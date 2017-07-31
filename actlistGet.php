@@ -11,8 +11,8 @@
 			$line["error"] = "服务器连接失败，错误提示：".$mysqli->error;
 			$line["success"] = false;
 		}else{
-			$place = "'".preg_replace("/,/","','",$place)."'";
-			$type = "'".preg_replace("/,/","','",$type)."'";
+			$place = "'".preg_replace("/,/","','",$place)."','不限'";
+			$type = "'".preg_replace("/,/","','",$type)."','不限'";
 			$orderStr = "SELECT * FROM activity WHERE campus in(".$place.")AND type in(".$type.")";
 			if($order=="最新")
 				$orderStr.="ORDER BY time DESC";

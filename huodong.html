@@ -313,7 +313,7 @@
     </style>
 </head>
 <body>
-<div class="scoll"><a href="#top">&#8679</a></div>
+<div class="scoll"><a href="#top">&#8679;</a></div>
 
 <header>
     <!--头部筛选栏-->
@@ -359,9 +359,9 @@
 
 </header>
 
-<!--话圈--发表对活动的评论-每周更新-->
+<!--话圈_发表对活动的评论_每周更新-->
 <section class="talk" style="background-color: #fff;">
-    <div class="weui-panel__hd">&nbsp<span class="weui-badge">new</span> &nbsp; 热门评论</div>
+    <div class="weui-panel__hd">&nbsp;<span class="weui-badge">new</span> &nbsp; 热门评论</div>
     <div class="slideshow-container">
         <div class="mySlides fade">
             <div class="numbertext">热门</div>
@@ -446,9 +446,12 @@
     function dealContent(res) {
         var json = JSON.parse(res);
         if (json.success) {
-            var card = document.getElementById(type + "_1");
+            var card = document.getElementById("actlist");
+            console.log(res);
+            console.log(json);
+
             for (var i = 0; i < json.length; i++) {
-                card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location, json[i].holdtime, json[i].time, json[i].labels, json[i].UID, false));
+                card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location, json[i].holdtime, json[i].time, json[i].json, json[i].UID, false));
             }
         } else {
             console.log(json.error);
@@ -470,7 +473,7 @@
 
         var formStr = "";
         for (var i in labels) {
-            formStr += "<label><b>" + i + "</b></label>" + "<input>";
+            formStr += "<label><b>" + i + "</b></label>" + "<input name='" + i + "'";
         }
 
         div.className = "weui-media-box weui-media-box_text";
