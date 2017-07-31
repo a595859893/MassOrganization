@@ -89,23 +89,24 @@
             overflow: hidden;
             transition: max-height 0.2s ease-out;
         }
-        #top .button-sp-area{
+
+        #top .button-sp-area {
             display: -webkit-flex;
             display: flex;
             -webkit-flex-wrap: wrap;
             flex-wrap: wrap;
         }
-        #top .weui-btn.weui-btn_mini.weui-btn_default{
-            margin:2%;
-            width:20%;
-            padding:0;
+
+        #top .weui-btn.weui-btn_mini.weui-btn_default {
+            margin: 2%;
+            width: 20%;
+            padding: 0;
         }
-        #top .panel p{
+
+        #top .panel p {
             color: #000;
-            font-size:15px;
+            font-size: 15px;
         }
-
-
 
         .talk {
             height: 20%
@@ -146,7 +147,6 @@
             right: 0;
             border-radius: 3px 0 0 3px;
         }
-
 
         .talk .prev:hover, .talk .next:hover {
             background-color: rgba(0, 0, 0, 0.8);
@@ -214,7 +214,6 @@
             }
         }
 
-
         article span.star {
 
             color: #cfcfcf;
@@ -234,33 +233,28 @@
             box-sizing: border-box;
         }
 
-
         #id03 button {
             background-color: #4CAF50;
             color: white;
             padding: 14px 20px;
-            margin: 8px ;
+            margin: 8px;
             border: none;
             cursor: pointer;
         }
-
 
         #id03 .cancelbtn {
             padding: 14px 20px;
             background-color: #4761f4;
         }
 
-
         #id03 .cancelbtn, .signupbtn {
             float: left;
             width: 40%
         }
 
-
         #id03 .container {
             padding: 16px;
         }
-
 
         .modal {
             display: none;
@@ -276,15 +270,13 @@
             /*padding-top: 10%;*/
         }
 
-
         #id03 .modal-content {
             background-color: #fefefe;
             /*margin: 5% auto 15% auto; */
             border: 1px solid #888;
             width: 100%;
-            height:100%;
+            height: 100%;
         }
-
 
         #id03 .close {
             position: absolute;
@@ -301,8 +293,7 @@
             cursor: pointer;
         }
 
-
-        #id03 .clearfix{
+        #id03 .clearfix {
             background-color: #fff;
         }
 
@@ -311,7 +302,6 @@
             clear: both;
             display: table;
         }
-
 
         @media screen and (max-width: 300px) {
             .cancelbtn, .signupbtn {
@@ -333,7 +323,7 @@
             <button class="accordion" onclick="display()">筛选</button>
             <div class="panel" id="panel">
                 <p>&nbsp;校区</p>
-                <div class="button-sp-area">
+                <div class="button-sp-area" name="place">
                     <a href="#" class="weui-btn weui-btn_mini weui-btn_default">不限</a>
                     <a href="#" class="weui-btn weui-btn_mini weui-btn_default">南校区</a>
                     <a href="#" class="weui-btn weui-btn_mini weui-btn_default">东校区</a>
@@ -341,7 +331,7 @@
                     <a href="#" class="weui-btn weui-btn_mini weui-btn_default">珠海校区</a>
                 </div>
                 <p>&nbsp;类型</p>
-                <div class="button-sp-area">
+                <div class="button-sp-area" name="type">
                     <a href="#" class="weui-btn weui-btn_mini weui-btn_default">不限</a>
                     <a href="#" class="weui-btn weui-btn_mini weui-btn_default">讲座</a>
                     <a href="#" class="weui-btn weui-btn_mini weui-btn_default">比赛</a>
@@ -352,18 +342,20 @@
                     <a href="#" class="weui-btn weui-btn_mini weui-btn_default">其它</a>
                 </div>
                 <p>&nbsp;排序</p>
-                <div class="button-sp-area">
+                <div class="button-sp-area" name="order">
                     <a href="#" class="weui-btn weui-btn_mini weui-btn_default">最新</a>
                     <a href="#" class="weui-btn weui-btn_mini weui-btn_default">最热</a>
                 </div>
-                <div class="button-sp-area" style="justify-content: space-between;">
+                <br/>
+                <div class="button-sp-area" style="justify-content: space-between;" name="other">
                     <a href="#" class="weui-btn weui-btn_mini weui-btn_default">重置</a>
-                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default" style="background-color: #86d0ff;color:#fff">完成</a>
+                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default"
+                       style="background-color: #86d0ff;color:#fff">完成</a>
                 </div>
             </div>
 
         </div>
-        </div>
+    </div>
 
 </header>
 
@@ -399,104 +391,11 @@
 </section>
 <br><br>
 <article>
-    <!--最热活动-->
-    <div class="weui-panel" id="hot">
-        <div class="weui-panel__bd" id="hot_1">
-            <!--最热活动JS添加地点-->
-        </div>
-
-    </div>
-
-
-    <!--最新活动-->
-    <div class="weui-panel" id="new">
-
-        <div class="weui-panel__bd" id="new_1">
-            <!--最新活动JS添加地点-->
-        </div>
-
-
-    </div>
-
-
-    <!--下面是不同校区活动-->
-
-    <!--南校区-->
-    <div class="weui-panel" id="nanxiao">
-        <div class="weui-panel__bd" id="nanxiao_1">
-            <!--南校活动JS添加地点-->
-        </div>
-
-
-
-    </div>
-
-
-    <!--东校区-->
-    <div class="weui-panel" id="dongxiao">
-        <div class="weui-panel__bd" id="dongxiao_1">
-            <!--东校活动JS添加地点-->
-        </div>
-
-
-
-    </div>
-
-
-    <!--北校区-->
-    <div class="weui-panel" id="beixiao">
-        <div class="weui-panel__bd" id="beixiao_1">
-            <!--北校活动JS添加地点-->
-        </div>
-
-
-
-    </div>
-
-
-    <!--珠海校区-->
-    <div class="weui-panel" id="zhuhai">
-        <div class="weui-panel__bd" id="zhuhai_1">
-            <!--珠海活动JS添加地点-->
-        </div>
-
-    </div>
-    <!--以下是不同类型的活动-->
-    <!--讲座-->
-    <div class="weui-panel" id="jiangzuo">
-        <div class="weui-panel__bd" id="jiangzuo_1">
-            <!--讲座活动JS添加地点-->
+    <div class="weui-panel">
+        <div class="weui-panel__bd" id="actlist">
+            <!--活动JS添加地点-->
         </div>
     </div>
-
-
-    <!--公益--->
-    <div class="weui-panel" id="gongyi">
-        <div class="weui-panel__bd" id="gongyi_1">
-            <!--公益活动JS添加地点-->
-        </div>
-
-
-
-    </div>
-
-    <!--体育-->
-    <div class="weui-panel" id="tiyv">
-        <div class="weui-panel__bd" id="tiyv_1">
-            <!--体育活动JS添加地点-->
-        </div>
-
-    </div>
-    <!--其他-->
-    <div class="weui-panel" id="qita">
-        <div class="weui-panel__bd" id="qita_1">
-            <!--其它活动JS添加地点-->
-        </div>
-
-
-
-    </div>
-
 </article>
 
 
@@ -505,26 +404,10 @@
     <!--<span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">×</span>-->
     <form class="modal-content animate" action=" ">
         <div class="container" id="container">
-            <label><b>姓名</b></label>
-            <input type="text" required>
-
-            <label><b>学号</b></label>
-            <input type="number" required>
-
-            <label><b>学院</b></label>
-            <input type="text" required>
-
-            <label><b>手机</b></label>
-            <input type="number" required>
-
-            <label><b>微信/QQ</b></label>
-            <input type="text">
-
-            <label><b>备注</b></label>
-            <input type="text">
-
+            <div id="custom">
+                <!--JS代码切入点-->
+            </div>
             <input type="checkbox" checked="checked">记住我
-
             <div class="clearfix">
                 <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">
                     取消
@@ -535,51 +418,44 @@
     </form>
 </div>
 
-
 <script src="CommonJS.js"></script>
 <script>
-
-
-
-
-    var panel = document.getElementById('panel');
-     function display() {
-            if (panel.style.maxHeight) {
-                panel.style.maxHeight = null;
-
-            } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            }
-            }
-
-
-
     var slideIndex = 0;
+    var panel = document.getElementById('panel');
+    var actOrder = defaultActOther();
+    var postIndex = -1;
+
     showSlides();
-
-    var actType = ["hot", "new", "nanxiao", "dongxiao", "beixiao", "zhuhai", "jiangzuo", "tiyu", "qita"];
-    for (var i in actType)
-        getActivity(actType[i]);
-
+    getActivity(actOrder);
+    setOptionColor(actOrder);
 
     function getActivity(type) {
-        var content = {type: type};
         var xmlhttp = GetXMLHTTPRequest();
         xmlhttp.open("POST", "actlistGet.php", true);
         xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
+        xmlhttp.send(toStr(type));
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var res = xmlhttp.responseText;
                 if (res)
-                    dealContent(res, type);
+                    dealContent(res);
             }
         };
     }
 
+    function dealContent(res) {
+        var json = JSON.parse(res);
+        if (json.success) {
+            var card = document.getElementById(type + "_1");
+            for (var i = 0; i < json.length; i++) {
+                card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location, json[i].holdtime, json[i].time, json[i].labels, json[i].UID, false));
+            }
+        } else {
+            console.log(json.error);
+        }
+    }
 
-//    传入报名表的label
-    function createActivity(title, content, place, holdtime, time, index, mark,Label) {
+    function createActivity(title, content, place, holdtime, time, index, mark, labels) {
         var div = document.createElement("div");
         var h4 = document.createElement("h4");
         var p = document.createElement("p");
@@ -591,13 +467,18 @@
         var div_1 = document.createElement("div");
         var label = document.createElement("label");
         var input = document.createElement("input");
-//        var form = document.createElement("div");
-       
+
+        var formStr = "";
+        for (var i in labels) {
+            formStr += "<label><b>" + i + "</b></label>" + "<input>";
+        }
+
         div.className = "weui-media-box weui-media-box_text";
         div.onclick = function (event) {
             event = event || window.event;
             switch (event.target) {
                 case(div_1):
+                    document.getElementById("custom").innerHTML = form;
                     sign(index);
                     break;
                 case(span):
@@ -624,27 +505,19 @@
         p.className = "weui-media-box__desc";
         p.innerText = content;
 
-        ul_1.className= "weui-media-box__info";
+        ul_1.className = "weui-media-box__info";
         li_1_1.className = "weui-media-box__info__meta";
         li_1_2.className = li_1_3.className = "weui-media-box__info__meta weui-media-box__info__meta_extra";
         li_1_1.innerText = place;
         li_1_2.innerText = holdtime;
         li_1_3.innerText = time;
 
-        for (var i in Label)
-        {
-            var form = "<label><b>" + "</b></label>" + "<input>" ;
-             form += "<label><b>" + Label[i] + "</b></label>" + "<input>" ;
-        }
-        var container = document.getElementById("container");
-        container.appendChild(form);
-
         h4.appendChild(span);
-       
+
         ul_1.appendChild(li_1_1);
         ul_1.appendChild(li_1_2);
         ul_1.appendChild(li_1_3);
-       
+
         div.appendChild(h4);
         div.appendChild(p);
         div.appendChild(ul_1);
@@ -653,23 +526,85 @@
         return div;
     }
 
-    function dealContent(res, type) {
-        var json = eval("(" + res + ")");
-        console.log(json);
-        console.log(json.length);
-        if (json.success) {
-            var card = document.getElementById(type + "_1");
-            for (var i = 0; i < json.length; i++) {
-                card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location, json[i].holdtime, json[i].time,json[i].Label, json[i].UID, false));
-            }
-        } else {
-            console.log(json.error);
-        }
+    document.getElementById("panel").onclick = function (event) {
+        event = event || window.event;
 
+        if (event.target.tagName == "A") {
+            var title = event.target.parentNode.getAttribute("name");
+            var ele = event.target.innerText;
+            var index = actOrder[title].indexOf(ele);
+
+            if (title == "other") {
+                if (ele == "重置")
+                    actOrder = defaultActOther();
+                if (ele == "完成")
+                    getActivity(actOrder);
+            } else if (title == "order") {
+                actOrder[title] = ele;
+            } else {
+                if (ele == "不限") {
+                    //判断是否全部在里面
+                    var pn = event.target.parentNode;
+                    var all = !isAllIn(pn)
+                    actOrder[title] = [];
+                    if (all) {
+                        var all = pn.getElementsByTagName("A");
+                        for (var i in all)
+                            if (all[i].innerText != "不限")
+                                actOrder[title].push(all[i].innerText);
+                    }
+                }
+                else if (index >= 0)
+                    actOrder[title].splice(index, 1);
+                else
+                    actOrder[title].push(ele);
+            }
+
+            setOptionColor(actOrder)
+        }
     }
 
-    function sign(index) {
-        document.getElementById('id03').style.display = 'block';
+    function isAllIn(target) {
+        var title = target.getAttribute("name");
+        var ele = target.getElementsByTagName("A");
+        for (var i = 0; i < ele.length; i++) {
+            var signTemp = false;
+            if (ele[i].innerText != "不限") {
+                for (var j = 0; j < actOrder[title].length; j++)
+                    if (ele[i].innerText == actOrder[title][j]) {
+                        signTemp = true;
+                        break;
+                    }
+            } else
+                signTemp = true;
+
+            if (!signTemp)
+                return false;
+
+        }
+        return true;
+    }
+
+    function setOptionColor() {
+        var tempA = document.getElementById("panel").getElementsByTagName("A");
+        for (var i = 0; i < tempA.length; i++) {
+            var title = tempA[i].parentNode.getAttribute("name");
+            var ele = tempA[i].innerText;
+            if (title != "other") {
+                tempA[i].style.background = "#f8f8f8";
+                if (title == "order") {
+                    if (ele == actOrder[title])
+                        tempA[i].style.background = "#9999FF";
+                } else if (ele == "不限") {
+                    if (isAllIn(tempA[i].parentNode))
+                        tempA[i].style.background = "#9999FF";
+                } else {
+                    for (var j = 0; j < actOrder[title].length; j++)
+                        if (ele == actOrder[title][j])
+                            tempA[i].style.background = "#9999FF";
+                }
+            }
+        }
     }
 
     function showSlides() {
@@ -684,6 +619,28 @@
         }
         slides[slideIndex - 1].style.display = "block";
         setTimeout(showSlides, 8000); // Change image every 2 seconds
+    }
+
+    function display() {
+        panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + "px";
+    }
+
+    function sign(index) {
+        postIndex = index;
+        document.getElementById('id03').style.display = 'block';
+    }
+
+    function defaultActOther() {
+        var act = {place: [], type: [], order: "最新"};
+        var tempA = document.getElementById("panel").getElementsByTagName("A");
+        for (var i = 0; i < tempA.length; i++) {
+            var title = tempA[i].parentNode.getAttribute("name");
+            var ele = tempA[i].innerText;
+            if (title != "other" && title != "order" && ele != "不限")
+                act[title].push(ele);
+        }
+
+        return act;
     }
 </script>
 </body>
