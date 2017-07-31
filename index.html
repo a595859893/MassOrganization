@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--全屏显示-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+    <!--引用weui框架做样式-->
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+    <link rel="stylesheet" href="css.css">
+
+</head>
+<body>
+
+<div id="page1" class="page">
+
+    <!--页面一头部幻灯片导航条-->
+    <header>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                <img src=" " style="width:100%">
+                <div class="text">文本 1</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 3</div>
+                <img src=" " style="width:100%">
+                <div class="text">文本 2</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                <img src=" " style="width:100%">
+                <div class="text">文本 3</div>
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a class="next" onclick="plusSlides(1)">❯</a>
+        </div>
+
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </header>
+    <br>
+    <br>
+
+    <div class="weui-tab">
+        <div class="weui-tab__panel">
+
+            <!--六个方块导航条-->
+            <div class="weui-grids">
+                <a href="huodong.html" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <img src="" alt="">
+                    </div>
+                    <p class="weui-grid__label">
+                        校园活动
+                    </p>
+                </a>
+                <a href="社团主页.html" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <img src="" alt="">
+                    </div>
+                    <p class="weui-grid__label">
+                        社团主页
+                    </p>
+                </a>
+                <a href="社团主页子页面.html" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <img src="" alt="">
+                    </div>
+                    <p class="weui-grid__label">
+                        社团招新
+                    </p>
+                </a>
+                <a href="#" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <img src="" alt="">
+                    </div>
+                    <p class="weui-grid__label">
+                        排行榜
+                    </p>
+                </a>
+                <a href="#" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <img src="" alt="">
+                    </div>
+                    <p class="weui-grid__label">
+                        话圈
+                    </p>
+                </a>
+                <a href="#" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <img src="" alt="">
+                    </div>
+                    <p class="weui-grid__label">
+                        ……
+                    </p>
+                </a>
+            </div>
+
+
+            <!--热门话题-->
+            <div class="weui-panel weui-panel_access">
+                <div class="weui-panel__hd">精选</div>
+                <div class="weui-panel__bd">
+                    <a href="" class="weui-media-box weui-media-box_appmsg">
+                        <div class="weui-media-box__hd">
+                            <img class="weui-media-box__thumb" src="" alt="">
+                        </div>
+                        <div class="weui-media-box__bd">
+                            <h4 class="weui-media-box__title">标题一</h4>
+                            <p class="weui-media-box__desc">内容1</p>
+                        </div>
+                    </a>
+                    <a href="" class="weui-media-box weui-media-box_appmsg">
+                        <div class="weui-media-box__hd">
+                            <img class="weui-media-box__thumb" src="" alt="">
+                        </div>
+                        <div class="weui-media-box__bd">
+                            <h4 class="weui-media-box__title">标题二</h4>
+                            <p class="weui-media-box__desc">内容2</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="weui-panel__ft">
+                    <a href="" class="weui-cell weui-cell_access weui-cell_link">
+                        <div class="weui-cell__bd">查看更多</div>
+                        <span class="weui-cell__ft"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page2" class="page">
+    <br>
+    <br>
+    <div class="weui-cells__title">消息提醒</div>
+    <div class="weui-cells">
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__bd">
+                <p>活动提醒 <span class="weui-badge">8</span></p>
+            </div>
+
+            <div class="weui-cell__ft">说明文字</div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__bd">
+                <p>组织提醒 <span class="weui-badge">6</span></p>
+            </div>
+            <div class="weui-cell__ft">说明文字</div>
+        </a>
+    </div>
+    <br>
+    <div class="weui-cells__title">消息反馈</div>
+    <div class="weui-cells">
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__bd">
+                <p>活动评论1 <span class="weui-badge">new</span></p>
+            </div>
+            <div class="weui-cell__ft">说明文字</div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__bd">
+                <p>活动评论2 <span class="weui-badge">new</span></p>
+            </div>
+            <div class="weui-cell__ft">说明文字</div>
+        </a>
+
+    </div>
+
+</div>
+
+<!--第三页个人主页-->
+<div id="page3" class="page">
+    <div id="main">
+        <header>
+            <a href="" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">名字</h4>
+                    <p class="weui-media-box__desc">个人简介</p>
+                </div>
+            </a>
+            <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">社团管理者登陆</button>
+        </header>
+        <br>
+        <!--通过下拉菜单查看-->
+
+        <button class="accordion">&#9635 我的活动</button>
+        <div class="panel">
+            <a class="weui-cell weui-cell_access" href="javascript:;">
+                <div class="weui-cell__bd">
+                    <p>活动一</p>
+                </div>
+                <div class="weui-cell__ft">说明文字</div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="javascript:;">
+                <div class="weui-cell__bd">
+                    <p>活动二</p>
+                </div>
+                <div class="weui-cell__ft">说明文字</div>
+            </a>
+        </div>
+
+        <button class="accordion">&#10084 我的收藏</button>
+        <div class="panel">
+            <a class="weui-cell weui-cell_access" href="javascript:;">
+                <div class="weui-cell__bd">
+                    <p>收藏一</p>
+                </div>
+                <div class="weui-cell__ft">说明文字</div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="javascript:;">
+                <div class="weui-cell__bd">
+                    <p>收藏二</p>
+                </div>
+                <div class="weui-cell__ft">说明文字</div>
+            </a>
+        </div>
+
+
+        <button class="accordion">&#10084 我的社团</button>
+        <div class="panel">
+            <a class="weui-cell weui-cell_access" href="javascript:;">
+                <div class="weui-cell__bd">
+                    <p>社团一</p>
+                </div>
+                <div class="weui-cell__ft">说明文字</div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="javascript:;">
+                <div class="weui-cell__bd">
+                    <p>社团二</p>
+                </div>
+                <div class="weui-cell__ft">说明文字</div>
+            </a>
+        </div>
+
+        <button onclick="openNav()">&#10148 我的日程</button>
+
+
+    </div>
+
+
+    <!--侧拉菜单显示日程-->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">事件1</a>
+        <a href="#">事件2</a>
+        <a href="#">事件3</a>
+        <a href="#">事件4</a>
+    </div>
+
+
+    <!--登录页面-->
+    <div class="modal" id="id01">
+        <form class="modal-content animate" action=" ">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <img src="#" class="avatar">
+            </div>
+
+            <div class="container">
+                <label><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
+
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+
+                <button type="button" id="login">登陆</button>
+                <input type="checkbox" checked="checked" id="remember"> 记住我
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="log()" class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="page4" class="page">
+    <div id="main_1">
+        <header>
+            <a href="" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title" id="user_name">社团名字</h4>
+                    <p class="weui-media-box__desc" id="user_intro">内容</p>
+                </div>
+            </a>
+            <button style="width:auto;" onclick="logout()">退出</button>
+        </header>
+
+        <br>
+        <article class="main">
+            <button>&#9635 活动管理</button>
+
+            <button onclick="document.getElementById('id02').style.display='block';document.getElementById('main_1').style.display='none'">
+                &#9746 活动发布
+            </button>
+
+            <button onclick="document.getElementById('id03').style.display='block';document.getElementById('main_1').style.display='none'">
+                &#9746 招新发布
+            </button>
+
+            <button>&#9729 社团主页管理</button>
+        </article>
+    </div>
+    <!--活动发布表单-->
+    <div id="id02" class="modal">
+        <!--<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>-->
+        <form class="modal-content animate" id="ACT_form" action=" ">
+            <div class="container">
+                <label><b>活动类型</b></label>
+                <select style="font-size: 12px;" id="ACT_type" required>
+                    <option value="gongyi">公益</option>
+                    <option value="tiyv">体育</option>
+                    <option value="jiangzuo">讲座</option>
+                    <option value="qita">其他</option>
+                </select>
+
+                <label><b>活动名称</b></label>
+                <input type="text" placeholder="迎新晚会" id="ACT_name" required>
+
+                <label><b>活动地点</b></label>
+                <input type="text" placeholder="中珠-风雨球场" id="ACT_location" required>
+
+                <label><b>活动时间</b></label>
+                <input type="number" placeholder="2017.08.30" id="ACT_time" required>
+
+                <label><b>活动简介</b></label>
+                <input type="text" id="ACT_intro" id="ACT_intro" required>
+
+                <label><b>推送链接</b></label>
+                <input type="url" placeholder="复制推送链接至此处" required>
+                <!--<label><b>上传更多</b></label>-->
+                <!--<input type="text" onclick="myfile.click();" placeholder="&#9729 海报/报名表/视频等">-->
+                <!--<input type="file" id="myfile" style="display: none">-->
+
+                <label><b>主办方</b></label>
+                <input type="text" placeholder="校团工委" id="ACT_organizer" required>
+
+                <br>
+                <input type="radio" name="formChoose" value="default" checked="checked"> <b>使用默认报名表</b>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="formChoose" value="make"
+                       onclick="document.getElementById('myDIV').style.display='block';document.getElementById('id02').style.display='none';">
+                <b>在线制作报名表</b>
+                <input type="radio" name="formChoose" value="none"> <b>不使用报名表</b>
+                <br>
+                <!--取消和提交按钮-->
+                <div class="clearfix">
+                    <button type="button"
+                            onclick="document.getElementById('id02').style.display='none';document.getElementById('main_1').style.display='block'"
+                            class="cancelbtn">取消
+                    </button>
+                    <button type="submit" class="signupbtn">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <!--招新表单-->
+    <div id="id03" class="modal">
+        <form class="modal-content animate" id="defaultForm">
+            <div class="container">
+                <label><b>活动类型</b></label>
+                <select style="font-size: 12px;" id="NEW_type" required>
+                    <option value="shetuan">兴趣社团</option>
+                    <option value="zuzhi">学生组织</option>
+                </select>
+
+                <label><b>招新标题</b></label>
+                <input type="text" id="NEW_title" required>
+
+                <label><b>招新对象</b></label>
+                <input type="text" id="NEW_object" required>
+
+                <label><b>报名截止时间</b></label>
+                <input type="text" placeholder="2017.09.25" id="NEW_end" required>
+
+                <label><b>社团简介</b></label>
+                <input type="text" id="NEW_intro" required>
+
+                <label><b>推送链接</b></label>
+                <input type="url" placeholder="复制推送链接至此处" id="NEW_link" required>
+
+                <div class="clearfix">
+                    <button type="button"
+                            onclick="document.getElementById('id03').style.display='none';document.getElementById('main_1').style.display='block'"
+                            class="cancelbtn">取消
+                    </button>
+                    <button type="submit" class="signupbtn">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <!--在线制作报名表-->
+    <div id="myDIV">
+        <h2 style="margin:5px ">制作报名表</h2>
+        <input type="text" id="myInput" placeholder="输入...">
+        <button onclick="addElement()" class="addBtn">添加</button>
+
+        <form class="modal-content animate" id="customerForm">
+            <ul id="myUL">
+                <!--JS添加地点-->
+            </ul>
+
+            <div class="clearfix">
+                <button type="button"
+                        onclick="document.getElementById('myDIV').style.display='none';document.getElementById('id02').style.display='block'"
+                        class="cancelbtn">取消
+                </button>
+                <button type="submit" class="signupbtn">提交</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!--底部选项卡导航条-->
+<div class="weui-tabbar" id="footer">
+    <a href="#" class="weui-tabbar__item tab" id="defaultOpen" onclick="tabNav(event,'page1')">
+        <img src="" alt="" class="weui-tabbar__icon">
+        <p class="weui-tabbar__label">首页</p>
+    </a>
+    <a href="#" class="weui-tabbar__item tab" onclick="tabNav(event,'page2')">
+        <img src="" alt="" class="weui-tabbar__icon">
+        <p class="weui-tabbar__label">消息</p>
+    </a>
+    <a href="#" class="weui-tabbar__item tab" id="myself" onclick="tabNav(event,'page3')">
+        <img src="" alt="" class="weui-tabbar__icon">
+        <p class="weui-tabbar__label">我</p>
+    </a>
+</div>
+
+<script src="CommonJS.js"></script>
+<script>
+    //页面初始化
+    var uid = -1;
+    var listjson = {};
+    var defaultjson = {};
+    var ne = {
+            姓名: "text",
+            学号: "number",
+            学院: "text",
+            手机: "number",
+            QQ微信: "text",
+            备注: "text"
+        }
+    ;
+    for (var i in ne) {
+        newElement(i, ne[i]);
+        defaultjson[i] = ne[i];
+    }
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+    //    第三页下拉菜单
+    var acc = document.getElementsByClassName("accordion");
+    for (var i = 0; i < acc.length; i++) {
+        acc[i].onclick = function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        }
+    }
+
+    var xmlhttp = GetXMLHTTPRequest();
+    xmlhttp.open("GET", "login.php", true);
+    xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+    xmlhttp.send("");
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var res = xmlhttp.responseText;
+            login(res);
+        }
+    };
+
+    // 触发 id="defaultOpen" click 事件
+    document.getElementById("defaultOpen").click();
+    document.getElementById("login").onclick = function () {
+        document.getElementById("login").disabled = true;
+        var content = {
+            type: "login",
+            account: document.getElementById("uname").value,
+            password: document.getElementById("psw").value,
+            remember: document.getElementById("remember").value
+        };
+        var xmlhttp = GetXMLHTTPRequest();
+        xmlhttp.open("POST", "login.php", true);
+        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+        xmlhttp.send(toStr(content));
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var res = xmlhttp.responseText;
+                login(res);
+            }
+        }
+    };
+    document.getElementById("ACT_form").onsubmit = function (event) {
+        event = event || window.event;
+        event.target.disabled = true;
+        event.preventDefault();
+        if (document.getElementsByName("formChoose")[0].checked)
+            listjson = defaultjson;
+        else if (document.getElementsByName("formChoose")[1].checked) {
+            listjson = {};
+            var list = document.getElementById("myUL").getElementsByTagName("input");
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].name)
+                    listjson[list.name] = list[i].value;
+            }
+        } else {
+            listjson = {none: true};
+        }
+
+        var content = {
+            name: document.getElementById("ACT_name").value,
+            location: document.getElementById("ACT_location").value,
+            time: document.getElementById("ACT_time").value,
+            introduction: document.getElementById("ACT_intro").value,
+            organizer: document.getElementById("ACT_organizer").value,
+            type: document.getElementById("ACT_type").value,
+            json: JSON.stringify(listjson),
+            UID: uid
+        };
+
+        var xmlhttp = GetXMLHTTPRequest();
+        xmlhttp.open("POST", "activityPost.php", true);
+        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+        xmlhttp.send(toStr(content));
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var res = xmlhttp.responseText;
+                var json = JSON.parse(res);
+                console.log(json);
+                if (json.success) {
+                    document.getElementById('id02').style.display = 'none';
+                    document.getElementById('main_1').style.display = 'block'
+                } else
+                    console.log(json.error);
+            }
+        }
+    };
+    document.getElementById("customerForm").onsubmit = function (event) {
+        event = event || window.event;
+        event.target.disabled = true;
+        event.preventDefault();
+
+        listjson = {};
+        var list = document.getElementById("myUL").getElementsByTagName("input");
+        for (var i = 0; i < list.length; i++) {
+            if (list[i].name)
+                listjson[list.name] = list[i].value;
+        }
+
+        document.getElementById('myDIV').style.display = 'none';
+        document.getElementById('id02').style.display = 'block'
+    };
+    document.getElementById("defaultForm").onsubmit = function (event) {
+        event = event || window.event;
+        event.target.disabled = true;
+        event.preventDefault();
+
+        var content = {
+            type: document.getElementById("NEW_type").value,
+            title: document.getElementById("NEW_title").value,
+            object: document.getElementById("NEW_object").value,
+            end: document.getElementById("NEW_end").value,
+            introduction: document.getElementById("NEW_intro").value,
+            link: document.getElementById("NEW_link").value,
+            UID: uid
+        };
+
+        var xmlhttp = GetXMLHTTPRequest();
+        xmlhttp.open("POST", "recruitmentPost.php", true);
+        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+        xmlhttp.send(toStr(content));
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var res = xmlhttp.responseText;
+                var json = JSON.parse(res);
+                console.log(json);
+                if (json.success) {
+                    document.getElementById('id03').style.display = 'none';
+                    document.getElementById('main_1').style.display = 'block'
+                } else
+                    console.log(json.error);
+            }
+        }
+    };
+
+    //登陆登出
+    function login(res) {
+        var info = JSON.parse(res);
+        if (info.success) {
+            uid = info.UID;
+            document.getElementById('id01').style.display = 'none';
+            document.getElementById("user_name").innerText = info.nickName + "(UID:" + info.UID + ")";
+            document.getElementById("user_intro").innerText = info.introduction;
+            document.getElementById("footer").style.display = 'none';
+            document.getElementById("myself").onclick = function (event) {
+                tabNav(event, 'page4')
+            };
+            document.getElementById("myself").click();
+        } else {
+            console.log(info.error);
+        }
+
+    }
+
+    function logout() {
+        var xmlhttp = GetXMLHTTPRequest();
+        xmlhttp.open("POST", "login.php", true);
+        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+        xmlhttp.send(toStr({type: "logout"}));
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var res = xmlhttp.responseText;
+                var info = JSON.parse(res);
+                if (info.success) {
+                    uid = -1;
+                    document.getElementById("myself").onclick = function (event) {
+                        tabNav(event, 'page3')
+                    };
+                    document.getElementById("footer").style.display = 'flex';
+                    document.getElementById("myself").click();
+                    document.getElementById("login").disabled = false;
+                }
+            }
+        }
+    }
+
+    <!--底部选项卡-->
+    function tabNav(evt, tabName) {
+        var i, page, tab;
+        page = document.getElementsByClassName("page");
+        for (i = 0; i < page.length; i++) {
+            page[i].style.display = 'none';
+        }
+        tab = document.getElementsByClassName("tab");
+        for (i = 0; i < tab.length; i++) {
+            tab[i].className = tab[i].className.replace(" weui-bar__item_on", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " weui-bar__item_on";
+    }
+
+    //    第一页顶部幻灯片
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = slides.length
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
+
+    //    第三页侧拉菜单--显示日程
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "50%";
+        document.getElementById("main").style.marginLeft = "50%";
+        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+        document.body.style.backgroundColor = "white";
+    }
+
+    function addElement() {
+        var inputValue = document.getElementById("myInput").value;
+        if (inputValue)
+            newElement(inputValue);
+        else
+            alert("你需要写点输入描述");
+    }
+
+    function newElement(value, type) {
+        var li = document.createElement("li");
+        var label = document.createElement("label");
+        var input = document.createElement("input");
+        label.innerHTML = "<b>" + value + "&nbsp;</b>";
+        li.appendChild(label);
+        li.appendChild(input);
+        input.name = value;
+        input.value = type;
+        document.getElementById("myUL").appendChild(li);
+        document.getElementById("myInput").value = "";
+
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+
+        span.onclick = function () {
+            var element = this.parentElement;
+            var parent = element.parentElement;
+            parent.removeChild(element);
+        }
+    }
+</script>
+</body>
+</html>

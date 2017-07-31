@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--全屏显示-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+    <!--引用weui框架做样式-->
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+
+    <style>
+        body, html {
+            height: 100%;
+        }
+
+        body {
+            font-family: "Lato", sans-serif;
+            background-color: rgba(247, 247, 247, 0.5);
+        }
+
+        .scoll {
+            position: fixed;
+            right: 0;
+            top: 80%;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0.9);
+            height: 4em;
+            width: 4em;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 4em;
+        }
+
+        .scoll > a {
+            color: #fff;
+            font-size: 3em;
+        }
+
+        #top {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+        #top .navtop {
+            width: 33%;
+        }
+
+        #top button, .accordion {
+            background-color: rgb(70, 70, 70);
+            color: #f3f3f3;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+        }
+
+        #top button.accordion.active, button.accordion:hover {
+            background-color: #ddd;
+            color: rgb(70, 70, 70);
+        }
+
+        #top button.accordion:after {
+            content: '\25BC';
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        #top button.accordion.active:after {
+            content: "\25B2";
+        }
+
+        #top div.panel {
+            padding: 0 18px;
+            background-color: #fff;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+
+        /*话圈的样式*/
+        .talk {
+            height: 20%
+        }
+
+        .talk .mySlides {
+            display: none
+        }
+
+        /* 幻灯片容器 */
+        .talk .slideshow-container {
+            /*max-width: 1000px;*/
+            position: relative;
+            margin: auto;
+            height: 80%;
+        }
+
+        .mySlides.fade {
+            height: 100%;
+        }
+
+        /* 下一张 & 上一张 按钮 */
+        .talk .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+        }
+
+        /* 定位 "下一张" 按钮靠右 */
+        .talk .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .talk .prev:hover, .talk .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* 标题文本 */
+        .talk .text {
+            color: #979797;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* 数字文本 (1/3 等) */
+        .talk .numbertext {
+            color: #a8a8a8;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* 标记符号 */
+        .talk .dot {
+            cursor: pointer;
+            height: 13px;
+            width: 13px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .talk .active, .talk .dot:hover {
+            background-color: #717171;
+        }
+
+        /* 淡出动画 */
+        .talk .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 1.5s;
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @-webkit-keyframes fade {
+            from {
+                opacity: .4
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        /*下面是活动发布栏的样式*/
+        article span.star {
+            /*content:'\2606';*/
+            color: #cfcfcf;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bolder;
+        }
+
+        /*下面是报名表的样式*/
+        /* Full-width input fields */
+        #id03 input[type=text], input[type=password], input[type=number] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        /* Set a style for all buttons */
+        #id03 button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            /*width: 100%;*/
+        }
+
+        /* Extra styles for the cancel button */
+        #id03 .cancelbtn {
+            padding: 14px 20px;
+            background-color: #4761f4;
+        }
+
+        /* Float cancel and signup buttons and add an equal width */
+        #id03 .cancelbtn, .signupbtn {
+            float: left;
+            width: 50%
+        }
+
+        /* Add padding to container elements */
+        #id03 .container {
+            padding: 16px;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 3; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        /* Modal Content/Box */
+        #id03 .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button (x) */
+        #id03 .close {
+            position: absolute;
+            right: 35px;
+            top: 15px;
+            color: #000;
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        #id03 .close:hover,
+        #id03 .close:focus {
+            color: red;
+            cursor: pointer;
+        }
+
+        /* Clear floats */
+        #id03 .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Change styles for cancel button and signup button on extra small screens */
+        @media screen and (max-width: 300px) {
+            .cancelbtn, .signupbtn {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="scoll"><a href="#top">&#8679</a></div>
+
+<header>
+    <!--头部筛选栏-->
+    <div id="top">
+
+        <div class="navtop">
+            <button class="accordion">&#9728 地点</button>
+            <div class="panel" id="panel3">
+                <a class="weui-cell weui-cell_access" href="#nanxiao">
+                    <div class="weui-cell__bd">
+                        <p>南校区 &nbsp &nbsp <span class="weui-badge">3</span></p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+
+                <a class="weui-cell weui-cell_access" href="#dongxiao">
+                    <div class="weui-cell__bd">
+                        <p>东校区 &nbsp &nbsp <span class="weui-badge">4</span></p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+
+                <a class="weui-cell weui-cell_access" href="#beixiao">
+                    <div class="weui-cell__bd">
+                        <p>北校区 &nbsp &nbsp <span class="weui-badge">5</span></p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+
+                <a class="weui-cell weui-cell_access" href="#zhuhai">
+                    <div class="weui-cell__bd">
+                        <p>珠海校区 &nbsp<span class="weui-badge">6</span></p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+            </div>
+        </div>
+
+
+        <div class="navtop">
+            <button class="accordion">&#9733 综合排列</button>
+            <div class="panel" id="panel1">
+                <a class="weui-cell weui-cell_access" href="#hot">
+                    <div class="weui-cell__bd">
+                        <p>最热 &nbsp<span class="weui-badge">hot</span></p>
+                    </div>
+                    <!--<span class="weui-badge weui-badge_dot"></span>-->
+                    <div class="weui-cell__ft"></div>
+                </a>
+                <a class="weui-cell weui-cell_access" href="#new">
+                    <div class="weui-cell__bd">
+                        <p>最新 &nbsp<span class="weui-badge">new</span></p>
+                    </div>
+                    <!--<span class="weui-badge weui-badge_dot"></span>-->
+                    <div class="weui-cell__ft"></div>
+                </a>
+            </div>
+        </div>
+
+        <div class="navtop">
+            <button class="accordion">&#9784 类型</button>
+            <div class="panel" id="panel2">
+
+                <a class="weui-cell weui-cell_access" href="#jiangzuo">
+                    <div class="weui-cell__bd">
+                        <p>讲座 &nbsp<span class="weui-badge">4</span></p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+
+                <a class="weui-cell weui-cell_access" href="#gongyi">
+                    <div class="weui-cell__bd">
+                        <p>公益 &nbsp<span class="weui-badge">3</span></p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+
+                <a class="weui-cell weui-cell_access" href="#tiyv">
+                    <div class="weui-cell__bd">
+                        <p>体育 &nbsp<span class="weui-badge">2</span></p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+
+                <a class="weui-cell weui-cell_access" href="#qita">
+                    <div class="weui-cell__bd">
+                        <p>其他</p>
+                    </div>
+                    <span class="weui-badge weui-badge_dot"></span>
+                    <div class="weui-cell__ft"></div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+</header>
+
+<!--话圈--发表对活动的评论-每周更新-->
+<section class="talk" style="background-color: #fff;">
+    <div class="weui-panel__hd">&nbsp<span class="weui-badge">new</span> &nbsp; 热门评论</div>
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <div class="numbertext">1 / 3</div>
+            <img src=" ">
+            <div class="text">文本 1</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">2 / 3</div>
+            <img src=" ">
+            <div class="text">文本 2</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">3 / 3</div>
+            <img src=" ">
+            <div class="text">文本 3</div>
+        </div>
+
+    </div>
+
+    <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+</section>
+<br><br><br><br>
+<article>
+    <!--最热活动-->
+    <div class="weui-panel" id="hot">
+        <div class="weui-panel__hd">&nbsp<span class="weui-badge">hot</span> &nbsp; 最热活动</div>
+        <div class="weui-panel__bd" id="hot_1">
+            <!--最热活动JS添加地点-->
+        </div>
+        <div class="weui-panel__ft">
+            <a href="查看更多-hot.html" class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd">查看更多</div>
+                <span class="weui-cell__ft"></span>
+            </a>
+        </div>
+    </div>
+
+    <br><br><br>
+    <!--最新活动-->
+    <div class="weui-panel" id="new">
+        <div class="weui-panel__hd">&nbsp<span class="weui-badge">new</span> &nbsp; 最新活动</div>
+        <div class="weui-panel__bd" id="new_1">
+            <!--最新活动JS添加地点-->
+        </div>
+        <div class="weui-panel__ft">
+            <a href="查看更多-new.html" class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd">查看更多</div>
+                <span class="weui-cell__ft"></span>
+            </a>
+        </div>
+
+    </div>
+
+    <br><br><br><br><br>
+    <!--下面是不同校区活动-->
+
+    <!--南校区-->
+    <div class="weui-panel" id="nanxiao">
+        <div class="weui-panel__hd">&nbsp<span class="weui-badge weui-badge_dot"></span>&nbsp;校区定位-南校区</div>
+        <div class="weui-panel__bd" id="nanxiao_1">
+            <!--南校活动JS添加地点-->
+        </div>
+
+        <div class="weui-panel__ft">
+            <a href="查看更多-南校.html" class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd">查看更多</div>
+                <span class="weui-cell__ft"></span>
+            </a>
+        </div>
+
+    </div>
+
+    <br><br><br>
+    <!--东校区-->
+    <div class="weui-panel" id="dongxiao">
+        <div class="weui-panel__hd">&nbsp<span class="weui-badge weui-badge_dot"></span>&nbsp;校区定位-东校区</div>
+        <div class="weui-panel__bd" id="dongxiao_1">
+            <!--东校活动JS添加地点-->
+        </div>
+
+        <div class="weui-panel__ft">
+            <a href="查看更多-东校.html" class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd">查看更多</div>
+                <span class="weui-cell__ft"></span>
+            </a>
+        </div>
+
+    </div>
+
+    <br><br><br>
+    <!--北校区-->
+    <div class="weui-panel" id="beixiao">
+        <div class="weui-panel__hd">&nbsp<span class="weui-badge weui-badge_dot"></span>&nbsp;校区定位-北校区</div>
+        <div class="weui-panel__bd" id="beixiao_1">
+            <!--北校活动JS添加地点-->
+        </div>
+
+        <div class="weui-panel__ft">
+            <a href="查看更多-北校.html" class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd">查看更多</div>
+                <span class="weui-cell__ft"></span>
+            </a>
+        </div>
+
+    </div>
+
+    <br><br><br>
+    <!--珠海校区-->
+    <div class="weui-panel" id="zhuhai">
+        <div class="weui-panel__hd">&nbsp<span class="weui-badge weui-badge_dot"></span>&nbsp;校区定位-珠海校区</div>
+        <div class="weui-panel__bd" id="zhuhai_1">
+            <!--珠海活动JS添加地点-->
+        </div>
+
+        <div class="weui-panel__ft">
+            <a href="查看更多-中珠.html" class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd">查看更多</div>
+                <span class="weui-cell__ft"></span>
+            </a>
+        </div>
+
+    </div>
+
+    <!--以下是不同类型的活动-->
+    <br><br><br><br><br><br>
+    <!--讲座-->
+    <div class="weui-panel" id="jiangzuo">
+        <div class="weui-panel__hd">&nbsp<span class="weui-badge weui-badge_dot"></span>&nbsp;类型定位-讲座</div>
+        <div class="weui-panel__bd" id="jiangzuo_1">
+            <!--讲座活动JS添加地点-->
+        </div>
+
+        <div class="weui-panel__ft">
+            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd">查看更多</div>
+                <span class="weui-cell__ft"></span>
+            </a>
+        </div>
+
+    </div>
+
+    <br><br><br>
+    <!--公益--->
+    <div class="weui-panel" id="gongyi">
+        <div class="weui-panel__hd">&nbsp<span class="weui-badge weui-badge_dot"></span>&nbsp;类型定位-公益</div>
+        <div class="weui-panel__bd" id="gongyi_1">
+            <!--公益活动JS添加地点-->
+        </div>
+
+        <div class="weui-panel__ft">
+            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd">查看更多</div>
+                <span class="weui-cell__ft"></span>
+            </a>
+        </div>
+
+    </div>
+
+    <br><br><br>
+    <!--体育-->
+    <div class="weui-panel" id="tiyv">
+        <div class="weui-panel__hd">&nbsp<span class="weui-badge weui-badge_dot"></span>&nbsp;类型定位-体育</div>
+        <div class="weui-panel__bd" id="tiyv_1">
+            <!--体育活动JS添加地点-->
+        </div>
+
+        <div class="weui-panel__ft">
+            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd">查看更多</div>
+                <span class="weui-cell__ft"></span>
+            </a>
+        </div>
+
+    </div>
+
+    <br><br><br>
+    <!--其他-->
+    <div class="weui-panel" id="qita">
+        <div class="weui-panel__hd">&nbsp<span class="weui-badge weui-badge_dot"></span>&nbsp;类型定位-其他</div>
+        <div class="weui-panel__bd" id="qita_1">
+            <!--其它活动JS添加地点-->
+        </div>
+
+        <div class="weui-panel__ft">
+            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd">查看更多</div>
+                <span class="weui-cell__ft"></span>
+            </a>
+        </div>
+
+    </div>
+
+</article>
+
+
+<!--以下是默认的报名表-->
+<div id="id03" class="modal">
+    <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">×</span>
+    <form class="modal-content animate" action=" ">
+        <div class="container">
+            <label><b>姓名</b></label>
+            <input type="text" required>
+
+            <label><b>学号</b></label>
+            <input type="number" required>
+
+            <label><b>学院</b></label>
+            <input type="text" required>
+
+            <label><b>手机</b></label>
+            <input type="number" required>
+
+            <label><b>微信/QQ</b></label>
+            <input type="text">
+
+            <label><b>备注</b></label>
+            <input type="text">
+
+            <input type="checkbox" checked="checked">记住我
+
+            <div class="clearfix">
+                <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">
+                    取消
+                </button>
+                <button type="submit" class="signupbtn">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script src="CommonJS.js"></script>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    for (var i = 0; i < acc.length; i++) {
+        acc[i].onclick = function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        }
+    }
+
+    var slideIndex = 0;
+    showSlides();
+
+    var actType = ["hot", "new", "nanxiao", "dongxiao", "beixiao", "zhuhai", "jiangzuo", "tiyu", "qita"]
+    for (var i in actType)
+        getActivity(actType[i]);
+
+
+    function getActivity(type) {
+        var content = {type: type};
+        var xmlhttp = GetXMLHTTPRequest();
+        xmlhttp.open("POST", "actlistGet.php", true);
+        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+        xmlhttp.send(toStr(content));
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var res = xmlhttp.responseText;
+                if (res)
+                    dealContent(res, type);
+            }
+        };
+    }
+
+    function createActivity(title, content, place, holdtime, time, index, mark) {
+        var div = document.createElement("div");
+        var h4 = document.createElement("h4");
+        var p = document.createElement("p");
+        var ul_1 = document.createElement("ul");
+        var li_1_1 = document.createElement("li");
+        var li_1_2 = document.createElement("li");
+        var li_1_3 = document.createElement("li");
+        var ul_2 = document.createElement("ul");
+        var li_2_1 = document.createElement("li");
+        var li_2_2 = document.createElement("li");
+        var span = document.createElement("span");
+        var button_1 = document.createElement("button");
+        var button_2 = document.createElement("button");
+
+        div.className = "weui-media-box weui-media-box_text";
+        div.onclick = function (event) {
+            event = event || window.event;
+            switch (event.target) {
+                case(button_1):
+                    sign(index);
+                    break;
+                case(span):
+                    if (mark) {
+                        event.target.style.color = '';
+                        mark = false;
+                    } else {
+                        event.target.style.color = '#FFFF00';
+                        mark = true;
+                    }
+                    break;
+            }
+        }
+
+        span.className = "star";
+        span.innerHTML = "&#9733";
+
+        button_1.className = button_2.className = "weui-btn weui-btn_plain-primary";
+        button_1.style = button_2.style = "font-size:0.1em;padding: 0.3em;height: 3em;opacity: 0.7;";
+        button_1.innerText = "我要报名"
+        button_2.innerText = "更多信息"
+
+        h4.className = "weui-media-box__title";
+        h4.innerText = title + "  ";
+
+        p.className = "weui-media-box__desc";
+        p.innerText = content;
+
+        ul_1.className = ul_2.className = "weui-media-box__info";
+        li_1_1.className = li_2_1.className = li_2_2.className = "weui-media-box__info__meta";
+        li_1_2.className = li_1_3.className = "weui-media-box__info__meta weui-media-box__info__meta_extra";
+        li_1_1.innerText = place;
+        li_1_2.innerText = holdtime;
+        li_1_3.innerText = time;
+
+        h4.appendChild(span);
+        li_2_1.appendChild(button_1);
+        li_2_2.appendChild(button_2)
+
+        ul_1.appendChild(li_1_1);
+        ul_1.appendChild(li_1_2);
+        ul_1.appendChild(li_1_3);
+        ul_2.appendChild(li_2_1);
+        ul_2.appendChild(li_2_2);
+
+        div.appendChild(h4);
+        div.appendChild(p);
+        div.appendChild(ul_1);
+        div.appendChild(ul_2);
+
+        return div;
+    }
+
+    function dealContent(res, type) {
+        var json = eval("(" + res + ")");
+        console.log(json);
+        console.log(json.length);
+        if (json.success) {
+            var card = document.getElementById(type + "_1");
+            for (var i = 0; i < json.length; i++) {
+                card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location, json[i].holdtime, json[i].time, json[i].UID, false));
+            }
+        } else {
+            console.log(json.error);
+        }
+
+    }
+
+    function sign(index) {
+        document.getElementById('id03').style.display = 'block';
+    }
+
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+            slideIndex = 1
+        }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 2000); // Change image every 2 seconds
+    }
+</script>
+</body>
+</html>

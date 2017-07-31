@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+    <style>
+        header button{
+            margin-left:87px;
+            border: none;
+            padding: 8px 6px;
+            border-radius:3px;
+            background-color: rgba(0,0,0,0.1);
+            color: #444;
+            cursor: pointer;
+        }
+        article button.accordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+        }
+        article button.accordion.active, button.accordion:hover {
+            background-color: #ddd;
+        }
+        article button.accordion:after {
+            content: '\25BA';
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+
+        /* Full-width input fields */
+        #id02 input{
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+
+        }
+
+        #id02 input::-webkit-input-placeholder{
+            font-size:10px;
+            color: rgba(153, 153, 153, 0.4);
+        }
+
+        /* Set a style for all buttons */
+        #id02 button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius:3%;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* Extra styles for the cancel button */
+        #id02 .cancelbtn {
+            padding: 14px 20px;
+            background-color: #2b72bc;
+        }
+
+        /* Float cancel and signup buttons and add an equal width */
+        #id02 .cancelbtn,#id02 .signupbtn {float:left;width:50%}
+
+        /* Add padding to container elements */
+        #id02 .container {
+            padding: 16px;
+        }
+
+        /* The Modal (background) */
+         .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        /* Modal Content/Box */
+        #id02 .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        #id02 .modal-content label{
+            font-size:15px;
+        }
+
+        /* The Close Button (x) */
+        #id02 .close {
+            position: absolute;
+            right: 35px;
+            top: 15px;
+            color: #000;
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        #id02 .close:hover,
+        #id02 .close:focus {
+            color: red;
+            cursor: pointer;
+        }
+
+        /* Clear floats */
+        #id02 .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Change styles for cancel button and signup button on extra small screens */
+        @media screen and (max-width: 300px) {
+             .cancelbtn, .signupbtn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <a href="" class="weui-media-box weui-media-box_appmsg">
+        <div class="weui-media-box__hd">
+            <img class="weui-media-box__thumb" src="" alt="">
+        </div>
+        <div class="weui-media-box__bd">
+            <h4 class="weui-media-box__title">社团名字</h4>
+            <p class="weui-media-box__desc">内容</p>
+        </div>
+    </a>
+    <button  style="width:auto;">退出</button>
+</header>
+
+<br>
+<article>
+<button class="accordion">&#9635 活动管理</button>
+
+<button class="accordion" onclick="document.getElementById('id02').style.display='block'">&#9746 活动发布</button>
+
+<button class="accordion">&#9729 社团主页管理</button>
+</article>
+
+
+<!--活动发布表单-->
+<div id="id02" class="modal">
+    <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
+    <form class="modal-content animate" action=" ">
+        <div class="container">
+            <label><b>活动名称</b></label>
+            <input type="text" placeholder="迎新晚会" id="ACT_name" required>
+
+            <label><b>活动地点</b></label>
+            <input type="text" placeholder="中珠-风雨球场" id="ACT_location" required>
+
+            <label><b>活动时间</b></label>
+            <input type="number" placeholder="2017/08/30" id="ACT_time" required>
+
+            <label><b>活动简介</b></label>
+            <input type="text" id="ACT_intro" required>
+
+            <label><b>主办方</b></label>
+            <input type="text" placeholder="校团工委" id="ACT_organizer" required>
+
+            <label><b>上传更多</b></label>
+            <input type="text" onclick="myfile.click();" placeholder="&#9729 海报/推送/报名表/视频等" required>
+            <input type="file" id="myfile" style="display: none">
+
+
+<!--取消和提交按钮-->
+            <div class="clearfix">
+                <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">取消</button>
+                <button type="submit" class="signupbtn">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+document.getElementById("ACT_from").onsubmit=function(event){
+	event = event||window.event;
+	event.target.disabled = true;
+	event.preventDefault();
+	var content = {
+		name:			document.getElementById("ACT_name").value,
+		location:		document.getElementById("ACT_location").value,
+		time:			document.getElementById("ACT_time").value,
+		introduction:	document.getElementById("ACT_intro").value,
+		organizer:		document.getElementById("ACT_organizer").value,
+		UID:			1
+	};
+	var xmlhttp = GetXMLHTTPRequest();
+	xmlhttp.open("POST","activityPost.php",true);
+	xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded" );
+	xmlhttp.send(toStr(content));
+	xmlhttp.onreadystatechange = function(){
+		console.log(toStr(content));
+		console.log(xmlhttp.readyState);
+		if(xmlhttp.readyState==4&&xmlhttp.status==200){
+			var res = xmlhttp.responseText;	
+			console.log(res);
+			if(res=="success"){
+				document.getElementById('id02').style.display='none';
+			}
+		}
+	}
+	return false;
+}
+</script>
+</body>
+</html>
