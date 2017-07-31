@@ -30,5 +30,6 @@
 		}
 		echo json_encode($line);
 		$mysqli->close();
+		//测试改动是否成功;
 	}
 ?>
