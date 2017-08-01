@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--全屏显示-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+    <!--引用weui框架做样式-->
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+
+
+</head>
+<body>
+
+
+<!--搜索栏-->
+<div class="weui-search-bar" id="search_bar">
+    <form class="weui-search-bar__form" action="#">
+        <div class="weui-search-bar__box">
+            <i class="weui-icon-search" id="weui-icon-search" style="color: #0d8e3d;" onclick="Search()"></i>
+            <input type="input" class="weui-search-bar__input" id="search_input" placeholder="搜索">
+            <input style="display: none"/>
+        </div>
+        <label for="search_input" class="weui-search-bar__label" id="search_text" onclick="searchBarClick()">
+            <i class="weui-icon-search"></i>
+            <span>搜索</span>
+        </label>
+    </form>
+    <a href="javascript:" class="weui-search-bar__cancel-btn" id="search_cancel">返回</a>
+</div>
+
+
+<!--顶部选项卡-->
+<div class="weui-tab">
+    <div class="weui-navbar">
+        <div class="weui-navbar__item weui-bar__item_on tab" onclick="tabNav1(event, 'page1')" id="defaultOpen">
+            &#9829 兴趣社团
+        </div>
+        <div class="weui-navbar__item tab" onclick="tabNav1(event, 'page2')">
+            &#9830 学生组织
+        </div>
+    </div>
+
+
+    <div class="weui-tab__panel" id="content">
+        <!--页面一-->
+        <div class="page" id="page1">
+            <div class="weui-panel weui-panel_access">
+                <div class="weui-panel__hd">兴趣社团</div>
+                <div class="weui-panel__bd" id="frame">
+                    <!--JS添加处-->
+                </div>
+            </div>
+        </div>
+
+        <!--页面二-->
+        <div class="page" id="page2">
+            <div class="weui-panel weui-panel_access">
+                <div class="weui-panel__hd">学生组织</div>
+                <div class="weui-panel__bd">
+                    <!--JS添加处-->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--<script src="CommonJS.js"></script>-->
+<script>
+    //Test
+    var massList = [
+        {name: '乒协', div: createActivity("乒协", "简单的简介", 1, 10)},
+        {name: '滑轮社', div: createActivity("滑轮社", "简单的简介", 1, 10)},
+        {name: '青协', div: createActivity("青协", "简单的简介", 1, 10)},
+        {name: '动漫社', div: createActivity("动漫社", "简单的简介", 1, 10)}
+    ];
+    for (var i in massList) {
+        document.getElementById("frame").appendChild(massList[i].div);
+    }
+
+    var searchBar = document.getElementById("search_input");
+
+    //页面搜索功能
+    document.getElementById('weui-icon-search').click(Search());
+    searchBar.onchange = function (event) {
+        Search();
+    };
+
+    //正则表达式有待改善
+    function Search() {
+        var keyword = searchBar.value;
+        var patt = new RegExp(keyword,"g");
+        console.log(keyword);
+        for(var i in massList){
+            if(patt.test(massList[i].name)){
+                console.log(massList[i].name)
+                massList[i].div.style.display="flex";
+            }else{
+                console.log(massList[i].name+"XX")
+                massList[i].div.style.display="none";
+            }
+        }
+    }
+
+    // 触发 id="defaultOpen" click 事件
+    document.getElementById("defaultOpen").click();
+
+    //搜索返回
+    document.getElementById("search_cancel").onclick = function () {
+        searchBar.value = "";
+        document.getElementById('search_text').style.display = 'block';
+        document.getElementById('search_cancel').style.display = 'none';
+    }
+
+    <!--点击搜索-->
+    function searchBarClick() {
+        document.getElementById('search_text').style.display = 'none';
+        document.getElementById('search_cancel').style.display = 'block';
+    }
+
+    <!--顶部选项卡-->
+    function tabNav1(evt, tabName) {
+        var i, page, tab;
+        page = document.getElementsByClassName("page");
+        for (i = 0; i < page.length; i++) {
+            page[i].style.display = 'none';
+        }
+        tab = document.getElementsByClassName("tab");
+        for (i = 0; i < tab.length; i++) {
+            tab[i].className = tab[i].className.replace(" weui-bar__item_on", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " weui-bar__item_on";
+    }
+
+    //    需要从后端获取name(名字)，intro(简介)，number(关注人数)和member(社员数)   [图片最后解决？]
+    function dealContent(res) {
+        var json = eval("(" + res + ")")
+        var frame = document.getElementById("frame");
+        for (var i = 0; i < json.length; i++) {
+            frame.appendChild(createActivity(json[i].name, json[i].intro, json[i].number, json[i].member));
+        }
+    }
+
+    function createActivity(name, intro, number, member) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var h4 = document.createElement("h4");
+        var p = document.createElement("p");
+        var ul = document.createElement("ul");
+        var li_1 = document.createElement("li");
+        var li_2 = document.createElement("li");
+
+
+        a.className = "weui-media-box weui-media-box_appmsg";
+        div_1.className = "weui-media-box__hd";
+
+        div_2.className = "weui-media-box__bd";
+        h4.className = "weui-media-box__title";
+        p.className = "weui-media-box__desc";
+        ul.className = "weui-media-box__info";
+        li_1.className = "weui-media-box__info__meta";
+        li_2.className = "weui-media-box__info__meta weui-media-box__info__meta_extra";
+
+
+        h4.innerText = name;
+        p.innerText = intro;
+        li_1.innerHTML = "已有 &nbsp; <span style='color: #a9a9a9;font-size: 17px;'>" + number + " </span> &nbsp; 报名";
+        li_2.innerHTML = "共有 &nbsp; <span style='color: #a9a9a9;font-size: 17px;'>" + member + " </span> &nbsp; 成员";
+
+
+        //div_1.appendChild(img);
+
+        ul.appendChild(li_1);
+        ul.appendChild(li_2);
+        div_2.appendChild(h4);
+        div_2.appendChild(p);
+        div_2.appendChild(ul);
+
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+
+        return a;
+
+    }
+</script>
+</body>
+</html>
