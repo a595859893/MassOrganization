@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="a282eda0-3b88-499c-89df-dc4651fffbc5" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -8,6 +9,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/huodong.html" afterPath="$PROJECT_DIR$/huodong.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
+=======
+    <list default="true" id="a282eda0-3b88-499c-89df-dc4651fffbc5" name="Default" comment="" />
+>>>>>>> d0734e548107d097beccdc1a3ea43a4d4d7cc26a
     <ignored path="MassOrganization.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,6 +28,7 @@
     <favorites_list name="MassOrganization" />
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
@@ -32,6 +37,19 @@
               <caret line="267" column="0" lean-forward="true" selection-start-line="267" selection-start-column="0" selection-end-line="267" selection-end-column="0" />
               <folding>
                 <marker date="1501573599455" expanded="true" signature="26271:26277" ph=" " />
+=======
+    <leaf>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.021739">
+              <caret line="89" column="26" selection-start-line="89" selection-start-column="26" selection-end-line="89" selection-end-column="26" />
+              <folding>
+                <marker date="1501570590741" expanded="true" signature="19693:20451" placeholder="{...}" />
+                <marker date="1501570590741" expanded="true" signature="19967:20445" placeholder="{...}" />
+                <marker date="1501570590741" expanded="true" signature="20035:20435" placeholder="{...}" />
+                <marker date="1501570590741" expanded="true" signature="20198:20371" placeholder="{...}" />
+>>>>>>> d0734e548107d097beccdc1a3ea43a4d4d7cc26a
               </folding>
             </state>
           </provider>
@@ -40,13 +58,22 @@
       <file leaf-file-name="huodong.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/huodong.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="276">
               <caret line="12" column="20" lean-forward="true" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
               <folding />
+=======
+            <state vertical-scroll-proportion="-242.10869">
+              <caret line="372" column="0" selection-start-line="372" selection-start-column="0" selection-end-line="372" selection-end-column="0" />
+              <folding>
+                <marker date="1501570590741" expanded="true" signature="6468:6748" placeholder="{...}" />
+              </folding>
+>>>>>>> d0734e548107d097beccdc1a3ea43a4d4d7cc26a
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="css.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css.css">
           <provider selected="true" editor-type-id="text-editor">
@@ -55,6 +82,14 @@
               <folding>
                 <marker date="1501572131343" expanded="true" signature="10583:10594" ph="{...}" />
               </folding>
+=======
+      <file leaf-file-name="css.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/css.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.6612529">
+              <caret line="355" column="9" selection-start-line="355" selection-start-column="9" selection-end-line="355" selection-end-column="9" />
+              <folding />
+>>>>>>> d0734e548107d097beccdc1a3ea43a4d4d7cc26a
             </state>
           </provider>
         </entry>
@@ -77,9 +112,13 @@
         <option value="$PROJECT_DIR$/社团主页子页面.html" />
         <option value="$PROJECT_DIR$/stzyz.html" />
         <option value="$USER_HOME$/Desktop/css.css" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/css.css" />
+=======
+>>>>>>> d0734e548107d097beccdc1a3ea43a4d4d7cc26a
         <option value="$PROJECT_DIR$/huodong.html" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/css.css" />
       </list>
     </option>
   </component>
@@ -90,8 +129,13 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
+<<<<<<< HEAD
     <option name="x" value="230" />
     <option name="y" value="80" />
+=======
+    <option name="x" value="883" />
+    <option name="y" value="5" />
+>>>>>>> d0734e548107d097beccdc1a3ea43a4d4d7cc26a
     <option name="width" value="1054" />
     <option name="height" value="1047" />
   </component>
@@ -155,9 +199,16 @@
     <option name="totallyTimeSpent" value="349000" />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="230" y="80" width="1054" height="1047" extended-state="0" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34942085" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+=======
+    <frame x="883" y="5" width="1054" height="1047" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34971097" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+>>>>>>> d0734e548107d097beccdc1a3ea43a4d4d7cc26a
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -221,6 +272,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/stzy.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -240,11 +292,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="264" column="14" lean-forward="false" selection-start-line="264" selection-start-column="8" selection-end-line="264" selection-end-column="14" />
+=======
+    <entry file="file://$USER_HOME$/Desktop/css.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.1461718">
+          <caret line="115" column="5" selection-start-line="115" selection-start-column="5" selection-end-line="169" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css.css">
+    <entry file="file://$USER_HOME$/Desktop/huodong.html">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.8043478">
+          <caret line="264" column="14" selection-start-line="264" selection-start-column="8" selection-end-line="264" selection-end-column="14" />
+          <folding />
+>>>>>>> d0734e548107d097beccdc1a3ea43a4d4d7cc26a
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/huodong.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="3289">
           <caret line="143" column="0" lean-forward="false" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
           <folding>
@@ -258,16 +326,41 @@
         <state relative-caret-position="276">
           <caret line="12" column="20" lean-forward="true" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
           <folding />
+=======
+        <state vertical-scroll-proportion="-242.10869">
+          <caret line="372" column="0" selection-start-line="372" selection-start-column="0" selection-end-line="372" selection-end-column="0" />
+          <folding>
+            <marker date="1501570590741" expanded="true" signature="6468:6748" placeholder="{...}" />
+          </folding>
+>>>>>>> d0734e548107d097beccdc1a3ea43a4d4d7cc26a
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="223">
           <caret line="267" column="0" lean-forward="true" selection-start-line="267" selection-start-column="0" selection-end-line="267" selection-end-column="0" />
           <folding>
             <marker date="1501573599455" expanded="true" signature="26271:26277" ph=" " />
+=======
+        <state vertical-scroll-proportion="-4.021739">
+          <caret line="89" column="26" selection-start-line="89" selection-start-column="26" selection-end-line="89" selection-end-column="26" />
+          <folding>
+            <marker date="1501570590741" expanded="true" signature="19693:20451" placeholder="{...}" />
+            <marker date="1501570590741" expanded="true" signature="19967:20445" placeholder="{...}" />
+            <marker date="1501570590741" expanded="true" signature="20035:20435" placeholder="{...}" />
+            <marker date="1501570590741" expanded="true" signature="20198:20371" placeholder="{...}" />
+>>>>>>> d0734e548107d097beccdc1a3ea43a4d4d7cc26a
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.6612529">
+          <caret line="355" column="9" selection-start-line="355" selection-start-column="9" selection-end-line="355" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
