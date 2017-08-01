@@ -1,137 +1,5 @@
-        #page4 header button{
-            margin-left:87px;
-            border: none;
-            padding: 8px 6px;
-            border-radius:3px;
-            background-color: rgba(0,0,0,0.1);
-            color: #444;
-            cursor: pointer;
-        }
-        #page4 article button.accordion {
-            background-color: #eee;
-            color: #444;
-            cursor: pointer;
-            padding: 18px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 15px;
-            transition: 0.4s;
-        }
-        #page4 article button.accordion.active, button.accordion:hover {
-            background-color: #ddd;
-        }
-        #page4 article button.accordion:after {
-            content: '\25BA';
-            color: #777;
-            font-weight: bold;
-            float: right;
-            margin-left: 5px;
-        }
 
-
-        /* Full-width input fields */
-        #id02 input{
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-
-        }
-
-        #id02 input::-webkit-input-placeholder{
-            font-size:10px;
-            color: rgba(153, 153, 153, 0.4);
-        }
-
-        /* Set a style for all buttons */
-        #id02 button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius:3%;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        /* Extra styles for the cancel button */
-        #id02 .cancelbtn {
-            padding: 14px 20px;
-            background-color: #2b72bc;
-        }
-
-        /* Float cancel and signup buttons and add an equal width */
-        #id02 .cancelbtn,#id02 .signupbtn {float:left;width:50%}
-
-        /* Add padding to container elements */
-        #id02 .container {
-            padding: 16px;
-        }
-
-        /* The Modal (background) */
-         .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            padding-top: 60px;
-        }
-
-        /* Modal Content/Box */
-        #id02 .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-            border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
-        }
-
-        #id02 .modal-content label{
-            font-size:15px;
-        }
-
-        /* The Close Button (x) */
-        #id02 .close {
-            position: absolute;
-            right: 35px;
-            top: 15px;
-            color: #000;
-            font-size: 50px;
-            font-weight: bold;
-        }
-
-        #id02 .close:hover,
-        #id02 .close:focus {
-            color: red;
-            cursor: pointer;
-        }
-
-        /* Clear floats */
-        #id02 .clearfix::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-
-        /* Change styles for cancel button and signup button on extra small screens */
-        @media screen and (max-width: 300px) {
-             .cancelbtn, .signupbtn {
-                width: 100%;
-            }
-        }
-		
-		* {box-sizing:border-box}
-        body,html,#page1,#page2,#page3{
+        body,html,#page1,#page2,#page3,#page4{
             height: 100%;
         }
         body {
@@ -145,41 +13,11 @@
             height: 100%;
             display:none;
         }
-
-        /* 幻灯片容器 */
         #page1 header .slideshow-container {
             position: relative;
             margin: auto;
             height: 100%;
         }
-
-        /* 下一张 & 上一张 按钮 */
-        #page1 header .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            width: auto;
-            margin-top: -22px;
-            padding: 16px;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            transition: 0.6s ease;
-            border-radius: 0 3px 3px 0;
-        }
-
-        /* 定位 "下一张" 按钮靠右 */
-        #page1 header .next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
-        }
-
-        /* On hover, add a black background color with a little bit see-through */
-        #page1 header .prev:hover, .next:hover {
-            background-color: rgba(0,0,0,0.8);
-        }
-
-        /* 标题文本 */
         #page1 header .text {
             color: #666666;
             font-size: 15px;
@@ -189,8 +27,6 @@
             width: 100%;
             text-align: center;
         }
-
-        /* 数字文本 (1/3 等) */
         #page1 header .numbertext {
             color: #666666;
             font-size: 12px;
@@ -198,12 +34,9 @@
             position: absolute;
             top: 0;
         }
-
         #page1 header img{
             height: 100%;
         }
-
-        /* 标记符号 */
         #page1 header .dot {
             cursor:pointer;
             height: 13px;
@@ -214,37 +47,27 @@
             display: inline-block;
             transition: background-color 0.6s ease;
         }
-
         #page1 header .active, .dot:hover {
             background-color: #717171;
         }
-
-        /* 淡出动画 */
         #page1 header .fade {
             -webkit-animation-name: fade;
             -webkit-animation-duration: 1.5s;
             animation-name: fade;
             animation-duration: 1.5s;
         }
-
         @-webkit-keyframes fade {
             from {opacity: .4}
             to {opacity: 1}
         }
-
         @keyframes fade {
             from {opacity: .4}
             to {opacity: 1}
         }
-
         #page3 header{
             height: 15%;
-            /*background-color: skyblue;*/
         }
-
-
-        /* Full-width input fields */
-        #page3 .modal input[type=text], input[type=password] {
+        #page3 .modal input[type=text],#page3 .modal input[type=password] {
             width: 100%;
             padding: 12px 20px;
             margin: 8px 0;
@@ -252,8 +75,6 @@
             border: 1px solid #ccc;
             box-sizing: border-box;
         }
-
-        /* Set a style for all buttons */
         #page3 .modal button {
             background-color: #4CAF50;
             color: white;
@@ -263,82 +84,49 @@
             cursor: pointer;
             width: 100%;
         }
-
         #page3 .modal button:hover {
             opacity: 0.8;
         }
-
-        /* Extra styles for the cancel button */
         #page3 .modal .cancelbtn {
             width: auto;
             padding: 10px 18px;
             background-color: #2b72bc;
         }
-
-        /* Center the image and position the close button */
-        #page3 .modal .imgcontainer {
-            text-align: center;
-            margin: 24px 0 12px 0;
-            position: relative;
-        }
-
-        #page3 .modal img.avatar {
-            width: 40%;
-            border-radius: 50%;
-        }
-
         #page3 .modal .container {
             padding: 16px;
         }
-
-        #page3 .modal span.psw {
-            float: right;
-            padding-top: 16px;
-        }
-
-        /* The Modal (background) */
         #page3 .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
+            display: none;
+            position: fixed;
+            z-index: 1;
             left: 0;
             top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            padding-top: 60px;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 3%;
         }
 
-        /* Modal Content/Box */
         #page3 .modal .modal-content {
             background-color: #fefefe;
-            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+            margin: 5% auto 15% auto;
             border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
+            width: 80%;
         }
 
-        /* The Close Button (x) */
-        #page3 .modal .close {
-            position: absolute;
-            right: 25px;
-            top: 0;
-            color: #000;
-            font-size: 35px;
-            font-weight: bold;
-        }
-
-        #page3 .modal .close:hover,
-        #page3 .modal .close:focus {
-            color: #ff0000;
-            cursor: pointer;
-        }
-
-        /* Add Zoom Animation */
         #page3 .modal .animate {
             -webkit-animation: animatezoom 0.6s;
             animation: animatezoom 0.6s
+        }
+        @-webkit-keyframes animatezoom {
+            from {-webkit-transform: scale(0)}
+            to {-webkit-transform: scale(1)}
+        }
+
+        @keyframes animatezoom {
+            from {transform: scale(0)}
+            to {transform: scale(1)}
         }
 
         #page3 .sidenav {
@@ -383,8 +171,9 @@
             .sidenav {padding-top: 15px;}
             .sidenav a {font-size: 18px;}
         }
-        #page3 #main button,#page4 .main button,.accordion {
-            background-color: rgba(0,0,0,0.1);
+
+        #page3 #main button,#page4 .main button{
+            background-color: rgba(0, 0, 0, 0.1);
             color: #444;
             cursor: pointer;
             padding: 18px;
@@ -395,28 +184,31 @@
             font-size: 15px;
             transition: 0.4s;
         }
-        #page3 #main header button{
+
+        #page3 #main header button,#page4 header button{
             margin-left:87px;
             border: none;
             padding: 8px 6px;
             border-radius:3px;
+            background-color: rgba(0,0,0,0.1);
+            color: #444;
+            cursor: pointer;
         }
-        #page3 #main button.accordion.active, button.accordion:hover {
+
+        #page3 #main button.accordion.active, button:hover,#page4 article button.active {
             background-color: #ddd;
         }
 
-        #page3 #main button.accordion:after {
+        #page3 #main button.accordion:after,#page4 article button:after {
             content: '\25BC';
             color: #777;
             font-weight: bold;
             float: right;
             margin-left: 5px;
         }
-
         #page3 #main button.accordion.active:after {
             content: "\25B2";
         }
-
         #page3 #main div.panel {
             padding: 0 18px;
             background-color: #fff;
@@ -424,25 +216,119 @@
             overflow: hidden;
             transition: max-height 0.2s ease-out;
         }
-
-        @-webkit-keyframes animatezoom {
-            from {-webkit-transform: scale(0)}
-            to {-webkit-transform: scale(1)}
+        #page4 article button:after {
+            content: '\25BA';
         }
 
-        @keyframes animatezoom {
-            from {transform: scale(0)}
-            to {transform: scale(1)}
+#id02 input[type=text],#id02 input[type=number],#id02 input[type=url],#id02 select,#id03 input[type=text],#id03 input[type=number],#id03 input[type=url],#id03 select,#myDIV input{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#id02 label,#id03 label,#myDIV label{display: block}
+
+#id02 input::-webkit-input-placeholder,#id03 input::-webkit-input-placeholder{
+    font-size:10px;
+    color: rgba(153, 153, 153, 0.4);
+}
+
+#id02 button,#id03 button,#myDIV button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 3%;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+}
+
+#id02 .cancelbtn, #id03 .cancelbtn,#myDIV button.cancelbtn{
+    padding: 14px 20px;
+    background-color: #2b72bc;
+}
+
+#id02 .cancelbtn,.model .signupbtn {float:left;}
+
+#id02 .container,#id03 .container{
+    padding: 16px;
+}
+        #page4 .modal {
+            display: none;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            /*overflow: hidden;*/
         }
 
-        /* Change styles for span and cancel button on extra small screens */
+
+        #id02 .modal-content ,#id03 .modal-content, #myDIV .modal-content{
+            background-color: #fefefe;
+            width: 100%;
+            height: 100%;
+        }
+
+        #id02  label,#id03  label{
+            font-size:15px;
+        }
+
+
+        #page4 #myDIV{
+            width: 100%;
+            padding:1% 3%;
+            box-sizing: border-box;
+            display: none;
+        }
+
+
+        #page4 #myDIV input{
+            width: 75%;
+        }
+
+        #page4 #myDIV #myInput{
+            width: 80%;
+            margin: 1% auto ;
+        }
+
+        #page4 #myDIV li{
+            list-style: none;
+        }
+
+        #page4 #myDIV li>span{
+            font-size:25px;
+        }
+
+        #page4 #myDIV .addBtn{
+            background-color:#00ACEE;
+            width: 15%;
+            text-align: center;
+            padding:14px 2px;
+        }
+
+        #page4 #myDIV .modal-content {
+            margin: 1% auto 5% auto;
+        }
+
+
+        #id02 .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+
         @media screen and (max-width: 300px) {
+            .cancelbtn, .signupbtn {
+                width: 100%;
+            }
             span.psw {
                 display: block;
                 float: none;
-            }
-            .cancelbtn {
-                width: 100%;
             }
         }
 
