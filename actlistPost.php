@@ -5,6 +5,8 @@
 		
 		$line = array();
 		$mysqli = new mysqli("localhost",'ipeuser','*ipE123','ipe_db','3306');
+		$mysqli->query("set character set 'utf8'");
+		$mysqli->query("set names 'utf8'");
 		if($mysqli->connect_errno){
 			$line["error"] = "服务器连接失败，错误提示：".$mysqli->error;
 			$line["success"] = false;

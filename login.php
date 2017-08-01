@@ -22,6 +22,8 @@
 	}
 	
 	$mysqli = new mysqli('localhost','ipeuser','*ipE123','ipe_db','3306');
+	$mysqli->query("set character set 'utf8'");
+	$mysqli->query("set names 'utf8'");
 	if($mysqli->connect_errno){
 		printf("连接服务器失败!");
 		exit();

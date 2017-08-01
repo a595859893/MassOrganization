@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Title</title>
     <!--全屏显示-->
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0;" charset="utf-8">
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
     <!--引用weui框架做样式-->
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
 
@@ -430,24 +429,26 @@
     setOptionColor(actOrder);
 
     function getActivity(type) {
+        type = {place: "didian"};
         var xmlhttp = GetXMLHTTPRequest();
         xmlhttp.open("POST", "actlistGet.php", true);
         xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
         xmlhttp.send(toStr(type));
+        console.log(toStr(type));
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var res = xmlhttp.responseText;
-                if (res)
-                    dealContent(res);
+                var json = JSON.parse(xmlhttp.responseText);
+                if (json.success)
+                    dealContent(json);
+                else
+                    console.log(json.error);
             }
         };
     }
 
-    function dealContent(res) {
-        var json = JSON.parse(res);
+    function dealContent(json) {
         if (json.success) {
             var card = document.getElementById("actlist");
-            console.log(res);
             console.log(json);
 
             for (var i = 0; i < json.length; i++) {

@@ -1,4 +1,5 @@
 <?php
+	header("Content-Type: text/html; charset=UTF-8");
 	if($_SERVER["REQUEST_METHOD"]=="POST"){
 		$name 		= $_POST["name"];
 		$location 	= $_POST["location"];
@@ -7,20 +8,24 @@
 		$intro	 	= $_POST["introduction"];
 		$type	 	= $_POST["type"];
 		$json		= $_POST["json"];
+		$campus		= $_POST["campus"];
 		$UID		= $_POST["UID"];
 		$time	 	= time();
 		
 		$line = array();
 		$mysqli = new mysqli('localhost','ipeuser','*ipE123','ipe_db','3306');
+		$mysqli->query("set character set 'utf8'");
+		$mysqli->query("set names 'utf8'");
 		if($mysqli->connect_errno){
 			$line["success"] = false;
+			
 			$line["error"] = "连接服务器失败!".$mysqli->connect_errno;
 		}else{
-			$order = "INSERT INTO activity (name,location,holdtime,time,organizer,introduction,type,json,organizerUID) ";
-			$order .="VALUES('$name','$location','$holdtime',FROM_UNIXTIME($time),'$organizer','$intro','$type','$json',$UID)";
+			$order = "INSERT INTO activity (name,location,holdtime,time,organizer,introduction,type,campus,json,organizerUID) ";
+			$order .="VALUES('$name','$location','$holdtime',FROM_UNIXTIME($time),'$organizer','$intro','$type','$campus','$json',$UID)";
 
 			$rst = $mysqli->query($order);
-			
+			$line["test"]=$intro;
 			if($rst){
 				$line["success"] = true;
 			}else{
@@ -30,7 +35,5 @@
 		}
 		echo json_encode($line);
 		$mysqli->close();
-		//测试改动是否成功;
 	}
-	//123321
 ?>

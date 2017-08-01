@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Title</title>
     <!--全屏显示-->
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0;" charset="utf-8">
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
 
     <!--引用weui框架做样式-->
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
@@ -335,12 +335,12 @@
                 <input type="text" placeholder="迎新晚会" id="ACT_name" required>
 
                 <label><b>活动对象</b></label>
-                <select style="font-size: 12px;"  required>
-                    <option value="nanxiao">南校区</option>
-                    <option value="dongxiao">东校区</option>
-                    <option value="beixiao">北校区</option>
-                    <option value="zhongzhu">珠海校区</option>
-                    <option value="zhongzhu">不限</option>
+                <select style="font-size: 12px;" id="ACT_campus" required>
+                    <option value="南校区">南校区</option>
+                    <option value="东校区">东校区</option>
+                    <option value="北校区">北校区</option>
+                    <option value="珠海校区">珠海校区</option>
+                    <option value="不限">不限</option>
                 </select>
 
                 <label><b>活动地点</b></label>
@@ -550,10 +550,10 @@
             introduction: document.getElementById("ACT_intro").value,
             organizer: document.getElementById("ACT_organizer").value,
             type: document.getElementById("ACT_type").value,
+            campus: document.getElementById("ACT_campus").value,
             json: JSON.stringify(listjson),
             UID: uid
         };
-
         var xmlhttp = GetXMLHTTPRequest();
         xmlhttp.open("POST", "activityPost.php", true);
         xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
