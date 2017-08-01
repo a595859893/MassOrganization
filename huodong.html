@@ -115,7 +115,6 @@
             display: none
         }
 
-
         .talk .slideshow-container {
             position: relative;
             margin: auto;
@@ -125,7 +124,6 @@
         .mySlides.fade {
             height: 100%;
         }
-
 
         .talk .prev, .next {
             cursor: pointer;
@@ -141,7 +139,6 @@
             border-radius: 0 3px 3px 0;
         }
 
-
         .talk .next {
             right: 0;
             border-radius: 3px 0 0 3px;
@@ -150,7 +147,6 @@
         .talk .prev:hover, .talk .next:hover {
             background-color: rgba(0, 0, 0, 0.8);
         }
-
 
         .talk .text {
             color: #979797;
@@ -162,7 +158,6 @@
             text-align: center;
         }
 
-
         .talk .numbertext {
             color: #a8a8a8;
             font-size: 12px;
@@ -170,7 +165,6 @@
             position: absolute;
             top: 0;
         }
-
 
         .talk .dot {
             cursor: pointer;
@@ -186,7 +180,6 @@
         .talk .active, .talk .dot:hover {
             background-color: #717171;
         }
-
 
         .talk .fade {
             -webkit-animation-name: fade;
@@ -220,7 +213,6 @@
             font-size: 18px;
             font-weight: bolder;
         }
-
 
         /*下面是报名表的样式*/
         #id03 input[type=text], input[type=password], input[type=number] {
@@ -274,18 +266,18 @@
         }
 
         /*#id03 .close {*/
-            /*position: absolute;*/
-            /*right: 35px;*/
-            /*top: 15px;*/
-            /*color: #000;*/
-            /*font-size: 50px;*/
-            /*font-weight: bold;*/
+        /*position: absolute;*/
+        /*right: 35px;*/
+        /*top: 15px;*/
+        /*color: #000;*/
+        /*font-size: 50px;*/
+        /*font-weight: bold;*/
         /*}*/
 
         /*#id03 .close:hover,*/
         /*#id03 .close:focus {*/
-            /*color: red;*/
-            /*cursor: pointer;*/
+        /*color: red;*/
+        /*cursor: pointer;*/
         /*}*/
 
         #id03 .clearfix {
@@ -398,9 +390,10 @@
     <div class="weui-mask"></div>
     <div class="weui-dialog">
         <div class="weui-dialog__hd"><strong class="weui-dialog__title">发布流程</strong></div>
-        <div class="weui-dialog__bd">社团管理者登陆 &#8594 发布活动 </div>
+        <div class="weui-dialog__bd">社团管理者登陆 &#8594 发布活动</div>
         <div class="weui-dialog__ft">
-            <a href="#" class="weui-dialog__btn weui-dialog__btn_primary" onclick="document.getElementById('dialog_1').style.display='none'">确定</a>
+            <a href="#" class="weui-dialog__btn weui-dialog__btn_primary"
+               onclick="document.getElementById('dialog_1').style.display='none'">确定</a>
         </div>
     </div>
 </div>
@@ -445,7 +438,6 @@
     setOptionColor(actOrder);
 
     function getActivity(type) {
-        type = {place: "didian"};
         var xmlhttp = GetXMLHTTPRequest();
         xmlhttp.open("POST", "actlistGet.php", true);
         xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
@@ -468,14 +460,14 @@
             console.log(json);
 
             for (var i = 0; i < json.length; i++) {
-                card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location, json[i].holdtime, json[i].time, json[i].json, json[i].UID, false));
+                card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location, json[i].holdtime, json[i].time, json[i].UID, json[i].json, false));
             }
         } else {
             console.log(json.error);
         }
     }
 
-    function createActivity(title, content, place, holdtime, time, index, mark, labels) {
+    function createActivity(title, content, place, holdtime, time, index, labels, mark) {
         var div = document.createElement("div");
         var h4 = document.createElement("h4");
         var p = document.createElement("p");
@@ -489,8 +481,11 @@
         var input = document.createElement("input");
 
         var formStr = "";
-        for (var i in labels) {
-            formStr += "<label><b>" + i + "</b></label>" + "<input name='" + i + "'";
+        var formLabel = JSON.parse(labels);
+        console.log(formLabel);
+        console.log(labels);
+        for (var i in formLabel) {
+            formStr += "<label><b>" + i + "</b></label>" + "<input name='" + i + "'>";
         }
 
         div.className = "weui-media-box weui-media-box_text";
@@ -498,7 +493,7 @@
             event = event || window.event;
             switch (event.target) {
                 case(div_1):
-                    document.getElementById("custom").innerHTML = form;
+                    document.getElementById("custom").innerHTML = formStr;
                     sign(index);
                     break;
                 case(span):

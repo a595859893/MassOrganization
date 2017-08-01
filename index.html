@@ -259,17 +259,19 @@
         <form class="modal-content animate" action=" ">
             <div class="container">
                 <label><b>账号名</b></label>
-                <input type="text"  name="uname" id="uname" required>
+                <input type="text" name="uname" id="uname" required>
 
                 <label><b>密码</b></label>
-                <input type="password"  name="psw" id="psw" required>
+                <input type="password" name="psw" id="psw" required>
 
                 <button type="button" id="login">登陆</button>
                 <input type="checkbox" checked="checked" id="remember"> 记住我
             </div>
 
             <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="log()" class="cancelbtn">Cancel</button>
+                <button type="button" onclick="document.getElementById('id01').style.display = 'none';"
+                        class="cancelbtn">Cancel
+                </button>
                 <span class="psw">忘记 <a href="#">密码?</a></span>
             </div>
         </form>
@@ -313,10 +315,13 @@
             <div class="container">
                 <label><b>活动类型</b></label>
                 <select style="font-size: 12px;" id="ACT_type" required>
-                    <option value="gongyi">公益</option>
-                    <option value="tiyv">体育</option>
-                    <option value="jiangzuo">讲座</option>
-                    <option value="qita">其他</option>
+                    <option value="讲座">讲座</option>
+                    <option value="比赛">比赛</option>
+                    <option value="演出">演出</option>
+                    <option value="宣讲会">宣讲会</option>
+                    <option value="公益时">公益时</option>
+                    <option value="体育章">体育章</option>
+                    <option value="其它">其它</option>
                 </select>
 
                 <label><b>活动名称</b></label>
@@ -335,7 +340,7 @@
                 <input type="text" placeholder="中珠-风雨球场" id="ACT_location" required>
 
                 <label><b>活动时间</b></label>
-                <input  placeholder="2017.08.30" id="ACT_time" required>
+                <input placeholder="2017.08.30" id="ACT_time" required>
 
                 <label><b>活动简介</b></label>
                 <input type="text" id="ACT_intro" id="ACT_intro" required>
