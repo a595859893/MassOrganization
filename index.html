@@ -676,9 +676,9 @@
 
     //    第三页侧拉菜单--显示日程
     function openNav() {
-        document.getElementById("mySidenav").style.width = "50%";
-        document.getElementById("main").style.marginLeft = "50%";
-        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+        document.getElementById("mySidenav").style.width = "100%";
+        document.getElementById("main").style.marginLeft = "0%";
+//        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
     }
 
     function closeNav() {
@@ -692,7 +692,7 @@
         if (inputValue)
             newElement(inputValue);
         else
-            alert("你需要写点输入描述");
+            alert("你需要写点描述");
     }
 
     function newElement(value, type) {
