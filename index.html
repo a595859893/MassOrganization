@@ -36,8 +36,6 @@
                 <div class="text">文本 3</div>
             </div>
 
-            <!--<a class="prev" onclick="plusSlides(-1)">❮</a>-->
-            <!--<a class="next" onclick="plusSlides(1)">❯</a>-->
         </div>
 
         <div style="text-align:center">
@@ -62,7 +60,7 @@
                         校园活动
                     </p>
                 </a>
-                <a href="社团主页.html" class="weui-grid">
+                <a href="#" class="weui-grid">
                     <div class="weui-grid__icon">
                         <img src="" alt="">
                     </div>
@@ -70,7 +68,7 @@
                         社团主页
                     </p>
                 </a>
-                <a href="社团主页子页面.html" class="weui-grid">
+                <a href="#" class="weui-grid">
                     <div class="weui-grid__icon">
                         <img src="" alt="">
                     </div>
@@ -264,12 +262,12 @@
                 <label><b>密码</b></label>
                 <input type="password"  name="psw" id="psw" required>
 
-                <button type="button" id="login">登陆</button>
+                <button type="button" id="login"  >登陆</button>
                 <input type="checkbox" checked="checked" id="remember"> 记住我
             </div>
 
             <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="log()" class="cancelbtn">Cancel</button>
+                <button type="button" class="cancelbtn" onclick="document.getElementById('id01').style.display='none';onclick='log()'">取消</button>
                 <span class="psw">忘记 <a href="#">密码?</a></span>
             </div>
         </form>
@@ -662,32 +660,18 @@
     }
 
     //    第一页顶部幻灯片
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
-    }
-
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-    }
-
-    function showSlides(n) {
+    function showSlides() {
         var i;
         var slides = document.getElementsByClassName("mySlides");
-        var dots = document.getElementsByClassName("dot");
-        if (n > slides.length) {
-            slideIndex = 1
-        }
-        if (n < 1) {
-            slideIndex = slides.length
-        }
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
         }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
+        slideIndex++;
+        if (slideIndex > slides.length) {
+            slideIndex = 1
         }
         slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 8000);
     }
 
     //    第三页侧拉菜单--显示日程

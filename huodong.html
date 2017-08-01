@@ -8,313 +8,24 @@
     <!--引用weui框架做样式-->
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
 
+    <link rel="stylesheet" href="css.css">
     <style>
         body, html {
             height: 100%;
             overflow: hidden;
             background-color: rgba(247, 247, 247, 0.5);
-        }
-
-        body {
             font-family: "Lato", sans-serif;
         }
-
-        .scoll {
-            position: fixed;
-            right: 0;
-            top: 80%;
-            z-index: 2;
-            background-color: #999999;
-            height: 4em;
-            width: 4em;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 4em;
-        }
-
-        .scoll > a {
-            color: #fff;
-            font-size: 3em;
-        }
-
-        #top {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            width: 100%;
-
-        }
-
-        #top .navtop {
-            width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        #top button, .accordion {
-            color: black;
-            cursor: pointer;
-            padding: 8px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 15px;
-            transition: 0.4s;
-        }
-
-        #top button.accordion.active, button.accordion:hover {
-            background-color: #ddd;
-            color: rgb(70, 70, 70);
-        }
-
-        #top button.accordion:after {
-            content: '\25BC';
-            color: #777;
-            font-weight: bold;
-            float: right;
-            margin-left: 5px;
-        }
-
-        #top button.accordion.active:after {
-            content: "\25B2";
-        }
-
-        #top div.panel {
-            width: 100%;
-            background-color: #fff;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.2s ease-out;
-        }
-
-        #top .button-sp-area {
-            display: -webkit-flex;
-            display: flex;
-            -webkit-flex-wrap: wrap;
-            flex-wrap: wrap;
-        }
-
-        #top .weui-btn.weui-btn_mini.weui-btn_default {
-            margin: 2%;
-            width: 20%;
-            padding: 0;
-        }
-
-        #top .panel p {
-            color: #000;
-            font-size: 15px;
-        }
-
-        .talk {
-            height: 20%
-        }
-
-        .talk .mySlides {
-            display: none
-        }
-
-
-        .talk .slideshow-container {
-            position: relative;
-            margin: auto;
-            height: 80%;
-        }
-
-        .mySlides.fade {
-            height: 100%;
-        }
-
-
-        .talk .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            width: auto;
-            margin-top: -22px;
-            padding: 16px;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            transition: 0.6s ease;
-            border-radius: 0 3px 3px 0;
-        }
-
-
-        .talk .next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
-        }
-
-        .talk .prev:hover, .talk .next:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-
-        .talk .text {
-            color: #979797;
-            font-size: 15px;
-            padding: 8px 12px;
-            position: absolute;
-            bottom: 8px;
-            width: 100%;
-            text-align: center;
-        }
-
-
-        .talk .numbertext {
-            color: #a8a8a8;
-            font-size: 12px;
-            padding: 8px 12px;
-            position: absolute;
-            top: 0;
-        }
-
-
-        .talk .dot {
-            cursor: pointer;
-            height: 13px;
-            width: 13px;
-            margin: 0 2px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.6s ease;
-        }
-
-        .talk .active, .talk .dot:hover {
-            background-color: #717171;
-        }
-
-
-        .talk .fade {
-            -webkit-animation-name: fade;
-            -webkit-animation-duration: 1.5s;
-            animation-name: fade;
-            animation-duration: 1.5s;
-        }
-
-        @-webkit-keyframes fade {
-            from {
-                opacity: .4
-            }
-            to {
-                opacity: 1
-            }
-        }
-
-        @keyframes fade {
-            from {
-                opacity: .4
-            }
-            to {
-                opacity: 1
-            }
-        }
-
-        article span.star {
-
-            color: #cfcfcf;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: bolder;
-        }
-
-
-        /*下面是报名表的样式*/
-        #id03 input[type=text], input[type=password], input[type=number] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
-
-        #id03 button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px;
-            border: none;
-            cursor: pointer;
-        }
-
-        #id03 .cancelbtn {
-            padding: 14px 20px;
-            background-color: #4761f4;
-        }
-
-        #id03 .cancelbtn, .signupbtn {
-            float: left;
-            width: 40%
-        }
-
-        #id03 .container {
-            padding: 16px;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 3;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-        }
-
-        #id03 .modal-content {
-            background-color: #fefefe;
-            border: 1px solid #888;
-            width: 100%;
-            height: 100%;
-        }
-
-        /*#id03 .close {*/
-            /*position: absolute;*/
-            /*right: 35px;*/
-            /*top: 15px;*/
-            /*color: #000;*/
-            /*font-size: 50px;*/
-            /*font-weight: bold;*/
-        /*}*/
-
-        /*#id03 .close:hover,*/
-        /*#id03 .close:focus {*/
-            /*color: red;*/
-            /*cursor: pointer;*/
-        /*}*/
-
-        #id03 .clearfix {
-            background-color: #fff;
-        }
-
-        #id03 .clearfix::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-
-        @media screen and (max-width: 300px) {
-            .cancelbtn, .signupbtn {
-                width: 100%;
-            }
-        }
-
-
     </style>
 </head>
-<body>
+<body id="activity">
 <div class="scoll"><a href="#top">&#8679;</a></div>
 
 <header>
     <!--头部筛选栏-->
     <div id="top">
 
-        <div class="navtop">
+        <!--<div class="navtop">-->
             <button class="accordion" onclick="display()">筛选</button>
             <div class="panel" id="panel">
                 <p>&nbsp;校区</p>
@@ -349,7 +60,7 @@
                 </div>
             </div>
 
-        </div>
+        <!--</div>-->
     </div>
 
 </header>
@@ -416,7 +127,7 @@
 
 
 <!--以下是默认的报名表-->
-<div id="id03" class="modal">
+<div id="id04" class="modal">
     <form class="modal-content animate" action=" ">
         <div class="container" id="container">
             <div id="custom">
@@ -424,7 +135,7 @@
             </div>
             <input type="checkbox" checked="checked">记住我
             <div class="clearfix">
-                <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">
+                <button type="button" onclick="document.getElementById('id04').style.display='none'" class="cancelbtn">
                     取消
                 </button>
                 <button type="submit" class="signupbtn">提交</button>
@@ -582,7 +293,7 @@
 
             setOptionColor(actOrder)
         }
-    }
+    };
 
     function isAllIn(target) {
         var title = target.getAttribute("name");
@@ -638,7 +349,7 @@
             slideIndex = 1
         }
         slides[slideIndex - 1].style.display = "block";
-        setTimeout(showSlides, 8000); // Change image every 2 seconds
+        setTimeout(showSlides, 8000);
     }
 
     function display() {
@@ -647,7 +358,7 @@
 
     function sign(index) {
         postIndex = index;
-        document.getElementById('id03').style.display = 'block';
+        document.getElementById('id04').style.display = 'block';
     }
 
     function defaultActOther() {
