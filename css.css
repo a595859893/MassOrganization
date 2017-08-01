@@ -9,16 +9,16 @@
         #page1 header{
             height: 30%;
         }
-        #page1 header .mySlides {
+        #page1 header .mySlides , #activity .talk .mySlides{
             height: 100%;
             display:none;
         }
-        #page1 header .slideshow-container {
+        #page1 header .slideshow-container ,#activity .talk .slideshow-container {
             position: relative;
             margin: auto;
             height: 100%;
         }
-        #page1 header .text {
+        #page1 header .text ,#activity .talk .text{
             color: #666666;
             font-size: 15px;
             padding: 8px 12px;
@@ -27,17 +27,17 @@
             width: 100%;
             text-align: center;
         }
-        #page1 header .numbertext {
+        #page1 header .numbertext,#activity .talk .numbertext{
             color: #666666;
             font-size: 12px;
             padding: 8px 12px;
             position: absolute;
             top: 0;
         }
-        #page1 header img{
+        #page1 header img,#activity .talk img{
             height: 100%;
         }
-        #page1 header .dot {
+        #page1 header .dot ,#activity .talk .dot{
             cursor:pointer;
             height: 13px;
             width: 13px;
@@ -50,7 +50,7 @@
         #page1 header .active, .dot:hover {
             background-color: #717171;
         }
-        #page1 header .fade {
+        #page1 header .fade ,#activity .talk .fade{
             -webkit-animation-name: fade;
             -webkit-animation-duration: 1.5s;
             animation-name: fade;
@@ -172,7 +172,7 @@
             .sidenav a {font-size: 18px;}
         }
 
-        #page3 #main button,#page4 .main button{
+        #page3 #main button,#page4 .main button,#activity #top .accordion{
             background-color: rgba(0, 0, 0, 0.1);
             color: #444;
             cursor: pointer;
@@ -209,7 +209,7 @@
         #page3 #main button.accordion.active:after {
             content: "\25B2";
         }
-        #page3 #main div.panel {
+        #page3 #main div.panel,#activity #top div.panel{
             padding: 0 18px;
             background-color: #fff;
             max-height: 0;
@@ -220,7 +220,7 @@
             content: '\25BA';
         }
 
-#id02 input[type=text],#id02 input[type=number],#id02 input[type=url],#id02 select,#id03 input[type=text],#id03 input[type=number],#id03 input[type=url],#id03 select,#myDIV input{
+#id02 input[type=text],#id02 input[type=number],#id02 input[type=url],#id02 select,#id03 input[type=text],#id03 input[type=number],#id03 input[type=url],#id03 select,#myDIV input,#id04 input{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -236,7 +236,7 @@
     color: rgba(153, 153, 153, 0.4);
 }
 
-#id02 button,#id03 button,#myDIV button{
+#id02 button,#id03 button,#myDIV button,#id04 button{
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -246,7 +246,7 @@
     width: 40%;
 }
 
-#id02 .cancelbtn, #id03 .cancelbtn,#myDIV button.cancelbtn{
+#id02 .cancelbtn, #id03 .cancelbtn,#myDIV button.cancelbtn, #id04 .cancelbtn{
     padding: 14px 20px;
     background-color: #2b72bc;
 }
@@ -335,4 +335,75 @@
         #footer{
             position: fixed;
             bottom: 0;
+        }
+
+        #activity .scoll {
+            position: fixed;
+            right: 0;
+            top: 80%;
+            z-index: 2;
+            background-color: #999999;
+            height: 4em;
+            width: 4em;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 4em;
+        }
+
+        #activity .scoll > a {
+            color: #fff;
+            font-size: 3em;
+        }
+        #activity #top {
+            /*display: flex;*/
+            width: 100%;
+        }
+        #activity #top .accordion{
+            color: black;
+            cursor: pointer;
+            padding: 8px;
+        }
+        #activity #top .accordion.active, .accordion:hover {
+            background-color: #ddd;
+            color: rgb(70, 70, 70);
+        }
+        #activity #top div.panel {
+            width: 100%;
+        }
+        #activity #top .button-sp-area {
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+        #activity #top .weui-btn.weui-btn_mini.weui-btn_default {
+            margin: 2%;
+            width: 20%;
+            padding: 0;
+        }
+        #activity #top .panel p {
+            color: #000;
+            font-size: 15px;
+        }
+        #activity .talk {
+            height: 20%
+        }
+        #activity .talk .slideshow-container {
+            height: 80%;
+        }
+        #activity article span.star {
+            color: #cfcfcf;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bolder;
+        }
+        #activity #id04 .cancelbtn, .signupbtn {
+            float: left;
+            width: 40%
+        }
+        #activity #id04 .clearfix {
+            background-color: #fff;
+        }
+        #activity #id04 {
+            display: none;
         }
