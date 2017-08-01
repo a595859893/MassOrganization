@@ -16,6 +16,282 @@
             background-color: rgba(247, 247, 247, 0.5);
             font-family: "Lato", sans-serif;
         }
+        .scoll {
+            position: fixed;
+            right: 0;
+            top: 80%;
+            z-index: 2;
+            background-color: #999999;
+            height: 4em;
+            width: 4em;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 4em;
+        }
+
+        .scoll > a {
+            color: #fff;
+            font-size: 3em;
+        }
+
+        #top {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 100%;
+
+        }
+
+        #top .navtop {
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        #top button, .accordion {
+            color: black;
+            cursor: pointer;
+            padding: 8px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+        }
+
+        #top button.accordion.active, button.accordion:hover {
+            background-color: #ddd;
+            color: rgb(70, 70, 70);
+        }
+
+        #top button.accordion:after {
+            content: '\25BC';
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        #top button.accordion.active:after {
+            content: "\25B2";
+        }
+
+        #top div.panel {
+            width: 100%;
+            background-color: #fff;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+
+        #top .button-sp-area {
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        #top .weui-btn.weui-btn_mini.weui-btn_default {
+            margin: 2%;
+            width: 20%;
+            padding: 0;
+        }
+
+        #top .panel p {
+            color: #000;
+            font-size: 15px;
+        }
+
+        .talk {
+            height: 20%
+        }
+
+        .talk .mySlides {
+            display: none
+        }
+
+        .talk .slideshow-container {
+            position: relative;
+            margin: auto;
+            height: 80%;
+        }
+
+        .mySlides.fade {
+            height: 100%;
+        }
+
+        .talk .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .talk .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .talk .prev:hover, .talk .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .talk .text {
+            color: #979797;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .talk .numbertext {
+            color: #a8a8a8;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        .talk .dot {
+            cursor: pointer;
+            height: 13px;
+            width: 13px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .talk .active, .talk .dot:hover {
+            background-color: #717171;
+        }
+
+        .talk .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 1.5s;
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @-webkit-keyframes fade {
+            from {
+                opacity: .4
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        article span.star {
+
+            color: #cfcfcf;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bolder;
+        }
+
+        /*下面是报名表的样式*/
+        #id03 input[type=text], input[type=password], input[type=number] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        #id03 button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #id03 .cancelbtn {
+            padding: 14px 20px;
+            background-color: #4761f4;
+        }
+
+        #id03 .cancelbtn, .signupbtn {
+            float: left;
+            width: 40%
+        }
+
+        #id03 .container {
+            padding: 16px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 3;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+
+        #id03 .modal-content {
+            background-color: #fefefe;
+            border: 1px solid #888;
+            width: 100%;
+            height: 100%;
+        }
+
+        /*#id03 .close {*/
+        /*position: absolute;*/
+        /*right: 35px;*/
+        /*top: 15px;*/
+        /*color: #000;*/
+        /*font-size: 50px;*/
+        /*font-weight: bold;*/
+        /*}*/
+
+        /*#id03 .close:hover,*/
+        /*#id03 .close:focus {*/
+        /*color: red;*/
+        /*cursor: pointer;*/
+        /*}*/
+
+        #id03 .clearfix {
+            background-color: #fff;
+        }
+
+        #id03 .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        @media screen and (max-width: 300px) {
+            .cancelbtn, .signupbtn {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body id="activity">
@@ -109,9 +385,10 @@
     <div class="weui-mask"></div>
     <div class="weui-dialog">
         <div class="weui-dialog__hd"><strong class="weui-dialog__title">发布流程</strong></div>
-        <div class="weui-dialog__bd">社团管理者登陆 &#8594 发布活动 </div>
+        <div class="weui-dialog__bd">社团管理者登陆 &#8594 发布活动</div>
         <div class="weui-dialog__ft">
-            <a href="#" class="weui-dialog__btn weui-dialog__btn_primary" onclick="document.getElementById('dialog_1').style.display='none'">确定</a>
+            <a href="#" class="weui-dialog__btn weui-dialog__btn_primary"
+               onclick="document.getElementById('dialog_1').style.display='none'">确定</a>
         </div>
     </div>
 </div>
@@ -156,7 +433,6 @@
     setOptionColor(actOrder);
 
     function getActivity(type) {
-        type = {place: "didian"};
         var xmlhttp = GetXMLHTTPRequest();
         xmlhttp.open("POST", "actlistGet.php", true);
         xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
@@ -179,14 +455,14 @@
             console.log(json);
 
             for (var i = 0; i < json.length; i++) {
-                card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location, json[i].holdtime, json[i].time, json[i].json, json[i].UID, false));
+                card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location, json[i].holdtime, json[i].time, json[i].UID, json[i].json, false));
             }
         } else {
             console.log(json.error);
         }
     }
 
-    function createActivity(title, content, place, holdtime, time, index, mark, labels) {
+    function createActivity(title, content, place, holdtime, time, index, labels, mark) {
         var div = document.createElement("div");
         var h4 = document.createElement("h4");
         var p = document.createElement("p");
@@ -200,8 +476,11 @@
         var input = document.createElement("input");
 
         var formStr = "";
-        for (var i in labels) {
-            formStr += "<label><b>" + i + "</b></label>" + "<input name='" + i + "'";
+        var formLabel = JSON.parse(labels);
+        console.log(formLabel);
+        console.log(labels);
+        for (var i in formLabel) {
+            formStr += "<label><b>" + i + "</b></label>" + "<input name='" + i + "'>";
         }
 
         div.className = "weui-media-box weui-media-box_text";
@@ -209,7 +488,7 @@
             event = event || window.event;
             switch (event.target) {
                 case(div_1):
-                    document.getElementById("custom").innerHTML = form;
+                    document.getElementById("custom").innerHTML = formStr;
                     sign(index);
                     break;
                 case(span):
