@@ -8,16 +8,15 @@
     <!--引用weui框架做样式-->
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
 
+    <link rel="stylesheet" href="css.css">
     <style>
         body, html {
             height: 100%;
             overflow: hidden;
             background-color: rgba(247, 247, 247, 0.5);
-        }
-
-        body {
             font-family: "Lato", sans-serif;
         }
+<<<<<<< HEAD
 
         .scoll {
             position: fixed;
@@ -297,16 +296,18 @@
         }
 
 
+=======
+>>>>>>> 9ecb9f03ec9d359cb39aef9fc7efe35783e0f217
     </style>
 </head>
-<body>
+<body id="activity">
 <div class="scoll"><a href="#top">&#8679;</a></div>
 
 <header>
     <!--头部筛选栏-->
     <div id="top">
 
-        <div class="navtop">
+        <!--<div class="navtop">-->
             <button class="accordion" onclick="display()">筛选</button>
             <div class="panel" id="panel">
                 <p>&nbsp;校区</p>
@@ -341,7 +342,7 @@
                 </div>
             </div>
 
-        </div>
+        <!--</div>-->
     </div>
 
 </header>
@@ -409,7 +410,7 @@
 
 
 <!--以下是默认的报名表-->
-<div id="id03" class="modal">
+<div id="id04" class="modal">
     <form class="modal-content animate" action=" ">
         <div class="container" id="container">
             <div id="custom">
@@ -417,7 +418,7 @@
             </div>
             <input type="checkbox" checked="checked">记住我
             <div class="clearfix">
-                <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">
+                <button type="button" onclick="document.getElementById('id04').style.display='none'" class="cancelbtn">
                     取消
                 </button>
                 <button type="submit" class="signupbtn">提交</button>
@@ -577,7 +578,7 @@
 
             setOptionColor(actOrder)
         }
-    }
+    };
 
     function isAllIn(target) {
         var title = target.getAttribute("name");
@@ -633,7 +634,7 @@
             slideIndex = 1
         }
         slides[slideIndex - 1].style.display = "block";
-        setTimeout(showSlides, 8000); // Change image every 2 seconds
+        setTimeout(showSlides, 8000);
     }
 
     function display() {
@@ -642,7 +643,7 @@
 
     function sign(index) {
         postIndex = index;
-        document.getElementById('id03').style.display = 'block';
+        document.getElementById('id04').style.display = 'block';
     }
 
     function defaultActOther() {
