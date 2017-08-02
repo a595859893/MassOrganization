@@ -187,7 +187,7 @@
         <br>
         <!--通过下拉菜单查看-->
 
-        <button class="accordion">&#9635 我的活动</button>
+        <button class="accordion">&#9635; 我的活动</button>
         <div class="panel">
             <a class="weui-cell weui-cell_access" href="javascript:;">
                 <div class="weui-cell__bd">
@@ -203,7 +203,7 @@
             </a>
         </div>
 
-        <button class="accordion">&#10084 我的收藏</button>
+        <button class="accordion">&#10084; 我的收藏</button>
         <div class="panel">
             <a class="weui-cell weui-cell_access" href="javascript:;">
                 <div class="weui-cell__bd">
@@ -220,7 +220,7 @@
         </div>
 
 
-        <button class="accordion">&#10084 我的社团</button>
+        <button class="accordion">&#10084; 我的社团</button>
         <div class="panel">
             <a class="weui-cell weui-cell_access" href="javascript:;">
                 <div class="weui-cell__bd">
@@ -236,7 +236,7 @@
             </a>
         </div>
 
-        <button onclick="openNav()">&#10148 我的日程</button>
+        <button onclick="openNav()">&#10148; 我的日程</button>
 
 
     </div>
@@ -262,12 +262,14 @@
                 <label><b>密码</b></label>
                 <input type="password" name="psw" id="psw" required>
 
-                <button type="button" id="login"  >登陆</button>
+                <button type="button" id="login">登陆</button>
                 <input type="checkbox" checked="checked" id="remember"> 记住我
             </div>
 
             <div class="container" style="background-color:#f1f1f1">
-                <button type="button" class="cancelbtn" onclick="document.getElementById('id01').style.display='none';">取消</button>
+                <button type="button" class="cancelbtn" onclick="document.getElementById('id01').style.display='none';">
+                    取消
+                </button>
             </div>
         </form>
     </div>
@@ -290,17 +292,17 @@
 
         <br>
         <article class="main">
-            <button>&#9635 活动管理</button>
+            <button>&#9635; 活动管理</button>
 
             <button onclick="document.getElementById('id02').style.display='block';document.getElementById('main_1').style.display='none'">
-                &#9746 活动发布
+                &#9746; 活动发布
             </button>
 
             <button onclick="document.getElementById('id03').style.display='block';document.getElementById('main_1').style.display='none'">
-                &#9746 招新发布
+                &#9746; 招新发布
             </button>
 
-            <button>&#9729 社团主页管理</button>
+            <button>&#9729; 社团主页管理</button>
         </article>
     </div>
     <!--活动发布表单-->
@@ -346,12 +348,17 @@
                 <label><b>主办方</b></label>
                 <input type="text" placeholder="校团工委" id="ACT_organizer" required>
 
+                <label><b>上传Logo</b></label>
+                <button type="button" onclick="document.getElementById('ACT_input').click();">点击上传图片</button>
+                <input type="file" style="display:none" id="ACT_input">
+                <img id="ACT_logo" style="width:150px;height:150px"></img>
+
                 <br>
                 <input type="radio" name="formChoose" value="default" checked="checked"> <b>使用默认报名表</b>
                 &nbsp;
                 <input type="radio" name="formChoose" value="make"
                        onclick="document.getElementById('myDIV').style.display='block';document.getElementById('id02').style.display='none';">
-                <b>在线制作报名表</b>
+                <b>自定义报名表</b>
                 &nbsp;
                 <input type="radio" name="formChoose" value="none"> <b>不使用报名表</b>
                 <br>
@@ -537,6 +544,7 @@
             organizer: document.getElementById("ACT_organizer").value,
             type: document.getElementById("ACT_type").value,
             campus: document.getElementById("ACT_campus").value,
+            logo: encodeURIComponent(document.getElementById("ACT_logo").src),
             json: JSON.stringify(listjson),
             UID: uid
         };
@@ -604,6 +612,23 @@
             }
         }
     };
+    document.getElementById("ACT_input").onchange = function (event) {
+        event = event || window.event;
+        var file = event.target.files[0];
+        var fr = new FileReader();
+        var reg = new RegExp(/image\/\w+/);
+        if (reg.test(file.type)) {
+            fr.onload = function (event) {
+                var url = event.target.result;
+                if (url.length <= 1024 * 500)//图片大小限制(dataURL本身的原因，多少不太明确)
+                    document.getElementById("ACT_logo").src = event.target.result;
+                else
+                    alert("图片过大，请选择较小的图片！");
+            }
+            fr.readAsDataURL(file);
+        } else
+            alert("不是图片无法上传！");
+    };
 
     //登陆登出
     function login(res) {
@@ -658,7 +683,7 @@
             tab[i].className = tab[i].className.replace(" weui-bar__item_on", "");
         }
         document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " weui-bar__item_on";
+        if (evt) evt.currentTarget.className += " weui-bar__item_on";
     }
 
     //    第一页顶部幻灯片

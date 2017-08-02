@@ -20,13 +20,13 @@
 </head>
 <body id="activity">
 <div id="main_2">
-<div class="scoll"><a href="#top">&#8679;</a></div>
+    <div class="scoll"><a href="#top">&#8679;</a></div>
 
-<header>
-    <!--头部筛选栏-->
-    <div id="top">
+    <header>
+        <!--头部筛选栏-->
+        <div id="top">
 
-        <!--<div class="navtop">-->
+            <!--<div class="navtop">-->
             <button class="accordion" onclick="display()">筛选</button>
             <div class="panel" id="panel">
                 <p>&nbsp;校区</p>
@@ -61,71 +61,71 @@
                 </div>
             </div>
 
-        <!--</div>-->
+            <!--</div>-->
+        </div>
+
+    </header>
+
+    <!--话圈_发表对活动的评论_每周更新-->
+    <section class="talk" style="background-color: #fff;">
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <div class="numbertext">热门</div>
+                <img src=" ">
+                <div class="text">文本 1</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">热门</div>
+                <img src=" ">
+                <div class="text">文本 2</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">热门</div>
+                <img src=" ">
+                <div class="text">文本 3</div>
+            </div>
+
+        </div>
+
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </section>
+
+    <!--公告栏-->
+    <div class="weui-cells">
+        <a class="weui-cell weui-cell_access" onclick="document.getElementById('dialog_1').style.display='block'">
+            <div class="weui-cell__bd">
+                <p>活动发布流程 &#10150</p>
+            </div>
+            <div class="weui-cell__ft">
+            </div>
+        </a>
+    </div>
+    <div style="display: none;" id="dialog_1">
+        <div class="weui-mask"></div>
+        <div class="weui-dialog">
+            <div class="weui-dialog__hd"><strong class="weui-dialog__title">发布流程</strong></div>
+            <div class="weui-dialog__bd">社团管理者登陆 &#8594 发布活动</div>
+            <div class="weui-dialog__ft">
+                <a href="#" class="weui-dialog__btn weui-dialog__btn_primary"
+                   onclick="document.getElementById('dialog_1').style.display='none'">确定</a>
+            </div>
+        </div>
     </div>
 
-</header>
-
-<!--话圈_发表对活动的评论_每周更新-->
-<section class="talk" style="background-color: #fff;">
-    <div class="slideshow-container">
-        <div class="mySlides fade">
-            <div class="numbertext">热门</div>
-            <img src=" ">
-            <div class="text">文本 1</div>
+    <br><br>
+    <article>
+        <div class="weui-panel">
+            <div class="weui-panel__bd" id="actlist">
+                <!--活动JS添加地点-->
+            </div>
         </div>
-
-        <div class="mySlides fade">
-            <div class="numbertext">热门</div>
-            <img src=" ">
-            <div class="text">文本 2</div>
-        </div>
-
-        <div class="mySlides fade">
-            <div class="numbertext">热门</div>
-            <img src=" ">
-            <div class="text">文本 3</div>
-        </div>
-
-    </div>
-
-    <div style="text-align:center">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-    </div>
-</section>
-
-<!--公告栏-->
-<div class="weui-cells">
-    <a class="weui-cell weui-cell_access" onclick="document.getElementById('dialog_1').style.display='block'">
-        <div class="weui-cell__bd">
-            <p>活动发布流程 &#10150</p>
-        </div>
-        <div class="weui-cell__ft">
-        </div>
-    </a>
-</div>
-<div style="display: none;" id="dialog_1">
-    <div class="weui-mask"></div>
-    <div class="weui-dialog">
-        <div class="weui-dialog__hd"><strong class="weui-dialog__title">发布流程</strong></div>
-        <div class="weui-dialog__bd">社团管理者登陆 &#8594 发布活动</div>
-        <div class="weui-dialog__ft">
-            <a href="#" class="weui-dialog__btn weui-dialog__btn_primary"
-               onclick="document.getElementById('dialog_1').style.display='none'">确定</a>
-        </div>
-    </div>
-</div>
-
-<br><br>
-<article>
-    <div class="weui-panel">
-        <div class="weui-panel__bd" id="actlist">
-            <!--活动JS添加地点-->
-        </div>
-    </div>
-</article>
+    </article>
 
 </div>
 <!--以下是默认的报名表-->
@@ -137,7 +137,9 @@
             </div>
             <!--<input type="checkbox" checked="checked">记住我-->
             <div class="clearfix">
-                <button type="button" onclick="document.getElementById('id04').style.display='none';document.getElementById('main_2').style.display='block'" class="cancelbtn">
+                <button type="button"
+                        onclick="document.getElementById('id04').style.display='none';document.getElementById('main_2').style.display='block'"
+                        class="cancelbtn">
                     取消
                 </button>
                 <button type="submit" class="signupbtn">提交</button>
@@ -162,7 +164,6 @@
         xmlhttp.open("POST", "actlistGet.php", true);
         xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
         xmlhttp.send(toStr(type));
-        console.log(toStr(type));
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var json = JSON.parse(xmlhttp.responseText);
@@ -180,17 +181,19 @@
             console.log(json);
 
             for (var i = 0; i < json.length; i++) {
-                card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location, json[i].holdtime, json[i].time, json[i].UID, json[i].json, false));
+                card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location,
+                    json[i].holdtime, json[i].time, json[i].UID, json[i].json, json[i].logo, false));
             }
         } else {
             console.log(json.error);
         }
     }
 
-    function createActivity(title, content, place, holdtime, time, index, labels, mark) {
+    function createActivity(title, content, place, holdtime, time, index, labels, logo, mark) {
         var div = document.createElement("div");
         var h4 = document.createElement("h4");
         var p = document.createElement("p");
+        var img = document.createElement("img");
         var ul_1 = document.createElement("ul");
         var li_1_1 = document.createElement("li");
         var li_1_2 = document.createElement("li");
@@ -202,11 +205,13 @@
 
         var formStr = "";
         var formLabel = JSON.parse(labels);
-        console.log(formLabel);
-        console.log(labels);
         for (var i in formLabel) {
             formStr += "<label><b>" + i + "</b></label>" + "<input name='" + i + "'>";
         }
+
+        img.src = decodeURIComponent(logo);
+        img.style.width = "150px";
+        img.style.height = "150px";
 
         div.className = "weui-media-box weui-media-box_text";
         div.onclick = function (event) {
@@ -257,6 +262,7 @@
         div.appendChild(p);
         div.appendChild(ul_1);
         div.appendChild(div_1);
+        div.appendChild(img);
 
         return div;
     }
@@ -363,7 +369,7 @@
     function sign(index) {
         postIndex = index;
         document.getElementById('id04').style.display = 'block';
-        document.getElementById('main_2').style.display='none';
+        document.getElementById('main_2').style.display = 'none';
     }
 
     function defaultActOther() {

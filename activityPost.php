@@ -9,6 +9,7 @@
 		$type	 	= $_POST["type"];
 		$json		= $_POST["json"];
 		$campus		= $_POST["campus"];
+		$logo		= $_POST["logo"];
 		$UID		= $_POST["UID"];
 		$time	 	= time();
 		
@@ -21,8 +22,8 @@
 			
 			$line["error"] = "连接服务器失败!".$mysqli->connect_errno;
 		}else{
-			$order = "INSERT INTO activity (name,location,holdtime,time,organizer,introduction,type,campus,json,organizerUID) ";
-			$order .="VALUES('$name','$location','$holdtime',FROM_UNIXTIME($time),'$organizer','$intro','$type','$campus','$json',$UID)";
+			$order = "INSERT INTO activity (name,location,holdtime,time,organizer,introduction,type,campus,logo,json,organizerUID) ";
+			$order .="VALUES('$name','$location','$holdtime',FROM_UNIXTIME($time),'$organizer','$intro','$type','$campus','$logo','$json',$UID)";
 
 			$rst = $mysqli->query($order);
 			$line["test"]=$intro;
