@@ -4,7 +4,7 @@
     <title>Title</title>
     <!--全屏显示-->
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <meta http-equiv='Content-Type' content='text/html,charset=utf-8'>
+    <meta http-equiv='Content-Type' content='text/html;charset=utf-8'>
     <!--引用weui框架做样式-->
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
 
@@ -371,7 +371,7 @@
         var tempA = document.getElementById("panel").getElementsByTagName("A");
         for (var i = 0; i < tempA.length; i++) {
             var title = tempA[i].parentNode.getAttribute("name");
-            var ele = tempA[i].innerText;
+            var ele = tempA[i].innerHTML;
             if (title != "other" && title != "order" && ele != "不限")
                 act[title].push(ele);
         }
