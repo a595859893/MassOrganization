@@ -160,6 +160,7 @@
     setOptionColor(actOrder);
 
     function getActivity(type) {
+        document.getElementById("actlist").innerHTML = "";
         var xmlhttp = GetXMLHTTPRequest();
         xmlhttp.open("POST", "actlistGet.php", true);
         xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
@@ -178,8 +179,6 @@
     function dealContent(json) {
         if (json.success) {
             var card = document.getElementById("actlist");
-            console.log(json);
-
             for (var i = 0; i < json.length; i++) {
                 card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location,
                     json[i].holdtime, json[i].time, json[i].UID, json[i].json, json[i].logo, false));
@@ -273,7 +272,6 @@
         if (event.target.tagName == "A") {
             var title = event.target.parentNode.getAttribute("name");
             var ele = event.target.innerText;
-            var index = actOrder[title].indexOf(ele);
 
             if (title == "other") {
                 if (ele == "重置")
@@ -283,6 +281,7 @@
             } else if (title == "order") {
                 actOrder[title] = ele;
             } else {
+                var index = actOrder[title].indexOf(ele);
                 if (ele == "不限") {
                     //判断是否全部在里面
                     var pn = event.target.parentNode;
