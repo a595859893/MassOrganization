@@ -1,6 +1,7 @@
 
         body,html,#page1,#page2,#page3,#page4{
             height: 100%;
+            overflow-x: hidden;
         }
         body {
             font-family: Verdana,sans-serif;
@@ -253,10 +254,10 @@
 
 #id02 .cancelbtn,.model .signupbtn {float:left;}
 
-#id02 .container,#id03 .container{
+#id02 .container,#id03 .container,#id04 .container{
     padding: 16px;
 }
-        #page4 .modal {
+        #page4 .modal ,#activity #id04{
             display: none;
             z-index: 1;
             left: 0;
@@ -267,13 +268,13 @@
         }
 
 
-        #id02 .modal-content ,#id03 .modal-content, #myDIV .modal-content{
+        #id02 .modal-content ,#id03 .modal-content, #myDIV .modal-content,#id04 .modal-content {
             background-color: #fefefe;
             width: 100%;
             height: 100%;
         }
 
-        #id02  label,#id03  label{
+        #id02 label,#id03 label,#id03 label{
             font-size:15px;
         }
 
@@ -397,13 +398,13 @@
             font-size: 18px;
             font-weight: bolder;
         }
-        #activity #id04 .cancelbtn, .signupbtn {
+        #activity #id04 .cancelbtn,#activity #id04 .signupbtn {
             float: left;
             width: 40%
         }
         #activity #id04 .clearfix {
             background-color: #fff;
         }
-        #activity #id04 {
-            display: none;
-        }
+        /*#activity #id04 {*/
+            /*display: none;*/
+        /*}*/

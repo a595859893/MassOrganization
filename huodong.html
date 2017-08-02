@@ -3,8 +3,8 @@
 <head>
     <title>Title</title>
     <!--全屏显示-->
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0;" charset="utf-8">
-    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv='Content-Type' content='text/html,charset=utf-8'>
     <!--引用weui框架做样式-->
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
 
@@ -12,13 +12,14 @@
     <style>
         body, html {
             height: 100%;
-            overflow: hidden;
             background-color: rgba(247, 247, 247, 0.5);
             font-family: "Lato", sans-serif;
+            overflow-x: hidden;
         }
     </style>
 </head>
 <body id="activity">
+<div id="main_2">
 <div class="scoll"><a href="#top">&#8679;</a></div>
 
 <header>
@@ -126,7 +127,7 @@
     </div>
 </article>
 
-
+</div>
 <!--以下是默认的报名表-->
 <div id="id04" class="modal">
     <form class="modal-content animate" action=" ">
@@ -134,9 +135,9 @@
             <div id="custom">
                 <!--JS代码切入点-->
             </div>
-            <input type="checkbox" checked="checked">记住我
+            <!--<input type="checkbox" checked="checked">记住我-->
             <div class="clearfix">
-                <button type="button" onclick="document.getElementById('id04').style.display='none'" class="cancelbtn">
+                <button type="button" onclick="document.getElementById('id04').style.display='none';document.getElementById('main_2').style.display='block'" class="cancelbtn">
                     取消
                 </button>
                 <button type="submit" class="signupbtn">提交</button>
@@ -362,6 +363,7 @@
     function sign(index) {
         postIndex = index;
         document.getElementById('id04').style.display = 'block';
+        document.getElementById('main_2').style.display='none';
     }
 
     function defaultActOther() {
