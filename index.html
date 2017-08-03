@@ -9,41 +9,6 @@
     <!--引用weui框架做样式-->
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
     <link rel="stylesheet" href="css.css">
-    <style>
-        .sidenav{background-color: #f7f7f7;}
-        .sidenav *{box-sizing:border-box;}
-        .month {
-            padding: 7%;
-            width: 100%;
-            background: #1abc9c;
-        }
-        .month ul {
-            margin: 0;
-            padding: 0;
-            list-style-type: none;
-        }
-
-        .month ul li {
-            color: white;
-            font-size: 20px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-        #ul>li{
-            border:1px solid #ddd;
-            padding:5px;
-            position: relative;
-            display: block;
-        }
-        #ul span{
-            position: absolute;
-            right: 0;
-            padding:5px;
-            font-size:20px;
-            top: -10%;
-        }
-        .sidenav table td{color:#777;}
-    </style>
 </head>
 <body>
 
@@ -870,8 +835,8 @@
     function submit(condition){
         document.getElementById('add').style.display = 'none';
         if(condition){
-            target.style.color = '#FA8072';
-            target.style.fontWeight = 'bolder';
+            target.innerHTML += "<span style='color:#db9796'> &#8226</span>";
+//            target.style.fontWeight = 'bolder';
             var thing = document.getElementById('thing').value;
             var time = document.getElementById('time').value;
             var li = document.createElement('li');
