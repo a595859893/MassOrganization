@@ -9,7 +9,41 @@
     <!--引用weui框架做样式-->
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
     <link rel="stylesheet" href="css.css">
+    <style>
+        .sidenav{background-color: #f7f7f7;}
+        .sidenav *{box-sizing:border-box;}
+        .month {
+            padding: 7%;
+            width: 100%;
+            background: #1abc9c;
+        }
+        .month ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
 
+        .month ul li {
+            color: white;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        #ul>li{
+            border:1px solid #ddd;
+            padding:5px;
+            position: relative;
+            display: block;
+        }
+        #ul span{
+            position: absolute;
+            right: 0;
+            padding:5px;
+            font-size:20px;
+            top: -10%;
+        }
+        .sidenav table td{color:#777;}
+    </style>
 </head>
 <body>
 
@@ -245,10 +279,39 @@
     <!--侧拉菜单显示日程-->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">事件1</a>
-        <a href="#">事件2</a>
-        <a href="#">事件3</a>
-        <a href="#">事件4</a>
+        <div class="month" id="month">
+            <ul>
+                <li style="text-align:center">
+                    <span style="font-size:18px" id="thisYear"></span><br>
+                    <span id="thisMonth"></span>
+                </li>
+            </ul>
+        </div>
+
+        <div id="table"></div>
+        <br>
+        <div>
+            <ul id="ul">
+
+            </ul>
+        </div>
+
+        <div style="display:none" id="add">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog">
+                <div class="weui-dialog__hd"><strong class="weui-dialog__title">添加日程</strong></div>
+                <div class="weui-dialog__bd">
+                    <input type="text" placeholder="thing" id="thing">
+                    <input type="text" placeholder="time" id="time">
+                    <!--<input type="text" style="width: 31%;">—<input type="text" style="width: 31%;">-->
+                </div>
+                <div class="weui-dialog__ft">
+                    <a  class="weui-dialog__btn weui-dialog__btn_default" onclick="submit(0)">取消</a>
+                    <a  class="weui-dialog__btn weui-dialog__btn_primary" onclick="submit(1)">确定</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
@@ -744,6 +807,83 @@
             var element = this.parentElement;
             var parent = element.parentElement;
             parent.removeChild(element);
+        }
+    }
+
+    function showCal(){
+        function is_leap(year) {
+            return (year%100==0?res=(year%400==0?1:0):res=(year%4==0?1:0));
+        } //是否为闰年
+
+        var nstr=new Date(); //当前Date资讯
+        var ynow=nstr.getFullYear(); //年份
+        var mnow=nstr.getMonth(); //月份
+        var dnow=nstr.getDate(); //今日日期
+        var n1str=new Date(ynow,mnow,1); //当月第一天Date资讯
+
+        var firstday=n1str.getDay(); //当月第一天星期几
+
+        var m_days= new Array(31,28+is_leap(ynow),31,30,31,30,31,31,30,31,30,31); //各月份的总天数
+
+        var tr_str=Math.ceil((m_days[mnow] + firstday)/7); //表格所需要行数
+
+
+        //打印表格第一行（有星期标志）
+//        var div = document.createElement("div");
+        var div = '';
+        div +="<table  align='center' width='100%' cellspacing='0' cellpadding='10' ><tr bgcolor= '#ddd' ><th align='center'>日</th><th align='center'>一</th><th align='center'>二</th><th align='center'>三</th><th align='center'>四</th><th align='center'>五</th><th align='center'>六</th></tr>";
+
+        for(i=0;i<tr_str;i++) { //表格的行
+            div +="<tr class='day'>";
+            for(k=0;k<7;k++) { //表格每行的单元格
+                idx=i*7+k; //单元格自然序列号
+                date_str=idx-firstday+1; //计算日期
+                (date_str<=0 || date_str>m_days[mnow]) ? date_str="&nbsp;" : date_str=idx-firstday+1; //过滤无效日期（小于等于零的、大于月总天数的）
+                //打印日期：今天底色为绿
+                date_str==dnow ? div +="<td align='center'  bgcolor='#1abc9c' onclick='workList()'>" + date_str + "</td>" : div  += "<td align='center' bgcolor='#eee' onclick='workList()'>" + date_str + "</td>";
+            }
+            div  +="</tr>"; //表格的行结束
+        }
+
+        div  +="</table>"; //表格结束
+
+//        document.getElementById('table').innerHTML =  div  ;
+
+        var y = document.getElementById("thisYear");
+        y.innerText= ynow ;
+
+        var m = document.getElementById("thisMonth");
+        m.innerText= mnow+1 + '月';
+
+        return div;
+    }
+
+    document.getElementById('table').innerHTML = showCal();
+
+
+    function workList(event){
+        document.getElementById('add').style.display = 'block';
+        event = event || window.event;
+        target = event.target;
+    }
+
+    function submit(condition){
+        document.getElementById('add').style.display = 'none';
+        if(condition){
+            target.style.color = '#FA8072';
+            target.style.fontWeight = 'bolder';
+            var thing = document.getElementById('thing').value;
+            var time = document.getElementById('time').value;
+            var li = document.createElement('li');
+            var span = document.createElement('span');
+            span.innerText = "\u00D7";
+            li.innerHTML = "<b>"+ time + "</b>" +"&nbsp; — &nbsp;" + thing ;
+            var ul = document.getElementById('ul');
+            li.appendChild(span);
+            ul.appendChild(li);
+            span.onclick = function(){
+                this.parentElement.style.display='none';
+            };
         }
     }
 </script>
