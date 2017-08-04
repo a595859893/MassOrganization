@@ -196,16 +196,20 @@
             top: -10%;
         }
         #page3 .sidenav table td{color:#777;}
-        #page3 .sidenav #add input,#add select{
+        #page3 .sidenav #add input{
             display: inline-block;
             border: 1px solid #ccc;
             box-sizing: border-box;
+            width: 230px;
+            height: 31px;
             margin: 4px;
-            padding: 7px;
+            padding: 4px;
         }
-        #page3 .sidenav #add input::-webkit-input-placeholder{
-            font-size:5px;
-            color: rgba(153, 153, 153, 0.4);
+        #page3 .sidenav #add li{
+            list-style: none;
+            margin: auto;
+            width: 230px;
+            height: 31px;
         }
         #page3 #main{
             transition: margin-left .5s;
@@ -448,6 +452,3 @@
         #activity #id04 .clearfix {
             background-color: #fff;
         }
-        /*#activity #id04 {*/
-            /*display: none;*/
-        /*}*/
