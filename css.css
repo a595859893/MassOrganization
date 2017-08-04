@@ -7,6 +7,12 @@
             font-family: Verdana,sans-serif;
             transition: background-color .5s;
         }
+        .icon {
+            width: 2em; height: 2em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
         #page1 header{
             height: 30%;
         }
@@ -452,13 +458,7 @@
         #activity #id04 .clearfix {
             background-color: #fff;
         }
-        #footer .weui-bar__item_on i,#footer .weui-bar__item_on p,#footer .weui-bar__item_on .icon{
+        #footer .weui-bar__item_on i,#footer .weui-bar__item_on p{
             color: #136832;
-            fill:#136832 ;
-        }
-        .icon {
-            width: 2em; height: 2em;
-            vertical-align: -0.15em;
-            fill: currentColor;
-            overflow: hidden;
+            /*fill:#136832 ;*/
         }

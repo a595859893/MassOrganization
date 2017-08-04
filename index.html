@@ -9,6 +9,7 @@
     <!--引用weui框架做样式-->
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="iconfont.js"></script>
     <link rel="stylesheet" href="css.css">
 </head>
 <body>
@@ -381,7 +382,7 @@
                 <label><b>上传Logo</b></label>
                 <button type="button" onclick="document.getElementById('ACT_input').click();">点击上传图片</button>
                 <input type="file" style="display:none" id="ACT_input">
-                <img id="ACT_logo" style="width:150px;height:150px"></img>
+                <img id="ACT_logo" style="width:150px;height:150px">
 
                 <br>
                 <input type="radio" name="formChoose" value="default" checked="checked"> <b>使用默认报名表</b>
@@ -422,7 +423,8 @@
                 <input type="text" id="NEW_object" required>
 
                 <label><b>报名截止时间</b></label>
-                <input type="text" placeholder="2017.09.25" id="NEW_end" required>
+                <input  class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_end'});" id="NEW_end" required>
+                <!--<input type="text" placeholder="2017.09.25" id="NEW_end" required>-->
 
                 <label><b>社团简介</b></label>
                 <input type="text" id="NEW_intro" required>
@@ -472,10 +474,7 @@
         <p class="weui-tabbar__label">首页</p>
     </a>
     <a href="#" class="weui-tabbar__item tab" onclick="tabNav(event,'page2')">
-        <!--<i class="weui-tabbar__icon fa fa-user-secret" style="font-size:25px;"></i>-->
-        <svg class="weui-tabbar__icon icon" aria-hidden="true" style="font-size:10px;">
-            <use xlink:href="#icon-tixing"></use>
-        </svg>
+        <i class="weui-tabbar__icon fa fa-bell" style="font-size:22px;"></i>
         <p class="weui-tabbar__label">消息</p>
     </a>
     <a href="#" class="weui-tabbar__item tab" id="myself" onclick="tabNav(event,'page3')">
@@ -484,7 +483,7 @@
     </a>
 </div>
 <script type="text/javascript" src="date-picker-js/laydate.js"></script>
-<script src="iconfont.js"></script>
+
 <script src="CommonJS.js"></script>
 <script>
     //页面初始化
@@ -658,7 +657,7 @@
                     document.getElementById("ACT_logo").src = event.target.result;
                 else
                     alert("图片过大，请选择较小的图片！");
-            }
+            };
             fr.readAsDataURL(file);
         } else
             alert("不是图片无法上传！");
