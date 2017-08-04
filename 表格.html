@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--全屏显示-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+    <!--引用pure-->
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+    <style>
+        table{
+            margin:20px auto;
+        }
+    </style>
+</head>
+<body>
+<table class="pure-table pure-table-bordered" id="table">
+    <thead>
+    <tr>
+        <th><input type="checkbox" id="all" onclick="all()"></th>
+        <th>姓名</th>
+        <th>学号</th>
+        <th>学院</th>
+        <th>手机</th>
+        <th>微信</th>
+        <th>备注</th>
+    </tr>
+    </thead>
+
+    <tbody id="tbody">
+    </tbody>
+</table>
+
+<script>
+
+    <!--后端传入姓名name,学号number,学院institute,微信号weichat,备注remarks -->
+    function loadDoc() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                table(this);
+            }
+        };
+        xhttp.open("GET", "table.xml", true);
+        xhttp.send();
+    }
+    function table(xml) {
+        var i;
+        var xmlDoc = xml.responseXML;
+        var table = "<tr><td>"+ "<input type='checkbox'>" + "</td><td>" +
+                    "</td><td>"+ "</td><td>"+
+                    "</td><td>"+ "</td><td>"+
+                    "</td><td>"+ "</td></tr>";
+        var x = xmlDoc.getElementsByTagName("form");
+        for (i = 0; i <x.length; i++) {
+            table += "<tr><td>" +
+                    "<input type='checkbox'>" +
+                    "</td><td>" +
+                    x[i].name +
+                    "</td><td>" +
+                    x[i].number +
+                    "</td><td>" +
+                    x[i].institute +
+                    "</td><td>" +
+                    x[i].telephone +
+                    "</td><td>" +
+                    x[i].weichat +
+                    "</td><td>" +
+                    x[i].remarks +
+                    "</td></tr>";
+        }
+        document.getElementById("tbody").appendChild(table);
+    }
+
+    function all(){
+        var tbody = document.getElementById("tbody");
+        var checkBox = tbody.getElementsByTagName("input");
+        var all = document.getElementById("all");
+        var i = 0 ;
+            if(all.checked){
+                for(;i < checkBox.length;i++){
+                checkBox[i].checked = true;}
+            }else {
+                for(;i < checkBox.length;i++){
+                checkBox[i].checked = false;}
+            }
+    }
+
+</script>
+</body>
+</html>

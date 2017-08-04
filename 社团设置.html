@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--全屏显示-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+    <!--引用weui框架做样式-->
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+</head>
+<body>
+<div class="weui-cells__title">编辑基本信息</div>
+<div class="weui-cells weui-cells_form">
+<div class="weui-cell">
+    <div class="weui-cell__hd"><label for="" class="weui-label">社团名字</label></div>
+    <div class="weui-cell__bd">
+        <input class="weui-input" type="text" value=""/>
+    </div>
+</div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label for="" class="weui-label">社团负责人</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value=""/>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label for="" class="weui-label">社团logo</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="file" style="opacity: 0" accept="image/*"   value=""/>
+        </div>
+    </div>
+
+
+    <div class="weui-cell">
+    <div class="weui-cell__hd"><label for="" class="weui-label">社团简介</label></div>
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                <div class="weui-textarea-counter"><span>0</span>/200</div>
+            </div>
+        </div>
+
+</div>
+<label for="weuiAgree" class="weui-agree">
+    <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+    <span class="weui-agree__text">
+        阅读并同意<a href="javascript:void(0);">《相关条款》</a>
+    </span>
+</label>
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">保存</a>
+</div>
+</body>
+</html>

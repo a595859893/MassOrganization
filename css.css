@@ -452,3 +452,13 @@
         #activity #id04 .clearfix {
             background-color: #fff;
         }
+        #footer .weui-bar__item_on i,#footer .weui-bar__item_on p,#footer .weui-bar__item_on .icon{
+            color: #136832;
+            fill:#136832 ;
+        }
+        .icon {
+            width: 2em; height: 2em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
