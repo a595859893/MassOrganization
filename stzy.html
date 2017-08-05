@@ -9,6 +9,19 @@
     <!--引用weui框架做样式-->
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
 
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+    <style>
+        ul>li>span{
+            color: #a9a9a9;
+            font-size: 15px;
+        }
+
+        .weui-media-box__info__meta.fa{
+            font-size: 15px;
+            color: #818181
+        }
+    </style>
 
 </head>
 <body>
@@ -88,7 +101,7 @@
         Search();
     };
 
-    //正则表达式有待改善
+
     function Search() {
         var keyword = searchBar.value;
         var patt = new RegExp(keyword,"g");
@@ -112,7 +125,7 @@
         searchBar.value = "";
         document.getElementById('search_text').style.display = 'block';
         document.getElementById('search_cancel').style.display = 'none';
-    }
+    };
 
     <!--点击搜索-->
     function searchBarClick() {
@@ -135,9 +148,13 @@
         evt.currentTarget.className += " weui-bar__item_on";
     }
 
-    //    需要从后端获取name(名字)，intro(简介)，number(关注人数)和member(社员数)   [图片最后解决？]
+    <!--点赞-->
+    var mark = false;
+
+
+    //    需要从后端获取name(名字)，intro(简介)，number(关注人数)和member(社员数)
     function dealContent(res) {
-        var json = eval("(" + res + ")")
+        var json = eval("(" + res + ")");
         var frame = document.getElementById("frame");
         for (var i = 0; i < json.length; i++) {
             frame.appendChild(createActivity(json[i].name, json[i].intro, json[i].number, json[i].member));
@@ -162,14 +179,24 @@
         h4.className = "weui-media-box__title";
         p.className = "weui-media-box__desc";
         ul.className = "weui-media-box__info";
-        li_1.className = "weui-media-box__info__meta";
-        li_2.className = "weui-media-box__info__meta weui-media-box__info__meta_extra";
+        li_1.className = "weui-media-box__info__meta fa fa-user-plus";
+        li_2.className = "weui-media-box__info__meta fa fa-thumbs-o-up";
 
+        li_1.onclick=li_2.onclick=function (event){
+            event = event || window.event;
+            if (mark) {
+                event.target.style.color = '';
+                mark = false;
+            } else {
+                event.target.style.color = 'red';
+                mark = true;
+            }
+        };
 
         h4.innerText = name;
         p.innerText = intro;
-        li_1.innerHTML = "已有 &nbsp; <span style='color: #a9a9a9;font-size: 17px;'>" + number + " </span> &nbsp; 报名";
-        li_2.innerHTML = "共有 &nbsp; <span style='color: #a9a9a9;font-size: 17px;'>" + member + " </span> &nbsp; 成员";
+        li_1.innerHTML = "<span>" + number + " </span> ";
+        li_2.innerHTML = " <span>" + member + " </span> ";
 
 
         //div_1.appendChild(img);

@@ -9,7 +9,7 @@
     <!--引用weui框架做样式-->
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
 
-
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
     <style>
 
         a, button, div, input, select, textarea {
@@ -88,10 +88,6 @@
             display: inline-block;
         }
 
-        .mod-fil-fans {
-            font-size: 0;
-        }
-
         .mod-fil-fans > div {
             position: relative;
             font-size: .75rem;
@@ -113,22 +109,6 @@
             color: black;
         }
 
-        .mod-fil-desc {
-            padding: 0 .75rem;
-            line-height: 1.125rem;
-            font-size: .75rem;
-            color: black;
-        }
-
-        .m-text-cut {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .mod-fil-desc.m-text-cut {
-            cursor: pointer;
-        }
 
         p {
             display: block;
@@ -254,12 +234,11 @@
                 </span>
                 <!--<i class="m-icon m-icon-vipl6"></i>-->
             </div>
-            <!--<div class="mod-fil-fans">-->
-                <!--<div class="txt-shadow">关注<span>200</span></div>-->
-            <!--</div>-->
-            <p class="mod-fil-desc m-text-cut">关注 200</p>
-            <p class="mod-fil-desc m-text-cut" id="attention"
-               onclick="document.getElementById('attention').innerText='已关注'">+加关注</p>
+
+            <div class="txt-shadow">
+            <i class="fa fa-user-plus"  onclick="color(event)"></i>   <span> 200 </span>
+            </div>
+
         </div>
     </div>
 </header>
@@ -327,75 +306,6 @@
         </div>
     </div>
 
-
-    <div class="weui-panel weui-panel_access">
-        <div class="weui-panel__bd">
-            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg" style="padding-bottom: 0">
-                <div class="weui-media-box__hd">
-                    <img class="weui-media-box__thumb" alt="" src="" style="border-radius:50%;">
-                </div>
-                <div class="weui-media-box__bd">
-                    <h4 class="weui-media-box__title">标题</h4>
-                    <p class="weui-media-box__desc">发布时间</p>
-                </div>
-            </a>
-            <article class="weui-article" style="margin-left:72px;padding: 0 15px">
-                <p>内容</p>
-                <p>
-                <div class="weui-uploader">
-                    <div class="weui-uploader__bd">
-                        <ul class="weui-uploader__files">
-                            <li class="weui-uploader__file" style="background-image:url(# )"></li>
-                            <li class="weui-uploader__file" style="background-image:url(# )"></li>
-                            <li class="weui-uploader__file" style="background-image:url(# )"></li>
-                        </ul>
-                    </div>
-                </div>
-                </p>
-            </article>
-        </div>
-        <div class="weui-form-preview__ft">
-            <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">&#9744 评论</a>
-            <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">&#9829 点赞</a>
-            <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">&#10150 转发</a>
-        </div>
-    </div>
-
-
-    <div class="weui-panel weui-panel_access">
-        <div class="weui-panel__bd">
-            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg" style="padding-bottom: 0">
-                <div class="weui-media-box__hd">
-                    <img class="weui-media-box__thumb" alt="" src="" style="border-radius:50%;">
-                </div>
-                <div class="weui-media-box__bd">
-                    <h4 class="weui-media-box__title">标题</h4>
-                    <p class="weui-media-box__desc">发布时间</p>
-                </div>
-            </a>
-            <article class="weui-article" style="margin-left:72px;padding: 0 15px">
-                <p>内容</p>
-                <p>
-                <div class="weui-uploader">
-                    <div class="weui-uploader__bd">
-                        <ul class="weui-uploader__files">
-                            <li class="weui-uploader__file" style="background-image:url(# )"></li>
-                            <li class="weui-uploader__file" style="background-image:url(# )"></li>
-                            <li class="weui-uploader__file" style="background-image:url(# )"></li>
-                        </ul>
-                    </div>
-                </div>
-                </p>
-            </article>
-        </div>
-        <div class="weui-form-preview__ft">
-            <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">&#9744 评论</a>
-            <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">&#9829 点赞</a>
-            <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">&#10150 转发</a>
-        </div>
-    </div>
-
-
 </article>
 
 <br>
@@ -447,6 +357,19 @@
 <script src="CommonJS.js"></script>
 <script>
     var uid = 0;
+
+//    加关注
+    var mark = false;
+    function color(event){
+        event = event || window.event;
+        if (mark) {
+            event.target.style.color = '';
+            mark = false;
+        } else {
+            event.target.style.color = 'red';
+            mark = true;
+        }
+    }
 
     //    报名表的
     function sign() {

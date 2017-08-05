@@ -170,7 +170,8 @@
             margin-left: 50px;
         }
         #page3 .sidenav{background-color: #f7f7f7;}
-        #page3 .sidenav *{box-sizing:border-box;}
+        #page3 .sidenav *{box-sizing:border-box;
+            }
         #page3 .sidenav .month {
             padding: 7%;
             width: 100%;
@@ -193,13 +194,14 @@
             padding:5px;
             position: relative;
             display: block;
+            font-size:13px;
         }
         #page3 .sidenav #ul span{
-            position: absolute;
-            right: 0;
+            /*position: absolute;*/
+            /*right: 0;*/
             padding:5px;
-            font-size:20px;
-            top: -10%;
+            font-size:25px;
+            /*top: -10%;*/
         }
         #page3 .sidenav table td{color:#777;}
         #page3 .sidenav #add input{
