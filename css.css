@@ -175,7 +175,7 @@
         #page3 .sidenav .month {
             padding: 7%;
             width: 100%;
-            background: #1abc9c;
+            background: #136832;
         }
         #page3 .sidenav .month ul {
             margin: 0;
@@ -229,12 +229,13 @@
         }
 
         #page3 #main button,#page4 .main button,#activity #top .accordion{
-            background-color: rgba(0, 0, 0, 0.1);
-            color: #444;
-            cursor: pointer;
+            /*background-color: rgba(0, 0, 0, 0.1);*/
+            background-color: #fff;
+            color: #888;
             padding: 18px;
             width: 100%;
             border: none;
+            border-bottom: 0.01px solid rgba(19,104,50,0.5);
             text-align: left;
             outline: none;
             font-size: 15px;
@@ -243,21 +244,21 @@
 
         #page3 #main header button,#page4 header button{
             margin-left:87px;
-            border: none;
+            border: 0.01px solid rgba(19,104,50,0.6);
             padding: 8px 6px;
             border-radius:3px;
-            background-color: rgba(0,0,0,0.1);
-            color: #444;
+            /*background-color: rgba(0,0,0,0.1);*/
+            color: #888;
             cursor: pointer;
         }
 
         #page3 #main button.accordion.active, button:hover,#page4 article button.active {
-            background-color: #ddd;
+            /*background-color: #ddd;*/
         }
 
         #page3 #main button.accordion:after,#page4 article button:after {
             content: '\25BC';
-            color: #777;
+            color: #136832;
             font-weight: bold;
             float: right;
             margin-left: 5px;
@@ -343,11 +344,11 @@
 
 
         #page4 #myDIV input{
-            width: 75%;
+            width: 80%;
         }
 
         #page4 #myDIV #myInput{
-            width: 80%;
+            width: 60%;
             margin: 1% auto ;
         }
 
@@ -361,7 +362,8 @@
 
         #page4 #myDIV .addBtn{
             background-color:#00ACEE;
-            width: 15%;
+            width: 32%;
+            height: 45px;
             text-align: center;
             padding:14px 2px;
         }

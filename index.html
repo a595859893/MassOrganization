@@ -17,7 +17,7 @@
 <div id="page1" class="page">
 
     <!--页面一头部幻灯片导航条-->
-    <header>
+    <header style="position: relative">
         <div class="slideshow-container">
             <div class="mySlides fade">
                 <div class="numbertext">1 / 3</div>
@@ -40,7 +40,7 @@
         </div>
 
         <div style="text-align:center;position: absolute;
-    right: 43%;top:26%" >
+    right: 40%;top:86%" >
             <span class="dot" onclick="currentSlide(1)"></span>
             <span class="dot" onclick="currentSlide(2)"></span>
             <span class="dot" onclick="currentSlide(3)"></span>
@@ -187,7 +187,7 @@
         <br>
         <!--通过下拉菜单查看-->
 
-        <button class="accordion">&#9635; 我的活动</button>
+        <button class="accordion" style="border-top: 0.01px solid rgba(19,104,50,0.6);"><i class="fa fa-hand-o-right" style="font-size:18px;color: #136832;"></i> 我的活动</button>
         <div class="panel">
             <a class="weui-cell weui-cell_access" href="javascript:;">
                 <div class="weui-cell__bd">
@@ -203,7 +203,7 @@
             </a>
         </div>
 
-        <button class="accordion">&#10084; 我的收藏</button>
+        <button class="accordion"><i class="fa fa-star" style="font-size:18px;color: #136832;"></i> 我的收藏</button>
         <div class="panel">
             <a class="weui-cell weui-cell_access" href="javascript:;">
                 <div class="weui-cell__bd">
@@ -220,7 +220,7 @@
         </div>
 
 
-        <button class="accordion">&#10084; 我的社团</button>
+        <button class="accordion"><i class="fa fa-users" style="font-size:18px;color: #136832;"></i> 我的社团</button>
         <div class="panel">
             <a class="weui-cell weui-cell_access" href="javascript:;">
                 <div class="weui-cell__bd">
@@ -236,7 +236,7 @@
             </a>
         </div>
 
-        <button onclick="openNav()">&#10148; 我的日程</button>
+        <button onclick="openNav()"><i class="fa fa-calendar" style="font-size:18px;color: #136832;"></i> 我的日程</button>
 
 
     </div>
@@ -246,7 +246,7 @@
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="month" id="month">
-            <i class="fa fa-calendar-plus-o" style="font-size:25px;color:#393939;position: relative;left: 281px;top: 11px;" onclick='workList()'></i>
+            <i class="fa fa-calendar-plus-o" style="font-size:25px;color:#fff;position: relative;left: 281px;top: 11px;" onclick='workList()'></i>
             <ul>
                 <li style="text-align:center">
                     <span style="font-size:18px" id="thisYear"></span><br>
@@ -320,22 +320,22 @@
                     <p class="weui-media-box__desc" id="user_intro">内容</p>
                 </div>
             </a>
-            <button style="width:auto;" onclick="logout()">退出</button>
+            <button style="width:auto;background-color: #fff;" onclick="logout()">退出</button>
         </header>
 
         <br>
         <article class="main">
-            <button>&#9635; 活动管理<a href="表格.html" ></a></button>
+            <button style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i> 活动管理<a href="表格.html" ></a></button>
 
             <button onclick="document.getElementById('id02').style.display='block';document.getElementById('main_1').style.display='none'">
-                &#9746; 活动发布
+                <i class="fa fa-edit" style="font-size:18px;color: #136832;"></i> 发布活动
             </button>
 
             <button onclick="document.getElementById('id03').style.display='block';document.getElementById('main_1').style.display='none'">
-                &#9746; 招新发布
+                <i class="fa fa-edit" style="font-size:18px;color: #136832;"></i> 发布招新
             </button>
 
-            <button> &#9729; 社团主页管理<a href="社团设置.html" ></a></button>
+            <button> <i class="fa fa-address-book-o" style="font-size:18px;color: #136832;"></i> 社团主页管理<a href="社团设置.html" ></a></button>
         </article>
     </div>
     <!--活动发布表单-->
@@ -381,17 +381,18 @@
                 <input type="text" placeholder="校团工委" id="ACT_organizer" required>
 
                 <label><b>上传Logo</b></label>
+                <img id="ACT_logo" style="width:150px;height:150px"><br>
                 <button type="button" onclick="document.getElementById('ACT_input').click();">点击上传图片</button>
                 <input type="file" style="display:none" id="ACT_input">
-                <img id="ACT_logo" style="width:150px;height:150px">
-
                 <br>
                 <input type="radio" name="formChoose" value="default" checked="checked"> <b>使用默认报名表</b>
                 &nbsp;
+                <br>
                 <input type="radio" name="formChoose" value="make"
                        onclick="document.getElementById('myDIV').style.display='block';document.getElementById('id02').style.display='none';">
                 <b>自定义报名表</b>
                 &nbsp;
+                <br>
                 <input type="radio" name="formChoose" value="none"> <b>不使用报名表</b>
                 <br>
                 <!--取消和提交按钮-->
@@ -449,7 +450,7 @@
     <div id="myDIV">
         <h2 style="margin:5px ">制作报名表</h2>
         <input type="text" id="myInput" placeholder="输入...">
-        <button onclick="addElement()" class="addBtn">添加</button>
+        <button onclick="addElement()" class="addBtn">添加报名需填项</button>
 
         <form class="modal-content animate" id="customerForm">
             <ul id="myUL">
