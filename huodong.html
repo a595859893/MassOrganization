@@ -8,6 +8,8 @@
     <!--引用weui框架做样式-->
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
 
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
     <link rel="stylesheet" href="css.css">
     <style>
         body, html {
@@ -16,19 +18,21 @@
             font-family: "Lato", sans-serif;
             overflow-x: hidden;
         }
+        .fa .fa-pencil-square-o{float: right;font-size: 20px;}
+        .weui-media-box__desc{line-height: 1.6}
     </style>
 </head>
 <body id="activity">
 <div id="main_2">
-    <div class="scoll"><a href="#top">&#8679;</a></div>
+    <!--<div class="scoll"><a href="#top">&#8679;</a></div>-->
 
     <header>
         <!--头部筛选栏-->
         <div id="top">
 
             <!--<div class="navtop">-->
-            <button class="accordion" onclick="display()">筛选</button>
-            <div class="panel" id="panel">
+            <button class="accordion" style="text-align: right" onclick="display()"> 筛选 &nbsp;<i class="fa fa-list-ul" style="font-size:15px;color: black;"></i></button>
+            <div class="panel" id="panel" style="position: absolute;z-index: 999;">
                 <p>&nbsp;校区</p>
                 <div class="button-sp-area" name="place">
                     <a href="#" class="weui-btn weui-btn_mini weui-btn_default">不限</a>
@@ -53,16 +57,15 @@
                     <a href="#" class="weui-btn weui-btn_mini weui-btn_default">最新</a>
                     <a href="#" class="weui-btn weui-btn_mini weui-btn_default">最热</a>
                 </div>
-                <br/>
+                <br>
                 <div class="button-sp-area" style="justify-content: space-between;" name="other">
-                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default">重置</a>
-                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default"
-                       style="background-color: #86d0ff;color:#fff">完成</a>
+                <button type="reset" class="weui-btn weui-btn_mini weui-btn_default">重置</button>
+                <button type="submit" class="weui-btn weui-btn_mini weui-btn_default" style="background-color: #86d0ff;color:#fff;margin-right: 24px;" onclick="display()">完成</button>
+                </div>
+                </div>
+
                 </div>
             </div>
-
-            <!--</div>-->
-        </div>
 
     </header>
 
@@ -70,26 +73,26 @@
     <section class="talk" style="background-color: #fff;">
         <div class="slideshow-container">
             <div class="mySlides fade">
-                <div class="numbertext">热门</div>
+                <div class="numbertext">1/3</div>
                 <img src=" ">
-                <div class="text">文本 1</div>
+                <!--<div class="text">文本 1</div>-->
             </div>
 
             <div class="mySlides fade">
-                <div class="numbertext">热门</div>
+                <div class="numbertext">2/3</div>
                 <img src=" ">
-                <div class="text">文本 2</div>
+                <!--<div class="text">文本 2</div>-->
             </div>
 
             <div class="mySlides fade">
-                <div class="numbertext">热门</div>
+                <div class="numbertext">3/3</div>
                 <img src=" ">
-                <div class="text">文本 3</div>
+                <!--<div class="text">文本 3</div>-->
             </div>
 
         </div>
 
-        <div style="text-align:center">
+        <div style="text-align:center;    position: absolute;top: 80%;left: 40%;">
             <span class="dot" onclick="currentSlide(1)"></span>
             <span class="dot" onclick="currentSlide(2)"></span>
             <span class="dot" onclick="currentSlide(3)"></span>
@@ -97,10 +100,10 @@
     </section>
 
     <!--公告栏-->
-    <div class="weui-cells">
+    <div class="weui-cells" style="position: absolute;width: 100%;top: 165px;">
         <a class="weui-cell weui-cell_access" onclick="document.getElementById('dialog_1').style.display='block'">
             <div class="weui-cell__bd">
-                <p>活动发布流程 &#10150</p>
+                <p>活动发布流程</p>
             </div>
             <div class="weui-cell__ft">
             </div>
@@ -118,9 +121,11 @@
         </div>
     </div>
 
-    <br><br>
+
+
+    <br><br><br>
     <article>
-        <div class="weui-panel">
+        <div class="weui-panel weui-panel_access">
             <div class="weui-panel__bd" id="actlist">
                 <!--活动JS添加地点-->
             </div>
@@ -181,26 +186,29 @@
             var card = document.getElementById("actlist");
             for (var i = 0; i < json.length; i++) {
                 card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location,
-                    json[i].holdtime, json[i].time, json[i].UID, json[i].json, json[i].logo, false));
+                        json[i].holdtime, json[i].time, json[i].UID, json[i].json, json[i].logo, false));
             }
         } else {
             console.log(json.error);
         }
     }
 
+//    把发布时间换成主办方
     function createActivity(title, content, place, holdtime, time, index, labels, logo, mark) {
-        var div = document.createElement("div");
-        var h4 = document.createElement("h4");
-        var p = document.createElement("p");
-        var img = document.createElement("img");
-        var ul_1 = document.createElement("ul");
-        var li_1_1 = document.createElement("li");
-        var li_1_2 = document.createElement("li");
-        var li_1_3 = document.createElement("li");
-        var span = document.createElement("span");
+        var a = document.createElement("a");
         var div_1 = document.createElement("div");
-        var label = document.createElement("label");
-        var input = document.createElement("input");
+        var img = document.createElement("img");
+
+        var div_2 = document.createElement("div");
+        var h4 = document.createElement("h4");
+        var i_1 = document.createElement("i");
+        var i_2 = document.createElement("i");
+
+        var p_1 = document.createElement("p");
+        var p_2 = document.createElement("p");
+        var p_3 = document.createElement("p");
+        var p_4 = document.createElement("p");
+
 
         var formStr = "";
         var formLabel = JSON.parse(labels);
@@ -211,16 +219,17 @@
         img.src = decodeURIComponent(logo);
         img.style.width = "150px";
         img.style.height = "150px";
+//        记得改尺寸
 
-        div.className = "weui-media-box weui-media-box_text";
-        div.onclick = function (event) {
+        a.className = "weui-media-box weui-media-box_appmsg";
+        a.onclick = function (event) {
             event = event || window.event;
             switch (event.target) {
-                case(div_1):
+                case(i_2):
                     document.getElementById("custom").innerHTML = formStr;
                     sign(index);
                     break;
-                case(span):
+                case(i_1):
                     if (mark) {
                         event.target.style.color = '';
                         mark = false;
@@ -232,38 +241,35 @@
             }
         };
 
-        span.className = "star";
-        span.innerHTML = "&#9733";
+        i_1.className = "fa fa-star";
+        i_2.className = "fa fa-pencil-square-o";
 
-        div_1.className = "weui-cell__ft";
-        div_1.innerHTML = "&#10148 立即报名";
+        div_1.className = "weui-media-box__hd";
+        div_2.className = "weui-media-box__bd";
 
         h4.className = "weui-media-box__title";
         h4.innerText = title + "  ";
 
-        p.className = "weui-media-box__desc";
-        p.innerText = content;
+        p_1.className=p_2.className=p_3.className=p_4.className = "weui-media-box__desc";
+        p_1.innerText =  "时间" + "" + ":" + holdtime;
+        p_2.innerText =  "地点" + "" + ":" + place;
+        p_3.innerText =  "主办方" + "" + ":" + time;
+        p_4.innerText =  "简介" + "" + ":" + content;
 
-        ul_1.className = "weui-media-box__info";
-        li_1_1.className = "weui-media-box__info__meta";
-        li_1_2.className = li_1_3.className = "weui-media-box__info__meta weui-media-box__info__meta_extra";
-        li_1_1.innerText = place;
-        li_1_2.innerText = holdtime;
-        li_1_3.innerText = time;
+        div_1.appendChild(img);
 
-        h4.appendChild(span);
+        h4.appendChild(i_1);
+        h4.appendChild(i_2);
+        div_2.appendChild(h4);
+        div_2.appendChild(p_1);
+        div_2.appendChild(p_2);
+        div_2.appendChild(p_3);
+        div_2.appendChild(p_4);
 
-        ul_1.appendChild(li_1_1);
-        ul_1.appendChild(li_1_2);
-        ul_1.appendChild(li_1_3);
+        a.appendChild(div_1);
+        a.appendChild(div_2);
 
-        div.appendChild(h4);
-        div.appendChild(p);
-        div.appendChild(ul_1);
-        div.appendChild(div_1);
-        div.appendChild(img);
-
-        return div;
+        return a;
     }
 
     document.getElementById("panel").onclick = function (event) {
@@ -285,7 +291,7 @@
                 if (ele == "不限") {
                     //判断是否全部在里面
                     var pn = event.target.parentNode;
-                    var all = !isAllIn(pn)
+                    var all = !isAllIn(pn);
                     actOrder[title] = [];
                     if (all) {
                         var all = pn.getElementsByTagName("A");
@@ -331,17 +337,17 @@
             var title = tempA[i].parentNode.getAttribute("name");
             var ele = tempA[i].innerText;
             if (title != "other") {
-                tempA[i].style.background = "#f8f8f8";
+                tempA[i].style.backgroundColor = "#F8F8F8 ";
                 if (title == "order") {
                     if (ele == actOrder[title])
-                        tempA[i].style.background = "#9999FF";
+                        tempA[i].style.backgroundColor = "#C6E2FF";
                 } else if (ele == "不限") {
                     if (isAllIn(tempA[i].parentNode))
-                        tempA[i].style.background = "#9999FF";
+                        tempA[i].style.backgroundColor= "#C6E2FF";
                 } else {
                     for (var j = 0; j < actOrder[title].length; j++)
                         if (ele == actOrder[title][j])
-                            tempA[i].style.background = "#9999FF";
+                            tempA[i].style.backgroundColor = "#C6E2FF";
                 }
             }
         }
@@ -360,9 +366,10 @@
         slides[slideIndex - 1].style.display = "block";
         setTimeout(showSlides, 8000);
     }
-
+//    var body = document.getElementById('activity');
     function display() {
         panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + "px";
+
     }
 
     function sign(index) {
@@ -380,7 +387,6 @@
             if (title != "other" && title != "order" && ele != "不限")
                 act[title].push(ele);
         }
-
         return act;
     }
 </script>
