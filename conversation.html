@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--全屏显示-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+    <!--引用weui框架做样式-->
+    <!--<link rel="stylesheet" href="weui.min.css">-->
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+    <link rel="stylesheet" href="css.css">
+    <!--<script src="jquery.js"></script>-->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+    <style type="text/css">
+        body {
+            background-color: #f8f8f8;
+        }
+
+        .hqzhongyang {
+            /*text-align: center;*/
+        }
+
+        .hqfenlei {
+            text-align: center;
+            margin-bottom: 0.48em;
+        }
+
+        .hqdingduan {
+            display: inline-block;
+            position: relative;
+        }
+
+        .hqxuanxiang1 {
+            left: 1.3em;
+        }
+
+        .xuanxiang2 {
+            position: relative;
+            margin-top: 0.3em;
+            background-color: #f2edf3;
+            color: #565656;
+            font-size: 1em;
+            line-height: 2em;
+            width: 5em;
+            display: inline-block;
+            border-radius: 1.3em;
+        }
+
+        span.xuanzhong {
+            background-color: #5a5a5a;
+            color: white;
+        }
+
+        .hqxjdh {
+            display: none;
+            background-color: #f0eaf4;
+            overflow: hidden;
+            border-radius: 2px;
+            cursor: pointer;
+            width: 100%;
+            height: 5.4em;
+            position: relative;
+        }
+
+        .baikuang {
+            background-color: #5a5a5a;
+            overflow: hidden;
+            border-radius: 2px;
+            cursor: pointer;
+            width: 100%;
+            height: 5.4em;
+            position: relative;
+        }
+
+        .baise {
+            background-color: #fefcff;
+        }
+
+        .hqhf {
+            background-color: #f0ebf1;
+            overflow: hidden;
+            border-radius: 2px;
+            cursor: pointer;
+            width: 100%;
+            height: 1.6em;
+            position: relative;
+        }
+
+        .hqhfbxs {
+            display: none;
+        }
+
+        .hqsr {
+            background-color: #f0eaf4;
+            position: absolute;
+            display: inline;
+            width: 55%;
+            height: 80%;
+            line-height: 5.4em;
+            left: 9em;
+            top: 0.65em;
+            border-color: #0D0D0D;
+            border: thin;
+        }
+
+        .hqquangao {
+            position: absolute;
+            display: inline;
+            height: 100%;
+            line-height: 5.4em;
+            left: 7em;
+            top: 0.15em;
+            color: white;
+        }
+
+        .dzpl {
+            display: inline-block;
+            position: absolute;
+            bottom: 0.3em;
+            right: 0;
+            width: 6.7em;
+            height: 1.3em;
+            /*background-color: red;*/
+        }
+
+        .hqtb {
+            display: inline-block;
+            width: 1.3em;
+            height: 1.3em;
+            /*background-color: green;*/
+        }
+
+        .hqsl {
+            position: relative;
+            display: inline-block;
+            top: -0.3em;
+            line-height: 1.2em;
+            font-size: 0.9em;
+            color: #fffffd;
+        }
+
+        .hptjwz {
+            position: relative;
+            left: 21em;
+            margin-right: 0.5em;
+            bottom: -65%;
+            /*background-color: yellow;*/
+            display: inline-block;
+        }
+
+        .yuan {
+            position: absolute;
+            background-color: whitesmoke;
+            width: 3.5em;
+            height: 3.5em;
+            line-height: 3.5em;
+            text-align: center;
+            border-radius: 50%;
+            display: inline;
+            left: 3em;
+            top: 0.65em;
+        }
+
+        .heised {
+            background-color: #615f62;
+            color: #fefcff;
+        }
+
+        .heisez {
+            color: #474547;
+        }
+
+        .hqhfyuan {
+            position: absolute;
+            background-color: #646265;
+            width: 1.3em;
+            height: 1.3em;
+            line-height: 1.3em;
+            text-align: center;
+            border-radius: 50%;
+            display: inline;
+            left: 3em;
+            color: #f6f6f6;
+            margin-top: 0.1em;
+        }
+
+        .hqhfnr {
+            position: absolute;
+            display: inline-block;
+            margin-left: 5em;
+        }
+
+        .hqplkuang {
+            position: absolute;
+            display: inline-block;
+            margin-left: 5em;
+            margin-top: 0.2em;
+            background-color: #f0eaf4;
+            border: thin;
+            font-size: 1em;
+        }
+
+        .hqxinjian {
+            position: absolute;
+            background-color: #111111;
+            color: whitesmoke;
+            line-height: 2em;
+            font-size: 1.2em;
+            top: 0.38em;
+            right: 0.15em;
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 50%;
+        }
+
+        .hqjiahao {
+            position: relative;
+            top: -0.3em;
+            font-weight: 900;
+        }
+
+        .hqxjpl {
+            position: relative;
+            float: right;
+            background-color: #eae7de;
+            margin-top: 0.1em;
+            margin-right: 0.5em;
+            width: 1.3em;
+            height: 1.3em;
+            line-height: 1em;
+            display: inline-block;
+            border: solid;
+            border-width: thin;
+            border-color: #423d43;
+            text-align: center;
+            border-radius: 30%;
+        }
+
+        .hqxjplfs {
+            font-size: 1em;
+            position: relative;
+            float: right;
+            background-color: #eae7de;
+            margin-top: 0.1em;
+            margin-right: 0.5em;
+            width: 1.3em;
+            height: 1.3em;
+            line-height: 1em;
+            display: inline-block;
+            border: solid;
+            border-width: thin;
+            border-color: #423d43;
+            text-align: center;
+            border-radius: 30%;
+        }
+    </style>
+</head>
+<body>
+<div class="hqfenlei">
+    <div class="hqdingduan">
+        <span id="conversation" class="xuanxiang2 hqxuanxiang1 ciji0 ">话圈</span>
+        <span id="debunk" class="xuanxiang2 ciji0 xuanzhong">吐槽</span>
+    </div>
+    <div class="hqxinjian"><span class="hqjiahao" onclick="hqxinjian()">+</span></div>
+</div>
+<script type="text/javascript">
+
+</script>
+
+<div class="content">
+
+    <!--<div class="weui-flex__item"><div class="huidi">weui</div></div>-->
+    <ul id="conversation_main">
+        <!--------------------------------黑色显示框----------------------------------->
+        <li class="baikuang zhongyang">
+            <span class="yuan">J</span>
+            <p class="weui-flex__item hqquangao">显示吐槽/话圈内容的位置</p>
+            <!--点赞评论-->
+            <div class="dzpl">
+                <span class="hqtb"><i class="fa fa-thumbs-up" style="color: white"></i></span>
+                <span class="hqsl">11</span>&nbsp
+                <span class="hqtb"><i class="fa fa-comment" style="color: white"></i></span>
+                <span class="hqsl">5</span>
+            </div>
+        </li>
+        <li class="hqhf zhongyang">
+            <span class="hqhfyuan">K</span>
+            <p class="hqhfnr">单纯的回复，后面没有加号的</p>
+        </li>
+        <!--------------------------------------带新建的回复-------------------------------------->
+        <li class="hqhf zhongyang">
+            <span class="hqhfyuan">K</span>
+            <p class="hqhfnr">最底下的一条评论</p>
+            <div class="hqxjpl">+</div>
+        </li>
+        <!---------------------------白色显示框----------------------------------------->
+        <li class="baikuang zhongyang baise">
+            <span class="yuan heised">J</span>
+            <p class="weui-flex__item hqquangao heisez">显示吐槽/话圈内容的位置</p>
+            <!--点赞评论-->
+            <div class="dzpl ">
+                <span class="hqtb"><i class="fa fa-thumbs-up"></i></span>
+                <span class="hqsl heisez">11</span>&nbsp
+                <span class="hqtb"><i class="fa fa-comment"></i></span>
+                <span class="hqsl heisez">5</span>
+            </div>
+        </li>
+        <!--新建发话窗口-->
+        <li id="hqxjdh" class="hqxjdh hqzhongyang">
+            <span class="yuan">A</span>
+            <input id="xinhuaquan" type="text" class="hqsr" name="usrname" maxlength="10">
+            <i class="fa fa-send-o hptjwz"></i>
+        </li>
+        <!--新建评论窗口--->
+        <li id="hqplhf" class="hqhf zhongyang hqhfbxs">
+            <span class="hqhfyuan">K</span>
+            <input id="hqpl" type="text" class="hqplkuang" name="usrname" maxlength="10">
+            <input class="hqxjplfs" type="submit" value="+">
+        </li>
+
+    </ul>
+</div>
+
+<script src="CommonJS.js"></script>
+<script>
+    var main = document.getElementById("conversation_main");
+    var type = 0;
+    var circle = document.getElementsByClassName("ciji0");
+    var newConversation = false;
+    var changeTopicType = function (e) {
+        for (var i in circle)
+            if (circle[i].className)
+                circle[i].className = circle[i].className.replace("xuanzhong", "");
+
+        if (e) {
+            type = e.currentTarget.id;
+            e.currentTarget.className += " xuanzhong";
+        }
+
+    }
+
+    main.appendChild(appendTopic("A", "内容", 10, 5, true));
+    for (var i in circle)
+        circle[i].onclick = changeTopicType;
+
+    //    var content = {};
+    //    var xmlhttp = GetXMLHTTPRequest();
+    //    xmlhttp.open("POST", "conversation.php", true);
+    //    xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+    //    xmlhttp.send(toStr(content));
+    //    xmlhttp.onreadystatechange = function () {
+    //        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+    //            var json = JSON.parse(xmlhttp.responseText);
+    //            if (json.success)
+    //                dealContent(json);
+    //        }
+    //    }
+
+    function sendContent() {
+        var content = {
+            type: "Send",
+            character: "",
+            content: document.getElementById("xinhuaquan")
+        };
+        var xmlhttp = GetXMLHTTPRequest();
+        xmlhttp.open("POST", "conversation.php", true);
+        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+        xmlhttp.send(toStr(content));
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var json = JSON.parse(xmlhttp.responseText);
+                if (json.success)
+                    dealContent(json);
+            }
+        }
+    }
+
+    function dealContent(json) {
+        var black = false;
+        for (var i = 0; i < json.length; i++) {
+            appendTopic(json[i].character, json[i].content, json[i].good, json[i].review, black);
+            black = !black;
+        }
+    }
+
+    function hqxinjian() {
+        newConversation = !newConversation;
+        if (newConversation) {
+            document.getElementById('hqxjdh').style.display = "block";
+            document.getElementById('xinhuaquan').focus();
+        } else {
+            document.getElementById('hqxjdh').style.display = "none";
+        }
+
+    }
+
+    function appendTopic(character, content, good, review, black) {
+        var li = document.createElement("li");
+        var span = document.createElement("span");
+        var p = document.createElement("p");
+        var div = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var span_1 = document.createElement("span");
+        var span_1_text = document.createElement("span");
+        var span_2 = document.createElement("span");
+        var span_2_text = document.createElement("span");
+
+        li.className = black ? "baikuang zhongyang" : "baikuang zhongyang baise";
+        span.className = "yuan";
+        p.className = "weui-flex__item hqquangao";
+        div.className = "dzpl";
+        span_1.className = span_2.className = "hqtb";
+        span_1_text.className = span_2_text.className = "hqsl";
+
+        p.innerText = content;
+        if (black) {
+            span_1.innerHTML = "<i class='fa fa-thumbs-up'  style='color: white'></i>";
+            span_2.innerHTML = "<i class='fa fa-comment' style='color: white'></i>";
+        } else {
+            span_1.innerHTML = "<i class='fa fa-thumbs-up'></i>&nbsp;";
+            span_2.innerHTML = "<i class='fa fa-comment'></i>";
+        }
+
+        span_1_text.innerText = good + "    ";
+        span_2_text.innerText = review;
+        span.innerText = character;
+
+        div.appendChild(span_1);
+        div.appendChild(span_1_text);
+        div.appendChild(span_2);
+        div.appendChild(span_2_text);
+        li.appendChild(span);
+        li.appendChild(p);
+        li.appendChild(div);
+        li.appendChild(div_2);
+
+        return li;
+    }
+
+    function appendReview(character, content, append) {
+        var li = document.createElement("li");
+        var span = document.createElement("span");
+        var p = document.createElement("p");
+
+        li.className = "hqhf zhongyang";
+        span.className = "hqhfyuan"
+        p.className = "hqhfnr"
+
+        li.innerText = content;
+        span.innerText = character;
+
+        li.appendChild(span);
+        li.appendChild(p);
+
+        return li;
+    }
+</script>
+</body>
+</html>
