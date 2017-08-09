@@ -9,6 +9,7 @@
     <!--引用weui框架做样式-->
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="iconfont.js"></script>
     <link rel="stylesheet" href="css.css">
 </head>
 <body>
@@ -16,35 +17,35 @@
 <div id="page1" class="page">
 
     <!--页面一头部幻灯片导航条-->
-    <header>
+    <header style="position: relative">
         <div class="slideshow-container">
             <div class="mySlides fade">
                 <div class="numbertext">1 / 3</div>
                 <img src=" " style="width:100%">
-                <div class="text">文本 1</div>
+                <!--<div class="text">文本 1</div>-->
             </div>
 
             <div class="mySlides fade">
                 <div class="numbertext">2 / 3</div>
                 <img src=" " style="width:100%">
-                <div class="text">文本 2</div>
+                <!--<div class="text">文本 2</div>-->
             </div>
 
             <div class="mySlides fade">
                 <div class="numbertext">3 / 3</div>
                 <img src=" " style="width:100%">
-                <div class="text">文本 3</div>
+                <!--<div class="text">文本 3</div>-->
             </div>
 
         </div>
 
-        <div style="text-align:center">
+        <div style="text-align:center;position: absolute;
+    right: 40%;top:86%" >
             <span class="dot" onclick="currentSlide(1)"></span>
             <span class="dot" onclick="currentSlide(2)"></span>
             <span class="dot" onclick="currentSlide(3)"></span>
         </div>
     </header>
-    <br>
     <br>
 
     <div class="weui-tab">
@@ -82,7 +83,7 @@
                         社团招新
                     </p>
                 </a>
-                <a href="#" class="weui-grid">
+                <a href="排行榜.html" class="weui-grid">
                     <div class="weui-grid__icon">
                         <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-paihangbang-copy-copy-copy"></use>
@@ -186,7 +187,7 @@
         <br>
         <!--通过下拉菜单查看-->
 
-        <button class="accordion">&#9635; 我的活动</button>
+        <button class="accordion" style="border-top: 0.01px solid rgba(19,104,50,0.6);"><i class="fa fa-paper-plane-o" style="font-size:18px;color: #136832;"></i> 我的活动</button>
         <div class="panel">
             <a class="weui-cell weui-cell_access" href="javascript:;">
                 <div class="weui-cell__bd">
@@ -202,7 +203,7 @@
             </a>
         </div>
 
-        <button class="accordion">&#10084; 我的收藏</button>
+        <button class="accordion"><i class="fa fa-star" style="font-size:18px;color: #136832;"></i> 我的收藏</button>
         <div class="panel">
             <a class="weui-cell weui-cell_access" href="javascript:;">
                 <div class="weui-cell__bd">
@@ -219,7 +220,7 @@
         </div>
 
 
-        <button class="accordion">&#10084; 我的社团</button>
+        <button class="accordion"><i class="fa fa-black-tie" style="font-size:18px;color: #136832;"></i> 我的社团</button>
         <div class="panel">
             <a class="weui-cell weui-cell_access" href="javascript:;">
                 <div class="weui-cell__bd">
@@ -235,7 +236,7 @@
             </a>
         </div>
 
-        <button onclick="openNav()">&#10148; 我的日程</button>
+        <button onclick="openNav()"><i class="fa fa-calendar" style="font-size:18px;color: #136832;"></i> 我的日程</button>
 
 
     </div>
@@ -245,6 +246,7 @@
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="month" id="month">
+            <i class="fa fa-calendar-plus-o" style="font-size:25px;color:#fff;position: relative;left: 281px;top: 11px;" onclick='workList()'></i>
             <ul>
                 <li style="text-align:center">
                     <span style="font-size:18px" id="thisYear"></span><br>
@@ -318,22 +320,22 @@
                     <p class="weui-media-box__desc" id="user_intro">内容</p>
                 </div>
             </a>
-            <button style="width:auto;" onclick="logout()">退出</button>
+            <button style="width:auto;background-color: #fff;" onclick="logout()">退出</button>
         </header>
 
         <br>
         <article class="main">
-            <button>&#9635; 活动管理<a href="表格.html" ></a></button>
+            <button style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i> 活动管理<a href="表格.html" ></a></button>
 
             <button onclick="document.getElementById('id02').style.display='block';document.getElementById('main_1').style.display='none'">
-                &#9746; 活动发布
+                <i class="fa fa-edit" style="font-size:18px;color: #136832;"></i> 发布活动
             </button>
 
             <button onclick="document.getElementById('id03').style.display='block';document.getElementById('main_1').style.display='none'">
-                &#9746; 招新发布
+                <i class="fa fa-edit" style="font-size:18px;color: #136832;"></i> 发布招新
             </button>
 
-            <button> &#9729; 社团主页管理<a href="社团设置.html" ></a></button>
+            <button> <i class="fa fa-address-book-o" style="font-size:18px;color: #136832;"></i> 社团主页管理<a href="社团设置.html" ></a></button>
         </article>
     </div>
     <!--活动发布表单-->
@@ -379,17 +381,18 @@
                 <input type="text" placeholder="校团工委" id="ACT_organizer" required>
 
                 <label><b>上传Logo</b></label>
+                <img id="ACT_logo" style="width:150px;height:150px"><br>
                 <button type="button" onclick="document.getElementById('ACT_input').click();">点击上传图片</button>
                 <input type="file" style="display:none" id="ACT_input">
-                <img id="ACT_logo" style="width:150px;height:150px"></img>
-
                 <br>
                 <input type="radio" name="formChoose" value="default" checked="checked"> <b>使用默认报名表</b>
                 &nbsp;
+                <br>
                 <input type="radio" name="formChoose" value="make"
                        onclick="document.getElementById('myDIV').style.display='block';document.getElementById('id02').style.display='none';">
                 <b>自定义报名表</b>
                 &nbsp;
+                <br>
                 <input type="radio" name="formChoose" value="none"> <b>不使用报名表</b>
                 <br>
                 <!--取消和提交按钮-->
@@ -422,7 +425,8 @@
                 <input type="text" id="NEW_object" required>
 
                 <label><b>报名截止时间</b></label>
-                <input type="text" placeholder="2017.09.25" id="NEW_end" required>
+                <input  class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_end'});" id="NEW_end" required>
+                <!--<input type="text" placeholder="2017.09.25" id="NEW_end" required>-->
 
                 <label><b>社团简介</b></label>
                 <input type="text" id="NEW_intro" required>
@@ -446,7 +450,7 @@
     <div id="myDIV">
         <h2 style="margin:5px ">制作报名表</h2>
         <input type="text" id="myInput" placeholder="输入...">
-        <button onclick="addElement()" class="addBtn">添加</button>
+        <button onclick="addElement()" class="addBtn">添加报名需填项</button>
 
         <form class="modal-content animate" id="customerForm">
             <ul id="myUL">
@@ -472,10 +476,7 @@
         <p class="weui-tabbar__label">首页</p>
     </a>
     <a href="#" class="weui-tabbar__item tab" onclick="tabNav(event,'page2')">
-        <!--<i class="weui-tabbar__icon fa fa-user-secret" style="font-size:25px;"></i>-->
-        <svg class="weui-tabbar__icon icon" aria-hidden="true" style="font-size:10px;">
-            <use xlink:href="#icon-tixing"></use>
-        </svg>
+        <i class="weui-tabbar__icon fa fa-bell" style="font-size:22px;"></i>
         <p class="weui-tabbar__label">消息</p>
     </a>
     <a href="#" class="weui-tabbar__item tab" id="myself" onclick="tabNav(event,'page3')">
@@ -484,7 +485,7 @@
     </a>
 </div>
 <script type="text/javascript" src="date-picker-js/laydate.js"></script>
-<script src="iconfont.js"></script>
+
 <script src="CommonJS.js"></script>
 <script>
     //页面初始化
@@ -658,7 +659,7 @@
                     document.getElementById("ACT_logo").src = event.target.result;
                 else
                     alert("图片过大，请选择较小的图片！");
-            }
+            };
             fr.readAsDataURL(file);
         } else
             alert("不是图片无法上传！");
@@ -739,7 +740,7 @@
     function openNav() {
         document.getElementById("mySidenav").style.width = "100%";
         document.getElementById("main").style.marginLeft = "0%";
-//        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+//      document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
     }
 
     function closeNav() {
@@ -811,7 +812,7 @@
                 date_str=idx-firstday+1; //计算日期
                 (date_str<=0 || date_str>m_days[mnow]) ? date_str="&nbsp;" : date_str=idx-firstday+1; //过滤无效日期（小于等于零的、大于月总天数的）
                 //打印日期：今天底色为绿
-                date_str==dnow ? div +="<td align='center'  bgcolor='#CBCBCB' onclick='workList()'>" + date_str + "</td>" : div  += "<td align='center' bgcolor='#eee' onclick='workList()'>" + date_str + "</td>";
+                date_str==dnow ? div +="<td align='center'  bgcolor='#CBCBCB' >" + date_str + "</td>" : div  += "<td align='center' bgcolor='#eee' >" + date_str + "</td>";
             }
             div  +="</tr>"; //表格的行结束
         }
@@ -841,15 +842,16 @@
     function submit(condition){
         document.getElementById('add').style.display = 'none';
         if(condition){
-            target.innerHTML += "<span style='color:#db9979'> &#8226</span>";
+//            target.innerHTML += "<span style='color:#db9979'> &#8226</span>";
 //            target.style.fontWeight = 'bolder';
             var thing = document.getElementById('thing').value;
             var time_1 = document.getElementById('start').innerText;
             var time_2 = document.getElementById('end').innerText;
             var li = document.createElement('li');
             var span = document.createElement('span');
-            span.innerHTML = "<b>"+"\u00D7"+"</b>";
-            li.innerHTML = "<b>"+ time_1+"&nbsp;~ &nbsp;"+time_2 +"&nbsp;&nbsp;" + thing + "</b>";
+//            span.innerHTML = "<b>"+"\u00D7"+"</b>";
+            span.innerHTML ='<i class="fa fa-calendar-minus-o" style="font-size:15px;position:absolute;right: 0;"></i>';
+            li.innerHTML = time_1+"&nbsp;~ &nbsp;"+time_2 +"&nbsp;&nbsp;"+"<br>" + thing ;
             var ul = document.getElementById('ul');
             li.appendChild(span);
             ul.appendChild(li);

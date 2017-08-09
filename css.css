@@ -7,6 +7,12 @@
             font-family: Verdana,sans-serif;
             transition: background-color .5s;
         }
+        .icon {
+            width: 2em; height: 2em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
         #page1 header{
             height: 30%;
         }
@@ -164,11 +170,12 @@
             margin-left: 50px;
         }
         #page3 .sidenav{background-color: #f7f7f7;}
-        #page3 .sidenav *{box-sizing:border-box;}
+        #page3 .sidenav *{box-sizing:border-box;
+            }
         #page3 .sidenav .month {
             padding: 7%;
             width: 100%;
-            background: #1abc9c;
+            background: #136832;
         }
         #page3 .sidenav .month ul {
             margin: 0;
@@ -187,13 +194,14 @@
             padding:5px;
             position: relative;
             display: block;
+            font-size:13px;
         }
         #page3 .sidenav #ul span{
-            position: absolute;
-            right: 0;
+            /*position: absolute;*/
+            /*right: 0;*/
             padding:5px;
-            font-size:20px;
-            top: -10%;
+            font-size:25px;
+            /*top: -10%;*/
         }
         #page3 .sidenav table td{color:#777;}
         #page3 .sidenav #add input{
@@ -221,12 +229,13 @@
         }
 
         #page3 #main button,#page4 .main button,#activity #top .accordion{
-            background-color: rgba(0, 0, 0, 0.1);
-            color: #444;
-            cursor: pointer;
+            /*background-color: rgba(0, 0, 0, 0.1);*/
+            background-color: #fff;
+            color: #888;
             padding: 18px;
             width: 100%;
             border: none;
+            border-bottom: 0.01px solid rgba(19,104,50,0.5);
             text-align: left;
             outline: none;
             font-size: 15px;
@@ -235,21 +244,21 @@
 
         #page3 #main header button,#page4 header button{
             margin-left:87px;
-            border: none;
+            border: 0.01px solid rgba(19,104,50,0.6);
             padding: 8px 6px;
             border-radius:3px;
-            background-color: rgba(0,0,0,0.1);
-            color: #444;
+            /*background-color: rgba(0,0,0,0.1);*/
+            color: #888;
             cursor: pointer;
         }
 
         #page3 #main button.accordion.active, button:hover,#page4 article button.active {
-            background-color: #ddd;
+            /*background-color: #ddd;*/
         }
 
         #page3 #main button.accordion:after,#page4 article button:after {
             content: '\25BC';
-            color: #777;
+            color: #136832;
             font-weight: bold;
             float: right;
             margin-left: 5px;
@@ -335,11 +344,11 @@
 
 
         #page4 #myDIV input{
-            width: 75%;
+            width: 80%;
         }
 
         #page4 #myDIV #myInput{
-            width: 80%;
+            width: 60%;
             margin: 1% auto ;
         }
 
@@ -353,7 +362,8 @@
 
         #page4 #myDIV .addBtn{
             background-color:#00ACEE;
-            width: 15%;
+            width: 32%;
+            height: 45px;
             text-align: center;
             padding:14px 2px;
         }
@@ -384,27 +394,27 @@
             position: fixed;
             bottom: 0;
         }
+        /*#activity .scoll {*/
+            /*position: fixed;*/
+            /*right: 0;*/
+            /*top: 80%;*/
+            /*z-index: 2;*/
+            /*background-color: #999999;*/
+            /*height: 4em;*/
+            /*width: 4em;*/
+            /*border-radius: 50%;*/
+            /*text-align: center;*/
+            /*line-height: 4em;*/
+        /*}*/
 
-        #activity .scoll {
-            position: fixed;
-            right: 0;
-            top: 80%;
-            z-index: 2;
-            background-color: #999999;
-            height: 4em;
-            width: 4em;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 4em;
-        }
-
-        #activity .scoll > a {
-            color: #fff;
-            font-size: 3em;
-        }
+        /*#activity .scoll > a {*/
+            /*color: #fff;*/
+            /*font-size: 3em;*/
+        /*}*/
         #activity #top {
             /*display: flex;*/
             width: 100%;
+            height: 37px;
         }
         #activity #top .accordion{
             color: black;
@@ -434,11 +444,14 @@
             font-size: 15px;
         }
         #activity .talk {
-            height: 20%
+            height: 128px;
+            width:100%;
+            position: relative;
+            /*top: 37px;*/
         }
-        #activity .talk .slideshow-container {
-            height: 80%;
-        }
+        /*#activity .talk .slideshow-container {*/
+            /*height: 80%;*/
+        /*}*/
         #activity article span.star {
             color: #cfcfcf;
             cursor: pointer;
@@ -452,13 +465,7 @@
         #activity #id04 .clearfix {
             background-color: #fff;
         }
-        #footer .weui-bar__item_on i,#footer .weui-bar__item_on p,#footer .weui-bar__item_on .icon{
+        #footer .weui-bar__item_on i,#footer .weui-bar__item_on p{
             color: #136832;
-            fill:#136832 ;
-        }
-        .icon {
-            width: 2em; height: 2em;
-            vertical-align: -0.15em;
-            fill: currentColor;
-            overflow: hidden;
+            /*fill:#136832 ;*/
         }
