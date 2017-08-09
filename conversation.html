@@ -36,7 +36,7 @@
             left: 1.3em;
         }
 
-        .xuanxiang2 {
+        .hqxuanxiang2 {
             position: relative;
             margin-top: 0.3em;
             background-color: #f2edf3;
@@ -98,11 +98,11 @@
             display: inline;
             width: 55%;
             height: 80%;
-            line-height: 5.4em;
             left: 9em;
             top: 0.65em;
             border-color: #0D0D0D;
             border: thin;
+            word-wrap: break-word;
         }
 
         .hqquangao {
@@ -143,10 +143,24 @@
 
         .hptjwz {
             position: relative;
-            left: 21em;
+            left: 93%;
             margin-right: 0.5em;
-            bottom: -65%;
+            bottom: -3.3em;
             /*background-color: yellow;*/
+            display: inline-block;
+        }
+
+        .hqxzajz {
+            position: absolute;
+            top: 1.65em;
+            left: 2em;
+            display: inline-block;
+        }
+
+        .hqxzajy {
+            position: absolute;
+            top: 1.65em;
+            left: 6.5em;
             display: inline-block;
         }
 
@@ -193,13 +207,15 @@
         }
 
         .hqplkuang {
+            height: 1.6em;
             position: absolute;
             display: inline-block;
-            margin-left: 5em;
+            margin-left: 5.5em;
             margin-top: 0.2em;
             background-color: #f0eaf4;
             border: thin;
             font-size: 1em;
+            font-family: "微软雅黑"
         }
 
         .hqxinjian {
@@ -249,8 +265,6 @@
             height: 1.3em;
             line-height: 1em;
             display: inline-block;
-            border: solid;
-            border-width: thin;
             border-color: #423d43;
             text-align: center;
             border-radius: 30%;
@@ -260,75 +274,36 @@
 <body>
 <div class="hqfenlei">
     <div class="hqdingduan">
-        <span id="conversation" class="xuanxiang2 hqxuanxiang1 ciji0 ">话圈</span>
-        <span id="debunk" class="xuanxiang2 ciji0 xuanzhong">吐槽</span>
+        <span id="conversation" class="hqxuanxiang2 hqxuanxiang1 ciji0 ">话圈</span>
+        <span id="debunk" class="hqxuanxiang2 ciji0 xuanzhong">吐槽</span>
     </div>
     <div class="hqxinjian"><span class="hqjiahao" onclick="hqxinjian()">+</span></div>
 </div>
-<script type="text/javascript">
-
-</script>
+<!--新建发话窗口-->
+<div id="hqxjdh" class="hqxjdh hqzhongyang">
+    <div class="hqmzxz">
+        <i id="left" class="hqxzajz">&lt;</i>
+        <span id="hqniming" class="yuan">A</span>
+        <i id="right" class="hqxzajy">&gt;</i>
+    </div>
+    <textarea id="xinhuaquan" class="hqsr" style="color:#615f62;" placeholder="点击输入属于你的匿槽" name="usrname"></textarea>
+    <i id="sendMain" class="fa fa-send-o hptjwz"></i>
+</div>
 
 <div class="content">
-
-    <!--<div class="weui-flex__item"><div class="huidi">weui</div></div>-->
-    <ul id="conversation_main">
-        <!--------------------------------黑色显示框----------------------------------->
-        <li class="baikuang zhongyang">
-            <span class="yuan">J</span>
-            <p class="weui-flex__item hqquangao">显示吐槽/话圈内容的位置</p>
-            <!--点赞评论-->
-            <div class="dzpl">
-                <span class="hqtb"><i class="fa fa-thumbs-up" style="color: white"></i></span>
-                <span class="hqsl">11</span>&nbsp
-                <span class="hqtb"><i class="fa fa-comment" style="color: white"></i></span>
-                <span class="hqsl">5</span>
-            </div>
-        </li>
-        <li class="hqhf zhongyang">
-            <span class="hqhfyuan">K</span>
-            <p class="hqhfnr">单纯的回复，后面没有加号的</p>
-        </li>
-        <!--------------------------------------带新建的回复-------------------------------------->
-        <li class="hqhf zhongyang">
-            <span class="hqhfyuan">K</span>
-            <p class="hqhfnr">最底下的一条评论</p>
-            <div class="hqxjpl">+</div>
-        </li>
-        <!---------------------------白色显示框----------------------------------------->
-        <li class="baikuang zhongyang baise">
-            <span class="yuan heised">J</span>
-            <p class="weui-flex__item hqquangao heisez">显示吐槽/话圈内容的位置</p>
-            <!--点赞评论-->
-            <div class="dzpl ">
-                <span class="hqtb"><i class="fa fa-thumbs-up"></i></span>
-                <span class="hqsl heisez">11</span>&nbsp
-                <span class="hqtb"><i class="fa fa-comment"></i></span>
-                <span class="hqsl heisez">5</span>
-            </div>
-        </li>
-        <!--新建发话窗口-->
-        <li id="hqxjdh" class="hqxjdh hqzhongyang">
-            <span class="yuan">A</span>
-            <input id="xinhuaquan" type="text" class="hqsr" name="usrname" maxlength="10">
-            <i class="fa fa-send-o hptjwz"></i>
-        </li>
-        <!--新建评论窗口--->
-        <li id="hqplhf" class="hqhf zhongyang hqhfbxs">
-            <span class="hqhfyuan">K</span>
-            <input id="hqpl" type="text" class="hqplkuang" name="usrname" maxlength="10">
-            <input class="hqxjplfs" type="submit" value="+">
-        </li>
-
+    <ul id="conversation_main" style="list-style:none;">
+        <!--JS添加地点-->
     </ul>
 </div>
 
 <script src="CommonJS.js"></script>
 <script>
-    var main = document.getElementById("conversation_main");
-    var type = 0;
-    var circle = document.getElementsByClassName("ciji0");
     var newConversation = false;
+    var characterIndex = 65;
+    var type = 0;
+
+    var main = document.getElementById("conversation_main");
+    var circle = document.getElementsByClassName("ciji0");
     var changeTopicType = function (e) {
         for (var i in circle)
             if (circle[i].className)
@@ -339,29 +314,23 @@
             e.currentTarget.className += " xuanzhong";
         }
 
-    }
-
-    main.appendChild(appendTopic("A", "内容", 10, 5, true));
+    };
     for (var i in circle)
         circle[i].onclick = changeTopicType;
 
-    //    var content = {};
-    //    var xmlhttp = GetXMLHTTPRequest();
-    //    xmlhttp.open("POST", "conversation.php", true);
-    //    xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-    //    xmlhttp.send(toStr(content));
-    //    xmlhttp.onreadystatechange = function () {
-    //        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-    //            var json = JSON.parse(xmlhttp.responseText);
-    //            if (json.success)
-    //                dealContent(json);
-    //        }
-    //    }
 
-    function sendContent() {
+    document.getElementById('right').onclick = function () {
+        characterIndex = characterIndex >= 90 ? 65 : characterIndex + 1;
+        document.getElementById('hqniming').innerText = String.fromCharCode(characterIndex);
+    };
+    document.getElementById('left').onclick = function () {
+        characterIndex = characterIndex <= 65 ? 90 : characterIndex - 1;
+        document.getElementById('hqniming').innerText = String.fromCharCode(characterIndex);
+    };
+    document.getElementById('sendMain').onclick = function () {
         var content = {
             type: "Send",
-            character: "",
+            character: document.getElementById('hqniming').innerText,
             content: document.getElementById("xinhuaquan")
         };
         var xmlhttp = GetXMLHTTPRequest();
@@ -377,12 +346,162 @@
         }
     }
 
+
+    init();
+    main.appendChild(appendTopic("A", "内容", 10, {length: 0}, true));
+    main.appendChild(appendTopic("A", "内容", 10, {length: 0}, true));
+
+
     function dealContent(json) {
         var black = false;
         for (var i = 0; i < json.length; i++) {
-            appendTopic(json[i].character, json[i].content, json[i].good, json[i].review, black);
+            main.appendChild(appendTopic(json[i].word, json[i].content, json[i].good, json[i].review, black));
             black = !black;
         }
+    }
+
+
+    function appendTopic(uid, character, content, good, review, black) {
+        var li = document.createElement("li");
+        var span = document.createElement("span");
+        var p = document.createElement("p");
+        var divWhole = document.createElement("div");
+        var div = document.createElement("div");
+        var ul = document.createElement("ul");
+        var span_1 = document.createElement("span");
+        var span_1_text = document.createElement("span");
+        var span_2 = document.createElement("span");
+        var span_2_text = document.createElement("span");
+        var liSend = document.createElement("li");
+        var span_send = document.createElement("span");
+        var textarea = document.createElement("textarea");
+        var i = document.createElement("i");
+
+        divWhole.className = black ? "baikuang zhongyang" : "baikuang zhongyang baise";
+        span.className = "yuan";
+        p.className = "weui-flex__item hqquangao";
+        div.className = "dzpl";
+        span_1.className = "hqtb fa fa-thumbs-up";
+        span_2.className = "hqtb fa fa-comment";
+        span_1_text.className = span_2_text.className = "hqsl";
+        liSend.className = "hqhf zhongyang";
+        span_send.className = "hqhfyuan";
+        i.className = "fa fa-send-o hqxjplfs";
+        textarea.className = "hqplkuang";
+
+        if (black)
+            span_2.style = span_1.style = 'color: white';
+        ul.style.display = "none";
+
+        textarea.type = "text";
+        textarea.style = "color:#b8a4a4;";
+        liSend.style.display = "none";
+
+        p.innerText = content;
+        span_1_text.innerText = good + "    ";
+        span_2_text.innerText = review.length;
+        span.innerText = character;
+        span_send.innerText = "K";//待定
+        divWhole.onclick = function (e) {
+            if (e.target == span_1) {
+                span_1_text.innerText = (parseInt(span_1_text.innerText.replace(" ", "")) + 1) + "    ";
+                return;
+            }
+            if (ul.style.display == "block") {
+                ul.style.display = "none"
+                liSend.style.display = "none";
+            } else {
+                ul.style.display = "block"
+                if (review.length == 0)
+                    liSend.style.display = "block";
+            }
+        }
+        div.onclick = function (e) {
+            liSend.style.display = "block";
+        }
+        i.onclick = function (e) {
+            textarea.disabled = true;
+            var content = {
+                type: "Send",
+                character: span_send.innerText,
+                content: textarea.value,
+                uid: uid
+            };
+            var xmlhttp = GetXMLHTTPRequest();
+            xmlhttp.open("POST", "conversation.php", true);
+            xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+            xmlhttp.send(toStr(content));
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var json = JSON.parse(xmlhttp.responseText);
+                    if (json.success) {
+                        for (var i in ul) {
+                            var tempDIV = ul[i].getElementsByTagName("div");
+                            if (tempDIV) {
+                                tempDIV.onclick = null;
+                                ul[i].remove(tempDIV);
+                            }
+                        }
+                        ul.appendChild(appendReview(span_send.innerText, textarea.value, true));
+                        textarea.disabled = false;
+                        textarea.placeholder = "请输入评论";
+                        textarea.value = "";
+                    }
+                }
+            }
+        }
+
+        if (review.length > 0) {
+            for (var i = 0; i < review.length; i++) {
+                ul.appendChild(appendReview(review[i].word, review[i].content, i == review.length - 1));
+            }
+            textarea.placeholder = "请输入评论";
+        } else {
+            textarea.placeholder = "来发第一条评论吧";
+        }
+
+        div.appendChild(span_1);
+        div.appendChild(span_1_text);
+        div.appendChild(span_2);
+        div.appendChild(span_2_text);
+        divWhole.appendChild(span);
+        divWhole.appendChild(p);
+        divWhole.appendChild(div);
+        liSend.appendChild(span_send);
+        liSend.appendChild(textarea);
+        liSend.appendChild(i);
+        li.appendChild(divWhole);
+        li.appendChild(ul);
+        li.appendChild(liSend);
+
+        return li;
+    }
+
+    function appendReview(character, content, append) {
+        var li = document.createElement("li");
+        li.className = "hqhf zhongyang";
+
+        var p = document.createElement("p");
+        p.className = "hqhfnr";
+        p.innerText = content;
+
+        var span = document.createElement("span");
+        span.className = "hqhfyuan";
+        span.innerText = character;
+        li.appendChild(span);
+
+        if (append) {
+            var div = document.createElement("div");
+            div.className = "hqxjpl";
+            div.innerText = "+";
+            div.onclick = function () {
+            }
+            li.appendChild(div);
+        }
+
+        li.appendChild(p);
+
+        return li
     }
 
     function hqxinjian() {
@@ -393,68 +512,24 @@
         } else {
             document.getElementById('hqxjdh').style.display = "none";
         }
-
     }
 
-    function appendTopic(character, content, good, review, black) {
-        var li = document.createElement("li");
-        var span = document.createElement("span");
-        var p = document.createElement("p");
-        var div = document.createElement("div");
-        var div_2 = document.createElement("div");
-        var span_1 = document.createElement("span");
-        var span_1_text = document.createElement("span");
-        var span_2 = document.createElement("span");
-        var span_2_text = document.createElement("span");
-
-        li.className = black ? "baikuang zhongyang" : "baikuang zhongyang baise";
-        span.className = "yuan";
-        p.className = "weui-flex__item hqquangao";
-        div.className = "dzpl";
-        span_1.className = span_2.className = "hqtb";
-        span_1_text.className = span_2_text.className = "hqsl";
-
-        p.innerText = content;
-        if (black) {
-            span_1.innerHTML = "<i class='fa fa-thumbs-up'  style='color: white'></i>";
-            span_2.innerHTML = "<i class='fa fa-comment' style='color: white'></i>";
-        } else {
-            span_1.innerHTML = "<i class='fa fa-thumbs-up'></i>&nbsp;";
-            span_2.innerHTML = "<i class='fa fa-comment'></i>";
+    function init() {
+        var content = {
+            type: "Get",
+            num: 20
+        };
+        var xmlhttp = GetXMLHTTPRequest();
+        xmlhttp.open("POST", "conversation.php", true);
+        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+        xmlhttp.send(toStr(content));
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var json = JSON.parse(xmlhttp.responseText);
+                if (json.success)
+                    dealContent(json);
+            }
         }
-
-        span_1_text.innerText = good + "    ";
-        span_2_text.innerText = review;
-        span.innerText = character;
-
-        div.appendChild(span_1);
-        div.appendChild(span_1_text);
-        div.appendChild(span_2);
-        div.appendChild(span_2_text);
-        li.appendChild(span);
-        li.appendChild(p);
-        li.appendChild(div);
-        li.appendChild(div_2);
-
-        return li;
-    }
-
-    function appendReview(character, content, append) {
-        var li = document.createElement("li");
-        var span = document.createElement("span");
-        var p = document.createElement("p");
-
-        li.className = "hqhf zhongyang";
-        span.className = "hqhfyuan"
-        p.className = "hqhfnr"
-
-        li.innerText = content;
-        span.innerText = character;
-
-        li.appendChild(span);
-        li.appendChild(p);
-
-        return li;
     }
 </script>
 </body>
