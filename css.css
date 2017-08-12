@@ -228,7 +228,7 @@
             .sidenav a {font-size: 18px;}
         }
 
-        #page3 #main button,#page4 .main button,#activity #top .accordion{
+        #page3 #main button,#page4 .main button,#activity #top .accordion,#page4 .accordion{
             /*background-color: rgba(0, 0, 0, 0.1);*/
             background-color: #fff;
             color: #888;
@@ -266,7 +266,7 @@
         #page3 #main button.accordion.active:after {
             content: "\25B2";
         }
-        #page3 #main div.panel,#activity #top div.panel{
+        #page3 #main div.panel,#activity #top div.panel ,#page4  div.panel{
             padding: 0 18px;
             background-color: #fff;
             max-height: 0;
@@ -276,6 +276,9 @@
         #page4 article button:after {
             content: '\25BA';
         }
+
+        #page4 article button.accordion:after{content: '\25BC';}
+        #page4 article button.accordion.active:after{content: '\25B2';}
 
 #id02 input[type=text],#id02 input[type=number],#id02 input[type=url],#id02 select,#id03 input[type=text],#id03 input[type=number],#id03 input[type=url],#id03 select,#myDIV input,#id04 input{
     width: 100%;
@@ -371,8 +374,11 @@
         #page4 #myDIV .modal-content {
             margin: 1% auto 5% auto;
         }
-
-
+        #page4 #table_1{
+            margin:20px auto;
+            display: none;
+        }
+        #page4 .tt{display: none}
         #id02 .clearfix::after {
             content: "";
             clear: both;
@@ -389,28 +395,12 @@
                 float: none;
             }
         }
-
+        #page4 table{margin:20px auto;}
         #footer{
             position: fixed;
             bottom: 0;
         }
-        /*#activity .scoll {*/
-            /*position: fixed;*/
-            /*right: 0;*/
-            /*top: 80%;*/
-            /*z-index: 2;*/
-            /*background-color: #999999;*/
-            /*height: 4em;*/
-            /*width: 4em;*/
-            /*border-radius: 50%;*/
-            /*text-align: center;*/
-            /*line-height: 4em;*/
-        /*}*/
 
-        /*#activity .scoll > a {*/
-            /*color: #fff;*/
-            /*font-size: 3em;*/
-        /*}*/
         #activity #top {
             /*display: flex;*/
             width: 100%;

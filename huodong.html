@@ -19,7 +19,7 @@
             overflow-x: hidden;
         }
         .fa .fa-pencil-square-o{float: right;font-size: 20px;}
-        .weui-media-box__desc{line-height: 1.6}
+        .weui-media-box__desc{    line-height: 1.8; letter-spacing: 2.3px;}
     </style>
 </head>
 <body id="activity">
@@ -65,7 +65,7 @@
                 </div>
 
                 </div>
-            </div>
+
 
     </header>
 
@@ -217,9 +217,9 @@
         }
 
         img.src = decodeURIComponent(logo);
-        img.style.width = "150px";
-        img.style.height = "150px";
-//        记得改尺寸
+        img.style.width = "65px";
+        img.style.height = "92px";
+
 
         a.className = "weui-media-box weui-media-box_appmsg";
         a.onclick = function (event) {
@@ -234,7 +234,7 @@
                         event.target.style.color = '';
                         mark = false;
                     } else {
-                        event.target.style.color = '#E7CF0C';
+                        event.target.style.color = 'yellow';
                         mark = true;
                     }
                     break;
@@ -243,6 +243,9 @@
 
         i_1.className = "fa fa-star";
         i_2.className = "fa fa-pencil-square-o";
+
+        i_2.style.float='right';
+        i_2.style.fontSize='19px';
 
         div_1.className = "weui-media-box__hd";
         div_2.className = "weui-media-box__bd";
@@ -369,7 +372,6 @@
 //    var body = document.getElementById('activity');
     function display() {
         panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + "px";
-
     }
 
     function sign(index) {

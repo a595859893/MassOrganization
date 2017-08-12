@@ -8,7 +8,11 @@
     <meta http-equiv='Content-Type' content='text/html;charset=utf-8'>
     <!--引用weui框架做样式-->
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+    <!--引用pure-->
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
     <script src="iconfont.js"></script>
     <link rel="stylesheet" href="css.css">
 </head>
@@ -73,7 +77,7 @@
                         社团主页
                     </p>
                 </a>
-                <a href="stzyz.html" class="weui-grid">
+                <a href="stzx.html" class="weui-grid">
                     <div class="weui-grid__icon">
                         <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-zhaoxin-"></use>
@@ -193,13 +197,13 @@
                 <div class="weui-cell__bd">
                     <p>活动一</p>
                 </div>
-                <div class="weui-cell__ft">说明文字</div>
+                <div class="weui-cell__ft"></div>
             </a>
             <a class="weui-cell weui-cell_access" href="javascript:;">
                 <div class="weui-cell__bd">
                     <p>活动二</p>
                 </div>
-                <div class="weui-cell__ft">说明文字</div>
+                <div class="weui-cell__ft"></div>
             </a>
         </div>
 
@@ -209,13 +213,13 @@
                 <div class="weui-cell__bd">
                     <p>收藏一</p>
                 </div>
-                <div class="weui-cell__ft">说明文字</div>
+                <div class="weui-cell__ft"></div>
             </a>
             <a class="weui-cell weui-cell_access" href="javascript:;">
                 <div class="weui-cell__bd">
                     <p>收藏二</p>
                 </div>
-                <div class="weui-cell__ft">说明文字</div>
+                <div class="weui-cell__ft"></div>
             </a>
         </div>
 
@@ -226,13 +230,13 @@
                 <div class="weui-cell__bd">
                     <p>社团一</p>
                 </div>
-                <div class="weui-cell__ft">说明文字</div>
+                <div class="weui-cell__ft"></div>
             </a>
             <a class="weui-cell weui-cell_access" href="javascript:;">
                 <div class="weui-cell__bd">
                     <p>社团二</p>
                 </div>
-                <div class="weui-cell__ft">说明文字</div>
+                <div class="weui-cell__ft"></div>
             </a>
         </div>
 
@@ -325,7 +329,7 @@
 
         <br>
         <article class="main">
-            <button style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i> 活动管理<a href="表格.html" ></a></button>
+            <button  style="border-top:0.01px solid rgba(19,104,50,0.6) ;" onclick="document.getElementById('table_1').style.display='block';document.getElementsByClassName('tt').style.display='block';document.getElementById('main_1').style.display='none'"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i> 活动管理</button>
 
             <button onclick="document.getElementById('id02').style.display='block';document.getElementById('main_1').style.display='none'">
                 <i class="fa fa-edit" style="font-size:18px;color: #136832;"></i> 发布活动
@@ -335,9 +339,61 @@
                 <i class="fa fa-edit" style="font-size:18px;color: #136832;"></i> 发布招新
             </button>
 
-            <button> <i class="fa fa-address-book-o" style="font-size:18px;color: #136832;"></i> 社团主页管理<a href="社团设置.html" ></a></button>
+            <button class="accordion"><i class="fa fa-address-book-o" style="font-size:18px;color: #136832;"></i> 社团主页管理</button>
+            <div class="panel">
+                <a class="weui-cell weui-cell_access" href="javascript:;">
+                    <div class="weui-cell__bd">
+                        <p>编辑社团日志</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+                <a class="weui-cell weui-cell_access" href="javascript:;">
+                    <div class="weui-cell__bd">
+                        <p>编辑社团信息</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+            </div>
+
         </article>
     </div>
+
+
+    <!--活动管理-->
+    <table class="pure-table pure-table-bordered" id="table_1">
+        <thead>
+        <tr>
+            <th><input type="checkbox" id="all" onclick="all()"></th>
+            <th>姓名</th>
+            <th>学号</th>
+            <th>学院</th>
+            <th>手机</th>
+            <th>QQ</th>
+            <th>备注</th>
+        </tr>
+        </thead>
+
+        <tbody id="tbody">
+        </tbody>
+
+        <div class="tt">
+        <div class="weui-cells__title">编辑信息</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                    <div class="weui-textarea-counter"><span>0</span>/200</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="weui-btn-area">
+            <a class="weui-btn weui-btn_primary" href="javascript:" >确认报名名单并发送信息</a>
+            <a class="weui-btn weui-btn_primary" href="javascript:" >返回</a>
+        </div>
+        </div>
+    </table>
+
     <!--活动发布表单-->
     <div id="id02" class="modal">
         <form class="modal-content animate" id="ACT_form" action=" ">
@@ -894,6 +950,58 @@
     };
     laydate(start);
     laydate(end);
+
+    function loadDoc() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                table(this);
+            }
+        };
+        xhttp.open("GET", "table.xml", true);
+        xhttp.send();
+    }
+    function table(xml) {
+        var i;
+        var xmlDoc = xml.responseXML;
+        var table = "<tr><td>"+ "<input type='checkbox'>" + "</td><td>" +
+                "</td><td>"+ "</td><td>"+
+                "</td><td>"+ "</td><td>"+
+                "</td><td>"+ "</td></tr>";
+        var x = xmlDoc.getElementsByTagName("form");
+        for (i = 0; i <x.length; i++) {
+            table += "<tr><td>" +
+                    "<input type='checkbox'>" +
+                    "</td><td>" +
+                    x[i].name +
+                    "</td><td>" +
+                    x[i].number +
+                    "</td><td>" +
+                    x[i].institute +
+                    "</td><td>" +
+                    x[i].telephone +
+                    "</td><td>" +
+                    x[i].weichat +
+                    "</td><td>" +
+                    x[i].remarks +
+                    "</td></tr>";
+        }
+        document.getElementById("tbody").appendChild(table);
+    }
+
+    function all(){
+        var tbody = document.getElementById("tbody");
+        var checkBox = tbody.getElementsByTagName("input");
+        var all = document.getElementById("all");
+        var i = 0 ;
+        if(all.checked){
+            for(;i < checkBox.length;i++){
+                checkBox[i].checked = true;}
+        }else {
+            for(;i < checkBox.length;i++){
+                checkBox[i].checked = false;}
+        }
+    }
 
 </script>
 

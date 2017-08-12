@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--全屏显示-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+    <!--引用weui框架做样式-->
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+    <style>
+        ul>li>span{
+            color: #a9a9a9;
+            font-size: 15px;
+        }
+
+        .weui-media-box__info__meta.fa{
+            font-size: 15px;
+            color: #dfdfdf
+        }
+        .weui-media-box__desc{
+            line-height: 1.6;
+        }
+        img{
+            border-radius:50%;
+        }
+    </style>
+
+</head>
+<body>
+
+
+
+<div style="background-color: #dfdfdf;text-align: center;color:#000;padding: 8px">
+    <span>社团招新 <i class="fa fa-bullhorn" style="color:#136832;font-size: 20px"></i></span>
+</div>
+
+<!--顶部选项卡-->
+<div class="weui-tab">
+    <div class="weui-navbar">
+        <div class="weui-navbar__item weui-bar__item_on tab" onclick="tabNav1(event, 'page1')" id="defaultOpen">
+            &#9829 兴趣社团
+        </div>
+        <div class="weui-navbar__item tab" onclick="tabNav1(event, 'page2')">
+            &#9830 学生组织
+        </div>
+    </div>
+
+
+    <div class="weui-tab__panel" id="content">
+        <!--页面一-->
+        <div class="page" id="page1">
+            <div class="weui-panel weui-panel_access">
+                <div class="weui-panel__hd">兴趣社团</div>
+                <div class="weui-panel__bd" id="frame">
+                    <!--JS添加处-->
+                </div>
+            </div>
+        </div>
+
+        <!--页面二-->
+        <div class="page" id="page2">
+            <div class="weui-panel weui-panel_access">
+                <div class="weui-panel__hd">学生组织</div>
+                <div class="weui-panel__bd">
+                    <!--JS添加处-->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--<script src="CommonJS.js"></script>-->
+<script>
+    //Test
+    var massList = [
+        {name: '乒协招新', div: createActivity("乒协招新", "2017-9-30",'乒协')},
+        {name: '滑轮社招新', div: createActivity("滑轮社招新", "2017-9-30", '滑轮社')},
+        {name: '青协招新', div: createActivity("青协招新", "2017-9-30", '青协')},
+        {name: '动漫社招新', div: createActivity("动漫社招新", "2017-9-30",'动漫社')}
+    ];
+    for (var i in massList) {
+        document.getElementById("frame").appendChild(massList[i].div);
+    }
+
+
+    // 触发 id="defaultOpen" click 事件
+    document.getElementById("defaultOpen").click();
+
+
+
+
+    <!--顶部选项卡-->
+    function tabNav1(evt, tabName) {
+        var i, page, tab;
+        page = document.getElementsByClassName("page");
+        for (i = 0; i < page.length; i++) {
+            page[i].style.display = 'none';
+        }
+        tab = document.getElementsByClassName("tab");
+        for (i = 0; i < tab.length; i++) {
+            tab[i].className = tab[i].className.replace(" weui-bar__item_on", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " weui-bar__item_on";
+    }
+
+
+
+
+    //    需要从后端获取name(招新名字)，time(招新时间)，club(社团)，logo(社团logo)
+    function dealContent(res) {
+        var json = eval("(" + res + ")");
+        var frame = document.getElementById("frame");
+        for (var i = 0; i < json.length; i++) {
+            frame.appendChild(createActivity(json[i].name, json[i].time, json[i].host));
+        }
+    }
+
+    function createActivity(name, time, host) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var h4 = document.createElement("h4");
+        var p_1 = document.createElement("p");
+        var p_2 = document.createElement("p");
+        var img = document.createElement("img");
+
+
+        a.className = "weui-media-box weui-media-box_appmsg";
+        div_1.className = "weui-media-box__hd";
+
+        div_2.className = "weui-media-box__bd";
+        h4.className = "weui-media-box__title";
+        p_1.className= p_2.className = "weui-media-box__desc";
+
+
+        h4.innerText = name;
+        p_1.innerHTML = "<i class='fa fa-clock-o'></i> " +"&nbsp;"+ time ;
+        p_2.innerHTML ="<i class='fa fa-users'></i>" +"&nbsp;" + host  ;
+
+
+        div_1.appendChild(img);
+
+        div_2.appendChild(h4);
+        div_2.appendChild(p_1);
+        div_2.appendChild(p_2);
+
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+
+        return a;
+
+    }
+</script>
+</body>
+</html>
