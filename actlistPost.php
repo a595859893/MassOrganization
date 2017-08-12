@@ -4,7 +4,7 @@
 		$uid = $_REQUEST["UID"];
 		
 		$line = array();
-		$mysqli = new mysqli("localhost",'ipeuser','*ipE123','ipe_db','3306');
+		$mysqli = new mysqli('localhost','root','SYSUcc123','ipe_db','3306');
 		$mysqli->query("set character set 'utf8'");
 		$mysqli->query("set names 'utf8'");
 		if($mysqli->connect_errno){
