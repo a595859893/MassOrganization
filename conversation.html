@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <!--全屏显示-->
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
 
     <!--引用weui框架做样式-->
     <!--<link rel="stylesheet" href="weui.min.css">-->
@@ -14,10 +14,177 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
 
     <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
         body {
             background-color: #f8f8f8;
         }
+        .hqfenlei{
+            text-align: center;
+            margin-bottom: 0.48em;
+        }
+        .hqdingduan{
+            display: inline-block;
+            position: relative ;
+        }
+        .hqxuanxiang1{
+            left:1.3em;
+        }
+        .xuanxiang2{
+            position: relative;
+            margin-top: 0.3em;
+            background-color: #f2edf3;
+            color: #565656;
+            font-size:  1em;
+            line-height:2em;
+            width: 5em;
+            display: inline-block;
+            border-radius: 1.3em;
+        }
+        span.xuanzhong{
+            background-color: #5a5a5a;
+            color: white;
+        }
+        .jrht{
+            width: 90%;
+            height: 10em;
+            margin: 0 5%;
+            border-radius: 2em;
+            border: solid 0.04em black;
+            display: block;
+        }
+        .jrhtnr{
+            width: 100%;
+            height: 8em;
+            text-align: center;
+            padding: 4em;
+            display: block;
+        }
 
+        /*---------------------------------------------------*/
+        .wqht{
+            width: 100%;
+            height:9em;
+        }
+        .wqhtyidong{
+            width: 600px;
+            height:100%;
+            /*border: 1px solid #000;*/
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .wqht ul{
+            width: 2100;
+            height: 100%;
+            background-color: #f8f8f8;
+            animation: move 30s linear 0s infinite normal;
+        }
+        .wqht ul li{
+            float: left;
+            list-style: none;
+            width: 200px;
+            margin: 0 10px;
+            height:100%;
+            background-color: #fffbba;
+            border-radius: 0.5em;
+            /*border: 1px solid #000;*/
+            box-sizing: border-box;
+        }
+        .wqht ul:hover{
+            /*动画添加给谁, 就让谁停止*/
+            animation-play-state: paused;
+        }
+        .wqht ul:hover li{
+            opacity: 0.5;
+        }
+        .wqht ul li:hover{
+            opacity: 1;
+        }
+        @keyframes move {
+            from{
+                margin-left: 0;
+            }
+            to{
+                margin-left: -1200px;
+            }
+        }
+        .wqhtwz{
+            width: 100%;
+            height: 100%;
+            margin: 4em 0;
+            text-align: center;
+            display: block;
+        }
+        .htwenzi{
+            font-size: 1.2em;
+        }
+        .htwh{
+            height: 1.1em;
+            width: 1.1em;
+            margin-top:0.2em;
+            line-height:1.1em;
+            text-align: center;
+            border-radius: 0.55em;
+            color: #3739ee;
+            border: solid 0.04em #161dd5;
+            display: inline-block;
+            font-size: 1em;
+        }
+        .rmhttk{
+            display: block;
+        }
+        .rmhtxx{
+            display: inline-block;
+            width: 95%;
+            height: 3em;
+            line-height: 3em;
+            font-size: 0.9em;
+            margin: 0.5em 2.5% 0;
+            border: solid 0.04em black;
+            border-radius: 0.5em;
+        }
+        .rmhtnr{
+            position: absolute;
+            float: left;
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+        }
+        .rmhtbh{
+            position: relative;
+            float: left;
+            left: 0.5em;
+            font-size: 1em;
+            font-weight: 900;
+            display: inline-block;
+         }
+        .rmhtnrwz{
+            position: relative;
+            float: left;
+            left: 1em;
+            font-size: 1.1em;
+            font-weight: 500;
+            display: inline-block;
+        }
+        .rmhtdp{
+            position: relative;
+            float: right;
+            right: 2.8em;
+            top: 0.4em;
+            font-size: 1em;
+            display: inline-block;
+        }
+        .rmhtdprd{
+            position: relative;
+            float: right;
+            right: 0.8em;
+            font-size: 1em;
+            font-weight: 500;
+            display: inline-block;
+        }
+        /*---------------------匿槽-----------------------------*/
         .hqzhongyang {
             /*text-align: center;*/
         }
@@ -98,7 +265,7 @@
             display: inline;
             width: 55%;
             height: 80%;
-            left: 9em;
+            left: 33%;
             top: 0.65em;
             border-color: #0D0D0D;
             border: thin;
@@ -219,6 +386,7 @@
         }
 
         .hqxinjian {
+            text-align: center;
             position: absolute;
             background-color: #111111;
             color: whitesmoke;
@@ -271,278 +439,14 @@
         }
     </style>
 </head>
-<body>
+<body style="overflow-x:hidden;">
 <div class="hqfenlei">
-    <div class="hqdingduan">
-        <span id="conversation" class="hqxuanxiang2 hqxuanxiang1 ciji0 ">话圈</span>
-        <span id="debunk" class="hqxuanxiang2 ciji0 xuanzhong">吐槽</span>
+    <div class="hqdingduan"><span id="xiaoqu" class="xuanxiang2 hqxuanxiang1 ciji0 xuanzhong" onclick="hqxuanxiang(event);hqqh(event, 'hqym')">话圈</span>
+        <span id="leixing" class="xuanxiang2 ciji0" onclick="hqxuanxiang(event);hqqh(event, 'ncym')">匿嘈</span>
     </div>
-    <div class="hqxinjian"><span class="hqjiahao" onclick="hqxinjian()">+</span></div>
 </div>
-<!--新建发话窗口-->
-<div id="hqxjdh" class="hqxjdh hqzhongyang">
-    <div class="hqmzxz">
-        <i id="left" class="hqxzajz">&lt;</i>
-        <span id="hqniming" class="yuan">A</span>
-        <i id="right" class="hqxzajy">&gt;</i>
-    </div>
-    <textarea id="xinhuaquan" class="hqsr" style="color:#615f62;" placeholder="点击输入属于你的匿槽" name="usrname"></textarea>
-    <i id="sendMain" class="fa fa-send-o hptjwz"></i>
-</div>
-
-<div class="content">
-    <ul id="conversation_main" style="list-style:none;">
-        <!--JS添加地点-->
-    </ul>
-</div>
-
-<script src="CommonJS.js"></script>
-<script>
+<script type="text/javascript">
     var newConversation = false;
-    var characterIndex = 65;
-    var type = 0;
-
-    var main = document.getElementById("conversation_main");
-    var circle = document.getElementsByClassName("ciji0");
-    var changeTopicType = function (e) {
-        for (var i in circle)
-            if (circle[i].className)
-                circle[i].className = circle[i].className.replace("xuanzhong", "");
-
-        if (e) {
-            type = e.currentTarget.id;
-            e.currentTarget.className += " xuanzhong";
-        }
-
-    };
-    for (var i in circle)
-        circle[i].onclick = changeTopicType;
-
-
-    document.getElementById('right').onclick = function () {
-        characterIndex = characterIndex >= 90 ? 65 : characterIndex + 1;
-        document.getElementById('hqniming').innerText = String.fromCharCode(characterIndex);
-    };
-    document.getElementById('left').onclick = function () {
-        characterIndex = characterIndex <= 65 ? 90 : characterIndex - 1;
-        document.getElementById('hqniming').innerText = String.fromCharCode(characterIndex);
-    };
-    document.getElementById('sendMain').onclick = function () {
-        document.getElementById("xinhuaquan").disabled = true;
-        var content = {
-            type: "Send",
-            character: document.getElementById('hqniming').innerText,
-            content: document.getElementById("xinhuaquan").value,
-            UID: -1
-        };
-        var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "conversation.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var json = JSON.parse(xmlhttp.responseText);
-                if (json.success) {
-                    document.getElementById("xinhuaquan").disabled = false;
-                    document.getElementById("xinhuaquan").value = "";
-                } else
-                    console.log(json.error);
-
-            }
-        }
-    }
-
-    init();
-
-    function dealContent(json) {
-        var black = false;
-        for (var i = 0; i < json.length; i++) {
-            main.appendChild(appendTopic(json[i].UID, json[i].word, json[i].content, json[i].good, json[i].review, black));
-            black = !black;
-        }
-    }
-
-
-    function appendTopic(uid, character, content, good, review, black) {
-        var li = document.createElement("li");
-        var span = document.createElement("span");
-        var p = document.createElement("p");
-        var divWhole = document.createElement("div");
-        var div = document.createElement("div");
-        var ul = document.createElement("ul");
-        var span_1 = document.createElement("span");
-        var span_1_text = document.createElement("span");
-        var span_2 = document.createElement("span");
-        var span_2_text = document.createElement("span");
-        var liSend = document.createElement("li");
-        var span_send = document.createElement("span");
-        var textarea = document.createElement("textarea");
-        var icon = document.createElement("i");
-
-        var right = document.createElement("i");
-        right.style = "display:inline-block;position:absolute;left:4.5em";
-        right.innerText = ">";
-
-        var left = document.createElement("i");
-        left.style = "display:inline-block;position:absolute;left:2em";
-        left.innerText = "<";
-
-        divWhole.className = black ? "baikuang zhongyang" : "baikuang zhongyang baise";
-        span.className = "yuan";
-
-        div.className = "dzpl";
-        span_1.className = "hqtb fa fa-thumbs-up";
-        span_2.className = "hqtb fa fa-comment";
-        span_1_text.className = span_2_text.className = "hqsl";
-        liSend.className = "hqhf zhongyang";
-        span_send.className = "hqhfyuan";
-        icon.className = "fa fa-send-o hqxjplfs";
-        textarea.className = "hqplkuang";
-
-        if (black) {
-            span_2.style = span_1.style = 'color: white';
-            p.className = "weui-flex__item hqquangao";
-        } else {
-            p.className = "weui-flex__item hqquangao heisez";
-        }
-
-        ul.style.display = "none";
-        li.id = "piece " + uid;
-        textarea.type = "text";
-        textarea.style = "color:#b8a4a4;";
-        liSend.style.display = "none";
-
-        p.innerText = content;
-        span_1_text.innerText = good + "    ";
-        span_2_text.innerText = review.length;
-        span.innerText = character;
-        span_send.innerText = "A";
-        divWhole.onclick = function (e) {
-            if (e.target == span_1) {
-                span_1_text.innerText = (parseInt(span_1_text.innerText.replace(" ", "")) + 1) + "    ";
-                return;
-            }
-            if (ul.style.display == "block") {
-                ul.style.display = "none"
-                liSend.style.display = "none";
-            } else {
-                var tempLI = ul.getElementsByTagName("li");
-                for (var i = 0; i < tempLI.length; i++) {
-                    var tempDIV = tempLI[i].getElementsByTagName("div");
-                    if (tempDIV.length > 0)
-                        tempDIV[0].style.display = "block"
-                }
-                ul.style.display = "block"
-                if (review.length == 0)
-                    liSend.style.display = "block";
-            }
-        }
-        div.onclick = function (e) {
-            liSend.style.display = "block";
-        }
-        icon.onclick = function (e) {
-            textarea.disabled = true;
-            var content = {
-                type: "Send",
-                character: span_send.innerText,
-                content: textarea.value,
-                UID: uid
-            };
-            var xmlhttp = GetXMLHTTPRequest();
-            xmlhttp.open("POST", "conversation.php", true);
-            xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-            xmlhttp.send(toStr(content));
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    var json = JSON.parse(xmlhttp.responseText);
-                    if (json.success) {
-                        var tempLI = ul.getElementsByTagName("li");
-                        for (var i = 0; i < tempLI.length; i++) {
-                            var tempDIV = tempLI[i].getElementsByTagName("div");
-                            if (tempDIV.length > 0) {
-                                tempDIV[0].onclick = null;
-                                tempLI[i].removeChild(tempDIV[0]);
-                            }
-                        }
-                        ul.appendChild(appendReview(uid, span_send.innerText, textarea.value, true));
-                        liSend.style.display = "none";
-                        textarea.disabled = false;
-                        textarea.placeholder = "请输入评论";
-                        textarea.value = "";
-                    } else
-                        console.log(json.error);
-                }
-            }
-        }
-        var charIndex = 90;
-        right.onclick = function () {
-            charIndex = charIndex >= 90 ? 65 : charIndex + 1;
-            span_send.innerText = String.fromCharCode(charIndex);
-        };
-        left.onclick = function () {
-            charIndex = charIndex <= 65 ? 90 : charIndex - 1;
-            span_send.innerText = String.fromCharCode(charIndex);
-        };
-
-        if (review.length > 0) {
-            for (var i = 0; i < review.length; i++)
-                ul.appendChild(appendReview(uid, review[i].word, review[i].content, i == review.length - 1));
-            textarea.placeholder = "请输入评论";
-        } else {
-            textarea.placeholder = "来发第一条评论吧";
-        }
-
-        div.appendChild(span_1);
-        div.appendChild(span_1_text);
-        div.appendChild(span_2);
-        div.appendChild(span_2_text);
-        divWhole.appendChild(span);
-        divWhole.appendChild(p);
-        divWhole.appendChild(div);
-        liSend.appendChild(left);
-        liSend.appendChild(span_send);
-        liSend.appendChild(right);
-        liSend.appendChild(textarea);
-        liSend.appendChild(icon);
-        li.appendChild(divWhole);
-        li.appendChild(ul);
-        li.appendChild(liSend);
-
-        return li;
-    }
-
-    function appendReview(targetUID, character, content, append) {
-        var li = document.createElement("li");
-        li.className = "hqhf zhongyang";
-
-        var p = document.createElement("p");
-        p.className = "hqhfnr";
-        p.innerText = content;
-
-        var span = document.createElement("span");
-        span.className = "hqhfyuan";
-        span.innerText = character;
-
-        li.appendChild(span);
-        li.appendChild(p);
-        if (append) {
-            var div = document.createElement("div");
-            div.className = "hqxjpl";
-            div.innerText = "+";
-            div.onclick = function () {
-                var tempLI = document.getElementById("piece " + targetUID).getElementsByTagName("li")
-                for (var i = 0; i < tempLI.length; i++) {
-                    if (tempLI[i].style.display == "none")
-                        tempLI[i].style.display = "block";
-                }
-                div.style.display = "none";
-            }
-            li.appendChild(div);
-        }
-
-        return li
-    }
-
     function hqxinjian() {
         newConversation = !newConversation;
         if (newConversation) {
@@ -552,26 +456,146 @@
             document.getElementById('hqxjdh').style.display = "none";
         }
     }
-
-    function init() {
-        var content = {
-            type: "Get",
-            num: 20
-        };
-        var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "conversation.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var json = JSON.parse(xmlhttp.responseText);
-                if (json.success)
-                    dealContent(json);
-                else
-                    console.log(json.error);
-            }
+    function hqqh(evt, tabName) {
+        var i, page, tab;
+        page = document.getElementsByClassName("hqncym");
+        for (i = 0; i < page.length; i++) {
+            page[i].style.display = 'none';
         }
+        tab = document.getElementsByClassName("tab");
+        for (i = 0; i < tab.length; i++) {
+            tab[i].className = tab[i].className.replace(" weui-bar__item_on", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " weui-bar__item_on";
+    }
+    function hqxuanxiang(evt) {
+        var i,ciji0;
+        ciji0 = document.getElementsByClassName("ciji0");
+        for (i = 0; i < ciji0.length; i++) {
+            ciji0[i].className = ciji0[i].className.replace("xuanzhong", "");
+        }
+        if (evt) evt.currentTarget.className += " xuanzhong";
     }
 </script>
+<div class="hqncym" id="hqym">
+<div class="jrht"><span class="jrhtnr">中山大学是个怎么样的学校</span></div>
+<p class="htwenzi">往期话题</p>
+<div class="wqht">
+    <i class="wqhtts">
+    <div class="wqhtyidong">
+        <ul>
+            <li><span class="wqhtwz">读中大是一种怎样的体验1</span></li>
+            <li><span class="wqhtwz">读中大是一种怎样的体验2</span></li>
+            <li><span class="wqhtwz">读中大是一种怎样的体验3</span></li>
+            <li><span class="wqhtwz">读中大是一种怎样的体验4</span></li>
+            <li><span class="wqhtwz">读中大是一种怎样的体验5</span></li>
+            <li><span class="wqhtwz">读中大是一种怎样的体验6</span></li>
+            <li><span class="wqhtwz">读中大是一种怎样的体验7</span></li>
+        </ul>
+    </div>
+</i></div>
+<div>
+    <p class="htwenzi">热门话题 <span class="htwh">?</span></p>
+
+</div>
+<div class="rmht">
+    <ul>
+        <li class="rmhtxx"><span class="rmhtnr"><span class="rmhtbh">1 </span><span
+                class="rmhtnrwz">读中山大学是一种怎样的体验1</span></span><span class="rmhtdp fa fa-lightbulb-o" style="font-size: 23px;"> </span><span
+                class="rmhtdprd">100</span></li>
+    </ul>
+</div>
+</div>
+<!---------------------------匿槽------------------------------------------------------>
+<div class="hqncym" id="ncym" style="display: none">
+    <!--新建发话窗口-->
+    <div class="hqxinjian"><span class="hqjiahao" onclick="hqxinjian()">+</span></div>
+    <div id="hqxjdh" class="hqxjdh hqzhongyang">
+        <div class="hqmzxz">
+            <i id="left" class="hqxzajz" onclick="hqnmkongzhijian()">&lt;</i>
+            <span id="hqniming" class="yuan">A</span>
+            <i id="right" class="hqxzajy" onclick="hqnmkongzhij()">&gt;</i>
+        </div>
+        <textarea id="xinhuaquan" class="hqsr" style="color:#615f62;" placeholder="点击输入属于你的匿槽" name="usrname"></textarea>
+        <i id="sendMain" class="fa fa-send-o hptjwz"></i>
+    </div>
+
+
+    <div class="content">
+
+        <!--<div class="weui-flex__item"><div class="huidi">weui</div></div>-->
+        <ul id="conversation_main">
+            <!-------------------黑色显示框---------------------->
+            <li class="baikuang zhongyang">
+                <span class="yuan">J</span>
+                <p class="weui-flex__item hqquangao">显示吐槽/话圈内容的位置</p>
+                <!--点赞评论-->
+                <div class="dzpl">
+                    <span class="hqtb"><i class="fa fa-thumbs-up" style="color: white"></i></span>
+                    <span class="hqsl">11</span>&nbsp
+                    <span class="hqtb"><i class="fa fa-comment" style="color: white"></i></span>
+                    <span class="hqsl">5</span>
+                </div>
+            </li>
+            <li class="hqhf zhongyang">
+                <span class="hqhfyuan">K</span>
+                <p class="hqhfnr">单纯的回复，后面没有加号的</p>
+            </li>
+            <!-------------带新建的回复------------------>
+            <li class="hqhf zhongyang">
+                <span class="hqhfyuan">K</span>
+                <p class="hqhfnr">最底下的一条评论</p>
+                <div class="hqxjpl">+</div>
+            </li>
+            <!-----------------白色显示框------------------------>
+            <li class="baikuang zhongyang baise">
+                <span class="yuan heised">J</span>
+                <p class="weui-flex__item hqquangao heisez">显示吐槽/话圈内容的位置</p>
+                <!--点赞评论-->
+                <div class="dzpl ">
+                    <span class="hqtb"><i class="fa fa-thumbs-up"></i></span>
+                    <span class="hqsl heisez">11</span>&nbsp
+                    <span class="hqtb"><i class="fa fa-comment"></i></span>
+                    <span class="hqsl heisez">0</span>
+                </div>
+            </li>
+            <!--新建评论窗口--->
+            <li  class="hqhf zhongyang">
+                <span class="hqhfyuan">K</span>
+                <textarea type="text" style="color:#b8a4a4;" value="来发第一条评论吧" onfocus="if (value =='来发第一条评论吧'){value  =''}" onblur="if (value  ==''){value='来发第一条评论吧'}" class="hqplkuang" name="usrname">来发第一条评论吧</textarea>
+                <div class="hqxjpl hqxjplfs">+</div>
+            </li>
+            <!--新建评论窗口（没有默认值的评论）--->
+            <li  class="hqhf zhongyang">
+                <span class="hqhfyuan">K</span>
+                <textarea type="text" style="color:#7b6e6e;" class="hqplkuang" name="usrname"></textarea>
+               <div class="hqxjpl hqxjplfs">+</div>
+            </li>
+        </ul>
+    </div>
+</div>
+<script src="CommonJS.js"></script>
+<script>
+    var hqnmz = 65;
+    function hqnmkongzhij() {
+        if(hqnmz<90){
+            var hqniming;
+            hqnmz++;
+            hqniming = document.getElementById('hqniming');
+            hqniming.innerText = String.fromCharCode(hqnmz);
+        }
+    }
+    function hqnmkongzhijian() {
+        if(hqnmz>65){
+            var hqniming;
+            hqnmz--;
+            hqniming = document.getElementById('hqniming');
+            hqniming.innerText = String.fromCharCode(hqnmz);
+        }
+
+    }
+</script>
+
 </body>
 </html>
