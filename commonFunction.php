@@ -12,4 +12,25 @@ function linkToSQL(){
 	}
 	return $mysqli;
 }
+
+function getOpenID(){
+	if(isset($_COOKIE["openID"])){
+		$openID = $_COOKIE["openID"];
+	}else{
+		$exist = true;
+		$mysqli = linkToSQL();
+		while($exist){
+			$exist = false;
+			$openID = rand(100000,999999);
+			$order = "SELECT openID from openID WHERE openID=$openID";
+			$rst = $mysqli->query($order);
+			while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+				$exist=true;
+			}
+		}
+		$order = "INSERT INTO openID (openID) VALUES($openID)";
+		$rst = $mysqli->query($order);
+	}
+	return $openID;
+}
 ?>

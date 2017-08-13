@@ -12,8 +12,14 @@
 			case("login"):
 				$line = login(false,$mysqli);
 				break;
+			case("logout"):
+				$line = logout($mysqli);
+				break;
 			case("acfForm"):
 				$line = actForm($mysqli);
+				break;
+			case("recruitment"):
+				$line = recruitment($mysqli);
 				break;
 			case("massConfig"):
 				$line = massConfig($mysqli);
@@ -27,8 +33,40 @@
 		$mysqli->close();
 	}
 	
+
+	function recruitment($mysqli){
+		$line = array();
+		$type 		= $_POST["type"];
+		$title 		= $_POST["title"];
+		$object 	= $_POST["object"];
+		$end 		= $_POST["end"];
+		$intro	 	= $_POST["introduction"];
+		$link	 	= $_POST["link"];
+		$UID		= $_POST["UID"];
+		$time	 	= time();
+		
+		$order = "INSERT INTO recruitment (type,title,object,end,intro,link,time,massUID) ";
+		$order .="VALUES('$type','$title','$object','$end','$intro','$link',FROM_UNIXTIME($time),$UID)";
+
+		$rst = $mysqli->query($order);
+			
+		if($rst){
+			$line["success"] = true;
+		}else{
+			$line["success"] = false;
+			$line["error"] = "招新发起错误，错误提示:(".$mysqli->error.")";
+		}
+		return $line;
+	}
 	
-	
+	function logout($mysqli){
+		$line = array();
+		setCookie("account",$account,time());
+		setCookie("password",$password,time());
+		setCookie("remember",$remember,time());
+		$line["success"] = true;
+		return $line;
+	}
 	
 	
 	function login($autologin,$mysqli){
@@ -52,7 +90,7 @@
 			$remember = $_POST["remember"];	
 		}
 		
-		$rst = $mysqli->query("SELECT * FROM login WHERE account='$account'");
+		$rst = $mysqli->query("SELECT * FROM mass WHERE account='$account'");
 		while($row = $rst->fetch_array(MYSQLI_ASSOC)){
 			if($row["password"]==$password){
 				$is_login_success = true;

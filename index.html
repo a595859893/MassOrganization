@@ -39,8 +39,7 @@
 
         </div>
 
-        <div style="text-align:center;position: absolute;
-    right: 40%;top:86%">
+        <div style="text-align:center;position: absolute;right: 40%;top:86%">
             <span class="dot" onclick="currentSlide(1)"></span>
             <span class="dot" onclick="currentSlide(2)"></span>
             <span class="dot" onclick="currentSlide(3)"></span>
@@ -83,7 +82,7 @@
                         社团招新
                     </p>
                 </a>
-                <a href="排行榜.html" class="weui-grid">
+                <a href="billboard.html" class="weui-grid">
                     <div class="weui-grid__icon">
                         <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-paihangbang-copy-copy-copy"></use>
@@ -93,7 +92,7 @@
                         排行榜
                     </p>
                 </a>
-                <a href="#" class="weui-grid">
+                <a href="conversation.html" class="weui-grid">
                     <div class="weui-grid__icon">
                         <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-gaoxiao-copy"></use>
@@ -409,11 +408,11 @@
                 <br>
                 <!--取消和提交按钮-->
                 <div class="clearfix">
-                    <button type="submit" class="signupbtn">提交</button>
                     <button type="button"
                             onclick="document.getElementById('id02').style.display='none';document.getElementById('main_1').style.display='block'"
                             class="cancelbtn">取消
                     </button>
+                    <button type="submit" class="signupbtn">提交</button>
                 </div>
             </div>
         </form>
@@ -421,7 +420,7 @@
 
     <!--招新表单-->
     <div id="id03" class="modal">
-        <form class="modal-content animate" id="defaultForm">
+        <form class="modal-content animate" id="NEW_form">
             <div class="container">
                 <label><b>活动类型</b></label>
                 <select style="font-size: 12px;" id="NEW_type" required>
@@ -445,11 +444,11 @@
                 <input type="url" placeholder="复制推送链接至此处" id="NEW_link" required>
 
                 <div class="clearfix">
-                    <button type="submit" class="signupbtn">提交</button>
                     <button type="button"
                             onclick="document.getElementById('id03').style.display='none';document.getElementById('main_1').style.display='block'"
                             class="cancelbtn">取消
                     </button>
+                    <button type="submit" class="signupbtn">提交</button>
                 </div>
             </div>
         </form>
@@ -475,8 +474,10 @@
                     <div class="weui-cell__hd"><label class="weui-label">社团logo</label></div>
                     <img id="MASS_logo" style="width:150px;height:150px"><br>
                     <div class="weui-cell__bd">
-                        <button type="button" onclick="document.getElementById('MASS_logoInput').click();">点击上传图片</button>
-                        <input class="weui-input" type="file" style="display:none" accept="image/*" id="MASS_logoInput"/>
+                        <button type="button" onclick="document.getElementById('MASS_logoInput').click();">点击上传图片
+                        </button>
+                        <input class="weui-input" type="file" style="display:none" accept="image/*"
+                               id="MASS_logoInput"/>
                     </div>
                 </div>
 
@@ -495,11 +496,11 @@
                 <span class="weui-agree__text">阅读并同意<a href="javascript:void(0);">《相关条款》</a></span>
             </label>
             <div class="weui-btn-area">
-                <button type="submit" class="signupbtn">提交</button>
                 <button type="button"
                         onclick="document.getElementById('id04').style.display='none';document.getElementById('main_1').style.display='block'"
                         class="cancelbtn">取消
                 </button>
+                <button type="submit" class="signupbtn">提交</button>
             </div>
         </form>
     </div>
@@ -663,6 +664,39 @@
             }
         }
     };
+    document.getElementById("NEW_form").onsubmit = function (event) {
+        event = event || window.event;
+        event.target.disabled = true;
+        event.preventDefault();
+
+        var content = {
+            serverType:"recruitment",
+            type: document.getElementById("NEW_type").value,
+            title: document.getElementById("NEW_title").value,
+            object: document.getElementById("NEW_object").value,
+            end: document.getElementById("NEW_end").value,
+            introduction: document.getElementById("NEW_intro").value,
+            link: document.getElementById("NEW_link").value,
+            UID: uid
+        };
+
+        var xmlhttp = GetXMLHTTPRequest();
+        xmlhttp.open("POST", "IndexServer.php", true);
+        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+        xmlhttp.send(toStr(content));
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var res = xmlhttp.responseText;
+                var json = JSON.parse(res);
+                console.log(json);
+                if (json.success) {
+                    document.getElementById('id03').style.display = 'none';
+                    document.getElementById('main_1').style.display = 'block'
+                } else
+                    console.log(json.error);
+            }
+        }
+    };
     document.getElementById("massConfig").onsubmit = function (event) {
         event = event || window.event;
         event.target.disabled = true;
@@ -689,6 +723,9 @@
                 if (json.success) {
                     document.getElementById('id04').style.display = 'none';
                     document.getElementById('main_1').style.display = 'block'
+
+                    document.getElementById("user_name").innerText = content.name + "(UID:" + info.UID + ")";
+                    document.getElementById("user_intro").innerText = content.desc;
                 } else
                     console.log(json.error);
             }
@@ -709,38 +746,6 @@
 
         document.getElementById('myDIV').style.display = 'none';
         document.getElementById('id02').style.display = 'block';
-    };
-    document.getElementById("defaultForm").onsubmit = function (event) {
-        event = event || window.event;
-        event.target.disabled = true;
-        event.preventDefault();
-
-        var content = {
-            type: document.getElementById("NEW_type").value,
-            title: document.getElementById("NEW_title").value,
-            object: document.getElementById("NEW_object").value,
-            end: document.getElementById("NEW_end").value,
-            introduction: document.getElementById("NEW_intro").value,
-            link: document.getElementById("NEW_link").value,
-            UID: uid
-        };
-
-        var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "recruitmentPost.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var res = xmlhttp.responseText;
-                var json = JSON.parse(res);
-                console.log(json);
-                if (json.success) {
-                    document.getElementById('id03').style.display = 'none';
-                    document.getElementById('main_1').style.display = 'block'
-                } else
-                    console.log(json.error);
-            }
-        }
     };
     document.getElementById("ACT_input").onchange = function (event) {
         event = event || window.event;
@@ -782,8 +787,8 @@
         if (info.success) {
             uid = info.UID;
             document.getElementById('id01').style.display = 'none';
-            document.getElementById("user_name").innerText = info.nickName + "(UID:" + info.UID + ")";
-            document.getElementById("user_intro").innerText = info.introduction;
+            document.getElementById("user_name").innerText = info.name + "(UID:" + info.UID + ")";
+            document.getElementById("user_intro").innerText = info.intro;
             document.getElementById("footer").style.display = 'none';
             document.getElementById("myself").onclick = function (event) {
                 tabNav(event, 'page4')
@@ -797,13 +802,13 @@
 
     function logout() {
         var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "login.php", true);
+        var content = {serverType: "logout"};
+        xmlhttp.open("POST", "IndexServer.php", true);
         xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr({type: "logout"}));
+        xmlhttp.send(toStr(content));
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var res = xmlhttp.responseText;
-                var info = JSON.parse(res);
+                var info = JSON.parse(xmlhttp.responseText);
                 if (info.success) {
                     uid = -1;
                     document.getElementById("myself").onclick = function (event) {
