@@ -467,12 +467,51 @@
     </style>
 </head>
 <body style="overflow-x:hidden;">
+
 <div class="hqfenlei">
     <div class="hqdingduan">
         <span id="conversation" class="hqxuanxiang2 hqxuanxiang1 ciji0 xuanzhong">话圈</span>
         <span id="debunk" class="hqxuanxiang2 ciji0">吐槽</span>
     </div>
+    <div class="hqxinjian"><span class="hqjiahao" onclick="hqxinjian()">+</span></div>
 </div>
+
+<script type="text/javascript">
+    var newConversation = false;
+
+    function hqxinjian() {
+        newConversation = !newConversation;
+        if (newConversation) {
+            document.getElementById('hqxjdh').style.display = "block";
+            document.getElementById('xinhuaquan').focus();
+        } else {
+            document.getElementById('hqxjdh').style.display = "none";
+        }
+    }
+
+    function hqqh(evt, tabName) {
+        var i, page, tab;
+        page = document.getElementsByClassName("hqncym");
+        for (i = 0; i < page.length; i++) {
+            page[i].style.display = 'none';
+        }
+        tab = document.getElementsByClassName("tab");
+        for (i = 0; i < tab.length; i++) {
+            tab[i].className = tab[i].className.replace(" weui-bar__item_on", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " weui-bar__item_on";
+    }
+
+    function hqxuanxiang(evt) {
+        var i, ciji0;
+        ciji0 = document.getElementsByClassName("ciji0");
+        for (i = 0; i < ciji0.length; i++) {
+            ciji0[i].className = ciji0[i].className.replace("xuanzhong", "");
+        }
+        if (evt) evt.currentTarget.className += " xuanzhong";
+    }
+</script>
 <div class="hqncym" id="hqym">
     <div class="jrht"><span class="jrhtnr">中山大学是个怎么样的学校</span></div>
     <p class="htwenzi">往期话题</p>
@@ -503,16 +542,9 @@
         </ul>
     </div>
 </div>
-<div class="hqfenlei">
-    <div class="hqdingduan">
 
-    </div>
-    <div class="hqxinjian"><span class="hqjiahao" onclick="hqxinjian()">+</span></div>
-</div>
-
-<!--匿槽-->
+<!--新建发话窗口-->
 <div class="hqncym" id="ncym" style="display: none">
-    <!--新建发话窗口-->
     <div id="hqxjdh" class="hqxjdh hqzhongyang">
         <div class="hqmzxz">
             <i id="left" class="hqxzajz">&lt;</i>
@@ -539,18 +571,6 @@
     var main = document.getElementById("conversation_main");
     var top_conversation = document.getElementById("conversation");
     var top_debunk = document.getElementById("debunk");
-    top_conversation.onclick = function () {
-        top_conversation.className += " xuanzhong";
-        top_debunk.className = top_debunk.className.replace("xuanzhong", "");
-        document.getElementById("hqym").style.display = 'block';
-        document.getElementById("ncym").style.display = 'none';
-    };
-    top_debunk.onclick = function () {
-        top_debunk.className += " xuanzhong";
-        top_conversation.className = top_conversation.className.replace("xuanzhong", "");
-        document.getElementById("hqym").style.display = 'none';
-        document.getElementById("ncym").style.display = 'block';
-    };
     document.getElementById('right').onclick = function () {
         characterIndex = characterIndex >= 90 ? 65 : characterIndex + 1;
         document.getElementById('hqniming').innerText = String.fromCharCode(characterIndex);
@@ -560,10 +580,12 @@
         document.getElementById('hqniming').innerText = String.fromCharCode(characterIndex);
     };
     document.getElementById('sendMain').onclick = function () {
+        document.getElementById("xinhuaquan").disabled = true;
         var content = {
             type: "Send",
             character: document.getElementById('hqniming').innerText,
-            content: document.getElementById("xinhuaquan")
+            content: document.getElementById("xinhuaquan").value,
+            UID: -1
         };
         var xmlhttp = GetXMLHTTPRequest();
         xmlhttp.open("POST", "conversation.php", true);
@@ -572,22 +594,37 @@
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var json = JSON.parse(xmlhttp.responseText);
-                if (json.success)
-                    dealContent(json);
+                if (json.success) {
+                    document.getElementById("xinhuaquan").disabled = false;
+                    document.getElementById("xinhuaquan").value = "";
+                } else
+                    console.log(json.error);
+
             }
         }
     }
-
-
+    top_conversation.onclick = function () {
+        document.getElementById("ncym").style.display = 'none';
+        document.getElementById("hqym").style.display = 'block';
+        top_debunk.className = top_debunk.className.replace(" xuanzhong", "");
+        top_conversation.className += " xuanzhong";
+    }
+    top_debunk.onclick = function () {
+        document.getElementById("hqym").style.display = 'none';
+        document.getElementById("ncym").style.display = 'block';
+        top_conversation.className = top_conversation.className.replace(" xuanzhong", "");
+        top_debunk.className += " xuanzhong";
+    }
     init();
-    
+
     function dealContent(json) {
         var black = false;
         for (var i = 0; i < json.length; i++) {
-            main.appendChild(appendTopic(json[i].word, json[i].content, json[i].good, json[i].review, black));
+            main.appendChild(appendTopic(json[i].UID, json[i].word, json[i].content, json[i].good, json[i].review, black));
             black = !black;
         }
     }
+
 
     function appendTopic(uid, character, content, good, review, black) {
         var li = document.createElement("li");
@@ -603,24 +640,37 @@
         var liSend = document.createElement("li");
         var span_send = document.createElement("span");
         var textarea = document.createElement("textarea");
-        var i = document.createElement("i");
+        var icon = document.createElement("i");
+
+        var right = document.createElement("i");
+        right.style = "display:inline-block;position:absolute;left:4.5em";
+        right.innerText = ">";
+
+        var left = document.createElement("i");
+        left.style = "display:inline-block;position:absolute;left:2em";
+        left.innerText = "<";
 
         divWhole.className = black ? "baikuang zhongyang" : "baikuang zhongyang baise";
         span.className = "yuan";
-        p.className = "weui-flex__item hqquangao";
+
         div.className = "dzpl";
         span_1.className = "hqtb fa fa-thumbs-up";
         span_2.className = "hqtb fa fa-comment";
         span_1_text.className = span_2_text.className = "hqsl";
         liSend.className = "hqhf zhongyang";
         span_send.className = "hqhfyuan";
-        i.className = "fa fa-send-o hqxjplfs";
+        icon.className = "fa fa-send-o hqxjplfs";
         textarea.className = "hqplkuang";
 
-        if (black)
+        if (black) {
             span_2.style = span_1.style = 'color: white';
-        ul.style.display = "none";
+            p.className = "weui-flex__item hqquangao";
+        } else {
+            p.className = "weui-flex__item hqquangao heisez";
+        }
 
+        ul.style.display = "none";
+        li.id = "piece " + uid;
         textarea.type = "text";
         textarea.style = "color:#b8a4a4;";
         liSend.style.display = "none";
@@ -629,7 +679,7 @@
         span_1_text.innerText = good + "    ";
         span_2_text.innerText = review.length;
         span.innerText = character;
-        span_send.innerText = "K";//待定
+        span_send.innerText = "A";
         divWhole.onclick = function (e) {
             if (e.target == span_1) {
                 span_1_text.innerText = (parseInt(span_1_text.innerText.replace(" ", "")) + 1) + "    ";
@@ -639,6 +689,12 @@
                 ul.style.display = "none"
                 liSend.style.display = "none";
             } else {
+                var tempLI = ul.getElementsByTagName("li");
+                for (var i = 0; i < tempLI.length; i++) {
+                    var tempDIV = tempLI[i].getElementsByTagName("div");
+                    if (tempDIV.length > 0)
+                        tempDIV[0].style.display = "block"
+                }
                 ul.style.display = "block"
                 if (review.length == 0)
                     liSend.style.display = "block";
@@ -647,13 +703,13 @@
         div.onclick = function (e) {
             liSend.style.display = "block";
         }
-        i.onclick = function (e) {
+        icon.onclick = function (e) {
             textarea.disabled = true;
             var content = {
                 type: "Send",
                 character: span_send.innerText,
                 content: textarea.value,
-                uid: uid
+                UID: uid
             };
             var xmlhttp = GetXMLHTTPRequest();
             xmlhttp.open("POST", "conversation.php", true);
@@ -663,26 +719,37 @@
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                     var json = JSON.parse(xmlhttp.responseText);
                     if (json.success) {
-                        for (var i in ul) {
-                            var tempDIV = ul[i].getElementsByTagName("div");
-                            if (tempDIV) {
-                                tempDIV.onclick = null;
-                                ul[i].remove(tempDIV);
+                        var tempLI = ul.getElementsByTagName("li");
+                        for (var i = 0; i < tempLI.length; i++) {
+                            var tempDIV = tempLI[i].getElementsByTagName("div");
+                            if (tempDIV.length > 0) {
+                                tempDIV[0].onclick = null;
+                                tempLI[i].removeChild(tempDIV[0]);
                             }
                         }
-                        ul.appendChild(appendReview(span_send.innerText, textarea.value, true));
+                        ul.appendChild(appendReview(uid, span_send.innerText, textarea.value, true));
+                        liSend.style.display = "none";
                         textarea.disabled = false;
                         textarea.placeholder = "请输入评论";
                         textarea.value = "";
-                    }
+                    } else
+                        console.log(json.error);
                 }
             }
         }
+        var charIndex = 90;
+        right.onclick = function () {
+            charIndex = charIndex >= 90 ? 65 : charIndex + 1;
+            span_send.innerText = String.fromCharCode(charIndex);
+        };
+        left.onclick = function () {
+            charIndex = charIndex <= 65 ? 90 : charIndex - 1;
+            span_send.innerText = String.fromCharCode(charIndex);
+        };
 
         if (review.length > 0) {
-            for (var i = 0; i < review.length; i++) {
-                ul.appendChild(appendReview(review[i].word, review[i].content, i == review.length - 1));
-            }
+            for (var i = 0; i < review.length; i++)
+                ul.appendChild(appendReview(uid, review[i].word, review[i].content, i == review.length - 1));
             textarea.placeholder = "请输入评论";
         } else {
             textarea.placeholder = "来发第一条评论吧";
@@ -695,9 +762,11 @@
         divWhole.appendChild(span);
         divWhole.appendChild(p);
         divWhole.appendChild(div);
+        liSend.appendChild(left);
         liSend.appendChild(span_send);
+        liSend.appendChild(right);
         liSend.appendChild(textarea);
-        liSend.appendChild(i);
+        liSend.appendChild(icon);
         li.appendChild(divWhole);
         li.appendChild(ul);
         li.appendChild(liSend);
@@ -705,7 +774,7 @@
         return li;
     }
 
-    function appendReview(character, content, append) {
+    function appendReview(targetUID, character, content, append) {
         var li = document.createElement("li");
         li.className = "hqhf zhongyang";
 
@@ -716,18 +785,23 @@
         var span = document.createElement("span");
         span.className = "hqhfyuan";
         span.innerText = character;
-        li.appendChild(span);
 
+        li.appendChild(span);
+        li.appendChild(p);
         if (append) {
             var div = document.createElement("div");
             div.className = "hqxjpl";
             div.innerText = "+";
             div.onclick = function () {
+                var tempLI = document.getElementById("piece " + targetUID).getElementsByTagName("li")
+                for (var i = 0; i < tempLI.length; i++) {
+                    if (tempLI[i].style.display == "none")
+                        tempLI[i].style.display = "block";
+                }
+                div.style.display = "none";
             }
             li.appendChild(div);
         }
-
-        li.appendChild(p);
 
         return li
     }
@@ -756,6 +830,8 @@
                 var json = JSON.parse(xmlhttp.responseText);
                 if (json.success)
                     dealContent(json);
+                else
+                    console.log(json.error);
             }
         }
     }
