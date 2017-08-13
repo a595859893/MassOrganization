@@ -656,7 +656,7 @@
         div.className = "dzpl";
         span_1.className = "hqtb fa fa-thumbs-up";
         span_2.className = "hqtb fa fa-comment";
-        span_1_text.className = span_2_text.className = "hqsl";
+        span_1_text.className = span_2_text.className = black ? "hqsl" : "hqsl heisez";
         liSend.className = "hqhf zhongyang";
         span_send.className = "hqhfyuan";
         icon.className = "fa fa-send-o hqxjplfs";
@@ -682,7 +682,23 @@
         span_send.innerText = "A";
         divWhole.onclick = function (e) {
             if (e.target == span_1) {
-                span_1_text.innerText = (parseInt(span_1_text.innerText.replace(" ", "")) + 1) + "    ";
+                var content = {
+                    type: "Good",
+                    topicID: uid
+                };
+                var xmlhttp = GetXMLHTTPRequest();
+                xmlhttp.open("POST", "conversation.php", true);
+                xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+                xmlhttp.send(toStr(content));
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        var json = JSON.parse(xmlhttp.responseText);
+                        if (json.success) {
+                            span_1_text.innerText = (parseInt(span_1_text.innerText.replace(" ", "")) + 1) + "    ";
+                        } else
+                            console.log(json.error);
+                    }
+                }
                 return;
             }
             if (ul.style.display == "block") {

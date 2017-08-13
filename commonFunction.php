@@ -31,6 +31,7 @@ function getOpenID(){
 		$order = "INSERT INTO openID (openID) VALUES($openID)";
 		$rst = $mysqli->query($order);
 	}
+	setCookie("openID",$openID,time()+9999999);
 	return $openID;
 }
 ?>
