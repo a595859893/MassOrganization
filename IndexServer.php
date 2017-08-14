@@ -24,6 +24,9 @@
 			case("massConfig"):
 				$line = massConfig($mysqli);
 				break;
+			case("getActivity"):
+				$line = getActivity($mysqli);
+				break;
 			default:
 				$line = array();
 				$line["success"]=false;
@@ -33,6 +36,53 @@
 		$mysqli->close();
 	}
 	
+	function getActivity($mysqli){
+		$openID = getOpenID();
+		$actID = $_POST["actID"];
+		
+		$line["success"] = true;
+		$line["mark"] = array();
+		$line["list"] = array();
+		$markNum = 0;
+		$listNum = 0;
+		
+		$rst = $mysqli->query("SELECT * from activityMark WHERE openID=$openID");
+		if($rst){
+			while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+				$uid = $row["actID"];
+				$rst2 = $mysqli->query("SELECT * FROM activity WHERE UID=$uid");
+				while($row2 = $rst2->fetch_array(MYSQLI_ASSOC)){
+					$markNum++;
+					$line["mark"][] = $row2;
+				}
+			}
+			$line["mark"]["length"]=$markNum;
+		}else{
+			$line["success"] = false;
+			$line["error"] = "收藏获取错误，错误提示:".$mysqli->error;
+		}
+		
+			
+		$rst = $mysqli->query("SELECT * FROM actList WHERE openID=$openID");
+		if($rst){
+			while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+				
+				$uid = $row["actUID"];
+				$rst2 = $mysqli->query("SELECT * FROM activity WHERE UID=$uid");
+				while($row2 = $rst2->fetch_array(MYSQLI_ASSOC)){
+					$listNum++;
+					$line["list"][] = $row2;
+				}
+				
+			}
+			$line["list"]["length"]=$listNum;
+		}else{
+			$line["success"] = false;
+			$line["error"] = "报名获取错误，错误提示:".$mysqli->error;
+		}
+		
+		return $line;
+	}
 
 	function recruitment($mysqli){
 		$line = array();
