@@ -18,8 +18,15 @@
             font-family: "Lato", sans-serif;
             overflow-x: hidden;
         }
-        .fa .fa-pencil-square-o{float: right;font-size: 20px;}
-        .weui-media-box__desc{line-height: 1.6}
+
+        .fa .fa-pencil-square-o {
+            float: right;
+            font-size: 20px;
+        }
+
+        .weui-media-box__desc {
+            line-height: 1.6
+        }
     </style>
 </head>
 <body id="activity">
@@ -31,7 +38,9 @@
         <div id="top">
 
             <!--<div class="navtop">-->
-            <button class="accordion" style="text-align: right" onclick="display()"> 筛选 &nbsp;<i class="fa fa-list-ul" style="font-size:15px;color: black;"></i></button>
+            <button class="accordion" style="text-align: right" onclick="display()"> 筛选 &nbsp;<i class="fa fa-list-ul"
+                                                                                                 style="font-size:15px;color: black;"></i>
+            </button>
             <div class="panel" id="panel" style="position: absolute;z-index: 999;">
                 <p>&nbsp;校区</p>
                 <div class="button-sp-area" name="place">
@@ -59,13 +68,14 @@
                 </div>
                 <br>
                 <div class="button-sp-area" style="justify-content: space-between;" name="other">
-                <button type="reset" class="weui-btn weui-btn_mini weui-btn_default">重置</button>
-                <button type="submit" class="weui-btn weui-btn_mini weui-btn_default" style="background-color: #86d0ff;color:#fff;margin-right: 24px;" onclick="display()">完成</button>
-                </div>
-                </div>
-
+                    <button type="reset" class="weui-btn weui-btn_mini weui-btn_default">重置</button>
+                    <button type="submit" class="weui-btn weui-btn_mini weui-btn_default"
+                            style="background-color: #86d0ff;color:#fff;margin-right: 24px;" onclick="display()">完成
+                    </button>
                 </div>
             </div>
+
+        </div>
 
     </header>
 
@@ -121,8 +131,6 @@
         </div>
     </div>
 
-
-
     <br><br><br>
     <article>
         <div class="weui-panel weui-panel_access">
@@ -131,7 +139,6 @@
             </div>
         </div>
     </article>
-
 </div>
 <!--以下是默认的报名表-->
 <div id="id04" class="modal">
@@ -163,114 +170,6 @@
     showSlides();
     getActivity(actOrder);
     setOptionColor(actOrder);
-
-    function getActivity(type) {
-        document.getElementById("actlist").innerHTML = "";
-        var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "actlistGet.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(type));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var json = JSON.parse(xmlhttp.responseText);
-                if (json.success)
-                    dealContent(json);
-                else
-                    console.log(json.error);
-            }
-        };
-    }
-
-    function dealContent(json) {
-        if (json.success) {
-            var card = document.getElementById("actlist");
-            for (var i = 0; i < json.length; i++) {
-                card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location,
-                        json[i].holdtime, json[i].time, json[i].UID, json[i].json, json[i].logo, false));
-            }
-        } else {
-            console.log(json.error);
-        }
-    }
-
-//    把发布时间换成主办方
-    function createActivity(title, content, place, holdtime, time, index, labels, logo, mark) {
-        var a = document.createElement("a");
-        var div_1 = document.createElement("div");
-        var img = document.createElement("img");
-
-        var div_2 = document.createElement("div");
-        var h4 = document.createElement("h4");
-        var i_1 = document.createElement("i");
-        var i_2 = document.createElement("i");
-
-        var p_1 = document.createElement("p");
-        var p_2 = document.createElement("p");
-        var p_3 = document.createElement("p");
-        var p_4 = document.createElement("p");
-
-
-        var formStr = "";
-        var formLabel = JSON.parse(labels);
-        for (var i in formLabel) {
-            formStr += "<label><b>" + i + "</b></label>" + "<input name='" + i + "'>";
-        }
-
-        img.src = decodeURIComponent(logo);
-        img.style.width = "150px";
-        img.style.height = "150px";
-//        记得改尺寸
-
-        a.className = "weui-media-box weui-media-box_appmsg";
-        a.onclick = function (event) {
-            event = event || window.event;
-            switch (event.target) {
-                case(i_2):
-                    document.getElementById("custom").innerHTML = formStr;
-                    sign(index);
-                    break;
-                case(i_1):
-                    if (mark) {
-                        event.target.style.color = '';
-                        mark = false;
-                    } else {
-                        event.target.style.color = '#E7CF0C';
-                        mark = true;
-                    }
-                    break;
-            }
-        };
-
-        i_1.className = "fa fa-star";
-        i_2.className = "fa fa-pencil-square-o";
-
-        div_1.className = "weui-media-box__hd";
-        div_2.className = "weui-media-box__bd";
-
-        h4.className = "weui-media-box__title";
-        h4.innerText = title + "  ";
-
-        p_1.className=p_2.className=p_3.className=p_4.className = "weui-media-box__desc";
-        p_1.innerText =  "时间" + "" + ":" + holdtime;
-        p_2.innerText =  "地点" + "" + ":" + place;
-        p_3.innerText =  "主办方" + "" + ":" + time;
-        p_4.innerText =  "简介" + "" + ":" + content;
-
-        div_1.appendChild(img);
-
-        h4.appendChild(i_1);
-        h4.appendChild(i_2);
-        div_2.appendChild(h4);
-        div_2.appendChild(p_1);
-        div_2.appendChild(p_2);
-        div_2.appendChild(p_3);
-        div_2.appendChild(p_4);
-
-        a.appendChild(div_1);
-        a.appendChild(div_2);
-
-        return a;
-    }
 
     document.getElementById("panel").onclick = function (event) {
         event = event || window.event;
@@ -310,6 +209,125 @@
         }
     };
 
+    function getActivity(type) {
+        document.getElementById("actlist").innerHTML = "";
+        type.serverType = "GetList";
+        var xmlhttp = GetXMLHTTPRequest();
+        xmlhttp.open("POST", "activity.php", true);
+        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+        xmlhttp.send(toStr(type));
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var json = JSON.parse(xmlhttp.responseText);
+                if (json.success)
+                    dealContent(json);
+                else
+                    console.log(json.error);
+            }
+        };
+    }
+
+    function dealContent(json) {
+        if (json.success) {
+            var card = document.getElementById("actlist");
+            for (var i = 0; i < json.length; i++) {
+                card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location,
+                    json[i].holdtime, json[i].time, json[i].UID, json[i].json, json[i].logo, json[i].mark));
+            }
+        } else {
+            console.log(json.error);
+        }
+    }
+
+    //    把发布时间换成主办方
+    function createActivity(title, content, place, holdtime, time, index, labels, logo, mark) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var img = document.createElement("img");
+
+        var div_2 = document.createElement("div");
+        var h4 = document.createElement("h4");
+        var i_1 = document.createElement("i");
+        var i_2 = document.createElement("i");
+
+        var p_1 = document.createElement("p");
+        var p_2 = document.createElement("p");
+        var p_3 = document.createElement("p");
+        var p_4 = document.createElement("p");
+
+
+        var formStr = "";
+        var formLabel = JSON.parse(labels);
+        for (var i in formLabel) {
+            formStr += "<label><b>" + i + "</b></label>" + "<input name='" + i + "'>";
+        }
+
+        img.src = decodeURIComponent(logo);
+        img.style.width = "150px";
+        img.style.height = "150px";
+//        记得改尺寸
+
+        a.className = "weui-media-box weui-media-box_appmsg";
+        a.onclick = function (event) {
+            event = event || window.event;
+            switch (event.target) {
+                case(i_2):
+                    document.getElementById("custom").innerHTML = formStr;
+                    sign(index);
+                    break;
+
+                case(i_1):
+                    var content = {serverType: "Mark", actID: index};
+                    var xmlhttp = GetXMLHTTPRequest();
+                    xmlhttp.open("POST", "activity.php", true);
+                    xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+                    xmlhttp.send(toStr(content));
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            var json = JSON.parse(xmlhttp.responseText);
+                            if (json.success)
+                                event.target.style.color = json.mark ? '#E7CF0C' : '';
+                            else
+                                console.log(json.error);
+                        }
+                    }
+                    break;
+            }
+        };
+
+
+        i_1.className = "fa fa-star";
+        i_2.className = "fa fa-pencil-square-o";
+        i_1.style.color = mark ? '#E7CF0C' : '';
+
+        div_1.className = "weui-media-box__hd";
+        div_2.className = "weui-media-box__bd";
+
+        h4.className = "weui-media-box__title";
+        h4.innerText = title + "  ";
+
+        p_1.className = p_2.className = p_3.className = p_4.className = "weui-media-box__desc";
+        p_1.innerText = "时间" + "" + ":" + holdtime;
+        p_2.innerText = "地点" + "" + ":" + place;
+        p_3.innerText = "主办方" + "" + ":" + time;
+        p_4.innerText = "简介" + "" + ":" + content;
+
+        div_1.appendChild(img);
+
+        h4.appendChild(i_1);
+        h4.appendChild(i_2);
+        div_2.appendChild(h4);
+        div_2.appendChild(p_1);
+        div_2.appendChild(p_2);
+        div_2.appendChild(p_3);
+        div_2.appendChild(p_4);
+
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+
+        return a;
+    }
+
     function isAllIn(target) {
         var title = target.getAttribute("name");
         var ele = target.getElementsByTagName("A");
@@ -343,7 +361,7 @@
                         tempA[i].style.backgroundColor = "#C6E2FF";
                 } else if (ele == "不限") {
                     if (isAllIn(tempA[i].parentNode))
-                        tempA[i].style.backgroundColor= "#C6E2FF";
+                        tempA[i].style.backgroundColor = "#C6E2FF";
                 } else {
                     for (var j = 0; j < actOrder[title].length; j++)
                         if (ele == actOrder[title][j])
@@ -366,10 +384,9 @@
         slides[slideIndex - 1].style.display = "block";
         setTimeout(showSlides, 8000);
     }
-//    var body = document.getElementById('activity');
+
     function display() {
         panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + "px";
-
     }
 
     function sign(index) {
