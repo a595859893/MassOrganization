@@ -5,13 +5,12 @@
 		$serverType = $_REQUEST["serverType"];
 		$openID = getOpenID();
 		$line=array();
+		$mysqli = linkToSQL();
 		
 		if($serverType=="GetList"){
 			$place 	= $_REQUEST["place"];
 			$type 	= $_REQUEST["type"];
 			$order 	= $_REQUEST["order"];
-			
-			$mysqli = linkToSQL();
 
 			$place = "'".preg_replace("/,/","','",$place)."','不限'";
 			$type = "'".preg_replace("/,/","','",$type)."','不限'";
@@ -55,9 +54,7 @@
 		}
 		else if($serverType=="Mark"){
 			$actID = $_POST["actID"];
-			
-			$mysqli = linkToSQL();
-			
+
 			$exist = false;
 			$rst = $mysqli->query("SELECT * from activityMark WHERE openID=$openID AND actID=$actID");
 			while($row = $rst->fetch_array(MYSQLI_ASSOC)){
@@ -83,6 +80,17 @@
 					$line["error"] = "收藏删除错误，错误提示: ".$mysqli->error;
 					$line["success"] = false;
 				}
+			}
+		}
+		else if($serverType=="Post"){
+			$json = $_REQUEST["json"];
+			$uid = $_REQUEST["UID"];
+			
+			if($rst = $mysqli->query("INSERT INTO actList (openID,json,actUID)VALUES('$openID','$json',$uid)")){
+				$line["success"] = true;
+			}else{
+				$line["error"] = "表单发布错误，错误提示: ".$mysqli->error;
+				$line["success"] = false;
 			}
 		}
 		

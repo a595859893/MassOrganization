@@ -142,7 +142,7 @@
 </div>
 <!--以下是默认的报名表-->
 <div id="id04" class="modal">
-    <form class="modal-content animate" action=" ">
+    <form id="actRegister" class="modal-content animate" action=" ">
         <div class="container" id="container">
             <div id="custom">
                 <!--JS代码切入点-->
@@ -208,6 +208,38 @@
             setOptionColor(actOrder)
         }
     };
+    document.getElementById("actRegister").onsubmit = function (event) {
+        event = event || window.event;
+        event.target.disabled = true;
+        event.preventDefault();
+
+        var listjson = {};
+        var list = document.getElementById("actRegister").getElementsByTagName("input");
+        for (var i = 0; i < list.length; i++) {
+            if (list[i].name)
+                listjson[list[i].name] = list[i].value;
+        }
+
+        var content = {
+            serverType: "Post",
+            json: JSON.stringify(listjson),
+            UID: postIndex
+        };
+        var xmlhttp = GetXMLHTTPRequest();
+        xmlhttp.open("POST", "activity.php", true);
+        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+        xmlhttp.send(toStr(content));
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var json = JSON.parse(xmlhttp.responseText);
+                if (json.success) {
+                    document.getElementById('main_2').style.display = 'block';
+                    document.getElementById('id04').style.display = 'none';
+                } else
+                    console.log(json.error);
+            }
+        }
+    }
 
     function getActivity(type) {
         document.getElementById("actlist").innerHTML = "";
@@ -277,7 +309,7 @@
                     break;
 
                 case(i_1):
-                    var content = {serverType: "Mark", actID: index};
+                    var content = {serverType: "Mark", actID: postIndex};
                     var xmlhttp = GetXMLHTTPRequest();
                     xmlhttp.open("POST", "activity.php", true);
                     xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
