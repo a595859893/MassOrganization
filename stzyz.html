@@ -109,7 +109,6 @@
             color: black;
         }
 
-
         p {
             display: block;
             -webkit-margin-before: 1em;
@@ -146,17 +145,14 @@
             background-color: #4761f4;
         }
 
-
         #id03 .cancelbtn, .signupbtn {
             float: left;
             width: 50%
         }
 
-
         #id03 .container {
             padding: 16px;
         }
-
 
         .modal {
             display: none;
@@ -172,14 +168,12 @@
             padding-top: 60px;
         }
 
-
         #id03 .modal-content {
             background-color: #fefefe;
             margin: 5% auto 15% auto;
             border: 1px solid #888;
             width: 80%;
         }
-
 
         #id03 .close {
             position: absolute;
@@ -196,13 +190,11 @@
             cursor: pointer;
         }
 
-
         #id03 .clearfix::after {
             content: "";
             clear: both;
             display: table;
         }
-
 
         @media screen and (max-width: 300px) {
             .cancelbtn, .signupbtn {
@@ -222,21 +214,21 @@
         <div class="overlay"></div>
         <div class="mod-fil-img m-avatar-box">
             <span class="m-img-box">
-                <img src="">
+                <img id="mass_img" src="">
                 <!--<i class="m-icon m-icon-goldv"></i>-->
             </span>
         </div>
         <div class="item-list" style="position: relative;">
             <div class="mod-fil-name m-txt-cut">
                 <span class="mod-fil-n">
-                    <span class="txt-shadow">社团名字</span>
+                    <span class="txt-shadow" id="mass_name">社团名字</span>
                     <!--<i class="m-icon m-icon-female"></i> -->
                 </span>
                 <!--<i class="m-icon m-icon-vipl6"></i>-->
             </div>
 
             <div class="txt-shadow">
-            <i class="fa fa-user-plus"  onclick="color(event)"></i>   <span> 200 </span>
+                <i id="mass_num" class="fa fa-user-plus" onclick="color(event)"><span>0</span></i>
             </div>
 
         </div>
@@ -244,8 +236,6 @@
 </header>
 
 <article>
-
-
     <!--社团招新栏-->
     <br>
     <div class="weui-panel weui-panel_access">
@@ -256,51 +246,23 @@
                     <img class="" alt="">
                 </div>
                 <div class="weui-media-box__bd">
-                    <h4 class="weui-media-box__title"> 标题一 &nbsp;<i class="fa fa-star"></i><i class="fa fa-calendar-plus-o" style="float: right;font-size: 20px;"></i></h4>
+                    <h4 class="weui-media-box__title"> 标题一 &nbsp;<i class="fa fa-star"></i><i
+                            class="fa fa-calendar-plus-o" style="float: right;font-size: 20px;"></i></h4>
                     <p class="weui-media-box__desc">时间</p>
                     <p class="weui-media-box__desc">地点</p>
                     <p class="weui-media-box__desc">主办方</p>
                     <p class="weui-media-box__desc">简介</p>
                 </div>
             </a>
-    </div>
+        </div>
     </div>
 
 
     <!--社团日志栏-card形式-->
     <br><br>
-    <div class="weui-panel weui-panel_access" >
+    <div id="mass_diary" class="weui-panel weui-panel_access">
         <div class="weui-panel__hd">社团日志 <span class="weui-badge">&#9733</span></div>
-        <div class="weui-panel__bd">
-            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg" style="padding-bottom: 0">
-                <div class="weui-media-box__hd">
-                    <img class="weui-media-box__thumb" alt="" src="" style="border-radius:50%;">
-                </div>
-                <div class="weui-media-box__bd">
-                    <h4 class="weui-media-box__title">标题</h4>
-                    <p class="weui-media-box__desc">发布时间</p>
-                </div>
-            </a>
-            <article class="weui-article" style="margin-left:72px;padding: 0 15px">
-                <p>内容</p>
-                <p>
-                <div class="weui-uploader">
-                    <div class="weui-uploader__bd">
-                        <ul class="weui-uploader__files">
-                            <li class="weui-uploader__file" style="background-image:url(# )"></li>
-                            <li class="weui-uploader__file" style="background-image:url(# )"></li>
-                            <li class="weui-uploader__file" style="background-image:url(# )"></li>
-                        </ul>
-                    </div>
-                </div>
-                </p>
-            </article>
-        </div>
-        <div class="weui-form-preview__ft">
-            <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">&#9744 评论</a>
-            <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">&#9829 点赞</a>
-            <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">&#10150 转发</a>
-        </div>
+
     </div>
 
 </article>
@@ -309,7 +271,7 @@
 <div class="weui-msg__extra-area" style="position:static">
     <div class="weui-footer">
         <!--<p class="weui-footer__links">-->
-            <!--<a href="javascript:void(0);" class="weui-footer__link">底部链接文本</a>-->
+        <!--<a href="javascript:void(0);" class="weui-footer__link">底部链接文本</a>-->
         <!--</p>-->
         <p class="weui-footer__text">这里放二维码</p>
     </div>
@@ -353,59 +315,149 @@
 
 <script src="CommonJS.js"></script>
 <script>
-    var uid = 0;
+    var uid = getValue("uid");
+    if (uid > -1)
+        init();
+    document.getElementById("mass_diary").appendChild(createDiary());
+    //    document.getElementById("NEW_from").onsubmit = function (event) {
+    //        event = event || window.event;
+    //        event.target.disabled = true;
+    //        event.preventDefault();
+    //
+    //        var postJson = {};
+    //        var input = document.getElementsByTagName("input");
+    //        for (var i = 0; i < list.length; i++) {
+    //            if (input[i].name) {
+    //                postJson[input[i].name] = input[i].value;
+    //            }
+    //        }
+    //        var content = {
+    //            json: JSON.stringify(postJson),
+    //            UID: uid
+    //        };
+    //
+    //        var xmlhttp = GetXMLHTTPRequest();
+    //        xmlhttp.open("POST", "massPost.php", true);
+    //        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+    //        xmlhttp.send(toStr(content));
+    //        xmlhttp.onreadystatechange = function () {
+    //            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+    //                var res = xmlhttp.responseText;
+    //                var json = JSON.parse(res);
+    //                console.log(json);
+    //                if (json.success) {
+    //                    document.getElementById('id03').style.display = 'none';
+    //                } else
+    //                    console.log(json.error);
+    //            }
+    //        }
+    //    };
 
-//    加关注
-    var mark = false;
-    function color(event){
-        event = event || window.event;
-        if (mark) {
-            event.target.style.color = '';
-            mark = false;
-        } else {
-            event.target.style.color = 'red';
-            mark = true;
-        }
-    }
-
-    //    报名表的
-    function sign() {
-        document.getElementById('id03').style.display = 'block';
-    }
-
-    document.getElementById("NEW_from").onsubmit = function (event) {
-        event = event || window.event;
-        event.target.disabled = true;
-        event.preventDefault();
-
-        var postJson = {};
-        var input = document.getElementsByTagName("input");
-        for (var i = 0; i < list.length; i++) {
-            if (input[i].name) {
-                postJson[input[i].name] = input[i].value;
-            }
-        }
-        var content = {
-            json: JSON.stringify(postJson),
-            UID: uid
-        };
-
+    function color(event) {
+        var content = {serverType: "mark", markUID: uid};
         var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "massPost.php", true);
+        xmlhttp.open("POST", "mass.php", true);
         xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
         xmlhttp.send(toStr(content));
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var res = xmlhttp.responseText;
-                var json = JSON.parse(res);
-                console.log(json);
+                var json = JSON.parse(xmlhttp.responseText);
                 if (json.success) {
-                    document.getElementById('id03').style.display = 'none';
+                    var num = parseInt(document.getElementById("mass_num").innerHTML.replace("<span>", "").replace("</span>", ""));
+                    num = json.mark ? num + 1 : num - 1;
+                    event.target.innerHTML = " <span>" + num + " </span> ";
+                    event.target.style.color = json.mark ? 'red' : '';
                 } else
                     console.log(json.error);
             }
         }
-    };
+    }
+
+    function init() {
+        var xmlhttp = GetXMLHTTPRequest();
+        var content = {serverType: "getMass", UID: uid};
+        xmlhttp.open("POST", "mass.php", true);
+        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+        xmlhttp.send(toStr(content));
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var json = JSON.parse(xmlhttp.responseText);
+                if (json.success) {
+                    document.getElementById("mass_num").innerHTML = " <span>" + json.mass.number + " </span> ";
+                    document.getElementById("mass_img").src = json.mass.logo;
+                    document.getElementById("mass_name").innerText = json.mass.name;
+                    document.getElementById("mass_num").style.color = json.mass.imark ? 'red' : '';
+                } else
+                    console.log(json.error);
+            }
+        };
+
+    }
+
+    function createDiary() {
+        var div = document.createElement("div");
+        var div_1 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var div_3 = document.createElement("div");
+        var div_4 = document.createElement("div");
+        var div_4_1 = document.createElement("div");
+        var div_5 = document.createElement("div");
+        var a_1 = document.createElement("a");
+        var a_2 = document.createElement("a");
+        var a_3 = document.createElement("a");
+        var a_4 = document.createElement("a");
+        var img = document.createElement("img");
+        var h4 = document.createElement("h4");
+        var ul = document.createElement("ul");//放图片
+        var p_1 = document.createElement("p");
+        var p_2 = document.createElement("p");
+        var article = document.createElement("article");
+
+        div_1.className = "weui-panel__bd";
+        div_2.className = "weui-media-box__hd";
+        div_3.className = "weui-media-box__hd";
+        img.className = "weui-media-box__thumb";
+        img.style = "border-radius:50%;";
+        h4.className = "weui-media-box__title";
+        p_1.className = "weui-media-box__desc";
+        a_1.className = "weui-media-box weui-media-box_appmsg";
+        a_1.style = "padding-bottom: 0";
+        article.className = "weui-article";
+        article.style = "margin-left:72px;padding: 0 15px";
+        div_4.className = "weui-uploader";
+        div_4_1.className = "weui-uploader__bd";
+        ul.className = "weui-uploader__files";
+        div_5.className = "weui-form-preview__ft";
+        a_2.className = "weui-form-preview__btn weui-form-preview__btn_default";
+        a_3.className = "weui-form-preview__btn weui-form-preview__btn_default";
+        a_4.className = "weui-form-preview__btn weui-form-preview__btn_default";
+
+        div_2.appendChild(img);
+        div_3.appendChild(h4);
+        div_3.appendChild(p_1);
+        div_4_1.appendChild(ul);
+        div_4.appendChild(div_4_1);
+        a_1.appendChild(div_2);
+        a_1.appendChild(div_3);
+        article.appendChild(p_2);
+        article.appendChild(div_4);
+        div_5.appendChild(a_2);
+        div_5.appendChild(a_3);
+        div_5.appendChild(a_4);
+        div_1.appendChild(a_1);
+        div_1.appendChild(article);
+        div.appendChild(div_1);
+        div.appendChild(div_5);
+
+        return div;
+    }
+
+    //
+    //
+    //    //    报名表的
+    //    function sign() {
+    //        document.getElementById('id03').style.display = 'block';
+    //    }
 </script>
 
 </body>
