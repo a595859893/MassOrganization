@@ -8,13 +8,15 @@
     <meta http-equiv='Content-Type' content='text/html;charset=utf-8'>
     <!--引用weui框架做样式-->
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
-    <!--引用pure-->
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
-
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
-
     <script src="iconfont.js"></script>
     <link rel="stylesheet" href="css.css">
+    <style>
+        .fa.fa-pencil-square-o{
+            float: right;
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
 
@@ -43,8 +45,7 @@
 
         </div>
 
-        <div style="text-align:center;position: absolute;
-    right: 40%;top:86%" >
+        <div style="text-align:center;position: absolute;right: 40%;top:86%">
             <span class="dot" onclick="currentSlide(1)"></span>
             <span class="dot" onclick="currentSlide(2)"></span>
             <span class="dot" onclick="currentSlide(3)"></span>
@@ -87,7 +88,7 @@
                         社团招新
                     </p>
                 </a>
-                <a href="排行榜.html" class="weui-grid">
+                <a href="billboard.html" class="weui-grid">
                     <div class="weui-grid__icon">
                         <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-paihangbang-copy-copy-copy"></use>
@@ -97,7 +98,7 @@
                         排行榜
                     </p>
                 </a>
-                <a href="#" class="weui-grid">
+                <a href="conversation.html" class="weui-grid">
                     <div class="weui-grid__icon">
                         <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-gaoxiao-copy"></use>
@@ -177,67 +178,34 @@
 <div id="page3" class="page">
     <div id="main">
         <header>
-            <a href="" class="weui-media-box weui-media-box_appmsg">
+            <div class="weui-media-box weui-media-box_appmsg">
                 <div class="weui-media-box__hd">
-                    <img class="weui-media-box__thumb" src="" alt="">
+                    <img class="weui-media-box__thumb" style="  border-radius: 50%;" src="" alt="">
                 </div>
                 <div class="weui-media-box__bd">
                     <h4 class="weui-media-box__title">名字</h4>
-                    <p class="weui-media-box__desc">个人简介</p>
+                    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">社团管理者登陆</button>
                 </div>
-            </a>
-            <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">社团管理者登陆</button>
+            </div>
         </header>
         <br>
         <!--通过下拉菜单查看-->
 
-        <button class="accordion" style="border-top: 0.01px solid rgba(19,104,50,0.6);"><i class="fa fa-paper-plane-o" style="font-size:18px;color: #136832;"></i> 我的活动</button>
-        <div class="panel">
-            <a class="weui-cell weui-cell_access" href="javascript:;">
-                <div class="weui-cell__bd">
-                    <p>活动一</p>
-                </div>
-                <div class="weui-cell__ft"></div>
-            </a>
-            <a class="weui-cell weui-cell_access" href="javascript:;">
-                <div class="weui-cell__bd">
-                    <p>活动二</p>
-                </div>
-                <div class="weui-cell__ft"></div>
-            </a>
+        <button class="accordion" style="border-top: 0.01px solid rgba(19,104,50,0.6);"><i class="fa fa-paper-plane-o"
+                                                                                           style="font-size:18px;color: #136832;"></i>我的活动</button>
+        <div class="panel" id="MyList">
+            <!--JS添加点-->
         </div>
 
         <button class="accordion"><i class="fa fa-star" style="font-size:18px;color: #136832;"></i> 我的收藏</button>
-        <div class="panel">
-            <a class="weui-cell weui-cell_access" href="javascript:;">
-                <div class="weui-cell__bd">
-                    <p>收藏一</p>
-                </div>
-                <div class="weui-cell__ft"></div>
-            </a>
-            <a class="weui-cell weui-cell_access" href="javascript:;">
-                <div class="weui-cell__bd">
-                    <p>收藏二</p>
-                </div>
-                <div class="weui-cell__ft"></div>
-            </a>
+        <div class="panel" id="MyMark">
+            <!--JS添加点-->
         </div>
 
 
         <button class="accordion"><i class="fa fa-black-tie" style="font-size:18px;color: #136832;"></i> 我的社团</button>
-        <div class="panel">
-            <a class="weui-cell weui-cell_access" href="javascript:;">
-                <div class="weui-cell__bd">
-                    <p>社团一</p>
-                </div>
-                <div class="weui-cell__ft"></div>
-            </a>
-            <a class="weui-cell weui-cell_access" href="javascript:;">
-                <div class="weui-cell__bd">
-                    <p>社团二</p>
-                </div>
-                <div class="weui-cell__ft"></div>
-            </a>
+        <div class="panel" id="MyMass">
+            <!--JS添加点-->
         </div>
 
         <button onclick="openNav()"><i class="fa fa-calendar" style="font-size:18px;color: #136832;"></i> 我的日程</button>
@@ -250,7 +218,8 @@
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="month" id="month">
-            <i class="fa fa-calendar-plus-o" style="font-size:25px;color:#fff;position: relative;left: 281px;top: 11px;" onclick='workList()'></i>
+            <i class="fa fa-calendar-plus-o" style="font-size:25px;color:#fff;position: relative;left: 281px;top: 11px;"
+               onclick='workList()'></i>
             <ul>
                 <li style="text-align:center">
                     <span style="font-size:18px" id="thisYear"></span><br>
@@ -273,15 +242,19 @@
                 <div class="weui-dialog__hd"><strong class="weui-dialog__title">添加日程</strong></div>
                 <div class="weui-dialog__bd">
                     <span style="display: block">事件：</span>
-                    <input type="text"  id="thing" >
+                    <input type="text" id="thing">
                     <ul class="inline">
-                        开始时间：<li class="inline laydate-icon" id="start"  onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})"></li>
-                        结束时间：<li class="inline laydate-icon" id="end" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})"></li>
+                        开始时间：
+                        <li class="inline laydate-icon" id="start"
+                            onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})"></li>
+                        结束时间：
+                        <li class="inline laydate-icon" id="end"
+                            onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})"></li>
                     </ul>
                 </div>
                 <div class="weui-dialog__ft">
-                    <a  class="weui-dialog__btn weui-dialog__btn_default" onclick="submit(0)">取消</a>
-                    <a  class="weui-dialog__btn weui-dialog__btn_primary" onclick="submit(1)">确定</a>
+                    <a class="weui-dialog__btn weui-dialog__btn_default" onclick="submit(0)">取消</a>
+                    <a class="weui-dialog__btn weui-dialog__btn_primary" onclick="submit(1)">确定</a>
                 </div>
             </div>
         </div>
@@ -321,15 +294,15 @@
                 </div>
                 <div class="weui-media-box__bd">
                     <h4 class="weui-media-box__title" id="user_name">社团名字</h4>
-                    <p class="weui-media-box__desc" id="user_intro">内容</p>
+                    <!--<p class="weui-media-box__desc" id="user_intro">内容</p>-->
+                    <button style="width:auto;background-color: #fff;" onclick="logout()">退出</button>
                 </div>
             </a>
-            <button style="width:auto;background-color: #fff;" onclick="logout()">退出</button>
         </header>
 
         <br>
         <article class="main">
-            <button  style="border-top:0.01px solid rgba(19,104,50,0.6) ;" onclick="document.getElementById('table_1').style.display='block';document.getElementsByClassName('tt').style.display='block';document.getElementById('main_1').style.display='none'"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i> 活动管理</button>
+            <button style="border-top:0.01px solid rgba(19,104,50,0.6) ;" onclick="document.getElementById('table_1').style.display='block';document.getElementById('main_1').style.display='none'"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i> 活动管理</button>
 
             <button onclick="document.getElementById('id02').style.display='block';document.getElementById('main_1').style.display='none'">
                 <i class="fa fa-edit" style="font-size:18px;color: #136832;"></i> 发布活动
@@ -341,26 +314,25 @@
 
             <button class="accordion"><i class="fa fa-address-book-o" style="font-size:18px;color: #136832;"></i> 社团主页管理</button>
             <div class="panel">
-                <a class="weui-cell weui-cell_access" href="javascript:;">
+                <a class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">
                         <p>编辑社团日志</p>
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
-                <a class="weui-cell weui-cell_access" href="javascript:;">
+                <a class="weui-cell weui-cell_access" onclick="document.getElementById('id04').style.display='block';document.getElementById('main_1').style.display='none'">
                     <div class="weui-cell__bd">
                         <p>编辑社团信息</p>
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
             </div>
-
         </article>
     </div>
 
-
-    <!--活动管理-->
-    <table class="pure-table pure-table-bordered" id="table_1">
+    <!--活动管理表格-->
+    <div  id="table_1" style="display: none">
+    <table  style="">
         <thead>
         <tr>
             <th><input type="checkbox" id="all" onclick="all()"></th>
@@ -376,23 +348,22 @@
         <tbody id="tbody">
         </tbody>
 
-        <div class="tt">
-        <div class="weui-cells__title">编辑信息</div>
-        <div class="weui-cells weui-cells_form">
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
-                    <div class="weui-textarea-counter"><span>0</span>/200</div>
-                </div>
+    </table>
+    <div class="weui-cells__title">向报名者发送消息</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                <div class="weui-textarea-counter"><span>0</span>/200</div>
             </div>
         </div>
+    </div>
+    <div class="weui-btn-area">
+        <button class="weui-btn weui-btn_plain-primary " style="width: 45%;float: left" onclick="document.getElementById('table_1').style.display='none';document.getElementById('main_1').style.display='block'">返回</button>
+        <button class="weui-btn weui-btn_plain-primary " style="width: 50%;float: right;margin-top: 0">确认并发送</button>
+    </div>
 
-        <div class="weui-btn-area">
-            <a class="weui-btn weui-btn_primary" href="javascript:" >确认报名名单并发送信息</a>
-            <a class="weui-btn weui-btn_primary" href="javascript:" >返回</a>
-        </div>
-        </div>
-    </table>
+    </div>
 
     <!--活动发布表单-->
     <div id="id02" class="modal">
@@ -425,7 +396,7 @@
                 <input type="text" placeholder="中珠-风雨球场" id="ACT_location" required>
 
                 <label><b>活动时间</b></label>
-                <input  class="laydate-icon" type="text" onClick="laydate({elem: '#ACT_time'});" id="ACT_time" required>
+                <input class="laydate-icon" type="text" onClick="laydate({elem: '#ACT_time'});" id="ACT_time" required>
 
                 <label><b>活动简介</b></label>
                 <input type="text" id="ACT_intro" id="ACT_intro" required>
@@ -439,9 +410,9 @@
                 <label><b>上传Logo</b></label>
                 <img id="ACT_logo" style="width:150px;height:150px"><br>
                 <button type="button" onclick="document.getElementById('ACT_input').click();">点击上传图片</button>
-                <input type="file" style="display:none" id="ACT_input">
+                <input type="file" style="display:none" accept="image/*" id="ACT_input">
                 <br>
-                <input type="radio" name="formChoose" value="default" checked="checked"> <b>使用默认报名表</b>
+                <input type="radio" name="formChoose" value="default" checked> <b>使用默认报名表</b>
                 &nbsp;
                 <br>
                 <input type="radio" name="formChoose" value="make"
@@ -463,10 +434,9 @@
         </form>
     </div>
 
-
     <!--招新表单-->
     <div id="id03" class="modal">
-        <form class="modal-content animate" id="defaultForm">
+        <form class="modal-content animate" id="NEW_form">
             <div class="container">
                 <label><b>活动类型</b></label>
                 <select style="font-size: 12px;" id="NEW_type" required>
@@ -481,8 +451,7 @@
                 <input type="text" id="NEW_object" required>
 
                 <label><b>报名截止时间</b></label>
-                <input  class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_end'});" id="NEW_end" required>
-                <!--<input type="text" placeholder="2017.09.25" id="NEW_end" required>-->
+                <input class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_end'});" id="NEW_end" required>
 
                 <label><b>社团简介</b></label>
                 <input type="text" id="NEW_intro" required>
@@ -491,9 +460,7 @@
                 <input type="url" placeholder="复制推送链接至此处" id="NEW_link" required>
 
                 <div class="clearfix">
-                    <button type="button"
-                            onclick="document.getElementById('id03').style.display='none';document.getElementById('main_1').style.display='block'"
-                            class="cancelbtn">取消
+                    <button type="button" onclick="document.getElementById('id03').style.display='none';document.getElementById('main_1').style.display='block'" class="cancelbtn">取消
                     </button>
                     <button type="submit" class="signupbtn">提交</button>
                 </div>
@@ -501,6 +468,56 @@
         </form>
     </div>
 
+    <div id="id04" class="modal">
+        <form id="massConfig">
+            <div class="weui-cells__title">编辑基本信息</div>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label for="" class="weui-label">社团名字</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="MASS_name"/>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label for="" class="weui-label">社团负责人</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="MASS_head"/>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">社团logo</label></div>
+                    <img id="MASS_logo" style="width:150px;height:150px"><br>
+                    <div class="weui-cell__bd">
+                        <button type="button" onclick="document.getElementById('MASS_logoInput').click();">点击上传图片
+                        </button>
+                        <input class="weui-input" type="file" style="display:none" accept="image/*"
+                               id="MASS_logoInput"/>
+                    </div>
+                </div>
+
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">社团简介</label></div>
+                    <div class="weui-cell__bd">
+                        <textarea class="weui-textarea" placeholder="请输入文本" rows="3" id="MASS_desc"></textarea>
+                        <div class="weui-textarea-counter"><span>0</span>/200</div>
+                    </div>
+                </div>
+
+            </div>
+            <label for="weuiAgree" class="weui-agree">
+                <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+                <span class="weui-agree__text">阅读并同意<a href="javascript:void(0);">《相关条款》</a></span>
+            </label>
+            <div class="weui-btn-area">
+                <button type="button"
+                        onclick="document.getElementById('id04').style.display='none';document.getElementById('main_1').style.display='block'"
+                        class="cancelbtn">取消
+                </button>
+                <button type="submit" class="signupbtn">提交</button>
+            </div>
+        </form>
+    </div>
 
     <!--在线制作报名表-->
     <div id="myDIV">
@@ -549,14 +566,13 @@
     var listjson = {};
     var defaultjson = {};
     var ne = {
-            姓名: "text",
-            学号: "number",
-            学院: "text",
-            手机: "number",
-            QQ微信: "text",
-            备注: "text"
-        }
-    ;
+        姓名: "",
+        学号: "",
+        学院: "",
+        手机: "",
+        QQ  : "",
+        备注: ""
+    };
     for (var i in ne) {
         newElement(i, ne[i]);
         defaultjson[i] = ne[i];
@@ -564,7 +580,7 @@
 
     var slideIndex = 1;
     showSlides(slideIndex);
-    //    第三页下拉菜单
+    //    下拉菜单
     var acc = document.getElementsByClassName("accordion");
     for (var i = 0; i < acc.length; i++) {
         acc[i].onclick = function () {
@@ -577,36 +593,30 @@
             }
         }
     }
+    init();
 
-    var xmlhttp = GetXMLHTTPRequest();
-    xmlhttp.open("GET", "login.php", true);
-    xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-    xmlhttp.send("");
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            var res = xmlhttp.responseText;
-            login(res);
-        }
-    };
 
     // 触发 id="defaultOpen" click 事件
     document.getElementById("defaultOpen").click();
     document.getElementById("login").onclick = function () {
         document.getElementById("login").disabled = true;
         var content = {
-            type: "login",
+            serverType: "login",
             account: document.getElementById("uname").value,
             password: document.getElementById("psw").value,
             remember: document.getElementById("remember").value
         };
         var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "login.php", true);
+        xmlhttp.open("POST", "IndexServer.php", true);
         xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
         xmlhttp.send(toStr(content));
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var res = xmlhttp.responseText;
-                login(res);
+                var json = JSON.parse(xmlhttp.responseText);
+                if (json.success)
+                    login(json);
+                else
+                    console.log(json.error);
             }
         }
     };
@@ -628,6 +638,7 @@
         }
 
         var content = {
+            serverType: "acfForm",
             name: document.getElementById("ACT_name").value,
             location: document.getElementById("ACT_location").value,
             time: document.getElementById("ACT_time").value,
@@ -640,14 +651,12 @@
             UID: uid
         };
         var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "activityPost.php", true);
+        xmlhttp.open("POST", "IndexServer.php", true);
         xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
         xmlhttp.send(toStr(content));
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var res = xmlhttp.responseText;
-                var json = JSON.parse(res);
-                console.log(json);
+                var json = JSON.parse(xmlhttp.responseText);
                 if (json.success) {
                     document.getElementById('id02').style.display = 'none';
                     document.getElementById('main_1').style.display = 'block'
@@ -656,27 +665,13 @@
             }
         }
     };
-    document.getElementById("customerForm").onsubmit = function (event) {
-        event = event || window.event;
-        event.target.disabled = true;
-        event.preventDefault();
-
-        listjson = {};
-        var list = document.getElementById("myUL").getElementsByTagName("input");
-        for (var i = 0; i < list.length; i++) {
-            if (list[i].name)
-                listjson[list.name] = list[i].value;
-        }
-
-        document.getElementById('myDIV').style.display = 'none';
-        document.getElementById('id02').style.display = 'block'
-    };
-    document.getElementById("defaultForm").onsubmit = function (event) {
+    document.getElementById("NEW_form").onsubmit = function (event) {
         event = event || window.event;
         event.target.disabled = true;
         event.preventDefault();
 
         var content = {
+            serverType: "recruitment",
             type: document.getElementById("NEW_type").value,
             title: document.getElementById("NEW_title").value,
             object: document.getElementById("NEW_object").value,
@@ -687,7 +682,7 @@
         };
 
         var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "recruitmentPost.php", true);
+        xmlhttp.open("POST", "IndexServer.php", true);
         xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
         xmlhttp.send(toStr(content));
         xmlhttp.onreadystatechange = function () {
@@ -702,6 +697,56 @@
                     console.log(json.error);
             }
         }
+    };
+    document.getElementById("massConfig").onsubmit = function (event) {
+        event = event || window.event;
+        event.target.disabled = true;
+        event.preventDefault();
+
+        var content = {
+            serverType: "massConfig",
+            name: document.getElementById("MASS_name").value,
+            head: document.getElementById("MASS_head").value,
+            logo: encodeURIComponent(document.getElementById("MASS_logo").src),
+            desc: document.getElementById("MASS_desc").value,
+            UID: uid
+        };
+
+        var xmlhttp = GetXMLHTTPRequest();
+        xmlhttp.open("POST", "IndexServer.php", true);
+        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+        xmlhttp.send(toStr(content));
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var res = xmlhttp.responseText;
+                var json = JSON.parse(res);
+                console.log(json);
+                if (json.success) {
+                    document.getElementById('id04').style.display = 'none';
+                    document.getElementById('main_1').style.display = 'block';
+
+                    document.getElementById("user_name").innerText = content.name + "(UID:" + info.UID + ")";
+                    document.getElementById("user_intro").innerText = content.desc;
+                } else
+                    console.log(json.error);
+            }
+        }
+    };
+
+    document.getElementById("customerForm").onsubmit = function (event) {
+        event = event || window.event;
+        event.target.disabled = true;
+        event.preventDefault();
+
+        listjson = {};
+        var list = document.getElementById("myUL").getElementsByTagName("input");
+        for (var i = 0; i < list.length; i++) {
+            if (list[i].name)
+                listjson[list[i].name] = list[i].value;
+        }
+
+        document.getElementById('myDIV').style.display = 'none';
+        document.getElementById('id02').style.display = 'block';
     };
     document.getElementById("ACT_input").onchange = function (event) {
         event = event || window.event;
@@ -720,15 +765,72 @@
         } else
             alert("不是图片无法上传！");
     };
+    document.getElementById("MASS_logoInput").onchange = function (event) {
+        event = event || window.event;
+        var file = event.target.files[0];
+        var fr = new FileReader();
+        var reg = new RegExp(/image\/\w+/);
+        if (reg.test(file.type)) {
+            fr.onload = function (event) {
+                var url = event.target.result;
+                if (url.length <= 1024 * 500)//图片大小限制(dataURL本身的原因，多少不太明确)
+                    document.getElementById("MASS_logo").src = event.target.result;
+                else
+                    alert("图片过大，请选择较小的图片！");
+            };
+            fr.readAsDataURL(file);
+        } else
+            alert("不是图片无法上传！");
+    };
+
+    function init() {
+        var xmlhttp = GetXMLHTTPRequest();
+        var content = {serverType: "autoLogin"};
+        xmlhttp.open("POST", "IndexServer.php", true);
+        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+        xmlhttp.send(toStr(content));
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var json = JSON.parse(xmlhttp.responseText);
+                if (json.success)
+                    login(json);
+                else
+                    console.log(json.error);
+            }
+        };
+
+        var xmlhttp2 = GetXMLHTTPRequest();
+        var content2 = {serverType: "getActivity"};
+        xmlhttp2.open("POST", "IndexServer.php", true);
+        xmlhttp2.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+        xmlhttp2.send(toStr(content2));
+        xmlhttp2.onreadystatechange = function () {
+            if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
+                var json = JSON.parse(xmlhttp2.responseText);
+                if (json.success){
+                    for (var i = 0; i < json.list.length; i++) {
+                        document.getElementById("MyList").appendChild(createActivity(json.list[i].name, json.list[i].introduction, json.list[i].location,
+                            json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo, json.list[i].mark));
+                    }
+
+                    for (var i = 0; i < json.mark.length; i++) {
+                        document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
+                            json.mark[i].holdtime, json.mark[i].time, json.mark[i].UID, json.mark[i].json, json.mark[i].logo, json.mark[i].mark));
+                    }
+                }else
+                    console.log(json.error);
+            }
+        };
+
+    }
 
     //登陆登出
-    function login(res) {
-        var info = JSON.parse(res);
+    function login(info) {
         if (info.success) {
             uid = info.UID;
             document.getElementById('id01').style.display = 'none';
-            document.getElementById("user_name").innerText = info.nickName + "(UID:" + info.UID + ")";
-            document.getElementById("user_intro").innerText = info.introduction;
+            document.getElementById("user_name").innerText = info.name + "(UID:" + info.UID + ")";
+//            document.getElementById("user_intro").innerText = info.intro;
             document.getElementById("footer").style.display = 'none';
             document.getElementById("myself").onclick = function (event) {
                 tabNav(event, 'page4')
@@ -742,13 +844,13 @@
 
     function logout() {
         var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "login.php", true);
+        var content = {serverType: "logout"};
+        xmlhttp.open("POST", "IndexServer.php", true);
         xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr({type: "logout"}));
+        xmlhttp.send(toStr(content));
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var res = xmlhttp.responseText;
-                var info = JSON.parse(res);
+                var info = JSON.parse(xmlhttp.responseText);
                 if (info.success) {
                     uid = -1;
                     document.getElementById("myself").onclick = function (event) {
@@ -838,50 +940,138 @@
         }
     }
 
-    function showCal(){
+    function createActivity(title, content, place, holdtime, time, index, labels, logo, mark) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var img = document.createElement("img");
+
+        var div_2 = document.createElement("div");
+        var h4 = document.createElement("h4");
+        var i_1 = document.createElement("i");
+        var i_2 = document.createElement("i");
+
+        var p_1 = document.createElement("p");
+        var p_2 = document.createElement("p");
+        var p_3 = document.createElement("p");
+        var p_4 = document.createElement("p");
+
+
+        var formStr = "";
+        var formLabel = JSON.parse(labels);
+        for (var i in formLabel) {
+            formStr += "<label><b>" + i + "</b></label>" + "<input name='" + i + "'>";
+        }
+
+        img.src = decodeURIComponent(logo);
+        img.style.width = "150px";
+        img.style.height = "150px";
+//        记得改尺寸
+
+        a.className = "weui-media-box weui-media-box_appmsg";
+        a.onclick = function (event) {
+            event = event || window.event;
+            switch (event.target) {
+                case(i_2):
+                    document.getElementById("custom").innerHTML = formStr;
+                    sign(index);
+                    break;
+
+                case(i_1):
+                    var content = {serverType: "Mark", actID: postIndex};
+                    var xmlhttp = GetXMLHTTPRequest();
+                    xmlhttp.open("POST", "activity.php", true);
+                    xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+                    xmlhttp.send(toStr(content));
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            var json = JSON.parse(xmlhttp.responseText);
+                            if (json.success)
+                                event.target.style.color = json.mark ? '#E7CF0C' : '';
+                            else
+                                console.log(json.error);
+                        }
+                    };
+                    break;
+            }
+        };
+
+
+        i_1.className = "fa fa-star";
+        i_2.className = "fa fa-pencil-square-o";
+        i_1.style.color = mark ? '#E7CF0C' : '';
+
+        div_1.className = "weui-media-box__hd";
+        div_2.className = "weui-media-box__bd";
+
+        h4.className = "weui-media-box__title";
+        h4.innerText = title + "  ";
+
+        p_1.className = p_2.className = p_3.className = p_4.className = "weui-media-box__desc";
+        p_1.innerText = "时间" + "" + ":" + holdtime;
+        p_2.innerText = "地点" + "" + ":" + place;
+        p_3.innerText = "主办方" + "" + ":" + time;
+        p_4.innerText = "简介" + "" + ":" + content;
+
+        div_1.appendChild(img);
+
+        h4.appendChild(i_1);
+        h4.appendChild(i_2);
+        div_2.appendChild(h4);
+        div_2.appendChild(p_1);
+        div_2.appendChild(p_2);
+        div_2.appendChild(p_3);
+        div_2.appendChild(p_4);
+
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+
+        return a;
+    }
+
+    function showCal() {
         function is_leap(year) {
-            return (year%100==0?res=(year%400==0?1:0):res=(year%4==0?1:0));
+            return (year % 100 == 0 ? res = (year % 400 == 0 ? 1 : 0) : res = (year % 4 == 0 ? 1 : 0));
         } //是否为闰年
 
-        var nstr=new Date(); //当前Date资讯
-        var ynow=nstr.getFullYear(); //年份
-        var mnow=nstr.getMonth(); //月份
-        var dnow=nstr.getDate(); //今日日期
-        var n1str=new Date(ynow,mnow,1); //当月第一天Date资讯
+        var nstr = new Date(); //当前Date资讯
+        var ynow = nstr.getFullYear(); //年份
+        var mnow = nstr.getMonth(); //月份
+        var dnow = nstr.getDate(); //今日日期
+        var n1str = new Date(ynow, mnow, 1); //当月第一天Date资讯
 
-        var firstday=n1str.getDay(); //当月第一天星期几
+        var firstday = n1str.getDay(); //当月第一天星期几
 
-        var m_days= new Array(31,28+is_leap(ynow),31,30,31,30,31,31,30,31,30,31); //各月份的总天数
+        var m_days = new Array(31, 28 + is_leap(ynow), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31); //各月份的总天数
 
-        var tr_str=Math.ceil((m_days[mnow] + firstday)/7); //表格所需要行数
+        var tr_str = Math.ceil((m_days[mnow] + firstday) / 7); //表格所需要行数
 
 
         //打印表格第一行（有星期标志）
 //        var div = document.createElement("div");
         var div = '';
-        div +="<table  align='center' width='100%' cellspacing='0' cellpadding='10' ><tr bgcolor= '#ddd' ><th align='center'>日</th><th align='center'>一</th><th align='center'>二</th><th align='center'>三</th><th align='center'>四</th><th align='center'>五</th><th align='center'>六</th></tr>";
+        div += "<table  align='center' width='100%' cellspacing='0' cellpadding='10' ><tr bgcolor= '#ddd' ><th align='center'>日</th><th align='center'>一</th><th align='center'>二</th><th align='center'>三</th><th align='center'>四</th><th align='center'>五</th><th align='center'>六</th></tr>";
 
-        for(i=0;i<tr_str;i++) { //表格的行
-            div +="<tr class='day'>";
-            for(k=0;k<7;k++) { //表格每行的单元格
-                idx=i*7+k; //单元格自然序列号
-                date_str=idx-firstday+1; //计算日期
-                (date_str<=0 || date_str>m_days[mnow]) ? date_str="&nbsp;" : date_str=idx-firstday+1; //过滤无效日期（小于等于零的、大于月总天数的）
+        for (i = 0; i < tr_str; i++) { //表格的行
+            div += "<tr class='day'>";
+            for (k = 0; k < 7; k++) { //表格每行的单元格
+                idx = i * 7 + k; //单元格自然序列号
+                date_str = idx - firstday + 1; //计算日期
+                (date_str <= 0 || date_str > m_days[mnow]) ? date_str = "&nbsp;" : date_str = idx - firstday + 1; //过滤无效日期（小于等于零的、大于月总天数的）
                 //打印日期：今天底色为绿
-                date_str==dnow ? div +="<td align='center'  bgcolor='#CBCBCB' >" + date_str + "</td>" : div  += "<td align='center' bgcolor='#eee' >" + date_str + "</td>";
+                date_str == dnow ? div += "<td align='center'  bgcolor='#CBCBCB' >" + date_str + "</td>" : div += "<td align='center' bgcolor='#eee' >" + date_str + "</td>";
             }
-            div  +="</tr>"; //表格的行结束
+            div += "</tr>"; //表格的行结束
         }
 
-        div  +="</table>"; //表格结束
+        div += "</table>"; //表格结束
 
 //        document.getElementById('table').innerHTML =  div  ;
 
         var y = document.getElementById("thisYear");
-        y.innerText= ynow ;
+        y.innerText = ynow;
 
         var m = document.getElementById("thisMonth");
-        m.innerText= mnow+1 + '月';
+        m.innerText = mnow + 1 + '月';
 
         return div;
     }
@@ -889,15 +1079,15 @@
     document.getElementById('table').innerHTML = showCal();
 
 
-    function workList(event){
+    function workList(event) {
         document.getElementById('add').style.display = 'block';
         event = event || window.event;
         target = event.target;
     }
 
-    function submit(condition){
+    function submit(condition) {
         document.getElementById('add').style.display = 'none';
-        if(condition){
+        if (condition) {
 //            target.innerHTML += "<span style='color:#db9979'> &#8226</span>";
 //            target.style.fontWeight = 'bolder';
             var thing = document.getElementById('thing').value;
@@ -906,61 +1096,17 @@
             var li = document.createElement('li');
             var span = document.createElement('span');
 //            span.innerHTML = "<b>"+"\u00D7"+"</b>";
-            span.innerHTML ='<i class="fa fa-calendar-minus-o" style="font-size:15px;position:absolute;right: 0;"></i>';
-            li.innerHTML = time_1+"&nbsp;~ &nbsp;"+time_2 +"&nbsp;&nbsp;"+"<br>" + thing ;
+            span.innerHTML = '<i class="fa fa-calendar-minus-o" style="font-size:15px;position:absolute;right: 0;"></i>';
+            li.innerHTML = time_1 + "&nbsp;~ &nbsp;" + time_2 + "&nbsp;&nbsp;" + "<br>" + thing;
             var ul = document.getElementById('ul');
             li.appendChild(span);
             ul.appendChild(li);
-            span.onclick = function(){
-                this.parentElement.style.display='none';
+            span.onclick = function () {
+                this.parentElement.style.display = 'none';
             };
         }
     }
-</script>
-<script type="text/javascript">
-    !function(){
-        laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
-        laydate({elem: '#demo'});//绑定元素
-    }();
 
-    //日期范围限制
-    var start = {
-        elem: '#start',
-        format: 'YYYY-MM-DD',
-        min: laydate.now(), //设定最小日期为当前日期
-        max: '2099-06-16', //最大日期
-        istime: true,
-        istoday: false,
-        choose: function(datas){
-            end.min = datas; //开始日选好后，重置结束日的最小日期
-            end.start = datas;  //将结束日的初始值设定为开始日
-        }
-    };
-
-    var end = {
-        elem: '#end',
-        format: 'YYYY-MM-DD',
-        min: laydate.now(),
-        max: '2099-06-16',
-        istime: true,
-        istoday: false,
-        choose: function(datas){
-            start.max = datas; //结束日选好后，充值开始日的最大日期
-        }
-    };
-    laydate(start);
-    laydate(end);
-
-    function loadDoc() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                table(this);
-            }
-        };
-        xhttp.open("GET", "table.xml", true);
-        xhttp.send();
-    }
     function table(xml) {
         var i;
         var xmlDoc = xml.responseXML;
@@ -1002,6 +1148,41 @@
                 checkBox[i].checked = false;}
         }
     }
+
+</script>
+<script type="text/javascript">
+    !function () {
+        laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+        laydate({elem: '#demo'});//绑定元素
+    }();
+
+    //日期范围限制
+    var start = {
+        elem: '#start',
+        format: 'YYYY-MM-DD',
+        min: laydate.now(), //设定最小日期为当前日期
+        max: '2099-06-16', //最大日期
+        istime: true,
+        istoday: false,
+        choose: function (datas) {
+            end.min = datas; //开始日选好后，重置结束日的最小日期
+            end.start = datas;  //将结束日的初始值设定为开始日
+        }
+    };
+
+    var end = {
+        elem: '#end',
+        format: 'YYYY-MM-DD',
+        min: laydate.now(),
+        max: '2099-06-16',
+        istime: true,
+        istoday: false,
+        choose: function (datas) {
+            start.max = datas; //结束日选好后，充值开始日的最大日期
+        }
+    };
+    laydate(start);
+    laydate(end);
 
 </script>
 
