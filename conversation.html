@@ -4,12 +4,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <!--全屏显示-->
-<<<<<<< HEAD
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-=======
     <meta name="viewport"
           content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
 
     <!--引用weui框架做样式-->
     <!--<link rel="stylesheet" href="weui.min.css">-->
@@ -19,20 +15,15 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
 
     <style type="text/css">
-<<<<<<< HEAD
-=======
         * {
             margin: 0;
             padding: 0;
         }
 
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
         body {
             background-color: #f8f8f8;
         }
 
-<<<<<<< HEAD
-=======
         .hqfenlei {
             text-align: center;
             margin-bottom: 0.48em;
@@ -221,7 +212,6 @@
         }
 
         /*---------------------匿槽-----------------------------*/
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
         .hqzhongyang {
             /*text-align: center;*/
         }
@@ -302,11 +292,7 @@
             display: inline;
             width: 55%;
             height: 80%;
-<<<<<<< HEAD
-            left: 9em;
-=======
             left: 33%;
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
             top: 0.65em;
             border-color: #0D0D0D;
             border: thin;
@@ -427,10 +413,7 @@
         }
 
         .hqxinjian {
-<<<<<<< HEAD
-=======
             text-align: center;
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
             position: absolute;
             background-color: #111111;
             color: whitesmoke;
@@ -483,31 +466,6 @@
         }
     </style>
 </head>
-<<<<<<< HEAD
-<body>
-<div class="hqfenlei">
-    <div class="hqdingduan">
-        <span id="conversation" class="hqxuanxiang2 hqxuanxiang1 ciji0 ">话圈</span>
-        <span id="debunk" class="hqxuanxiang2 ciji0 xuanzhong">吐槽</span>
-    </div>
-    <div class="hqxinjian"><span class="hqjiahao" onclick="hqxinjian()">+</span></div>
-</div>
-<!--新建发话窗口-->
-<div id="hqxjdh" class="hqxjdh hqzhongyang">
-    <div class="hqmzxz">
-        <i id="left" class="hqxzajz">&lt;</i>
-        <span id="hqniming" class="yuan">A</span>
-        <i id="right" class="hqxzajy">&gt;</i>
-    </div>
-    <textarea id="xinhuaquan" class="hqsr" style="color:#615f62;" placeholder="点击输入属于你的匿槽" name="usrname"></textarea>
-    <i id="sendMain" class="fa fa-send-o hptjwz"></i>
-</div>
-
-<div class="content">
-    <ul id="conversation_main" style="list-style:none;">
-        <!--JS添加地点-->
-    </ul>
-=======
 <body style="overflow-x:hidden;">
 
 <div class="hqfenlei">
@@ -603,39 +561,16 @@
             <!--JS添加地点-->
         </ul>
     </div>
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
 </div>
 
 <script src="CommonJS.js"></script>
 <script>
     var newConversation = false;
     var characterIndex = 65;
-<<<<<<< HEAD
-    var type = 0;
-
-    var main = document.getElementById("conversation_main");
-    var circle = document.getElementsByClassName("ciji0");
-    var changeTopicType = function (e) {
-        for (var i in circle)
-            if (circle[i].className)
-                circle[i].className = circle[i].className.replace("xuanzhong", "");
-
-        if (e) {
-            type = e.currentTarget.id;
-            e.currentTarget.className += " xuanzhong";
-        }
-
-    };
-    for (var i in circle)
-        circle[i].onclick = changeTopicType;
-
-
-=======
 
     var main = document.getElementById("conversation_main");
     var top_conversation = document.getElementById("conversation");
     var top_debunk = document.getElementById("debunk");
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
     document.getElementById('right').onclick = function () {
         characterIndex = characterIndex >= 90 ? 65 : characterIndex + 1;
         document.getElementById('hqniming').innerText = String.fromCharCode(characterIndex);
@@ -668,9 +603,6 @@
             }
         }
     }
-<<<<<<< HEAD
-
-=======
     top_conversation.onclick = function () {
         document.getElementById("ncym").style.display = 'none';
         document.getElementById("hqym").style.display = 'block';
@@ -683,7 +615,6 @@
         top_conversation.className = top_conversation.className.replace(" xuanzhong", "");
         top_debunk.className += " xuanzhong";
     }
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
     init();
 
     function dealContent(json) {
@@ -725,11 +656,7 @@
         div.className = "dzpl";
         span_1.className = "hqtb fa fa-thumbs-up";
         span_2.className = "hqtb fa fa-comment";
-<<<<<<< HEAD
-        span_1_text.className = span_2_text.className = "hqsl";
-=======
         span_1_text.className = span_2_text.className = black ? "hqsl" : "hqsl heisez";
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
         liSend.className = "hqhf zhongyang";
         span_send.className = "hqhfyuan";
         icon.className = "fa fa-send-o hqxjplfs";
@@ -755,9 +682,6 @@
         span_send.innerText = "A";
         divWhole.onclick = function (e) {
             if (e.target == span_1) {
-<<<<<<< HEAD
-                span_1_text.innerText = (parseInt(span_1_text.innerText.replace(" ", "")) + 1) + "    ";
-=======
                 var content = {
                     type: "Good",
                     topicID: uid
@@ -775,7 +699,6 @@
                             console.log(json.error);
                     }
                 }
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
                 return;
             }
             if (ul.style.display == "block") {

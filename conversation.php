@@ -1,27 +1,10 @@
 <?php
-<<<<<<< HEAD
-	if($_SERVER["REQUEST_METHOD"]=="POST"){
-		$type = $_POST["type"];
-		$line = array();
-		$mysqli = new mysqli('localhost','ipeuser','*ipE123','ipe_db','3306');
-		$mysqli->query("set character set 'utf8'");
-		$mysqli->query("set names 'utf8'");
-		
-		if($mysqli->connect_errno){
-			$line["error"] = "服务器连接失败，错误提示：".$mysqli->error;
-			$line["success"] = false;
-			echo json_encode($line);
-			$mysqli->close();
-			exit();
-		}
-=======
 	require 'commonFunction.php';
 
 	if($_SERVER["REQUEST_METHOD"]=="POST"){
 		$type = $_POST["type"];
 		$line = array();
 		$mysqli = linkToSQL();
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
 		
 		if($type == "Send"){
 			$character	= $_POST["character"];
@@ -52,13 +35,7 @@
 					$line["success"] = false;
 					$line["error"] = "评论发起错误，错误提示:(".$mysqli->error.")";
 				}
-<<<<<<< HEAD
-				
 			}
-			
-=======
-			}
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
 		}else if($type=="Get"){
 			$num = $_POST["num"];
 			
@@ -75,8 +52,6 @@
 						$row["review"][] = $row2;
 					}
 					$row["review"]["length"]=$reviewNum;
-<<<<<<< HEAD
-=======
 					
 					$rst3 = $mysqli->query("SELECT * from conversationGood WHERE topicID=$id");
 					$goodNum=0;
@@ -84,7 +59,6 @@
 						$goodNum++;
 					}
 					$row["good"] = $goodNum;
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
 					$line[] = $row;
 					$looptag++;
 				}
@@ -94,8 +68,6 @@
 				$line["error"] = "话题获取错误，错误提示: ".$mysqli->error;
 				$line["success"] = false;
 			}
-<<<<<<< HEAD
-=======
 		}else if($type=="Good"){
 			$topicID = $_POST["topicID"];
 			
@@ -118,7 +90,6 @@
 					$line["success"] = false;
 				}
 			}
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
 		}
 		
 		echo json_encode($line);

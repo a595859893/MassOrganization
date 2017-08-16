@@ -246,7 +246,8 @@
                     <img class="" alt="">
                 </div>
                 <div class="weui-media-box__bd">
-                    <h4 class="weui-media-box__title"> 标题一 &nbsp;<i class="fa fa-star" onclick="color(event)"></i><i class="fa fa-calendar-plus-o" style="float: right;font-size: 20px;" ></i></h4>
+                    <h4 class="weui-media-box__title"> 标题一 &nbsp;<i class="fa fa-star" onclick="color(event)"></i><i
+                            class="fa fa-calendar-plus-o" style="float: right;font-size: 20px;"></i></h4>
                     <p class="weui-media-box__desc">时间</p>
                     <p class="weui-media-box__desc">地点</p>
                     <p class="weui-media-box__desc">简介</p>
@@ -260,39 +261,6 @@
     <br><br>
     <div id="mass_diary" class="weui-panel weui-panel_access">
         <div class="weui-panel__hd">社团日志 <span class="weui-badge">&#9733</span></div>
-
-    <div class="weui-panel weui-panel_access" >
-        <div class="weui-panel__hd">社团日志 &nbsp;<i class="fa fa-pencil-square" style="font-size:15px;color:black"></i></div>
-        <div class="weui-panel__bd">
-            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg" style="padding-bottom: 0">
-                <div class="weui-media-box__hd">
-                    <img class="weui-media-box__thumb" alt="" src="" style="border-radius:50%;">
-                </div>
-                <div class="weui-media-box__bd">
-                    <h4 class="weui-media-box__title">标题</h4>
-                    <p class="weui-media-box__desc">发布时间</p>
-                </div>
-            </a>
-            <article class="weui-article" style="margin-left:72px;padding: 0 15px">
-                <p>内容</p>
-                <p>
-                <div class="weui-uploader">
-                    <div class="weui-uploader__bd">
-                        <ul class="weui-uploader__files">
-                            <li class="weui-uploader__file" style="background-image:url(# )"></li>
-                            <li class="weui-uploader__file" style="background-image:url(# )"></li>
-                            <li class="weui-uploader__file" style="background-image:url(# )"></li>
-                        </ul>
-                    </div>
-                </div>
-                </p>
-            </article>
-        </div>
-        <div class="weui-form-preview__ft">
-            <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:"><i class="fa fa-commenting-o" onclick="color(event)"></i> 评论</a>
-            <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:"><i class="fa fa-heart" onclick="color(event)"></i> 点赞</a>
-            <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:"><i class="fa fa-share-alt" ></i> 分享</a>
-        </div>
     </div>
 
 </article>
@@ -348,7 +316,6 @@
     var uid = getValue("uid");
     if (uid > -1)
         init();
-    document.getElementById("mass_diary").appendChild(createDiary());
     //    document.getElementById("NEW_from").onsubmit = function (event) {
     //        event = event || window.event;
     //        event.target.disabled = true;
@@ -417,6 +384,10 @@
                     document.getElementById("mass_img").src = json.mass.logo;
                     document.getElementById("mass_name").innerText = json.mass.name;
                     document.getElementById("mass_num").style.color = json.mass.imark ? 'red' : '';
+                    for (var i = 0; i < json.diary.length; i++) {
+                        document.getElementById("mass_diary").appendChild(createDiary(json.diary[i].title, json.diary[i].content, json.diary[i].time,
+                            json.diary[i].img, json.diary[i].logo, json.diary[i].UID));
+                    }
                 } else
                     console.log(json.error);
             }
@@ -424,60 +395,82 @@
 
     }
 
-    function createDiary() {
+    function createDiary(title, content, time, image, logo, uid) {
         var div = document.createElement("div");
+
         var div_1 = document.createElement("div");
+        var a_1_1 = document.createElement("a");
+        var div_1_1_1 = document.createElement("div");
+        var img_1_1_1_1 = document.createElement("img");
+        var div_1_1_2 = document.createElement("div");
+        var h4_1_1_2_1 = document.createElement("h4");
+        var p_1_1_2_2 = document.createElement("p");
+
+        var article_1_2 = document.createElement("article");
+        var p_1_2_1 = document.createElement("p");
+        var div_1_2_2 = document.createElement("div");
+        var div_1_2_2_1 = document.createElement("div");
+        var ul_1_2_2_1_1 = document.createElement("ul");//放图片
+
         var div_2 = document.createElement("div");
-        var div_3 = document.createElement("div");
-        var div_4 = document.createElement("div");
-        var div_4_1 = document.createElement("div");
-        var div_5 = document.createElement("div");
-        var a_1 = document.createElement("a");
-        var a_2 = document.createElement("a");
-        var a_3 = document.createElement("a");
-        var a_4 = document.createElement("a");
-        var img = document.createElement("img");
-        var h4 = document.createElement("h4");
-        var ul = document.createElement("ul");//放图片
-        var p_1 = document.createElement("p");
-        var p_2 = document.createElement("p");
-        var article = document.createElement("article");
+        var a_2_1 = document.createElement("a");
+        var a_2_2 = document.createElement("a");
+        var a_2_3 = document.createElement("a");
 
         div_1.className = "weui-panel__bd";
-        div_2.className = "weui-media-box__hd";
-        div_3.className = "weui-media-box__hd";
-        img.className = "weui-media-box__thumb";
-        img.style = "border-radius:50%;";
-        h4.className = "weui-media-box__title";
-        p_1.className = "weui-media-box__desc";
-        a_1.className = "weui-media-box weui-media-box_appmsg";
-        a_1.style = "padding-bottom: 0";
-        article.className = "weui-article";
-        article.style = "margin-left:72px;padding: 0 15px";
-        div_4.className = "weui-uploader";
-        div_4_1.className = "weui-uploader__bd";
-        ul.className = "weui-uploader__files";
-        div_5.className = "weui-form-preview__ft";
-        a_2.className = "weui-form-preview__btn weui-form-preview__btn_default";
-        a_3.className = "weui-form-preview__btn weui-form-preview__btn_default";
-        a_4.className = "weui-form-preview__btn weui-form-preview__btn_default";
+        a_1_1.className = "weui-media-box weui-media-box_appmsg";
+        a_1_1.style = "padding-bottom: 0";
 
-        div_2.appendChild(img);
-        div_3.appendChild(h4);
-        div_3.appendChild(p_1);
-        div_4_1.appendChild(ul);
-        div_4.appendChild(div_4_1);
-        a_1.appendChild(div_2);
-        a_1.appendChild(div_3);
-        article.appendChild(p_2);
-        article.appendChild(div_4);
-        div_5.appendChild(a_2);
-        div_5.appendChild(a_3);
-        div_5.appendChild(a_4);
-        div_1.appendChild(a_1);
-        div_1.appendChild(article);
+        div_1_1_1.className = "weui-media-box__hd";
+        div_1_1_2.className = "weui-media-box__bd";
+
+        img_1_1_1_1.className = "weui-media-box__thumb";
+        img_1_1_1_1.style = "border-radius:50%;";
+        h4_1_1_2_1.className = "weui-media-box__title";
+        p_1_1_2_2.className = "weui-media-box__desc";
+
+        article_1_2.className = "weui-article";
+        article_1_2.style = "margin-left:72px;padding: 0 15px";
+        div_1_2_2.className = "weui-uploader";
+        div_1_2_2_1.className = "weui-uploader__bd";
+        ul_1_2_2_1_1.className = "weui-uploader__files";
+        div_2.className = "weui-form-preview__ft";
+        a_2_1.className = "weui-form-preview__btn weui-form-preview__btn_default";
+        a_2_2.className = "weui-form-preview__btn weui-form-preview__btn_default";
+        a_2_3.className = "weui-form-preview__btn weui-form-preview__btn_default";
+
+        a_2_1.innerHTML = "<i class='fa fa-commenting-o'></i> 评论";
+        a_2_2.innerHTML = "<i class='fa fa-heart'></i> 点赞";
+        a_2_3.innerHTML = "<i class='fa fa-share-alt'></i> 分享";
+        h4_1_1_2_1.innerText = title;
+        p_1_1_2_2.innerText = time;
+        p_1_2_1.innerText = content;
+        img_1_1_1_1.src = logo;
+
+        for (var i = 0; i < image.length; i++) {
+            var li = document.createElement("li");
+            li.className = "weui-uploader__file";
+            li.style = "background-image:url(" + image[i] + ")";
+            ul_1_2_2_1_1.appendChild(li);
+        }
+
+
+        div_1_1_1.appendChild(img_1_1_1_1);
+        div_1_1_2.appendChild(h4_1_1_2_1);
+        div_1_1_2.appendChild(p_1_1_2_2);
+        div_1_2_2_1.appendChild(ul_1_2_2_1_1);
+        div_1_2_2.appendChild(div_1_2_2_1);
+        a_1_1.appendChild(div_1_1_1);
+        a_1_1.appendChild(div_1_1_2);
+        article_1_2.appendChild(p_1_2_1);
+        article_1_2.appendChild(div_1_2_2);
+        div_2.appendChild(a_2_1);
+        div_2.appendChild(a_2_2);
+        div_2.appendChild(a_2_3);
+        div_1.appendChild(a_1_1);
+        div_1.appendChild(article_1_2);
         div.appendChild(div_1);
-        div.appendChild(div_5);
+        div.appendChild(div_2);
 
         return div;
     }

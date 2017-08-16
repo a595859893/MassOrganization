@@ -184,6 +184,12 @@
 
 		$rst = $mysqli->query($order);
 		if($rst){
+			$mass_title = '新活动'.$name.'发布了!';
+			$mass_content = '我们发布了新的活动，快来看呀！';
+			$order = "INSERT INTO massDiary (title,content,time,logo,massUID) ";
+			$order .="VALUES('$mass_title','$mass_content',FROM_UNIXTIME($time),'$logo',$UID)";
+
+			$rst = $mysqli->query($order);
 			$line["success"] = true;
 		}else{
 			$line["success"] = false;

@@ -17,7 +17,7 @@
 					$exist = false;
 					$UID = $row["UID"];
 					
-					$rst2 = $mysqli->query("SELECT * from massGood WHERE openID=$openID AND massUID=$UID");
+					$rst2 = $mysqli->query("SELECT * from massGood WHERE openID='$openID' AND massUID=$UID");
 					while($row2 = $rst2->fetch_array(MYSQLI_ASSOC)){
 						$exist = true;
 						break;
@@ -25,7 +25,7 @@
 					$row["igood"] = $exist;
 					
 					$exist = false;
-					$rst2 = $mysqli->query("SELECT * from massMark WHERE openID=$openID AND markUID=$UID");
+					$rst2 = $mysqli->query("SELECT * from massMark WHERE openID='$openID' AND markUID=$UID");
 					while($row2 = $rst2->fetch_array(MYSQLI_ASSOC)){
 						$exist = true;
 						break;
@@ -45,7 +45,7 @@
 			$massUID = $_POST["massUID"];
 
 			$exist = false;
-			$rst = $mysqli->query("SELECT * from massGood WHERE openID=$openID AND massUID=$massUID");
+			$rst = $mysqli->query("SELECT * from massGood WHERE openID='$openID' AND massUID=$massUID");
 			while($row = $rst->fetch_array(MYSQLI_ASSOC)){
 				$exist = true;
 				break;
@@ -62,7 +62,7 @@
 					$line["success"] = false;
 				}
 			}else{
-				$rst2 = $mysqli->query("DELETE FROM massGood WHERE openID=$openID AND massUID=$massUID");
+				$rst2 = $mysqli->query("DELETE FROM massGood WHERE openID='$openID' AND massUID=$massUID");
 				$mysqli->query("UPDATE mass SET good=good-1 WHERE UID=$massUID");
 				$line["good"] = false;
 				if($rst2)
@@ -77,7 +77,7 @@
 			$markUID = $_POST["markUID"];
 
 			$exist = false;
-			$rst = $mysqli->query("SELECT * from massMark WHERE openID=$openID AND markUID=$markUID");
+			$rst = $mysqli->query("SELECT * from massMark WHERE openID='$openID' AND markUID=$markUID");
 			while($row = $rst->fetch_array(MYSQLI_ASSOC)){
 				$exist = true;
 				break;
@@ -94,7 +94,7 @@
 					$line["success"] = false;
 				}
 			}else{
-				$rst2 = $mysqli->query("DELETE FROM massMark WHERE openID=$openID AND markUID=$markUID");
+				$rst2 = $mysqli->query("DELETE FROM massMark WHERE openID='$openID' AND markUID=$markUID");
 				$mysqli->query("UPDATE mass SET number=number-1 WHERE UID=$markUID");
 				$line["mark"] = false;
 				if($rst2)
@@ -114,23 +114,62 @@
 				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
 					$exist = 0;
 					
-					$rst2 = $mysqli->query("SELECT * FROM massGood WHERE openID=$openID AND massUID=$uid");
+					$rst2 = $mysqli->query("SELECT * FROM massGood WHERE openID='$openID' AND massUID=$uid");
 					while($row2 = $rst2->fetch_array(MYSQLI_ASSOC)){
 						$exist++;
 					}
 					$row["igood"] = $exist;
 					
 					$exist = 0;
-					$rst2 = $mysqli->query("SELECT * FROM massMark WHERE openID=$openID AND markUID=$uid");
+					$rst2 = $mysqli->query("SELECT * FROM massMark WHERE openID='$openID' AND markUID=$uid");
 					while($row2 = $rst2->fetch_array(MYSQLI_ASSOC)){
 						$exist++;
 					}
 					$row["imark"] = $exist;
 					$line["mass"] = $row;
 				}
+				$num = 0;
+				$rst2 = $mysqli->query("SELECT * FROM massDiary WHERE massUID=$uid");
+				while($row2 = $rst2->fetch_array(MYSQLI_ASSOC)){
+					$num++;
+					$line["diary"][] = $row2;
+				}
+				$line["diary"]["length"] = $num;
 			}else{
 				$line["success"] = false;
 				$line["error"] = "评论发起错误，错误提示:(".$mysqli->error.")";
+			}
+		}
+		else if($serverType=="goodDiary"){
+			$diaryUID = $_POST["diaryUID"];
+
+			$exist = false;
+			$rst = $mysqli->query("SELECT * from massDiaryGood WHERE openID='$openID' AND diaryUID=$diaryUID");
+			while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+				$exist = true;
+				break;
+			}
+			
+			if(!$exist){
+				$rst2 = $mysqli->query("INSERT INTO massDiaryGood (openID,diaryUID) VALUES('$openID',$diaryUID)");
+				$mysqli->query("UPDATE mass SET good=good+1 WHERE UID=$diaryUID");
+				$line["good"] = true;
+				if($rst2)
+					$line["success"] = true;
+				else{
+					$line["error"] = "点赞错误，错误提示: ".$mysqli->error;
+					$line["success"] = false;
+				}
+			}else{
+				$rst2 = $mysqli->query("DELETE FROM massDiaryGood WHERE openID='$openID' AND diaryUID=$diaryUID");
+				$mysqli->query("UPDATE mass SET good=good-1 WHERE UID=$diaryUID");
+				$line["good"] = false;
+				if($rst2)
+					$line["success"] = true;
+				else{
+					$line["error"] = "点赞删除错误，错误提示: ".$mysqli->error;
+					$line["success"] = false;
+				}
 			}
 		}
 		
