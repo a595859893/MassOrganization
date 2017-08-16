@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 	if($_SERVER["REQUEST_METHOD"]=="POST"){
 		$type = $_POST["type"];
 		$line = array();
@@ -13,6 +14,14 @@
 			$mysqli->close();
 			exit();
 		}
+=======
+	require 'commonFunction.php';
+
+	if($_SERVER["REQUEST_METHOD"]=="POST"){
+		$type = $_POST["type"];
+		$line = array();
+		$mysqli = linkToSQL();
+>>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
 		
 		if($type == "Send"){
 			$character	= $_POST["character"];
@@ -43,9 +52,13 @@
 					$line["success"] = false;
 					$line["error"] = "评论发起错误，错误提示:(".$mysqli->error.")";
 				}
+<<<<<<< HEAD
 				
 			}
 			
+=======
+			}
+>>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
 		}else if($type=="Get"){
 			$num = $_POST["num"];
 			
@@ -62,6 +75,16 @@
 						$row["review"][] = $row2;
 					}
 					$row["review"]["length"]=$reviewNum;
+<<<<<<< HEAD
+=======
+					
+					$rst3 = $mysqli->query("SELECT * from conversationGood WHERE topicID=$id");
+					$goodNum=0;
+					while($row3 = $rst3->fetch_array(MYSQLI_ASSOC)){
+						$goodNum++;
+					}
+					$row["good"] = $goodNum;
+>>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
 					$line[] = $row;
 					$looptag++;
 				}
@@ -71,6 +94,31 @@
 				$line["error"] = "话题获取错误，错误提示: ".$mysqli->error;
 				$line["success"] = false;
 			}
+<<<<<<< HEAD
+=======
+		}else if($type=="Good"){
+			$topicID = $_POST["topicID"];
+			
+			$openID = getOpenID();
+			$exist = false;
+			$rst = $mysqli->query("SELECT * from conversationGood WHERE openID=$openID AND topicID=$topicID");
+			while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+				$exist = true;
+				$line["error"] = "点赞错误，错误提示: 已经点赞过了";
+				$line["success"] = false;
+				break;
+			}
+			
+			if(!$exist){
+				$rst = $mysqli->query("INSERT INTO conversationGood (openID,topicID) VALUES('$openID',$topicID)");
+				if($rst)
+					$line["success"] = true;
+				else{
+					$line["error"] = "点赞获取错误，错误提示: ".$mysqli->error;
+					$line["success"] = false;
+				}
+			}
+>>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
 		}
 		
 		echo json_encode($line);
