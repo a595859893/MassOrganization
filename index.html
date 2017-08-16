@@ -302,11 +302,9 @@
 
         <br>
         <article class="main">
-<<<<<<< HEAD
             <button style="border-top:0.01px solid rgba(19,104,50,0.6) ;" onclick="document.getElementById('table_1').style.display='block';document.getElementById('main_1').style.display='none'"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i> 活动管理</button>
-=======
-            <button style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard"
-                                                                             style="font-size:18px;color: #136832;"></i>
+
+            <button style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i>
                 活动管理<a href="表格.html"></a></button>
 >>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
 
@@ -582,11 +580,7 @@
         学号: "",
         学院: "",
         手机: "",
-<<<<<<< HEAD
         QQ  : "",
-=======
-        QQ微信: "",
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
         备注: ""
     };
     for (var i in ne) {
@@ -739,12 +733,8 @@
                 console.log(json);
                 if (json.success) {
                     document.getElementById('id04').style.display = 'none';
-<<<<<<< HEAD
                     document.getElementById('main_1').style.display = 'block';
-=======
-                    document.getElementById('main_1').style.display = 'block'
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
-
+                    document.getElementById('main_1').style.display = 'block';
                     document.getElementById("user_name").innerText = content.name + "(UID:" + info.UID + ")";
                     document.getElementById("user_intro").innerText = content.desc;
                 } else
@@ -850,11 +840,8 @@
             uid = info.UID;
             document.getElementById('id01').style.display = 'none';
             document.getElementById("user_name").innerText = info.name + "(UID:" + info.UID + ")";
-<<<<<<< HEAD
 //            document.getElementById("user_intro").innerText = info.intro;
-=======
             document.getElementById("user_intro").innerText = info.intro;
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
             document.getElementById("footer").style.display = 'none';
             document.getElementById("myself").onclick = function (event) {
                 tabNav(event, 'page4')
@@ -999,7 +986,6 @@
                     document.getElementById("custom").innerHTML = formStr;
                     sign(index);
                     break;
-
                 case(i_1):
                     var content = {serverType: "Mark", actID: postIndex};
                     var xmlhttp = GetXMLHTTPRequest();
@@ -1014,15 +1000,10 @@
                             else
                                 console.log(json.error);
                         }
-<<<<<<< HEAD
                     };
-=======
-                    }
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
                     break;
             }
         };
-
 
         i_1.className = "fa fa-star";
         i_2.className = "fa fa-pencil-square-o";
@@ -1055,6 +1036,7 @@
 
         return a;
     }
+
 
     function showCal() {
         function is_leap(year) {

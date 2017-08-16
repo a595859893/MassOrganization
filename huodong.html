@@ -18,27 +18,18 @@
             font-family: "Lato", sans-serif;
             overflow-x: hidden;
         }
-
-<<<<<<< HEAD
-        .fa.fa-pencil-square-o{
-=======
         .fa .fa-pencil-square-o {
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
             float: right;
             font-size: 20px;
         }
-
         .weui-media-box__desc {
             line-height: 1.6
         }
-<<<<<<< HEAD
         .weui-media-box_appmsg .weui-media-box__hd {
             width: 70px;
             height: 116px;
             line-height: 0;
         }
-=======
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
     </style>
 </head>
 <body id="activity">
@@ -49,13 +40,9 @@
         <!--头部筛选栏-->
         <div id="top">
 
-            <!--<div class="navtop">-->
-<<<<<<< HEAD
             <button class="accordion" style="text-align: right" onclick="display()"> 筛选 &nbsp;<i class="fa fa-list-ul" style="font-size:15px;color: black;"></i>
-=======
-            <button class="accordion" style="text-align: right" onclick="display()"> 筛选 &nbsp;<i class="fa fa-list-ul"
-                                                                                                 style="font-size:15px;color: black;"></i>
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
+            </button>
+            <button class="accordion" style="text-align: right" onclick="display()"> 筛选 &nbsp;<i class="fa fa-list-ul" style="font-size:15px;color: black;"></i>
             </button>
             <div class="panel" id="panel" style="position: absolute;z-index: 999;">
                 <p>&nbsp;校区</p>
@@ -259,11 +246,11 @@
                     console.log(json.error);
             }
         }
-<<<<<<< HEAD
+
     };
-=======
-    }
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
+
+
+
 
     function getActivity(type) {
         document.getElementById("actlist").innerHTML = "";
@@ -288,7 +275,7 @@
             var card = document.getElementById("actlist");
             for (var i = 0; i < json.length; i++) {
                 card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location,
-                    json[i].holdtime, json[i].time, json[i].UID, json[i].json, json[i].logo, json[i].mark));
+                    json[i].holdtime, json[i].organizer, json[i].UID, json[i].json, json[i].logo, json[i].mark));
             }
         } else {
             console.log(json.error);
@@ -296,7 +283,7 @@
     }
 
     //    把发布时间换成主办方
-    function createActivity(title, content, place, holdtime, time, index, labels, logo, mark) {
+    function createActivity(title, content, place, holdtime, organizer, index, labels, logo, mark) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var img = document.createElement("img");
@@ -346,11 +333,7 @@
                             else
                                 console.log(json.error);
                         }
-<<<<<<< HEAD
                     };
-=======
-                    }
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
                     break;
             }
         };
@@ -369,7 +352,7 @@
         p_1.className = p_2.className = p_3.className = p_4.className = "weui-media-box__desc";
         p_1.innerText = "时间" + "" + ":" + holdtime;
         p_2.innerText = "地点" + "" + ":" + place;
-        p_3.innerText = "主办方" + "" + ":" + time;
+        p_3.innerText = "主办方" + "" + ":" + organizer;
         p_4.innerText = "简介" + "" + ":" + content;
 
         div_1.appendChild(img);
