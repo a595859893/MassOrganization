@@ -304,10 +304,6 @@
         <article class="main">
             <button style="border-top:0.01px solid rgba(19,104,50,0.6) ;" onclick="document.getElementById('table_1').style.display='block';document.getElementById('main_1').style.display='none'"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i> 活动管理</button>
 
-            <button style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i>
-                活动管理<a href="表格.html"></a></button>
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
-
             <button onclick="document.getElementById('id02').style.display='block';document.getElementById('main_1').style.display='none'">
                 <i class="fa fa-edit" style="font-size:18px;color: #136832;"></i> 发布活动
             </button>
@@ -316,7 +312,6 @@
                 <i class="fa fa-edit" style="font-size:18px;color: #136832;"></i> 发布招新
             </button>
 
-<<<<<<< HEAD
             <button class="accordion"><i class="fa fa-address-book-o" style="font-size:18px;color: #136832;"></i> 社团主页管理</button>
             <div class="panel">
                 <a class="weui-cell weui-cell_access">
@@ -332,11 +327,6 @@
                     <div class="weui-cell__ft"></div>
                 </a>
             </div>
-=======
-            <button onclick="document.getElementById('id04').style.display='block';document.getElementById('main_1').style.display='none'">
-                <i class="fa fa-address-book-o" style="font-size:18px;color: #136832;"></i> 社团主页管理
-            </button>
->>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
         </article>
     </div>
 
@@ -483,28 +473,25 @@
             <div class="weui-cells__title">编辑基本信息</div>
             <div class="weui-cells weui-cells_form">
                 <div class="weui-cell">
-                    <div class="weui-cell__hd"><label for="" class="weui-label">社团名字</label></div>
+                    <div class="weui-cell__hd"><label for="MASS_name" class="weui-label">社团名字</label></div>
                     <div class="weui-cell__bd">
                         <input class="weui-input" type="text" id="MASS_name"/>
                     </div>
                 </div>
                 <div class="weui-cell">
-                    <div class="weui-cell__hd"><label for="" class="weui-label">社团负责人</label></div>
+                    <div class="weui-cell__hd"><label for="MASS_head" class="weui-label">社团负责人</label></div>
                     <div class="weui-cell__bd">
                         <input class="weui-input" type="text" id="MASS_head"/>
                     </div>
                 </div>
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label">社团logo</label></div>
-                    <img id="MASS_logo" style="width:150px;height:150px"><br>
                     <div class="weui-cell__bd">
-                        <button type="button" onclick="document.getElementById('MASS_logoInput').click();">点击上传图片
-                        </button>
-                        <input class="weui-input" type="file" style="display:none" accept="image/*"
-                               id="MASS_logoInput"/>
+                        <button type="button" onclick="document.getElementById('MASS_logoInput').click();" style="width: 60%">点击上传图片</button>
+            <img id="MASS_logo" style="width:150px;height:150px">
+                        <input class="weui-input" type="file" style="display:none" accept="image/*" id="MASS_logoInput"/>
                     </div>
                 </div>
-
 
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label">社团简介</label></div>
@@ -513,16 +500,13 @@
                         <div class="weui-textarea-counter"><span>0</span>/200</div>
                     </div>
                 </div>
-
             </div>
             <label for="weuiAgree" class="weui-agree">
                 <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
                 <span class="weui-agree__text">阅读并同意<a href="javascript:void(0);">《相关条款》</a></span>
             </label>
             <div class="weui-btn-area">
-                <button type="button"
-                        onclick="document.getElementById('id04').style.display='none';document.getElementById('main_1').style.display='block'"
-                        class="cancelbtn">取消
+                <button type="button" onclick="document.getElementById('id04').style.display='none';document.getElementById('main_1').style.display='block'" class="cancelbtn">取消
                 </button>
                 <button type="submit" class="signupbtn">提交</button>
             </div>
@@ -841,7 +825,6 @@
             document.getElementById('id01').style.display = 'none';
             document.getElementById("user_name").innerText = info.name + "(UID:" + info.UID + ")";
 //            document.getElementById("user_intro").innerText = info.intro;
-            document.getElementById("user_intro").innerText = info.intro;
             document.getElementById("footer").style.display = 'none';
             document.getElementById("myself").onclick = function (event) {
                 tabNav(event, 'page4')
