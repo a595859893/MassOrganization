@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
     <script src="iconfont.js"></script>
     <link rel="stylesheet" href="css.css">
+    <style>
+        .fa.fa-pencil-square-o{
+            float: right;
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
 
@@ -72,7 +78,7 @@
                         社团主页
                     </p>
                 </a>
-                <a href="stzyz.html" class="weui-grid">
+                <a href="stzx.html" class="weui-grid">
                     <div class="weui-grid__icon">
                         <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-zhaoxin-"></use>
@@ -172,16 +178,15 @@
 <div id="page3" class="page">
     <div id="main">
         <header>
-            <a href="" class="weui-media-box weui-media-box_appmsg">
+            <div class="weui-media-box weui-media-box_appmsg">
                 <div class="weui-media-box__hd">
-                    <img class="weui-media-box__thumb" src="" alt="">
+                    <img class="weui-media-box__thumb" style="  border-radius: 50%;" src="" alt="">
                 </div>
                 <div class="weui-media-box__bd">
                     <h4 class="weui-media-box__title">名字</h4>
-                    <p class="weui-media-box__desc">个人简介</p>
+                    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">社团管理者登陆</button>
                 </div>
-            </a>
-            <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">社团管理者登陆</button>
+            </div>
         </header>
         <br>
         <!--通过下拉菜单查看-->
@@ -289,17 +294,21 @@
                 </div>
                 <div class="weui-media-box__bd">
                     <h4 class="weui-media-box__title" id="user_name">社团名字</h4>
-                    <p class="weui-media-box__desc" id="user_intro">内容</p>
+                    <!--<p class="weui-media-box__desc" id="user_intro">内容</p>-->
+                    <button style="width:auto;background-color: #fff;" onclick="logout()">退出</button>
                 </div>
             </a>
-            <button style="width:auto;background-color: #fff;" onclick="logout()">退出</button>
         </header>
 
         <br>
         <article class="main">
+<<<<<<< HEAD
+            <button style="border-top:0.01px solid rgba(19,104,50,0.6) ;" onclick="document.getElementById('table_1').style.display='block';document.getElementById('main_1').style.display='none'"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i> 活动管理</button>
+=======
             <button style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard"
                                                                              style="font-size:18px;color: #136832;"></i>
                 活动管理<a href="表格.html"></a></button>
+>>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
 
             <button onclick="document.getElementById('id02').style.display='block';document.getElementById('main_1').style.display='none'">
                 <i class="fa fa-edit" style="font-size:18px;color: #136832;"></i> 发布活动
@@ -309,11 +318,65 @@
                 <i class="fa fa-edit" style="font-size:18px;color: #136832;"></i> 发布招新
             </button>
 
+<<<<<<< HEAD
+            <button class="accordion"><i class="fa fa-address-book-o" style="font-size:18px;color: #136832;"></i> 社团主页管理</button>
+            <div class="panel">
+                <a class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd">
+                        <p>编辑社团日志</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+                <a class="weui-cell weui-cell_access" onclick="document.getElementById('id04').style.display='block';document.getElementById('main_1').style.display='none'">
+                    <div class="weui-cell__bd">
+                        <p>编辑社团信息</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+            </div>
+=======
             <button onclick="document.getElementById('id04').style.display='block';document.getElementById('main_1').style.display='none'">
                 <i class="fa fa-address-book-o" style="font-size:18px;color: #136832;"></i> 社团主页管理
             </button>
+>>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
         </article>
     </div>
+
+    <!--活动管理表格-->
+    <div  id="table_1" style="display: none">
+    <table  style="">
+        <thead>
+        <tr>
+            <th><input type="checkbox" id="all" onclick="all()"></th>
+            <th>姓名</th>
+            <th>学号</th>
+            <th>学院</th>
+            <th>手机</th>
+            <th>QQ</th>
+            <th>备注</th>
+        </tr>
+        </thead>
+
+        <tbody id="tbody">
+        </tbody>
+
+    </table>
+    <div class="weui-cells__title">向报名者发送消息</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                <div class="weui-textarea-counter"><span>0</span>/200</div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-btn-area">
+        <button class="weui-btn weui-btn_plain-primary " style="width: 45%;float: left" onclick="document.getElementById('table_1').style.display='none';document.getElementById('main_1').style.display='block'">返回</button>
+        <button class="weui-btn weui-btn_plain-primary " style="width: 50%;float: right;margin-top: 0">确认并发送</button>
+    </div>
+
+    </div>
+
     <!--活动发布表单-->
     <div id="id02" class="modal">
         <form class="modal-content animate" id="ACT_form" action=" ">
@@ -409,9 +472,7 @@
                 <input type="url" placeholder="复制推送链接至此处" id="NEW_link" required>
 
                 <div class="clearfix">
-                    <button type="button"
-                            onclick="document.getElementById('id03').style.display='none';document.getElementById('main_1').style.display='block'"
-                            class="cancelbtn">取消
+                    <button type="button" onclick="document.getElementById('id03').style.display='none';document.getElementById('main_1').style.display='block'" class="cancelbtn">取消
                     </button>
                     <button type="submit" class="signupbtn">提交</button>
                 </div>
@@ -521,7 +582,11 @@
         学号: "",
         学院: "",
         手机: "",
+<<<<<<< HEAD
+        QQ  : "",
+=======
         QQ微信: "",
+>>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
         备注: ""
     };
     for (var i in ne) {
@@ -531,7 +596,7 @@
 
     var slideIndex = 1;
     showSlides(slideIndex);
-    //    第三页下拉菜单
+    //    下拉菜单
     var acc = document.getElementsByClassName("accordion");
     for (var i = 0; i < acc.length; i++) {
         acc[i].onclick = function () {
@@ -674,7 +739,11 @@
                 console.log(json);
                 if (json.success) {
                     document.getElementById('id04').style.display = 'none';
+<<<<<<< HEAD
+                    document.getElementById('main_1').style.display = 'block';
+=======
                     document.getElementById('main_1').style.display = 'block'
+>>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
 
                     document.getElementById("user_name").innerText = content.name + "(UID:" + info.UID + ")";
                     document.getElementById("user_intro").innerText = content.desc;
@@ -781,7 +850,11 @@
             uid = info.UID;
             document.getElementById('id01').style.display = 'none';
             document.getElementById("user_name").innerText = info.name + "(UID:" + info.UID + ")";
+<<<<<<< HEAD
+//            document.getElementById("user_intro").innerText = info.intro;
+=======
             document.getElementById("user_intro").innerText = info.intro;
+>>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
             document.getElementById("footer").style.display = 'none';
             document.getElementById("myself").onclick = function (event) {
                 tabNav(event, 'page4')
@@ -941,7 +1014,11 @@
                             else
                                 console.log(json.error);
                         }
+<<<<<<< HEAD
+                    };
+=======
                     }
+>>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
                     break;
             }
         };
@@ -1057,6 +1134,49 @@
             };
         }
     }
+
+    function table(xml) {
+        var i;
+        var xmlDoc = xml.responseXML;
+        var table = "<tr><td>"+ "<input type='checkbox'>" + "</td><td>" +
+                "</td><td>"+ "</td><td>"+
+                "</td><td>"+ "</td><td>"+
+                "</td><td>"+ "</td></tr>";
+        var x = xmlDoc.getElementsByTagName("form");
+        for (i = 0; i <x.length; i++) {
+            table += "<tr><td>" +
+                    "<input type='checkbox'>" +
+                    "</td><td>" +
+                    x[i].name +
+                    "</td><td>" +
+                    x[i].number +
+                    "</td><td>" +
+                    x[i].institute +
+                    "</td><td>" +
+                    x[i].telephone +
+                    "</td><td>" +
+                    x[i].weichat +
+                    "</td><td>" +
+                    x[i].remarks +
+                    "</td></tr>";
+        }
+        document.getElementById("tbody").appendChild(table);
+    }
+
+    function all(){
+        var tbody = document.getElementById("tbody");
+        var checkBox = tbody.getElementsByTagName("input");
+        var all = document.getElementById("all");
+        var i = 0 ;
+        if(all.checked){
+            for(;i < checkBox.length;i++){
+                checkBox[i].checked = true;}
+        }else {
+            for(;i < checkBox.length;i++){
+                checkBox[i].checked = false;}
+        }
+    }
+
 </script>
 <script type="text/javascript">
     !function () {

@@ -19,7 +19,11 @@
             overflow-x: hidden;
         }
 
+<<<<<<< HEAD
+        .fa.fa-pencil-square-o{
+=======
         .fa .fa-pencil-square-o {
+>>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
             float: right;
             font-size: 20px;
         }
@@ -27,6 +31,14 @@
         .weui-media-box__desc {
             line-height: 1.6
         }
+<<<<<<< HEAD
+        .weui-media-box_appmsg .weui-media-box__hd {
+            width: 70px;
+            height: 116px;
+            line-height: 0;
+        }
+=======
+>>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
     </style>
 </head>
 <body id="activity">
@@ -38,8 +50,12 @@
         <div id="top">
 
             <!--<div class="navtop">-->
+<<<<<<< HEAD
+            <button class="accordion" style="text-align: right" onclick="display()"> 筛选 &nbsp;<i class="fa fa-list-ul" style="font-size:15px;color: black;"></i>
+=======
             <button class="accordion" style="text-align: right" onclick="display()"> 筛选 &nbsp;<i class="fa fa-list-ul"
                                                                                                  style="font-size:15px;color: black;"></i>
+>>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
             </button>
             <div class="panel" id="panel" style="position: absolute;z-index: 999;">
                 <p>&nbsp;校区</p>
@@ -110,7 +126,7 @@
     </section>
 
     <!--公告栏-->
-    <div class="weui-cells" style="position: absolute;width: 100%;top: 165px;">
+    <div class="weui-cells" style="width: 100%;">
         <a class="weui-cell weui-cell_access" onclick="document.getElementById('dialog_1').style.display='block'">
             <div class="weui-cell__bd">
                 <p>活动发布流程</p>
@@ -123,7 +139,7 @@
         <div class="weui-mask"></div>
         <div class="weui-dialog">
             <div class="weui-dialog__hd"><strong class="weui-dialog__title">发布流程</strong></div>
-            <div class="weui-dialog__bd">社团管理者登陆 &#8594 发布活动</div>
+            <div class="weui-dialog__bd">点击“我”&#8594 社团管理者登陆 &#8594 发布活动</div>
             <div class="weui-dialog__ft">
                 <a href="#" class="weui-dialog__btn weui-dialog__btn_primary"
                    onclick="document.getElementById('dialog_1').style.display='none'">确定</a>
@@ -131,7 +147,11 @@
         </div>
     </div>
 
+<<<<<<< HEAD
+    <br>
+=======
     <br><br><br>
+>>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
     <article>
         <div class="weui-panel weui-panel_access">
             <div class="weui-panel__bd" id="actlist">
@@ -239,7 +259,11 @@
                     console.log(json.error);
             }
         }
+<<<<<<< HEAD
+    };
+=======
     }
+>>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
 
     function getActivity(type) {
         document.getElementById("actlist").innerHTML = "";
@@ -295,8 +319,8 @@
         }
 
         img.src = decodeURIComponent(logo);
-        img.style.width = "150px";
-        img.style.height = "150px";
+        img.style.width = "70px";
+        img.style.height = "110px";
 //        记得改尺寸
 
         a.className = "weui-media-box weui-media-box_appmsg";
@@ -322,7 +346,11 @@
                             else
                                 console.log(json.error);
                         }
+<<<<<<< HEAD
+                    };
+=======
                     }
+>>>>>>> 77c3ccdb536af1b5e187c9dc707ae365b639b31a
                     break;
             }
         };

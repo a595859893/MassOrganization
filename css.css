@@ -243,7 +243,6 @@
         }
 
         #page3 #main header button,#page4 header button{
-            margin-left:87px;
             border: 0.01px solid rgba(19,104,50,0.6);
             padding: 8px 6px;
             border-radius:3px;
@@ -266,7 +265,7 @@
         #page3 #main button.accordion.active:after {
             content: "\25B2";
         }
-        #page3 #main div.panel,#activity #top div.panel{
+        #page3 #main div.panel,#page4 div.panel,#activity #top div.panel{
             padding: 0 18px;
             background-color: #fff;
             max-height: 0;
@@ -372,6 +371,24 @@
             margin: 1% auto 5% auto;
         }
 
+        #page4 #table_1{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        #page4 #table_1 td,#page4 #table_1 th{
+            border:1px solid  #136832;
+            padding:3px 7px 2px 7px;
+        }
+
+        #page4 #table_1 th{
+            font-size:1.1em;
+            text-align:left;
+            padding-top:5px;
+            padding-bottom:4px;
+            background-color: #136832;
+            color:#ffffff;
+        }
 
         #id02 .clearfix::after {
             content: "";
@@ -394,23 +411,7 @@
             position: fixed;
             bottom: 0;
         }
-        /*#activity .scoll {*/
-            /*position: fixed;*/
-            /*right: 0;*/
-            /*top: 80%;*/
-            /*z-index: 2;*/
-            /*background-color: #999999;*/
-            /*height: 4em;*/
-            /*width: 4em;*/
-            /*border-radius: 50%;*/
-            /*text-align: center;*/
-            /*line-height: 4em;*/
-        /*}*/
 
-        /*#activity .scoll > a {*/
-            /*color: #fff;*/
-            /*font-size: 3em;*/
-        /*}*/
         #activity #top {
             /*display: flex;*/
             width: 100%;
@@ -449,9 +450,7 @@
             position: relative;
             /*top: 37px;*/
         }
-        /*#activity .talk .slideshow-container {*/
-            /*height: 80%;*/
-        /*}*/
+
         #activity article span.star {
             color: #cfcfcf;
             cursor: pointer;
@@ -467,5 +466,4 @@
         }
         #footer .weui-bar__item_on i,#footer .weui-bar__item_on p{
             color: #136832;
-            /*fill:#136832 ;*/
         }

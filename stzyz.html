@@ -239,18 +239,16 @@
     <!--社团招新栏-->
     <br>
     <div class="weui-panel weui-panel_access">
-        <div class="weui-panel__hd">招新 &nbsp;<span class="weui-badge">new</span></div>
+        <div class="weui-panel__hd">招新 &nbsp;</div>
         <div class="weui-panel__bd">
             <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
                 <div class="weui-media-box__hd">
                     <img class="" alt="">
                 </div>
                 <div class="weui-media-box__bd">
-                    <h4 class="weui-media-box__title"> 标题一 &nbsp;<i class="fa fa-star"></i><i
-                            class="fa fa-calendar-plus-o" style="float: right;font-size: 20px;"></i></h4>
+                    <h4 class="weui-media-box__title"> 标题一 &nbsp;<i class="fa fa-star" onclick="color(event)"></i><i class="fa fa-calendar-plus-o" style="float: right;font-size: 20px;" ></i></h4>
                     <p class="weui-media-box__desc">时间</p>
                     <p class="weui-media-box__desc">地点</p>
-                    <p class="weui-media-box__desc">主办方</p>
                     <p class="weui-media-box__desc">简介</p>
                 </div>
             </a>
@@ -263,6 +261,38 @@
     <div id="mass_diary" class="weui-panel weui-panel_access">
         <div class="weui-panel__hd">社团日志 <span class="weui-badge">&#9733</span></div>
 
+    <div class="weui-panel weui-panel_access" >
+        <div class="weui-panel__hd">社团日志 &nbsp;<i class="fa fa-pencil-square" style="font-size:15px;color:black"></i></div>
+        <div class="weui-panel__bd">
+            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg" style="padding-bottom: 0">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" alt="" src="" style="border-radius:50%;">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">标题</h4>
+                    <p class="weui-media-box__desc">发布时间</p>
+                </div>
+            </a>
+            <article class="weui-article" style="margin-left:72px;padding: 0 15px">
+                <p>内容</p>
+                <p>
+                <div class="weui-uploader">
+                    <div class="weui-uploader__bd">
+                        <ul class="weui-uploader__files">
+                            <li class="weui-uploader__file" style="background-image:url(# )"></li>
+                            <li class="weui-uploader__file" style="background-image:url(# )"></li>
+                            <li class="weui-uploader__file" style="background-image:url(# )"></li>
+                        </ul>
+                    </div>
+                </div>
+                </p>
+            </article>
+        </div>
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:"><i class="fa fa-commenting-o" onclick="color(event)"></i> 评论</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:"><i class="fa fa-heart" onclick="color(event)"></i> 点赞</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:"><i class="fa fa-share-alt" ></i> 分享</a>
+        </div>
     </div>
 
 </article>
@@ -273,7 +303,7 @@
         <!--<p class="weui-footer__links">-->
         <!--<a href="javascript:void(0);" class="weui-footer__link">底部链接文本</a>-->
         <!--</p>-->
-        <p class="weui-footer__text">这里放二维码</p>
+        <p class="weui-footer__text">社团二维码</p>
     </div>
 </div>
 
