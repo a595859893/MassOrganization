@@ -314,7 +314,7 @@
 
             <button class="accordion"><i class="fa fa-address-book-o" style="font-size:18px;color: #136832;"></i> 社团主页管理</button>
             <div class="panel">
-                <a class="weui-cell weui-cell_access">
+                <a class="weui-cell weui-cell_access" onclick="document.getElementById('dairy').style.display='block';document.getElementById('main_1').style.display='none'">
                     <div class="weui-cell__bd">
                         <p>编辑社团日志</p>
                     </div>
@@ -365,6 +365,57 @@
 
     </div>
 
+    <!--社团日志-->
+    <div id="dairy" class="container" onclick="check()" style="display: none;margin: 30px">
+        <b>日志类型</b>
+        <form style="margin: 15px 15px 35px ">
+            <label for="option-one" >
+                <input id="option-one" type="radio" name=" " value="option1" >
+                图文说说
+            </label>
+            <br>
+            <label for="option-two" class="pure-radio">
+                <input id="option-two" type="radio" name=" " value="option2" >
+                推送小记
+            </label>
+        </form>
+
+        <form action="" id="form_1" style="display: none;margin-bottom:35px ;">
+            <label>
+                <b>说说你想表达的话~</b>
+                <input  type="text" name=" " value=" " >
+            </label>
+            <br>
+            <label>
+                <b>上传图片</b>
+                <button onclick="document.getElementById('input_1').click();">选择图片</button>
+                <input  type="file" name=" " value=" " accept="image/*" id="input_1" style="display: none">
+                <img src="" alt="">
+            </label>
+        </form>
+        <form action="" id="form_2" style="display: none;margin-bottom:35px ;">
+            <label >
+                <b>推送标题</b>
+                <input  type="text" name=" "  value=" " >
+            </label>
+            <br>
+            <label >
+                <b>推送图片</b>
+                <button onclick="document.getElementById('input_2').click();">选择图片</button>
+                <input  type="file" name=" " accept="image/*" value=" " id="input_2" style="display: none">
+                <img src="" alt="">
+            </label>
+            <br>
+            <label >
+                <b>请务必填写正确的推送链接~</b>
+                <input  type="text" name=" " value=" " >
+            </label>
+        </form>
+
+        <button onclick="document.getElementById('dairy').style.display='none';document.getElementById('main_1').style.display='block'">返回</button>
+        <button >提交</button>
+    </div>
+
     <!--活动发布表单-->
     <div id="id02" class="modal">
         <form class="modal-content animate" id="ACT_form" action=" ">
@@ -408,8 +459,8 @@
                 <input type="text" placeholder="校团工委" id="ACT_organizer" required>
 
                 <label><b>上传Logo</b></label>
-                <img id="ACT_logo" style="width:150px;height:150px"><br>
                 <button type="button" onclick="document.getElementById('ACT_input').click();">点击上传图片</button>
+                <img id="ACT_logo" style="width:150px;height:150px"><br>
                 <input type="file" style="display:none" accept="image/*" id="ACT_input">
                 <br>
                 <input type="radio" name="formChoose" value="default" checked> <b>使用默认报名表</b>
@@ -1142,6 +1193,16 @@
         }
     }
 
+    function check(){
+        if(document.getElementById('option-one').checked){
+            document.getElementById('form_1').style.display='block';
+            document.getElementById('form_2').style.display='none';
+        }
+        if(document.getElementById('option-two').checked){
+            document.getElementById('form_2').style.display='block';
+            document.getElementById('form_1').style.display='none';
+        }
+    }
 </script>
 <script type="text/javascript">
     !function () {
