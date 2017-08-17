@@ -276,7 +276,7 @@
             content: '\25BA';
         }
 
-#id02 input[type=text],#id02 input[type=number],#id02 input[type=url],#id02 select,#id03 input[type=text],#id03 input[type=number],#id03 input[type=url],#id03 select,#myDIV input,#dairy input[type=text],#dairy input[type=url]{
+#id02 input[type=text],#id02 input[type=number],#id02 input[type=url],#id02 select,#id03 input[type=text],#id03 input[type=number],#id03 input[type=url],#id03 select,#myDIV input,#dairy input[type=text],#dairy input[type=url],#id04 input{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -285,7 +285,7 @@
     box-sizing: border-box;
 }
 
-#id02 label,#id03 label,#myDIV label,#dairy label{display: block}
+#id02 label,#id03 label,#myDIV label,#dairy label,#id04 label{display: block}
 
 #id02 input::-webkit-input-placeholder,#id03 input::-webkit-input-placeholder{
     font-size:10px;
@@ -449,6 +449,9 @@
             width:100%;
             position: relative;
             /*top: 37px;*/
+        }
+        #activity .talk .active, .dot:hover {
+            background-color: #717171;
         }
 
         #activity article span.star {

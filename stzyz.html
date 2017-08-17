@@ -111,8 +111,8 @@
 
         p {
             display: block;
-            -webkit-margin-before: 1em;
-            -webkit-margin-after: 1em;
+            -webkit-margin-before: 0.5em;
+            -webkit-margin-after: 0.5em;
             -webkit-margin-start: 0px;
             -webkit-margin-end: 0px;
         }
@@ -155,6 +155,20 @@
 </header>
 
 <article>
+
+    <!--社团简介-->
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__hd">简介</div>
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_text">
+                <!--<h4 class="weui-media-box__title">标题一</h4>-->
+                <p class="weui-media-box__desc">我们是……</p>
+            </div>
+        </div>
+    </div>
+
+
+
     <!--社团招新栏-->
     <br>
     <div class="weui-panel weui-panel_access">
@@ -270,7 +284,7 @@
           h4.innerHTML = title + "<i class='fa fa-thumbs-o-up' style='float: right'> "+ 3 +"</i> ";
           p_1.innerText = time;
           p_2.innerText = content;
-          div_1.style.paddingTop=0+'px';
+//          div_1.style.paddingTop=0+'px';
           logo_1.src = logo;
           logo_1.style.width = 50+"px";
 

@@ -302,7 +302,21 @@
 
         <br>
         <article class="main">
-            <button style="border-top:0.01px solid rgba(19,104,50,0.6) ;" onclick="document.getElementById('table_1').style.display='block';document.getElementById('main_1').style.display='none'"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i> 活动管理</button>
+            <button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;" ><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i> 活动管理</button>
+            <div class="panel">
+                <a class="weui-cell weui-cell_access" onclick="document.getElementById('table_1').style.display='block';document.getElementById('main_1').style.display='none'">
+                    <div class="weui-cell__bd">
+                        <p>活动A</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+                <a class="weui-cell weui-cell_access" onclick="document.getElementById('table_1').style.display='block';document.getElementById('main_1').style.display='none'">
+                    <div class="weui-cell__bd">
+                        <p>活动B</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+            </div>
 
             <button onclick="document.getElementById('id02').style.display='block';document.getElementById('main_1').style.display='none'">
                 <i class="fa fa-edit" style="font-size:18px;color: #136832;"></i> 发布活动
@@ -463,12 +477,12 @@
                 <img id="ACT_logo" style="width:150px;height:150px"><br>
                 <input type="file" style="display:none" accept="image/*" id="ACT_input">
                 <br>
-                <input type="radio" name="formChoose" value="default" checked> <b>使用默认报名表</b>
+                <input type="radio" name="formChoose" value="default" checked> <b>使用默认报名表</b> <button>点此处预览</button>
                 &nbsp;
                 <br>
                 <input type="radio" name="formChoose" value="make"
                        onclick="document.getElementById('myDIV').style.display='block';document.getElementById('id02').style.display='none';">
-                <b>自定义报名表</b>
+                <b>自定义报名表</b> &nbsp;<button>点此处预览</button>
                 &nbsp;
                 <br>
                 <input type="radio" name="formChoose" value="none"> <b>不使用报名表</b>
@@ -528,6 +542,29 @@
                     <div class="weui-cell__bd">
                         <input class="weui-input" type="text" id="MASS_name"/>
                     </div>
+                </div>
+                <div class="weui-cell">
+                <div class="weui-cells__title">社团类型</div>
+                <div class="weui-cells weui-cells_checkbox">
+                    <label class="weui-cell weui-check__label" for="type1">
+                        <!--<div class="weui-cell__hd">-->
+                            <input type="radio" class="weui-check" name="radio1" id="type1" >
+                            <i class="weui-icon-checked"></i>
+                        <!--</div>-->
+                        <!--<div class="weui-cell__bd">-->
+                            <!--<p></p>-->兴趣社团
+                        <!--</div>-->
+                    </label>
+                    <label class="weui-cell weui-check__label" for="type2">
+                        <!--<div class="weui-cell__hd">-->
+                            <input type="radio" name="radio1" class="weui-check" id="type2">
+                            <i class="weui-icon-checked"></i>
+                        <!--</div>-->
+                        <!--<div class="weui-cell__bd">-->
+                            学生组织
+                        <!--</div>-->
+                    </label>
+                </div>
                 </div>
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label for="MASS_head" class="weui-label">社团负责人</label></div>
@@ -623,8 +660,7 @@
         defaultjson[i] = ne[i];
     }
 
-    var slideIndex = 1;
-    showSlides(slideIndex);
+
     //    下拉菜单
     var acc = document.getElementsByClassName("accordion");
     for (var i = 0; i < acc.length; i++) {
@@ -925,18 +961,28 @@
     }
 
     //    第一页顶部幻灯片
-    function showSlides() {
+    var slideIndex = 1;
+    showSlides(slideIndex);
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+    function showSlides(n) {
         var i;
         var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
         }
-        slideIndex++;
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
         if (slideIndex > slides.length) {
             slideIndex = 1
         }
         slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex-1].className += " active";
         setTimeout(showSlides, 8000);
+        slideIndex++;
     }
 
     //    第三页侧拉菜单--显示日程
@@ -1131,15 +1177,15 @@
 
     function submit(condition) {
         document.getElementById('add').style.display = 'none';
+        var time_1 = document.getElementById('start').innerText;
+        var time_2 = document.getElementById('end').innerText;
+        console.log(time_1);
+        console.log(time_2);
+        if (time_1<time_2){
         if (condition) {
-//            target.innerHTML += "<span style='color:#db9979'> &#8226</span>";
-//            target.style.fontWeight = 'bolder';
             var thing = document.getElementById('thing').value;
-            var time_1 = document.getElementById('start').innerText;
-            var time_2 = document.getElementById('end').innerText;
             var li = document.createElement('li');
             var span = document.createElement('span');
-//            span.innerHTML = "<b>"+"\u00D7"+"</b>";
             span.innerHTML = '<i class="fa fa-calendar-minus-o" style="font-size:15px;position:absolute;right: 0;"></i>';
             li.innerHTML = time_1 + "&nbsp;~ &nbsp;" + time_2 + "&nbsp;&nbsp;" + "<br>" + thing;
             var ul = document.getElementById('ul');
@@ -1149,6 +1195,8 @@
                 this.parentElement.style.display = 'none';
             };
         }
+        }
+        else alert('请正确输入时间');
     }
 
     function table(xml) {
