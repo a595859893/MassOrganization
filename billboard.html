@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--全屏显示-->
+    <!--<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">-->
+    <meta name="viewport" content="width=375,initial-scale=0.84,user-scalable=0">
+    <!--引用weui框架做样式-->
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+        <style type="text/css">
+            .page,body {
+                background-color: #f8f8f8;
+            }
+            .zhongyang{
+                /*text-align: center;*/
+
+            }
+
+            .head{
+                /*position: relative;*/
+                /*left: 25%;*/
+                line-height: 1em;
+            }
+            .phbtop{
+                position: relative;
+                display: inline-block;
+                width: 100%;
+                height: 1.6em;
+                font-size: 1.5em;
+                line-height: 1.5em;
+            }
+
+            .phbtubiao{
+                position: absolute;
+               display: inline-block;
+                width: 1.3em;
+                height: 1.5em;
+                /*background-color: red;*/
+                top: 0.1em;
+                left: 7em;
+            }
+            .phbbiaoti{
+                display: inline-block;
+                position: absolute;
+                color: #696969;
+                left: 8em;
+                font-weight: 600;
+            }
+            .juzhong{
+                text-align: center;
+
+            }
+            .xuanxiang1{
+                font-size: 1.3em;
+            }
+            .fenlei{
+                text-align: center;
+                margin-top: 0.1em;
+            }
+            .phbxuanxiang2{
+                font-size:  1.2em;
+                line-height:0.9em;
+                color: #adadad;
+            }
+            span.xuanzhong{
+                color: #89c147;
+            }
+            .phbtiaokuang{
+                position: relative;
+                background-color: #fff;
+                overflow: hidden;
+                cursor: pointer;
+                width: 100%;
+                height:8em;
+                border-bottom: solid 0.01em #bebcbe;
+            }
+
+            .quangao{
+                position: absolute;
+                display: inline;
+                height:100%;
+                line-height: 3.4em;
+                left: 6em;
+                top:0.35em;
+            }
+            .phbbiaohao{
+                position: relative;
+                left: 0.5em;
+                top: -1em;
+                display: inline-block;
+                color: #524f52;
+                font-size: 1.8em;
+                font-weight: 600;
+            }
+            .phbhdbiaohao{
+                position: relative;
+                left: 0.5em;
+                top: -1.6em;
+                display: inline-block;
+                color: #524f52;
+                font-size: 1.8em;
+                font-weight: 600;
+            }
+            .phbyuan{
+                background-color: #e5e5e5;
+                width: 5.5em;
+                height:5.5em;
+                border-radius: 50%;
+                display: inline;
+               margin-left: 2em;
+                margin-top:1.25em;
+            }
+            .phbhaibao{
+                background-color: #e5e5e5;
+                width: 5.5em;
+                height:7em;
+                display: inline;
+                margin-left: 2em;
+                margin-top:0.5em;
+            }
+            .phbmingzi{
+                position: absolute;
+                top: 1.6em;
+                margin-left: 0.3em;
+                font-size: 1.6em;
+                color: #020202;
+                font-weight: 500;
+            }
+            .phbredu{
+                position: absolute;
+                font-size: 1.6em;
+                top: 1.6em;
+                right: 0.8em;
+                font-weight: 600;
+            }
+    </style>
+</head>
+<body>
+<div class="phbtop"><i class="phbtubiao fa fa-fire" style="color:red"></i><span class="phbbiaoti">排行榜</span></div>
+<div class="head juzhong">
+    <div class="weui-tab ">
+        <div class="weui-navbar">
+            <div   class="weui-navbar__item weui-bar__item_on ding" onclick="tabNav(event,'page1')">
+                <span class="xuanxiang1">学生活动</span>
+            </div>
+            <div id="weui-navbar__item" class="weui-navbar__item ding" onclick="tabNav(event,'page2')">
+                <span class="xuanxiang1">社团组织</span>
+            </div>
+        </div>
+        <div class="weui-tab__panel">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    <!--顶部选项卡-->
+    function tabNav(evt, tabName) {
+        var i,tab;
+        tab = document.getElementsByClassName("ding");
+        for (i = 0; i < tab.length; i++) {
+            tab[i].className = tab[i].className.replace(" weui-bar__item_on", "");
+        }
+        if (evt) evt.currentTarget.className += " weui-bar__item_on";
+    }
+
+</script>
+<script type="text/javascript">
+    <!--顶部次级选项卡-->
+    function xuanxiang0(evt, tabName1,tabName2) {
+        var i,ciji0;
+        ciji0 = document.getElementsByClassName("ciji0");
+        for (i = 0; i < ciji0.length; i++) {
+            ciji0[i].className = ciji0[i].className.replace("xuanzhong", " ");
+        }
+        document.getElementById(tabName1).style.display = "block";
+        document.getElementById(tabName2).style.display = "none";
+        if (evt) evt.currentTarget.className += " xuanzhong";
+    }
+</script>
+<div id="xiaoquxuanxiang"  class="fenlei">
+    <span class="phbxuanxiang2">校区</span>
+    <span class="phbxuanxiang2 ciji xuanzhong"  onclick="xuanxiang(event)">所有</span>
+    <span class="phbxuanxiang2 ciji"  onclick="xuanxiang(event)">东校区</span>
+    <span class="phbxuanxiang2 ciji"  onclick="xuanxiang(event)">南校区</span>
+    <span class="phbxuanxiang2 ciji"  onclick="xuanxiang(event)">北校区</span>
+    <span class="phbxuanxiang2 ciji"  onclick="xuanxiang(event)">珠海校区</span>
+</div>
+<script type="text/javascript">
+    <!--顶部次次级选项卡-->
+    function xuanxiang(evt, tabName) {
+        var i,ciji;
+        ciji = document.getElementsByClassName("ciji");
+        for (i = 0; i < ciji.length; i++) {
+            ciji[i].className = ciji[i].className.replace("xuanzhong", " ");
+        }
+        if (evt) evt.currentTarget.className += " xuanzhong";
+    }
+</script>
+<div class="content">
+    <ul>
+        <li class="phbtiaokuang"><span class="phbbiaohao">1</span><img class="phbyuan"><span class="phbmingzi">社团组织</span><span class="phbredu">500</span></li>
+        <li class="phbtiaokuang"><span class="phbhdbiaohao">1</span><img class="phbhaibao"><span class="phbmingzi">学生活动</span><span class="phbredu">30</span></li>
+</ul>
+    <!--<div class="weui-flex__item"><div class="huidi">weui</div></div>-->
+
+</div>
+<div class="bottom"></div>
+</body>
+</html>

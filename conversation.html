@@ -68,7 +68,7 @@
             width: 100%;
             height: 8em;
             text-align: center;
-            padding: 4em;
+            padding: 4em 0;
             display: block;
         }
 
@@ -257,7 +257,28 @@
             height: 5.4em;
             position: relative;
         }
-
+        .hqhtxjdh {
+            display: none;
+            background-color: #f0eaf4;
+            overflow: hidden;
+            border-radius: 2px;
+            cursor: pointer;
+            width: 100%;
+            height: 2.5em;
+            position:fixed;
+            bottom: 0;
+        }
+        .htsrfsk{
+            background-color: #f0eaf4;
+            position: absolute;
+            display: inline-block;
+            width: 80%;
+            height: 2.5em;
+            border-color: #0D0D0D;
+            border: thin;
+            word-wrap: break-word;
+            font-size: 1.6em;
+        }
         .baikuang {
             background-color: #5a5a5a;
             overflow: hidden;
@@ -294,6 +315,28 @@
             height: 80%;
             left: 33%;
             top: 0.65em;
+            border-color: #0D0D0D;
+            border: thin;
+            word-wrap: break-word;
+        }
+        .hqhtsr{
+            background-color: #f0eaf4;
+            position: absolute;
+            display: inline;
+            width: 55%;
+            height: 80%;
+            left: 33%;
+            top: 0.65em;
+            border-color: #0D0D0D;
+            border: thin;
+            word-wrap: break-word;
+        }
+        .htsr{
+            background-color: #f0eaf4;
+            position: absolute;
+            display: inline;
+            width: 80%;
+            height: 3em;
             border-color: #0D0D0D;
             border: thin;
             word-wrap: break-word;
@@ -340,6 +383,14 @@
             left: 93%;
             margin-right: 0.5em;
             bottom: -3.3em;
+            /*background-color: yellow;*/
+            display: inline-block;
+        }
+        .hphttjwz {
+            position: relative;
+                    left: 93%;
+            margin-top: 0.5em;
+            margin-right: 0.5em;
             /*background-color: yellow;*/
             display: inline-block;
         }
@@ -425,6 +476,21 @@
             height: 1.5em;
             border-radius: 50%;
         }
+        .hqxjht{
+            float: right;
+            text-align: center;
+            background-color: #111111;
+            margin-top: 0.1em;
+            color: whitesmoke;
+            line-height: 1.2em;
+            font-size: 1.2em;
+            width: 1.2em;
+            height: 1.2em;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            font-weight: 900;
+        }
 
         .hqjiahao {
             position: relative;
@@ -473,7 +539,7 @@
         <span id="conversation" class="hqxuanxiang2 hqxuanxiang1 ciji0 xuanzhong">话圈</span>
         <span id="debunk" class="hqxuanxiang2 ciji0">吐槽</span>
     </div>
-    <div class="hqxinjian"><span class="hqjiahao" onclick="hqxinjian()">+</span></div>
+    <div id="hqdingduanxinjian" class="hqxinjian" style="display: none"><span class="hqjiahao" onclick="hqxinjian()">+</span></div>
 </div>
 
 <script type="text/javascript">
@@ -488,6 +554,7 @@
             document.getElementById('hqxjdh').style.display = "none";
         }
     }
+
 
     function hqqh(evt, tabName) {
         var i, page, tab;
@@ -530,9 +597,9 @@
             </div>
         </i></div>
     <div>
-        <p class="htwenzi">热门话题 <span class="htwh">?</span></p>
-
+        <p class="htwenzi">热门话题 <span class="htwh">?</span><span class="hqxjht" onclick="hqxjht()">+</span></p>
     </div>
+
     <div class="rmht">
         <ul>
             <li class="rmhtxx"><span class="rmhtnr"><span class="rmhtbh">1 </span><span
@@ -542,7 +609,23 @@
         </ul>
     </div>
 </div>
-
+<!--新建发话窗口8.13到此-->
+    <div id="hqxjht" class="hqhtxjdh">
+        <textarea id="xinhuati" class="htsrfsk" style="color:#615f62;"placeholder="参与讨论"
+                  name="usrname"></textarea>
+        <i id="sendMain2" class="fa fa-send-o hphttjwz"></i>
+    </div>
+<script>
+    function hqxjht() {
+        newConversation = !newConversation;
+        if (newConversation) {
+            document.getElementById('hqxjht').style.display = "block";
+            document.getElementById('xinhuaquan').focus();
+        } else {
+            document.getElementById('hqxjht').style.display = "none";
+        }
+    }
+</script>
 <!--新建发话窗口-->
 <div class="hqncym" id="ncym" style="display: none">
     <div id="hqxjdh" class="hqxjdh hqzhongyang">
@@ -605,6 +688,7 @@
     }
     top_conversation.onclick = function () {
         document.getElementById("ncym").style.display = 'none';
+        document.getElementById("hqdingduanxinjian").style.display = 'none';
         document.getElementById("hqym").style.display = 'block';
         top_debunk.className = top_debunk.className.replace(" xuanzhong", "");
         top_conversation.className += " xuanzhong";
@@ -612,6 +696,7 @@
     top_debunk.onclick = function () {
         document.getElementById("hqym").style.display = 'none';
         document.getElementById("ncym").style.display = 'block';
+        document.getElementById("hqdingduanxinjian").style.display = 'block';
         top_conversation.className = top_conversation.className.replace(" xuanzhong", "");
         top_debunk.className += " xuanzhong";
     }
