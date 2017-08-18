@@ -415,7 +415,7 @@
             <br>
             <label >
                 <b>推送图片</b>
-                <button onclick="document.getElementById('input_2').click();">选择图片</button>
+                <button  onclick="document.getElementById('input_2').click();">选择图片</button>
                 <input  type="file" name=" " accept="image/*" value=" " id="input_2" style="display: none">
                 <img src="" alt="">
             </label>
@@ -426,7 +426,7 @@
             </label>
         </form>
 
-        <button onclick="document.getElementById('dairy').style.display='none';document.getElementById('main_1').style.display='block'">返回</button>
+        <button onclick="document.getElementById('dairy').style.display='none';document.getElementById('main_1').style.display='block'" class="cancelbtn">返回</button>
         <button >提交</button>
     </div>
 
@@ -473,16 +473,16 @@
                 <input type="text" placeholder="校团工委" id="ACT_organizer" required>
 
                 <label><b>上传Logo</b></label>
-                <button type="button" onclick="document.getElementById('ACT_input').click();">点击上传图片</button>
-                <img id="ACT_logo" style="width:150px;height:150px"><br>
-                <input type="file" style="display:none" accept="image/*" id="ACT_input">
+                <button type="button" onclick="document.getElementById('ACT_input').click();">点击上传图片</button><input type="file" style="display:none" accept="image/*" id="ACT_input">
                 <br>
-                <input type="radio" name="formChoose" value="default" checked> <b>使用默认报名表</b> <button>点此处预览</button>
+                <img id="ACT_logo" >
+                <br>
+                <input type="radio" name="formChoose" value="default" checked> <b>使用默认报名表</b> <button onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">点此处预览</button>
                 &nbsp;
                 <br>
                 <input type="radio" name="formChoose" value="make"
                        onclick="document.getElementById('myDIV').style.display='block';document.getElementById('id02').style.display='none';">
-                <b>自定义报名表</b> &nbsp;<button>点此处预览</button>
+                <b>自定义报名表~</b> <button onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">点此处预览</button>
                 &nbsp;
                 <br>
                 <input type="radio" name="formChoose" value="none"> <b>不使用报名表</b>
@@ -533,6 +533,7 @@
         </form>
     </div>
 
+    <!--社团信息编辑-->
     <div id="id04" class="modal">
         <form id="massConfig">
             <div class="weui-cells__title">编辑基本信息</div>
@@ -545,24 +546,16 @@
                 </div>
                 <div class="weui-cell">
                 <div class="weui-cells__title">社团类型</div>
-                <div class="weui-cells weui-cells_checkbox">
+                <div class="weui-cells weui-cells_checkbox" style="border: 0">
                     <label class="weui-cell weui-check__label" for="type1">
-                        <!--<div class="weui-cell__hd">-->
                             <input type="radio" class="weui-check" name="radio1" id="type1" >
                             <i class="weui-icon-checked"></i>
-                        <!--</div>-->
-                        <!--<div class="weui-cell__bd">-->
-                            <!--<p></p>-->兴趣社团
-                        <!--</div>-->
+                        兴趣社团
                     </label>
                     <label class="weui-cell weui-check__label" for="type2">
-                        <!--<div class="weui-cell__hd">-->
                             <input type="radio" name="radio1" class="weui-check" id="type2">
                             <i class="weui-icon-checked"></i>
-                        <!--</div>-->
-                        <!--<div class="weui-cell__bd">-->
                             学生组织
-                        <!--</div>-->
                     </label>
                 </div>
                 </div>
@@ -597,6 +590,22 @@
                 <button type="button" onclick="document.getElementById('id04').style.display='none';document.getElementById('main_1').style.display='block'" class="cancelbtn">取消
                 </button>
                 <button type="submit" class="signupbtn">提交</button>
+            </div>
+        </form>
+    </div>
+
+    <!--预览报名表-->
+    <div id="id05" class="modal">
+        <form class="modal-content animate"  action=" ">
+            <br> <b> &nbsp; 报名表预览 </b> <br>
+            <div class="container" id="custom">
+                <!--js添加-->
+            </div>
+            <div class="clearfix">
+                <button type="button"
+                        onclick="document.getElementById('id05').style.display='none';document.getElementById('id02').style.display='block'" class="cancelbtn">
+                    返回
+                </button>
             </div>
         </form>
     </div>
@@ -647,6 +656,7 @@
     var uid = -1;
     var listjson = {};
     var defaultjson = {};
+    var formStr = "";
     var ne = {
         姓名: "",
         学号: "",
@@ -658,8 +668,9 @@
     for (var i in ne) {
         newElement(i, ne[i]);
         defaultjson[i] = ne[i];
+        formStr += "<label><b>" + i + "</b></label>" + "<input name='" + i.value + "'>";
     }
-
+    document.getElementById("custom").innerHTML=formStr;
 
     //    下拉菜单
     var acc = document.getElementsByClassName("accordion");
@@ -821,14 +832,17 @@
 
         listjson = {};
         var list = document.getElementById("myUL").getElementsByTagName("input");
+        var formStr = "";
         for (var i = 0; i < list.length; i++) {
             if (list[i].name)
                 listjson[list[i].name] = list[i].value;
+                formStr += "<label><b>" + list[i].name + "</b></label>" + "<input name='" + list[i].value + "'>";
         }
-
+        document.getElementById("custom").innerHTML=formStr;
         document.getElementById('myDIV').style.display = 'none';
         document.getElementById('id02').style.display = 'block';
     };
+
     document.getElementById("ACT_input").onchange = function (event) {
         event = event || window.event;
         var file = event.target.files[0];
@@ -1006,7 +1020,7 @@
             alert("你需要写点描述");
     }
 
-    function newElement(value, type) {
+    function newElement(value) {
         var li = document.createElement("li");
         var label = document.createElement("label");
         var input = document.createElement("input");
@@ -1014,7 +1028,7 @@
         li.appendChild(label);
         li.appendChild(input);
         input.name = value;
-        input.value = type;
+//        input.value = type;
         document.getElementById("myUL").appendChild(li);
         document.getElementById("myInput").value = "";
 
@@ -1054,8 +1068,8 @@
         }
 
         img.src = decodeURIComponent(logo);
-        img.style.width = "150px";
-        img.style.height = "150px";
+        img.style.width = "70px";
+        img.style.height = "110px";
 //        记得改尺寸
 
         a.className = "weui-media-box weui-media-box_appmsg";

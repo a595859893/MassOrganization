@@ -149,7 +149,6 @@
             <div id="custom">
                 <!--JS代码切入点-->
             </div>
-            <!--<input type="checkbox" checked="checked">记住我-->
             <div class="clearfix">
                 <button type="button"
                         onclick="document.getElementById('id04').style.display='none';document.getElementById('main_2').style.display='block'"
@@ -349,7 +348,11 @@
         div_1.appendChild(img);
 
         h4.appendChild(i_1);
+
+        if(!formLabel.none){
         h4.appendChild(i_2);
+        }
+
         div_2.appendChild(h4);
         div_2.appendChild(p_1);
         div_2.appendChild(p_2);

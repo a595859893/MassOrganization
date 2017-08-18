@@ -276,7 +276,7 @@
             content: '\25BA';
         }
 
-#id02 input[type=text],#id02 input[type=number],#id02 input[type=url],#id02 select,#id03 input[type=text],#id03 input[type=number],#id03 input[type=url],#id03 select,#myDIV input,#dairy input[type=text],#dairy input[type=url],#id04 input{
+#id02 input[type=text],#id02 input[type=number],#id02 input[type=url],#id02 select,#id03 input[type=text],#id03 input[type=number],#id03 input[type=url],#id03 select,#myDIV input,#dairy input[type=text],#dairy input[type=url],#id04 input[type=text],#id05 input{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -285,14 +285,14 @@
     box-sizing: border-box;
 }
 
-#id02 label,#id03 label,#myDIV label,#dairy label,#id04 label{display: block}
+#id02 label,#id03 label,#myDIV label,#dairy label,#id04 label,#id05 label{display: block}
 
 #id02 input::-webkit-input-placeholder,#id03 input::-webkit-input-placeholder{
     font-size:10px;
     color: rgba(153, 153, 153, 0.4);
 }
 
-#id02 button,#id03 button,#myDIV button,#id04 button,#dairy button{
+#id02 button,#id03 button,#myDIV button,#id04 button,#dairy button,#id05 button{
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -302,14 +302,14 @@
     width: 40%;
 }
 
-#id02 .cancelbtn, #id03 .cancelbtn,#myDIV button.cancelbtn, #id04 .cancelbtn{
+#id02 .cancelbtn, #id03 .cancelbtn,#myDIV button.cancelbtn, #id04 .cancelbtn, #id05 .cancelbtn,#dairy .cancelbtn{
     padding: 14px 20px;
     background-color: #2b72bc;
 }
 
 #id02 .cancelbtn,.model .signupbtn {float:left;}
 
-#id02 .container,#id03 .container,#id04 .container{
+#id02 .container,#id03 .container,#id04 .container,#id05 .container{
     padding: 16px;
 }
         #page4 .modal ,#activity #id04{
@@ -323,16 +323,17 @@
         }
 
 
-        #id02 .modal-content ,#id03 .modal-content, #myDIV .modal-content,#id04 .modal-content {
+        #id02 .modal-content ,#id03 .modal-content, #myDIV .modal-content,#id04 .modal-content,#id05 .modal-content {
             background-color: #fefefe;
             width: 100%;
             height: 100%;
         }
 
-        #id02 label,#id03 label,#id04 label,#dairy label{
+        #id02 label,#id03 label,#id04 label,#dairy label,#id05 label{
             font-size:15px;
         }
 
+#id04 .weui-cells.weui-cells_checkbox:before,#id04 .weui-cells.weui-cells_checkbox:after{border:0}
 
         #page4 #myDIV{
             width: 100%;
