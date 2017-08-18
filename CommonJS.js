@@ -32,3 +32,20 @@ function getValue(par) {
         get_par = get_par.slice(0, nextPar);
     return get_par;
 }
+
+function postMessage(content, php, func) {
+    var xmlhttp = GetXMLHTTPRequest();
+    xmlhttp.open("POST", php, true);
+    xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+    xmlhttp.send(toStr(content));
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var json = JSON.parse(xmlhttp.responseText);
+            if (json.success)
+                func(json);
+            else
+                console.log(json.error);
+        }
+    }
+
+}
