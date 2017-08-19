@@ -42,6 +42,9 @@
 		else if($serverType=="Get"){
 			$num = $_POST["num"];
 			$type = 'debunk';
+			$line["success"] = true;
+			$line["debunk"] = array();
+			$line["conversation"] = array();
 			
 			$rst = $mysqli->query("SELECT * FROM conversation as a WHERE $num>(SELECT count(*) FROM conversation WHERE UID>a.UID AND type='$type') ORDER BY a.UID DESC");
 			if($rst){
@@ -56,18 +59,27 @@
 						$row["review"][] = $row2;
 					}
 					$row["review"]["length"]=$reviewNum;
-					
-					$rst3 = $mysqli->query("SELECT * from conversationGood WHERE topicID=$id");
-					$goodNum=0;
-					while($row3 = $rst3->fetch_array(MYSQLI_ASSOC)){
-						$goodNum++;
-					}
-					$row["good"] = $goodNum;
-					$line[] = $row;
+
+					$line["debunk"][] = $row;
 					$looptag++;
 				}
-				$line["success"] = true;
-				$line["length"] = $looptag;
+				$line["debunk"]["length"] = $looptag;
+			}else{
+				$line["error"] = "匿槽获取错误，错误提示: ".$mysqli->error;
+				$line["success"] = false;
+			}
+			
+			$type = 'conversation';
+			
+			$rst = $mysqli->query("SELECT * FROM conversation WHERE type='$type' ORDER BY good DESC");
+			if($rst){
+				$looptag = 0;
+				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+					$id = $row["UID"];
+					$line["conversation"][] = $row;
+					$looptag++;
+				}
+				$line["conversation"]["length"] = $looptag;
 			}else{
 				$line["error"] = "话题获取错误，错误提示: ".$mysqli->error;
 				$line["success"] = false;
@@ -87,9 +99,10 @@
 			
 			if(!$exist){
 				$rst = $mysqli->query("INSERT INTO conversationGood (openID,topicID) VALUES('$openID',$topicID)");
-				if($rst)
+				if($rst){
+					$mysqli->query("UPDATE conversation SET good=good+1 WHERE UID=$topicID");
 					$line["success"] = true;
-				else{
+				}else{
 					$line["error"] = "点赞获取错误，错误提示: ".$mysqli->error;
 					$line["success"] = false;
 				}

@@ -108,6 +108,7 @@
             border-radius: 0.5em;
             box-sizing: border-box;
         }
+
         .wqht ul:hover {
             /*动画添加给谁, 就让谁停止*/
             animation-play-state: paused;
@@ -174,7 +175,7 @@
         .rmhtnr {
             position: absolute;
             float: left;
-            width: 100%;
+            width: 95%;
             display: inline-block;
             text-align: center;
         }
@@ -283,7 +284,7 @@
         }
 
         .baikuang {
-            background-color:rgba(90, 90, 90, 0.65);
+            background-color: rgba(90, 90, 90, 0.65);
             overflow: hidden;
             border-radius: 2px;
             cursor: pointer;
@@ -539,7 +540,8 @@
             text-align: center;
             border-radius: 30%;
         }
-        .fa-comment{
+
+        .fa-comment {
             margin-left: 1em;
         }
     </style>
@@ -552,7 +554,7 @@
         <span id="debunk" class="hqxuanxiang2 ciji0">吐槽</span>
     </div>
     <div id="hqdingduanxinjian" class="hqxinjian" style="display: none">
-        <span class="hqjiahao" onclick="hqxinjian('hqxjdh','xinhuaquan')" >+</span>
+        <span class="hqjiahao" onclick="hqxinjian('hqxjdh','xinhuaquan')">+</span>
     </div>
 </div>
 
@@ -581,11 +583,8 @@
     </div>
 
     <div class="rmht">
-        <ul>
-            <li class="rmhtxx"><span class="rmhtnr"><span class="rmhtbh">1 </span><span
-                    class="rmhtnrwz">读中山大学是一种怎样的体验1</span></span><span class="rmhtdp fa fa-lightbulb-o"
-                                                                       style="font-size: 23px;"> </span><span
-                    class="rmhtdprd">100</span></li>
+        <ul id="conversation_piece">
+            <!--JS添加地点-->
         </ul>
     </div>
     <div id="hqxjht" class="hqhtxjdh" style="display: none">
@@ -621,6 +620,7 @@
     var characterIndex = 65;
 
     var main = document.getElementById("conversation_main");
+    var main_2 = document.getElementById("conversation_piece");
     var top_conversation = document.getElementById("conversation");
     var top_debunk = document.getElementById("debunk");
     document.getElementById('right').onclick = function () {
@@ -654,11 +654,13 @@
             content: document.getElementById("xinhuati").value,
             UID: -1
         }, "conversation.php", function () {
+            init();
             document.getElementById("xinhuati").disabled = false;
             document.getElementById("xinhuati").value = "";
         });
     }
     top_conversation.onclick = function () {
+        init();
         document.getElementById("ncym").style.display = 'none';
         document.getElementById("hqdingduanxinjian").style.display = 'none';
         document.getElementById("hqym").style.display = 'block';
@@ -666,6 +668,7 @@
         top_conversation.className += " xuanzhong";
     }
     top_debunk.onclick = function () {
+        init();
         document.getElementById("hqym").style.display = 'none';
         document.getElementById("ncym").style.display = 'block';
         document.getElementById("hqdingduanxinjian").style.display = 'block';
@@ -674,6 +677,40 @@
     }
     init();
 
+    function appendConversation(topic, good, index, uid) {
+        var li = document.createElement("li");
+        var span_1 = document.createElement("span");
+        var span_2 = document.createElement("span");
+        var span_3 = document.createElement("span");
+        var span_4 = document.createElement("span");
+        var span_5 = document.createElement("span");
+
+        li.className = "rmhtxx";
+        span_1.className = "rmhtnr";
+        span_2.className = "rmhtbh";
+        span_3.className = "rmhtnrwz";
+        span_4.className = "rmhtdp fa fa-lightbulb-o";
+        span_5.className = "rmhtdprd";
+
+        span_2.innerText = index;
+        span_3.innerText = topic;
+        span_5.innerText = good;
+
+        span_4.style = "font-size: 23px;";
+        span_4.onclick = function (e) {
+            postMessage({serverType: "Good", topicID: uid}, "conversation.php", function () {
+                span_5.innerText = (parseInt(span_5.innerText) + 1);
+            });
+        }
+
+        span_1.appendChild(span_2);
+        span_1.appendChild(span_3);
+        li.appendChild(span_1);
+        li.appendChild(span_4);
+        li.appendChild(span_5);
+
+        return li;
+    }
 
     function appendTopic(uid, character, content, good, review, black) {
         var li = document.createElement("li");
@@ -858,9 +895,14 @@
     function init() {
         postMessage({serverType: "Get", num: 20}, "conversation.php", function (json) {
             main.innerHTML = "";
+            main_2.innerHTML = "";
             var black = false;
-            for (var i = 0; i < json.length; i++) {
-                main.appendChild(appendTopic(json[i].UID, json[i].word, json[i].content, json[i].good, json[i].review, black));
+            for (var i = 0; i < json.debunk.length; i++) {
+                main.appendChild(appendTopic(json.debunk[i].UID, json.debunk[i].word, json.debunk[i].content, json.debunk[i].good, json.debunk[i].review, black));
+                black = !black;
+            }
+            for (var i = 0; i < json.conversation.length; i++) {
+                main_2.appendChild(appendConversation(json.conversation[i].content, json.conversation[i].good, i, json.conversation[i].UID));
                 black = !black;
             }
         });
