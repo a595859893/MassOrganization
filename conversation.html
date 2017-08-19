@@ -10,546 +10,16 @@
     <!--引用weui框架做样式-->
     <!--<link rel="stylesheet" href="weui.min.css">-->
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
-    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="conversation.css">
     <!--<script src="jquery.js"></script>-->
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
-
-    <style type="text/css">
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: #f8f8f8;
-        }
-
-        .hqfenlei {
-            text-align: center;
-            margin-bottom: 0.48em;
-        }
-
-        .hqdingduan {
-            display: inline-block;
-            position: relative;
-        }
-
-        .hqxuanxiang1 {
-            left: 1.6em;
-        }
-
-        .xuanxiang2 {
-            position: relative;
-            margin-top: 0.3em;
-            background-color: #f2edf3;
-            color: #565656;
-            font-size: 1em;
-            line-height: 2em;
-            width: 5em;
-            display: inline-block;
-            border-radius: 1.3em;
-        }
-
-        span.xuanzhong {
-            background-color: #5a5a5a;
-            color: white;
-        }
-
-        .jrht {
-            width: 90%;
-            height: 10em;
-            margin: 0 5%;
-            border-radius: 2em;
-            border: solid 0.04em black;
-            display: block;
-        }
-
-        .jrhtnr {
-            width: 100%;
-            height: 8em;
-            text-align: center;
-            padding: 4em 0;
-            display: block;
-        }
-
-        /*---------------------------------------------------*/
-        .wqht {
-            width: 100%;
-            height: 9em;
-        }
-
-        .wqhtyidong {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            margin: 0 auto;
-            overflow: hidden;
-            overflow-x: auto;
-            overflow-y: hidden;
-        }
-
-        .wqht ul {
-            position: relative;
-            width: 110em;
-            height: 9em;
-            background-color: #f8f8f8;
-            animation: move 30s linear 0s infinite normal;
-        }
-
-        .wqht ul li {
-            position: relative;
-            display: inline-block;
-            float: left;
-            list-style: none;
-            width: 13em;
-            margin: 0 0.5em;
-            height: 100%;
-            background-color: #fffbba;
-            border-radius: 0.5em;
-            box-sizing: border-box;
-        }
-        .wqht ul:hover {
-            /*动画添加给谁, 就让谁停止*/
-            animation-play-state: paused;
-        }
-
-        .wqht ul:hover li {
-            opacity: 0.5;
-        }
-
-        .wqht ul li:hover {
-            opacity: 1;
-        }
-
-        @keyframes move {
-            from {
-                margin-left: 0;
-            }
-            to {
-                margin-left: -1200px;
-            }
-        }
-
-        .wqhtwz {
-            width: 100%;
-            height: 100%;
-            margin: 4em 0;
-            text-align: center;
-            display: block;
-            font-family: "微软雅黑";
-        }
-
-        .htwenzi {
-            font-size: 1.2em;
-        }
-
-        .htwh {
-            height: 1.1em;
-            width: 1.1em;
-            margin-top: 0.2em;
-            line-height: 1.1em;
-            text-align: center;
-            border-radius: 0.55em;
-            color: #3739ee;
-            border: solid 0.04em #161dd5;
-            display: inline-block;
-            font-size: 1em;
-        }
-
-        .rmhttk {
-            display: block;
-        }
-
-        .rmhtxx {
-            display: inline-block;
-            width: 95%;
-            height: 3em;
-            line-height: 3em;
-            font-size: 0.9em;
-            margin: 0.5em 2.5% 0;
-            border: solid 0.04em black;
-            border-radius: 0.5em;
-        }
-
-        .rmhtnr {
-            position: absolute;
-            float: left;
-            width: 100%;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .rmhtbh {
-            position: relative;
-            float: left;
-            left: 0.5em;
-            font-size: 1em;
-            font-weight: 900;
-            display: inline-block;
-        }
-
-        .rmhtnrwz {
-            position: relative;
-            float: left;
-            left: 1em;
-            font-size: 1.1em;
-            font-weight: 500;
-            display: inline-block;
-        }
-
-        .rmhtdp {
-            position: relative;
-            float: right;
-            right: 2.8em;
-            top: 0.4em;
-            font-size: 1em;
-            display: inline-block;
-        }
-
-        .rmhtdprd {
-            position: relative;
-            float: right;
-            right: 0.8em;
-            font-size: 1em;
-            font-weight: 500;
-            display: inline-block;
-        }
-
-        /*---------------------匿槽-----------------------------*/
-        .hqzhongyang {
-            /*text-align: center;*/
-        }
-
-        .hqfenlei {
-            text-align: center;
-            margin-bottom: 0.48em;
-        }
-
-        .hqdingduan {
-            display: inline-block;
-            position: relative;
-        }
-
-        .hqxuanxiang2 {
-            position: relative;
-            margin-top: 0.3em;
-            background-color: #f2edf3;
-            color: #565656;
-            font-size: 1em;
-            line-height: 2em;
-            width: 5em;
-            display: inline-block;
-            border-radius: 1.3em;
-        }
-
-        span.xuanzhong {
-            background-color: #5a5a5a;
-            color: white;
-        }
-
-        .hqxjdh {
-            display: none;
-            background-color: #f0eaf4;
-            overflow: hidden;
-            border-radius: 2px;
-            cursor: pointer;
-            width: 100%;
-            height: 5.4em;
-            position: relative;
-        }
-
-        .hqhtxjdh {
-            display: none;
-            background-color: #f0eaf4;
-            overflow: hidden;
-            border-radius: 2px;
-            cursor: pointer;
-            width: 100%;
-            height: 2.5em;
-            position: fixed;
-            bottom: 0;
-        }
-
-        .htsrfsk {
-            background-color: #f0eaf4;
-            position: absolute;
-            display: inline-block;
-            width: 80%;
-            height: 2.5em;
-            border-color: #0D0D0D;
-            border: thin;
-            word-wrap: break-word;
-            font-size: 1.6em;
-        }
-
-        .baikuang {
-            background-color:rgba(90, 90, 90, 0.65);
-            overflow: hidden;
-            border-radius: 2px;
-            cursor: pointer;
-            width: 100%;
-            height: 5.4em;
-            position: relative;
-        }
-
-        .baise {
-            background-color: #fefcff;
-        }
-
-        .hqhf {
-            background-color: #f0ebf1;
-            overflow: hidden;
-            border-radius: 2px;
-            cursor: pointer;
-            width: 100%;
-            height: 1.6em;
-            position: relative;
-        }
-
-        .hqhfbxs {
-            display: none;
-        }
-
-        .hqsr {
-            background-color: #f0eaf4;
-            position: absolute;
-            display: inline;
-            width: 67%;
-            height: 80%;
-            left: 9.1em;
-            top: 0.7em;
-            border-color: #0D0D0D;
-            border: thin;
-            word-wrap: break-word;
-        }
-
-        .hqhtsr {
-            background-color: #f0eaf4;
-            position: absolute;
-            display: inline;
-            width: 55%;
-            height: 80%;
-            left: 33%;
-            top: 0.65em;
-            border-color: #0D0D0D;
-            border: thin;
-            word-wrap: break-word;
-        }
-
-        .htsr {
-            background-color: #f0eaf4;
-            position: absolute;
-            display: inline;
-            width: 80%;
-            height: 3em;
-            border-color: #0D0D0D;
-            border: thin;
-            word-wrap: break-word;
-        }
-
-        .hqquangao {
-            position: absolute;
-            display: inline;
-            height: 100%;
-            line-height: 4.5em;
-            left: 6em;
-            top: 0.15em;
-            color: white;
-            font-size: 1.1em;
-        }
-
-        .dzpl {
-            display: inline-block;
-            position: absolute;
-            bottom: 0.8em;
-            right: 0;
-            width: 6.7em;
-            height: 1.3em;
-            /*background-color: red;*/
-        }
-
-        .hqtb {
-            display: inline-block;
-            width: 1.3em;
-            height: 1.3em;
-            /*background-color: green;*/
-        }
-
-        .hqsl {
-            position: relative;
-            display: inline-block;
-            line-height: 1.2em;
-            font-size: 0.9em;
-            color: #fffffd;
-        }
-
-        .hptjwz {
-            position: relative;
-            left: 93%;
-            margin-right: 0.5em;
-            bottom: -1em;
-            /*background-color: yellow;*/
-            display: inline-block;
-        }
-
-        .hphttjwz {
-            position: relative;
-            left: 93%;
-            margin-top: 0.5em;
-            margin-right: 0.5em;
-            /*background-color: yellow;*/
-            display: inline-block;
-        }
-
-        .hqxzajz {
-            position: relative;
-            top: 1.65em;
-            left: 0.35em;
-            display: inline-block;
-        }
-
-        .hqxzajy {
-            position: relative;
-            top: 1.65em;
-            left: 3.9em;
-            display: inline-block;
-        }
-
-        .yuan {
-            position: absolute;
-            font-weight: 500;
-            width: 2em;
-            height: 2em;
-            font-size: 1.8em;
-            background-color: whitesmoke;
-            line-height: 2em;
-            text-align: center;
-            border-radius: 50%;
-            display: inline;
-            left: 0.7em;
-            top: 0.4em;
-        }
-
-        .heised {
-            background-color: #615f62;
-            color: #fefcff;
-        }
-
-        .heisez {
-            color: #474547;
-        }
-
-        .hqhfyuan {
-            position: absolute;
-            background-color: #646265;
-            width: 1.3em;
-            height: 1.3em;
-            line-height: 1.3em;
-            text-align: center;
-            border-radius: 50%;
-            display: inline;
-            left: 3em;
-            color: #f6f6f6;
-            margin-top: 0.1em;
-        }
-
-        .hqhfnr {
-            position: absolute;
-            display: inline-block;
-            margin-left: 5em;
-        }
-
-        .hqplkuang {
-            height: 1.6em;
-            position: absolute;
-            display: inline-block;
-            margin-left: 5.5em;
-            margin-top: 0.2em;
-            background-color: #f0eaf4;
-            border: thin;
-            font-size: 1em;
-            font-family: "微软雅黑"
-        }
-
-        .hqxinjian {
-            text-align: center;
-            position: absolute;
-            background-color: #111111;
-            color: whitesmoke;
-            line-height: 2em;
-            font-size: 1.2em;
-            top: 0.38em;
-            right: 0.15em;
-            width: 1.5em;
-            height: 1.5em;
-            border-radius: 50%;
-        }
-
-        .hqxjht {
-            float: right;
-            text-align: center;
-            background-color: #111111;
-            margin-top: 0.1em;
-            color: whitesmoke;
-            line-height: 1.2em;
-            font-size: 1.2em;
-            width: 1.2em;
-            height: 1.2em;
-            border-radius: 50%;
-            display: inline-block;
-            position: relative;
-            font-weight: 900;
-        }
-
-        .hqjiahao {
-            position: relative;
-            top: -0.3em;
-            font-weight: 900;
-        }
-
-        .hqxjpl {
-            position: relative;
-            float: right;
-            background-color: #eae7de;
-            margin-top: 0.1em;
-            margin-right: 0.5em;
-            width: 1.3em;
-            height: 1.3em;
-            line-height: 1em;
-            display: inline-block;
-            border: solid;
-            border-width: thin;
-            border-color: #423d43;
-            text-align: center;
-            border-radius: 30%;
-        }
-
-        .hqxjplfs {
-            font-size: 1em;
-            position: relative;
-            float: right;
-            background-color: #eae7de;
-            margin-top: 0.1em;
-            margin-right: 0.5em;
-            width: 1.3em;
-            height: 1.3em;
-            line-height: 1em;
-            display: inline-block;
-            border-color: #423d43;
-            text-align: center;
-            border-radius: 30%;
-        }
-        .fa-comment{
-            margin-left: 1em;
-        }
-    </style>
 </head>
 <body>
 
 <div class="hqfenlei">
     <div class="hqdingduan">
         <span id="conversation" class="hqxuanxiang2 hqxuanxiang1 ciji0 xuanzhong">话圈</span>
-        <span id="debunk" class="hqxuanxiang2 ciji0">吐槽</span>
+        <span id="debunk" class="hqxuanxiang2 ciji0">匿槽</span>
     </div>
     <div id="hqdingduanxinjian" class="hqxinjian" style="display: none">
         <span class="hqjiahao" onclick="hqxinjian('hqxjdh','xinhuaquan')" >+</span>
@@ -581,11 +51,8 @@
     </div>
 
     <div class="rmht">
-        <ul>
-            <li class="rmhtxx"><span class="rmhtnr"><span class="rmhtbh">1 </span><span
-                    class="rmhtnrwz">读中山大学是一种怎样的体验1</span></span><span class="rmhtdp fa fa-lightbulb-o"
-                                                                       style="font-size: 23px;"> </span><span
-                    class="rmhtdprd">100</span></li>
+        <ul id="conversation_piece">
+            <!--JS添加地点-->
         </ul>
     </div>
     <div id="hqxjht" class="hqhtxjdh" style="display: none">
@@ -621,6 +88,7 @@
     var characterIndex = 65;
 
     var main = document.getElementById("conversation_main");
+    var main_2 = document.getElementById("conversation_piece");
     var top_conversation = document.getElementById("conversation");
     var top_debunk = document.getElementById("debunk");
     document.getElementById('right').onclick = function () {
@@ -654,11 +122,13 @@
             content: document.getElementById("xinhuati").value,
             UID: -1
         }, "conversation.php", function () {
+            init();
             document.getElementById("xinhuati").disabled = false;
             document.getElementById("xinhuati").value = "";
         });
     }
     top_conversation.onclick = function () {
+        init();
         document.getElementById("ncym").style.display = 'none';
         document.getElementById("hqdingduanxinjian").style.display = 'none';
         document.getElementById("hqym").style.display = 'block';
@@ -666,6 +136,7 @@
         top_conversation.className += " xuanzhong";
     }
     top_debunk.onclick = function () {
+        init();
         document.getElementById("hqym").style.display = 'none';
         document.getElementById("ncym").style.display = 'block';
         document.getElementById("hqdingduanxinjian").style.display = 'block';
@@ -674,6 +145,40 @@
     }
     init();
 
+    function appendConversation(topic, good, index, uid) {
+        var li = document.createElement("li");
+        var span_1 = document.createElement("span");
+        var span_2 = document.createElement("span");
+        var span_3 = document.createElement("span");
+        var span_4 = document.createElement("span");
+        var span_5 = document.createElement("span");
+
+        li.className = "rmhtxx";
+        span_1.className = "rmhtnr";
+        span_2.className = "rmhtbh";
+        span_3.className = "rmhtnrwz";
+        span_4.className = "rmhtdp fa fa-lightbulb-o";
+        span_5.className = "rmhtdprd";
+
+        span_2.innerText = index;
+        span_3.innerText = topic;
+        span_5.innerText = good;
+
+        span_4.style = "font-size: 23px;";
+        span_4.onclick = function (e) {
+            postMessage({serverType: "Good", topicID: uid}, "conversation.php", function () {
+                span_5.innerText = (parseInt(span_5.innerText) + 1);
+            });
+        }
+
+        span_1.appendChild(span_2);
+        span_1.appendChild(span_3);
+        li.appendChild(span_1);
+        li.appendChild(span_4);
+        li.appendChild(span_5);
+
+        return li;
+    }
 
     function appendTopic(uid, character, content, good, review, black) {
         var li = document.createElement("li");
@@ -861,6 +366,16 @@
             var black = false;
             for (var i = 0; i < json.length; i++) {
                 main.appendChild(appendTopic(json[i].UID, json[i].word, json[i].content, json[i].good, json[i].review, black));
+                black = !black;
+            }
+            main_2.innerHTML = "";
+            var black = false;
+            for (var i = 0; i < json.debunk.length; i++) {
+                main.appendChild(appendTopic(json.debunk[i].UID, json.debunk[i].word, json.debunk[i].content, json.debunk[i].good, json.debunk[i].review, black));
+                black = !black;
+            }
+            for (var i = 0; i < json.conversation.length; i++) {
+                main_2.appendChild(appendConversation(json.conversation[i].content, json.conversation[i].good, i, json.conversation[i].UID));
                 black = !black;
             }
         });
