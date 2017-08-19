@@ -18,13 +18,16 @@
             font-family: "Lato", sans-serif;
             overflow-x: hidden;
         }
+
         .fa .fa-pencil-square-o {
             float: right;
             font-size: 20px;
         }
+
         .weui-media-box__desc {
             line-height: 1.6
         }
+
         .weui-media-box_appmsg .weui-media-box__hd {
             width: 70px;
             height: 116px;
@@ -40,9 +43,11 @@
         <!--头部筛选栏-->
         <div id="top">
 
-            <button class="accordion" style="text-align: right" onclick="display()"> 筛选 &nbsp;<i class="fa fa-list-ul" style="font-size:15px;color: black;"></i>
+            <button class="accordion" style="text-align: right" onclick="display()"> 筛选 &nbsp;<i class="fa fa-list-ul"
+                                                                                                 style="font-size:15px;color: black;"></i>
             </button>
-            <button class="accordion" style="text-align: right;    position: absolute;top: 0;z-index: 999;" onclick="display()"> 筛选 &nbsp;<i class="fa fa-list-ul" style="font-size:15px;color: black;"></i>
+            <button class="accordion" style="text-align: right;    position: absolute;top: 0;z-index: 999;"
+                    onclick="display()"> 筛选 &nbsp;<i class="fa fa-list-ul" style="font-size:15px;color: black;"></i>
             </button>
             <div class="panel" id="panel" style="position: absolute;z-index: 999;top: 37px;">
                 <p>&nbsp;校区</p>
@@ -178,12 +183,7 @@
             var title = event.target.parentNode.getAttribute("name");
             var ele = event.target.innerText;
 
-            if (title == "other") {
-                if (ele == "重置")
-                    actOrder = defaultActOther();
-                if (ele == "完成")
-                    getActivity(actOrder);
-            } else if (title == "order") {
+            if (title == "order") {
                 actOrder[title] = ele;
             } else {
                 var index = actOrder[title].indexOf(ele);
@@ -206,6 +206,15 @@
             }
 
             setOptionColor(actOrder)
+        } else if (event.target.tagName == "BUTTON") {
+            var ele = event.target.innerText;
+            if (ele == "重置") {
+                actOrder = defaultActOther();
+                setOptionColor(actOrder);
+            }
+
+            if (ele == "完成")
+                getActivity(actOrder);
         }
     };
     document.getElementById("actRegister").onsubmit = function (event) {
@@ -349,8 +358,8 @@
 
         h4.appendChild(i_1);
 
-        if(!formLabel.none){
-        h4.appendChild(i_2);
+        if (!formLabel.none) {
+            h4.appendChild(i_2);
         }
 
         div_2.appendChild(h4);
@@ -391,28 +400,28 @@
         for (var i = 0; i < tempA.length; i++) {
             var title = tempA[i].parentNode.getAttribute("name");
             var ele = tempA[i].innerText;
-            if (title != "other") {
-                tempA[i].style.backgroundColor = "#F8F8F8 ";
-                if (title == "order") {
-                    if (ele == actOrder[title])
+            tempA[i].style.backgroundColor = "#F8F8F8 ";
+            if (title == "order") {
+                if (ele == actOrder[title])
+                    tempA[i].style.backgroundColor = "#C6E2FF";
+            } else if (ele == "不限") {
+                if (isAllIn(tempA[i].parentNode))
+                    tempA[i].style.backgroundColor = "#C6E2FF";
+            } else {
+                for (var j = 0; j < actOrder[title].length; j++)
+                    if (ele == actOrder[title][j] && !isAllIn(tempA[i].parentNode))
                         tempA[i].style.backgroundColor = "#C6E2FF";
-                } else if (ele == "不限") {
-                    if (isAllIn(tempA[i].parentNode))
-                        tempA[i].style.backgroundColor = "#C6E2FF";
-                } else {
-                    for (var j = 0; j < actOrder[title].length; j++)
-                        if (ele == actOrder[title][j])
-                            tempA[i].style.backgroundColor = "#C6E2FF";
-                }
             }
         }
     }
 
     var slideIndex = 1;
     showSlides(slideIndex);
+
     function currentSlide(n) {
         showSlides(slideIndex = n);
     }
+
     function showSlides(n) {
         var i;
         var slides = document.getElementsByClassName("mySlides");
@@ -427,7 +436,7 @@
             slideIndex = 1
         }
         slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex-1].className += " active";
+        dots[slideIndex - 1].className += " active";
         setTimeout(showSlides, 8000);
         slideIndex++;
     }

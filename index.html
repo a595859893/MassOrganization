@@ -12,7 +12,7 @@
     <script src="iconfont.js"></script>
     <link rel="stylesheet" href="css.css">
     <style>
-        .fa.fa-pencil-square-o{
+        .fa.fa-pencil-square-o {
             float: right;
             font-size: 20px;
         }
@@ -184,7 +184,9 @@
                 </div>
                 <div class="weui-media-box__bd">
                     <h4 class="weui-media-box__title">名字</h4>
-                    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">社团管理者登陆</button>
+                    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">
+                        社团管理者登陆
+                    </button>
                 </div>
             </div>
         </header>
@@ -192,7 +194,8 @@
         <!--通过下拉菜单查看-->
 
         <button class="accordion" style="border-top: 0.01px solid rgba(19,104,50,0.6);"><i class="fa fa-paper-plane-o"
-                                                                                           style="font-size:18px;color: #136832;"></i>我的活动</button>
+                                                                                           style="font-size:18px;color: #136832;"></i>我的活动
+        </button>
         <div class="panel" id="MyList">
             <!--JS添加点-->
         </div>
@@ -302,15 +305,20 @@
 
         <br>
         <article class="main">
-            <button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;" ><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i> 活动管理</button>
+            <button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard"
+                                                                                               style="font-size:18px;color: #136832;"></i>
+                活动管理
+            </button>
             <div class="panel">
-                <a class="weui-cell weui-cell_access" onclick="document.getElementById('table_1').style.display='block';document.getElementById('main_1').style.display='none'">
+                <a class="weui-cell weui-cell_access"
+                   onclick="document.getElementById('table_1').style.display='block';document.getElementById('main_1').style.display='none'">
                     <div class="weui-cell__bd">
                         <p>活动A</p>
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
-                <a class="weui-cell weui-cell_access" onclick="document.getElementById('table_1').style.display='block';document.getElementById('main_1').style.display='none'">
+                <a class="weui-cell weui-cell_access"
+                   onclick="document.getElementById('table_1').style.display='block';document.getElementById('main_1').style.display='none'">
                     <div class="weui-cell__bd">
                         <p>活动B</p>
                     </div>
@@ -326,15 +334,18 @@
                 <i class="fa fa-edit" style="font-size:18px;color: #136832;"></i> 发布招新
             </button>
 
-            <button class="accordion"><i class="fa fa-address-book-o" style="font-size:18px;color: #136832;"></i> 社团主页管理</button>
+            <button class="accordion"><i class="fa fa-address-book-o" style="font-size:18px;color: #136832;"></i> 社团主页管理
+            </button>
             <div class="panel">
-                <a class="weui-cell weui-cell_access" onclick="document.getElementById('dairy').style.display='block';document.getElementById('main_1').style.display='none'">
+                <a class="weui-cell weui-cell_access"
+                   onclick="document.getElementById('dairy').style.display='block';document.getElementById('main_1').style.display='none'">
                     <div class="weui-cell__bd">
                         <p>编辑社团日志</p>
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
-                <a class="weui-cell weui-cell_access" onclick="document.getElementById('id04').style.display='block';document.getElementById('main_1').style.display='none'">
+                <a class="weui-cell weui-cell_access"
+                   onclick="document.getElementById('id04').style.display='block';document.getElementById('main_1').style.display='none'">
                     <div class="weui-cell__bd">
                         <p>编辑社团信息</p>
                     </div>
@@ -345,37 +356,41 @@
     </div>
 
     <!--活动管理表格-->
-    <div  id="table_1" style="display: none">
-    <table  style="">
-        <thead>
-        <tr>
-            <th><input type="checkbox" id="all" onclick="all()"></th>
-            <th>姓名</th>
-            <th>学号</th>
-            <th>学院</th>
-            <th>手机</th>
-            <th>QQ</th>
-            <th>备注</th>
-        </tr>
-        </thead>
+    <div id="table_1" style="display: none">
+        <table style="">
+            <thead>
+            <tr>
+                <th><input type="checkbox" id="all" onclick="all()"></th>
+                <th>姓名</th>
+                <th>学号</th>
+                <th>学院</th>
+                <th>手机</th>
+                <th>QQ</th>
+                <th>备注</th>
+            </tr>
+            </thead>
 
-        <tbody id="tbody">
-        </tbody>
+            <tbody id="tbody">
+            </tbody>
 
-    </table>
-    <div class="weui-cells__title">向报名者发送消息</div>
-    <div class="weui-cells weui-cells_form">
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
-                <div class="weui-textarea-counter"><span>0</span>/200</div>
+        </table>
+        <div class="weui-cells__title">向报名者发送消息</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                    <div class="weui-textarea-counter"><span>0</span>/200</div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="weui-btn-area">
-        <button class="weui-btn weui-btn_plain-primary " style="width: 45%;float: left" onclick="document.getElementById('table_1').style.display='none';document.getElementById('main_1').style.display='block'">返回</button>
-        <button class="weui-btn weui-btn_plain-primary " style="width: 50%;float: right;margin-top: 0">确认并发送</button>
-    </div>
+        <div class="weui-btn-area">
+            <button class="weui-btn weui-btn_plain-primary " style="width: 45%;float: left"
+                    onclick="document.getElementById('table_1').style.display='none';document.getElementById('main_1').style.display='block'">
+                返回
+            </button>
+            <button class="weui-btn weui-btn_plain-primary " style="width: 50%;float: right;margin-top: 0">确认并发送
+            </button>
+        </div>
 
     </div>
 
@@ -383,13 +398,13 @@
     <div id="dairy" class="container" onclick="check()" style="display: none;margin: 30px">
         <b>日志类型</b>
         <form style="margin: 15px 15px 35px ">
-            <label for="option-one" >
-                <input id="option-one" type="radio" name=" " value="option1" >
+            <label for="option-one">
+                <input id="option-one" type="radio" name=" " value="option1">
                 图文说说
             </label>
             <br>
             <label for="option-two" class="pure-radio">
-                <input id="option-two" type="radio" name=" " value="option2" >
+                <input id="option-two" type="radio" name=" " value="option2">
                 推送小记
             </label>
         </form>
@@ -397,37 +412,39 @@
         <form action="" id="form_1" style="display: none;margin-bottom:35px ;">
             <label>
                 <b>说说你想表达的话~</b>
-                <input  type="text" name=" " value=" " >
+                <input type="text" name=" " value=" ">
             </label>
             <br>
             <label>
                 <b>上传图片</b>
                 <button onclick="document.getElementById('input_1').click();">选择图片</button>
-                <input  type="file" name=" " value=" " accept="image/*" id="input_1" style="display: none">
+                <input type="file" name=" " value=" " accept="image/*" id="input_1" style="display: none">
                 <img src="" alt="">
             </label>
         </form>
         <form action="" id="form_2" style="display: none;margin-bottom:35px ;">
-            <label >
+            <label>
                 <b>推送标题</b>
-                <input  type="text" name=" "  value=" " >
+                <input type="text" name=" " value=" ">
             </label>
             <br>
-            <label >
+            <label>
                 <b>推送图片</b>
-                <button  onclick="document.getElementById('input_2').click();">选择图片</button>
-                <input  type="file" name=" " accept="image/*" value=" " id="input_2" style="display: none">
+                <button onclick="document.getElementById('input_2').click();">选择图片</button>
+                <input type="file" name=" " accept="image/*" value=" " id="input_2" style="display: none">
                 <img src="" alt="">
             </label>
             <br>
-            <label >
+            <label>
                 <b>请务必填写正确的推送链接~</b>
-                <input  type="text" name=" " value=" " >
+                <input type="text" name=" " value=" ">
             </label>
         </form>
 
-        <button onclick="document.getElementById('dairy').style.display='none';document.getElementById('main_1').style.display='block'" class="cancelbtn">返回</button>
-        <button >提交</button>
+        <button onclick="document.getElementById('dairy').style.display='none';document.getElementById('main_1').style.display='block'"
+                class="cancelbtn">返回
+        </button>
+        <button>提交</button>
     </div>
 
     <!--活动发布表单-->
@@ -473,16 +490,23 @@
                 <input type="text" placeholder="校团工委" id="ACT_organizer" required>
 
                 <label><b>上传Logo</b></label>
-                <button type="button" onclick="document.getElementById('ACT_input').click();">点击上传图片</button><input type="file" style="display:none" accept="image/*" id="ACT_input">
+                <button type="button" onclick="document.getElementById('ACT_input').click();">点击上传图片</button>
+                <input type="file" style="display:none" accept="image/*" id="ACT_input">
                 <br>
-                <img id="ACT_logo" >
+                <img id="ACT_logo">
                 <br>
-                <input type="radio" name="formChoose" value="default" checked> <b>使用默认报名表</b> <button onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">点此处预览</button>
+                <input type="radio" name="formChoose" value="default" checked> <b>使用默认报名表</b>
+                <button onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">
+                    点此处预览
+                </button>
                 &nbsp;
                 <br>
                 <input type="radio" name="formChoose" value="make"
                        onclick="document.getElementById('myDIV').style.display='block';document.getElementById('id02').style.display='none';">
-                <b>自定义报名表~</b> <button onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">点此处预览</button>
+                <b>自定义报名表~</b>
+                <button onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">
+                    点此处预览
+                </button>
                 &nbsp;
                 <br>
                 <input type="radio" name="formChoose" value="none"> <b>不使用报名表</b>
@@ -525,7 +549,9 @@
                 <input type="url" placeholder="复制推送链接至此处" id="NEW_link" required>
 
                 <div class="clearfix">
-                    <button type="button" onclick="document.getElementById('id03').style.display='none';document.getElementById('main_1').style.display='block'" class="cancelbtn">取消
+                    <button type="button"
+                            onclick="document.getElementById('id03').style.display='none';document.getElementById('main_1').style.display='block'"
+                            class="cancelbtn">取消
                     </button>
                     <button type="submit" class="signupbtn">提交</button>
                 </div>
@@ -545,19 +571,19 @@
                     </div>
                 </div>
                 <div class="weui-cell">
-                <div class="weui-cells__title">社团类型</div>
-                <div class="weui-cells weui-cells_checkbox" style="border: 0">
-                    <label class="weui-cell weui-check__label" for="type1">
-                            <input type="radio" class="weui-check" name="radio1" id="type1" >
+                    <div class="weui-cells__title">社团类型</div>
+                    <div class="weui-cells weui-cells_checkbox" style="border: 0">
+                        <label class="weui-cell weui-check__label" for="type1">
+                            <input type="radio" class="weui-check" name="radio1" id="type1">
                             <i class="weui-icon-checked"></i>
-                        兴趣社团
-                    </label>
-                    <label class="weui-cell weui-check__label" for="type2">
+                            兴趣社团
+                        </label>
+                        <label class="weui-cell weui-check__label" for="type2">
                             <input type="radio" name="radio1" class="weui-check" id="type2">
                             <i class="weui-icon-checked"></i>
                             学生组织
-                    </label>
-                </div>
+                        </label>
+                    </div>
                 </div>
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label for="MASS_head" class="weui-label">社团负责人</label></div>
@@ -568,9 +594,12 @@
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label">社团logo</label></div>
                     <div class="weui-cell__bd">
-                        <button type="button" onclick="document.getElementById('MASS_logoInput').click();" style="width: 60%">点击上传图片</button>
-            <img id="MASS_logo" style="width:150px;height:150px">
-                        <input class="weui-input" type="file" style="display:none" accept="image/*" id="MASS_logoInput"/>
+                        <button type="button" onclick="document.getElementById('MASS_logoInput').click();"
+                                style="width: 60%">点击上传图片
+                        </button>
+                        <img id="MASS_logo" style="width:150px;height:150px">
+                        <input class="weui-input" type="file" style="display:none" accept="image/*"
+                               id="MASS_logoInput"/>
                     </div>
                 </div>
 
@@ -587,7 +616,9 @@
                 <span class="weui-agree__text">阅读并同意<a href="javascript:void(0);">《相关条款》</a></span>
             </label>
             <div class="weui-btn-area">
-                <button type="button" onclick="document.getElementById('id04').style.display='none';document.getElementById('main_1').style.display='block'" class="cancelbtn">取消
+                <button type="button"
+                        onclick="document.getElementById('id04').style.display='none';document.getElementById('main_1').style.display='block'"
+                        class="cancelbtn">取消
                 </button>
                 <button type="submit" class="signupbtn">提交</button>
             </div>
@@ -596,14 +627,15 @@
 
     <!--预览报名表-->
     <div id="id05" class="modal">
-        <form class="modal-content animate"  action=" ">
+        <form class="modal-content animate" action=" ">
             <br> <b> &nbsp; 报名表预览 </b> <br>
             <div class="container" id="custom">
                 <!--js添加-->
             </div>
             <div class="clearfix">
                 <button type="button"
-                        onclick="document.getElementById('id05').style.display='none';document.getElementById('id02').style.display='block'" class="cancelbtn">
+                        onclick="document.getElementById('id05').style.display='none';document.getElementById('id02').style.display='block'"
+                        class="cancelbtn">
                     返回
                 </button>
             </div>
@@ -662,7 +694,7 @@
         学号: "",
         学院: "",
         手机: "",
-        QQ  : "",
+        QQ: "",
         备注: ""
     };
     for (var i in ne) {
@@ -670,7 +702,7 @@
         defaultjson[i] = ne[i];
         formStr += "<label><b>" + i + "</b></label>" + "<input name='" + i.value + "'>";
     }
-    document.getElementById("custom").innerHTML=formStr;
+    document.getElementById("custom").innerHTML = formStr;
 
     //    下拉菜单
     var acc = document.getElementsByClassName("accordion");
@@ -705,9 +737,13 @@
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var json = JSON.parse(xmlhttp.responseText);
-                if (json.success)
+                if (json.success) {
                     login(json);
-                else
+                    if (remember) {
+                        document.cookie = "account=" + content.account;
+                        document.cookie = "password=" + content. + password;
+                    }
+                } else
                     console.log(json.error);
             }
         }
@@ -836,9 +872,9 @@
         for (var i = 0; i < list.length; i++) {
             if (list[i].name)
                 listjson[list[i].name] = list[i].value;
-                formStr += "<label><b>" + list[i].name + "</b></label>" + "<input name='" + list[i].value + "'>";
+            formStr += "<label><b>" + list[i].name + "</b></label>" + "<input name='" + list[i].value + "'>";
         }
-        document.getElementById("custom").innerHTML=formStr;
+        document.getElementById("custom").innerHTML = formStr;
         document.getElementById('myDIV').style.display = 'none';
         document.getElementById('id02').style.display = 'block';
     };
@@ -902,7 +938,7 @@
         xmlhttp2.onreadystatechange = function () {
             if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
                 var json = JSON.parse(xmlhttp2.responseText);
-                if (json.success){
+                if (json.success) {
                     for (var i = 0; i < json.list.length; i++) {
                         document.getElementById("MyList").appendChild(createActivity(json.list[i].name, json.list[i].introduction, json.list[i].location,
                             json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo, json.list[i].mark));
@@ -912,11 +948,20 @@
                         document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
                             json.mark[i].holdtime, json.mark[i].time, json.mark[i].UID, json.mark[i].json, json.mark[i].logo, json.mark[i].mark));
                     }
-                }else
+                } else
                     console.log(json.error);
             }
         };
 
+        var cookie = document.cookie;
+        var value = cookie.split(";");
+        for(var i =0;i<value.length;i++){
+            var arr = value[i].split("=");
+            if("account"==arr[0])
+                document.getElementById("uname").value=arr[1];
+            if("password"==arr[0])
+                document.getElementById("psw").value=arr[1];
+        }
     }
 
     //登陆登出
@@ -931,6 +976,7 @@
                 tabNav(event, 'page4')
             };
             document.getElementById("myself").click();
+
         } else {
             console.log(info.error);
         }
@@ -977,9 +1023,11 @@
     //    第一页顶部幻灯片
     var slideIndex = 1;
     showSlides(slideIndex);
+
     function currentSlide(n) {
         showSlides(slideIndex = n);
     }
+
     function showSlides(n) {
         var i;
         var slides = document.getElementsByClassName("mySlides");
@@ -994,7 +1042,7 @@
             slideIndex = 1
         }
         slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex-1].className += " active";
+        dots[slideIndex - 1].className += " active";
         setTimeout(showSlides, 8000);
         slideIndex++;
     }
@@ -1195,20 +1243,20 @@
         var time_2 = document.getElementById('end').innerText;
         console.log(time_1);
         console.log(time_2);
-        if (time_1<time_2){
-        if (condition) {
-            var thing = document.getElementById('thing').value;
-            var li = document.createElement('li');
-            var span = document.createElement('span');
-            span.innerHTML = '<i class="fa fa-calendar-minus-o" style="font-size:15px;position:absolute;right: 0;"></i>';
-            li.innerHTML = time_1 + "&nbsp;~ &nbsp;" + time_2 + "&nbsp;&nbsp;" + "<br>" + thing;
-            var ul = document.getElementById('ul');
-            li.appendChild(span);
-            ul.appendChild(li);
-            span.onclick = function () {
-                this.parentElement.style.display = 'none';
-            };
-        }
+        if (time_1 < time_2) {
+            if (condition) {
+                var thing = document.getElementById('thing').value;
+                var li = document.createElement('li');
+                var span = document.createElement('span');
+                span.innerHTML = '<i class="fa fa-calendar-minus-o" style="font-size:15px;position:absolute;right: 0;"></i>';
+                li.innerHTML = time_1 + "&nbsp;~ &nbsp;" + time_2 + "&nbsp;&nbsp;" + "<br>" + thing;
+                var ul = document.getElementById('ul');
+                li.appendChild(span);
+                ul.appendChild(li);
+                span.onclick = function () {
+                    this.parentElement.style.display = 'none';
+                };
+            }
         }
         else alert('请正确输入时间');
     }
@@ -1216,53 +1264,55 @@
     function table(xml) {
         var i;
         var xmlDoc = xml.responseXML;
-        var table = "<tr><td>"+ "<input type='checkbox'>" + "</td><td>" +
-                "</td><td>"+ "</td><td>"+
-                "</td><td>"+ "</td><td>"+
-                "</td><td>"+ "</td></tr>";
+        var table = "<tr><td>" + "<input type='checkbox'>" + "</td><td>" +
+            "</td><td>" + "</td><td>" +
+            "</td><td>" + "</td><td>" +
+            "</td><td>" + "</td></tr>";
         var x = xmlDoc.getElementsByTagName("form");
-        for (i = 0; i <x.length; i++) {
+        for (i = 0; i < x.length; i++) {
             table += "<tr><td>" +
-                    "<input type='checkbox'>" +
-                    "</td><td>" +
-                    x[i].name +
-                    "</td><td>" +
-                    x[i].number +
-                    "</td><td>" +
-                    x[i].institute +
-                    "</td><td>" +
-                    x[i].telephone +
-                    "</td><td>" +
-                    x[i].weichat +
-                    "</td><td>" +
-                    x[i].remarks +
-                    "</td></tr>";
+                "<input type='checkbox'>" +
+                "</td><td>" +
+                x[i].name +
+                "</td><td>" +
+                x[i].number +
+                "</td><td>" +
+                x[i].institute +
+                "</td><td>" +
+                x[i].telephone +
+                "</td><td>" +
+                x[i].weichat +
+                "</td><td>" +
+                x[i].remarks +
+                "</td></tr>";
         }
         document.getElementById("tbody").appendChild(table);
     }
 
-    function all(){
+    function all() {
         var tbody = document.getElementById("tbody");
         var checkBox = tbody.getElementsByTagName("input");
         var all = document.getElementById("all");
-        var i = 0 ;
-        if(all.checked){
-            for(;i < checkBox.length;i++){
-                checkBox[i].checked = true;}
-        }else {
-            for(;i < checkBox.length;i++){
-                checkBox[i].checked = false;}
+        var i = 0;
+        if (all.checked) {
+            for (; i < checkBox.length; i++) {
+                checkBox[i].checked = true;
+            }
+        } else {
+            for (; i < checkBox.length; i++) {
+                checkBox[i].checked = false;
+            }
         }
     }
 
-    function check(){
-        if(document.getElementById('option-one').checked){
-            document.getElementById('form_1').style.display='block';
-            document.getElementById('form_2').style.display='none';
+    function check() {
+        if (document.getElementById('option-one').checked) {
+            document.getElementById('form_1').style.display = 'block';
+            document.getElementById('form_2').style.display = 'none';
         }
-        if(document.getElementById('option-two').checked){
-            document.getElementById('form_2').style.display='block';
-            document.getElementById('form_1').style.display='none';
+        if (document.getElementById('option-two').checked) {
+            document.getElementById('form_2').style.display = 'block';
+            document.getElementById('form_1').style.display = 'none';
         }
     }
 </script>
