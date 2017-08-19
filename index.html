@@ -573,13 +573,13 @@
                 <div class="weui-cell">
                     <div class="weui-cells__title">社团类型</div>
                     <div class="weui-cells weui-cells_checkbox" style="border: 0">
-                        <label class="weui-cell weui-check__label" for="type1">
-                            <input type="radio" class="weui-check" name="radio1" id="type1">
+                        <label class="weui-cell weui-check__label">
+                            <input type="radio" class="weui-check" name="radio1" value="shetuan">
                             <i class="weui-icon-checked"></i>
                             兴趣社团
                         </label>
-                        <label class="weui-cell weui-check__label" for="type2">
-                            <input type="radio" name="radio1" class="weui-check" id="type2">
+                        <label class="weui-cell weui-check__label">
+                            <input type="radio" name="radio1" class="weui-check" value="zuzhi">
                             <i class="weui-icon-checked"></i>
                             学生组织
                         </label>
@@ -606,9 +606,12 @@
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label">社团公众号二维码</label></div>
                     <div class="weui-cell__bd">
-                        <button type="button" onclick="document.getElementById(' ').click();" style="width: 60%">点击上传图片</button>
-                        <img id=" " style="width:150px;height:150px">
-                        <input class="weui-input" type="file" style="display:none" accept="image/*" id=" "/>
+                        <button type="button" onclick="document.getElementById('massCfg_input').click();"
+                                style="width: 60%">
+                            点击上传图片
+                        </button>
+                        <img id="massCfg_img" style="width:150px;height:150px">
+                        <input class="weui-input" type="file" style="display:none" accept="image/*" id="massCfg_input"/>
                     </div>
                 </div>
 
@@ -749,8 +752,8 @@
                 if (json.success) {
                     login(json);
                     if (remember) {
-                        document.cookie = "account=" + content.account;
-                        document.cookie = "password=" + content. + password;
+                        document.cookie = "account_r=" + content.account;
+                        document.cookie = "password_r=" + content.password;
                     }
                 } else
                     console.log(json.error);
@@ -840,12 +843,22 @@
         event.target.disabled = true;
         event.preventDefault();
 
+        var type;
+        var radio = document.getElementsByName("formChoose");
+        for (var i = 0; i < radio.length; i++) {
+            if (radio[i].checked) {
+                type = radio.value;
+            }
+        }
+
         var content = {
             serverType: "massConfig",
+            type: type,
             name: document.getElementById("MASS_name").value,
             head: document.getElementById("MASS_head").value,
             logo: encodeURIComponent(document.getElementById("MASS_logo").src),
             desc: document.getElementById("MASS_desc").value,
+            QRcode: document.getElementById("massCfg_img").src,
             UID: uid
         };
 
@@ -889,24 +902,16 @@
     };
 
     document.getElementById("ACT_input").onchange = function (event) {
-        event = event || window.event;
-        var file = event.target.files[0];
-        var fr = new FileReader();
-        var reg = new RegExp(/image\/\w+/);
-        if (reg.test(file.type)) {
-            fr.onload = function (event) {
-                var url = event.target.result;
-                if (url.length <= 1024 * 500)//图片大小限制(dataURL本身的原因，多少不太明确)
-                    document.getElementById("ACT_logo").src = event.target.result;
-                else
-                    alert("图片过大，请选择较小的图片！");
-            };
-            fr.readAsDataURL(file);
-        } else
-            alert("不是图片无法上传！");
+        uploadImg(event || window.event, "ACT_logo");
     };
     document.getElementById("MASS_logoInput").onchange = function (event) {
-        event = event || window.event;
+        uploadImg(event || window.event, "MASS_logo");
+    };
+    document.getElementById("massCfg_input").onchange = function (event) {
+        uploadImg(event || window.event, "massCfg_img");
+    };
+
+    function uploadImg(event, id) {
         var file = event.target.files[0];
         var fr = new FileReader();
         var reg = new RegExp(/image\/\w+/);
@@ -914,14 +919,14 @@
             fr.onload = function (event) {
                 var url = event.target.result;
                 if (url.length <= 1024 * 500)//图片大小限制(dataURL本身的原因，多少不太明确)
-                    document.getElementById("MASS_logo").src = event.target.result;
+                    document.getElementById(id).src = event.target.result;
                 else
                     alert("图片过大，请选择较小的图片！");
             };
             fr.readAsDataURL(file);
         } else
             alert("不是图片无法上传！");
-    };
+    }
 
     function init() {
         var xmlhttp = GetXMLHTTPRequest();
@@ -963,13 +968,13 @@
         };
 
         var cookie = document.cookie;
-        var value = cookie.split(";");
-        for(var i =0;i<value.length;i++){
+        var value = cookie.split("; ");
+        for (var i = 0; i < value.length; i++) {
             var arr = value[i].split("=");
-            if("account"==arr[0])
-                document.getElementById("uname").value=arr[1];
-            if("password"==arr[0])
-                document.getElementById("psw").value=arr[1];
+            if ("account_r" == arr[0])
+                document.getElementById("uname").value = arr[1];
+            if ("password_r" == arr[0])
+                document.getElementById("psw").value = arr[1];
         }
     }
 

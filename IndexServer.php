@@ -145,7 +145,21 @@
 			if($row["password"]==$password){
 				$is_login_success = true;
 				$line = $row;
+				$uid = $row["UID"];
 			}
+		}
+		
+		$line["activity"]=array();
+		$rst = $mysqli->query("SELECT * FROM activity WHERE organizerUID=$uid");
+		while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+			$row["list"] = array();
+			$actuid = $row["UID"];
+			$rst2 = $mysqli->query("SELECT * FROM actList WHERE actuid=$actuid");
+			while($row2 = $rst2->fetch_array(MYSQLI_ASSOC)){
+				$row["list"][] = $row2;
+			}
+			
+			$line["activity"][] = $row;
 		}
 		
 		if($is_login_success){
@@ -200,13 +214,15 @@
 	
 	function massConfig($mysqli){
 		$line = array();
+		$type 	= $_POST["type"];
 		$name 	= $_POST["name"];
 		$head 	= $_POST["head"];
 		$logo 	= $_POST["logo"];
 		$desc 	= $_POST["desc"];
+		$QRcode = $_POST["QRcode"];
 		$UID	= $_POST["UID"];
 		
-		$order = "UPDATE mass SET name='$name',member='$head',logo='$logo',intro='$desc' WHERE UID=$UID";
+		$order = "UPDATE mass SET name='$name',member='$head',logo='$logo',intro='$desc' type='$type' QRcode='$QRcode' WHERE UID=$UID";
 
 		$rst = $mysqli->query($order);
 		if($rst){
