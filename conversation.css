@@ -1,0 +1,534 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f8f8f8;
+}
+
+.hqfenlei {
+    text-align: center;
+    margin-bottom: 0.48em;
+}
+
+.hqdingduan {
+    display: inline-block;
+    position: relative;
+}
+
+.hqxuanxiang1 {
+    left: 1.6em;
+}
+
+.xuanxiang2 {
+    position: relative;
+    margin-top: 0.3em;
+    background-color: #f2edf3;
+    color: #565656;
+    font-size: 1em;
+    line-height: 2em;
+    width: 5em;
+    display: inline-block;
+    border-radius: 1.3em;
+}
+
+span.xuanzhong {
+    background-color: #5a5a5a;
+    color: white;
+}
+
+.jrht {
+    width: 90%;
+    height: 10em;
+    margin: 0 5%;
+    /*border-radius: 2em;*/
+    border: solid 0.04em black;
+    display: block;
+    box-shadow: 10px 10px 10px grey;
+}
+
+.jrhtnr {
+    width: 100%;
+    height: 8em;
+    font-size: 1.5em;
+    text-align: center;
+    padding: 2.5em 0;
+    display: block;
+    font-weight: 600;
+    font-family: "微软雅黑";
+}
+
+/*---------------------------------------------------*/
+.wqht {
+    width: 100%;
+    height: 9em;
+}
+
+.wqhtyidong {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.wqhtyidong li{
+    box-shadow: 10px 10px 10px grey;
+}
+.wqht ul {
+    position: relative;
+    width: 110em;
+    height: 9em;
+    background-color: #f8f8f8;
+    /*animation: move 30s linear 0s infinite normal;*/
+}
+
+.wqht ul li {
+    position: relative;
+    display: inline-block;
+    float: left;
+    list-style: none;
+    width: 13em;
+    margin: 0 0.5em;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.06);
+    /*border-radius: 0.5em;*/
+    box-sizing: border-box;
+}
+.wqht ul:hover {
+}
+
+.wqht ul:hover li {
+    opacity: 0.5;
+}
+
+.wqht ul li:hover {
+    opacity: 1;
+}
+
+@keyframes move {
+    from {
+        margin-left: 0;
+    }
+    to {
+        margin-left: -1200px;
+    }
+}
+
+.wqhtwz {
+    width: 100%;
+    height: 100%;
+    margin: 4em 0;
+    text-align: center;
+    display: block;
+    font-family: "微软雅黑";
+}
+
+.htwenzi {
+    margin-top: 1em;
+    font-size: 1.2em;
+}
+
+.htwh {
+    height: 1.1em;
+    width: 1.1em;
+    margin-top: 0.2em;
+    line-height: 1.1em;
+    text-align: center;
+    border-radius: 0.55em;
+    color: #3739ee;
+    border: solid 0.04em #161dd5;
+    display: inline-block;
+    font-size: 1em;
+}
+
+.rmhttk {
+    display: block;
+}
+
+.rmhtxx {
+    position: relative;
+    display: inline-block;
+    width: 95%;
+    height: 3em;
+    line-height: 3em;
+    font-size: 0.9em;
+    margin: 0.5em 2.5% 0;
+    border: solid 0.04em black;
+    box-shadow: 10px 10px 10px grey;
+    /*border-radius: 0.5em;*/
+}
+
+.rmhtnr {
+    position: absolute;
+    float: left;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+.rmhtbh {
+    position: relative;
+    float: left;
+    left: 0.5em;
+    font-size: 1em;
+    font-weight: 900;
+    display: inline-block;
+}
+
+.rmhtnrwz {
+    position: relative;
+    float: left;
+    left: 1em;
+    font-size: 1.1em;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.rmhtdp {
+    position: relative;
+    float: right;
+    right: 2.8em;
+    top: 0.4em;
+    font-size: 1em;
+    display: inline-block;
+}
+
+.rmhtdprd {
+    position: relative;
+    float: right;
+    right: 1.6em;
+    font-size: 1em;
+    font-weight: 500;
+    display: inline-block;
+}
+
+/*---------------------匿槽-----------------------------*/
+.hqzhongyang {
+    /*text-align: center;*/
+}
+
+.hqfenlei {
+    text-align: center;
+    margin-bottom: 0.48em;
+}
+
+.hqdingduan {
+    display: inline-block;
+    position: relative;
+}
+
+.hqxuanxiang2 {
+    position: relative;
+    margin-top: 0.3em;
+    background-color: #f2edf3;
+    color: #565656;
+    font-size: 1.4em;
+    line-height: 1.8em;
+    width: 5em;
+    display: inline-block;
+    border-radius: 1.3em;
+}
+
+span.xuanzhong {
+    background-color: #5a5a5a;
+    color: white;
+}
+
+.hqxjdh {
+    display: none;
+    background-color: #f0eaf4;
+    overflow: hidden;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 100%;
+    height: 5.4em;
+    position: relative;
+}
+
+.hqhtxjdh {
+    position: relative;
+    display: none;
+    background-color: #f0eaf4;
+    overflow: hidden;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 100%;
+    height: 2.5em;
+    bottom: 0;
+}
+
+.htsrfsk {
+    background-color: #f0eaf4;
+    position: absolute;
+    display: inline-block;
+    width: 80%;
+    height: 2em;
+    border-color: #0D0D0D;
+    border: thin;
+    word-wrap: break-word;
+    font-size: 1.6em;
+}
+
+.baikuang {
+    background-color:rgba(90, 90, 90, 0.65);
+    overflow: hidden;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 100%;
+    height: 5.4em;
+    position: relative;
+}
+
+.baise {
+    background-color: #fefcff;
+}
+
+.hqhf {
+    background-color: #f0ebf1;
+    overflow: hidden;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 100%;
+    height: 1.6em;
+    position: relative;
+}
+
+.hqhfbxs {
+    display: none;
+}
+
+.hqsr {
+    background-color: #f0eaf4;
+    position: absolute;
+    display: inline;
+    width: 67%;
+    height: 80%;
+    left: 9.1em;
+    top: 0.7em;
+    border-color: #0D0D0D;
+    border: thin;
+    word-wrap: break-word;
+}
+
+.hqhtsr {
+    background-color: #f0eaf4;
+    position: absolute;
+    display: inline;
+    width: 55%;
+    height: 80%;
+    left: 33%;
+    top: 0.65em;
+    border-color: #0D0D0D;
+    border: thin;
+    word-wrap: break-word;
+}
+
+.htsr {
+    background-color: #f0eaf4;
+    position: absolute;
+    display: inline;
+    width: 80%;
+    height: 3em;
+    border-color: #0D0D0D;
+    border: thin;
+    word-wrap: break-word;
+}
+
+.hqquangao {
+    position: absolute;
+    display: inline;
+    height: 100%;
+    line-height: 4.5em;
+    left: 6em;
+    top: 0.15em;
+    color: white;
+    font-size: 1.1em;
+}
+
+.dzpl {
+    display: inline-block;
+    position: absolute;
+    bottom: 0.8em;
+    right: 0;
+    width: 6.7em;
+    height: 1.3em;
+    /*background-color: red;*/
+}
+
+.hqtb {
+    display: inline-block;
+    width: 1.3em;
+    height: 1.3em;
+    /*background-color: green;*/
+}
+
+.hqsl {
+    position: relative;
+    display: inline-block;
+    line-height: 1.2em;
+    font-size: 0.9em;
+    color: #fffffd;
+}
+
+.hptjwz {
+    position: relative;
+    left: 93%;
+    margin-right: 0.5em;
+    bottom: -1em;
+    /*background-color: yellow;*/
+    display: inline-block;
+}
+
+.hphttjwz {
+    position: relative;
+    left: 93%;
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+    /*background-color: yellow;*/
+    display: inline-block;
+}
+
+.hqxzajz {
+    position: relative;
+    top: 1.65em;
+    left: 0.35em;
+    display: inline-block;
+}
+
+.hqxzajy {
+    position: relative;
+    top: 1.65em;
+    left: 3.9em;
+    display: inline-block;
+}
+
+.yuan {
+    position: absolute;
+    font-weight: 500;
+    width: 2em;
+    height: 2em;
+    font-size: 1.8em;
+    background-color: whitesmoke;
+    line-height: 2em;
+    text-align: center;
+    border-radius: 50%;
+    display: inline;
+    left: 0.7em;
+    top: 0.4em;
+}
+
+.heised {
+    background-color: #615f62;
+    color: #fefcff;
+}
+
+.heisez {
+    color: #474547;
+}
+
+.hqhfyuan {
+    position: absolute;
+    background-color: #646265;
+    width: 1.3em;
+    height: 1.3em;
+    line-height: 1.3em;
+    text-align: center;
+    border-radius: 50%;
+    display: inline;
+    left: 3em;
+    color: #f6f6f6;
+    margin-top: 0.1em;
+}
+
+.hqhfnr {
+    position: absolute;
+    display: inline-block;
+    margin-left: 5em;
+}
+
+.hqplkuang {
+    height: 1.6em;
+    position: absolute;
+    display: inline-block;
+    margin-left: 5.5em;
+    margin-top: 0.2em;
+    background-color: #f0eaf4;
+    border: thin;
+    font-size: 1em;
+    font-family: "微软雅黑"
+}
+
+.hqxinjian {
+    text-align: center;
+    position: absolute;
+    background-color: #111111;
+    color: whitesmoke;
+    line-height: 2em;
+    font-size: 1.2em;
+    top: 0.38em;
+    right: 0.15em;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+}
+
+.hqxjht {
+    float: right;
+    text-align: center;
+    background-color: #111111;
+    margin-top: 0.1em;
+    color: whitesmoke;
+    line-height: 1.2em;
+    font-size: 1.2em;
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    font-weight: 900;
+}
+
+.hqjiahao {
+    position: relative;
+    top: -0.3em;
+    font-weight: 900;
+}
+
+.hqxjpl {
+    position: relative;
+    float: right;
+    background-color: #eae7de;
+    margin-top: 0.1em;
+    margin-right: 0.5em;
+    width: 1.3em;
+    height: 1.3em;
+    line-height: 1em;
+    display: inline-block;
+    border: solid;
+    border-width: thin;
+    border-color: #423d43;
+    text-align: center;
+    border-radius: 30%;
+}
+
+.hqxjplfs {
+    font-size: 1em;
+    position: relative;
+    float: right;
+    background-color: #eae7de;
+    margin-top: 0.1em;
+    margin-right: 0.5em;
+    width: 1.3em;
+    height: 1.3em;
+    line-height: 1em;
+    display: inline-block;
+    border-color: #423d43;
+    text-align: center;
+    border-radius: 30%;
+}
+.fa-comment{
+    margin-left: 1em;
+}
