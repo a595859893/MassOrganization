@@ -42,9 +42,12 @@
 		else if($serverType=="Get"){
 			$num = $_POST["num"];
 			$type = 'debunk';
+<<<<<<< HEAD
+=======
 			$line["success"] = true;
 			$line["debunk"] = array();
 			$line["conversation"] = array();
+>>>>>>> 85c0348c87ca9a6d202f051160798ccaa16d0159
 			
 			$rst = $mysqli->query("SELECT * FROM conversation as a WHERE $num>(SELECT count(*) FROM conversation WHERE UID>a.UID AND type='$type') ORDER BY a.UID DESC");
 			if($rst){

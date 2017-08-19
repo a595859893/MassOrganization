@@ -181,9 +181,9 @@
                 <div class="weui-media-box__bd">
                     <h4 class="weui-media-box__title"> 标题一 &nbsp;<i class="fa fa-star" onclick="color(event)"></i><i
                             class="fa fa-calendar-plus-o" style="float: right;font-size: 20px;"></i></h4>
-                    <p class="weui-media-box__desc">时间</p>
-                    <p class="weui-media-box__desc">地点</p>
-                    <p class="weui-media-box__desc">简介</p>
+                    <p class="weui-media-box__desc"><i class='fa fa-clock-o'></i> 时间 </p>
+                    <p class="weui-media-box__desc"><i class='fa fa-users'></i> 主办方</p>
+                    <!--<p class="weui-media-box__desc">简介</p>-->
                 </div>
             </a>
         </div>
@@ -281,7 +281,7 @@
         h4.className = "weui-media-box__title";
         p_1.className=p_2.className=p_3.className = "weui-media-box__desc";
 
-          h4.innerHTML = title + "<i class='fa fa-thumbs-o-up' style='float: right'> "+ 3 +"</i> ";
+          h4.innerHTML = title + "<i class='fa fa-thumbs-o-up' style='float: right' onclick='color(event)'> "+ 3 +"</i> ";
           p_1.innerText = time;
           p_2.innerText = content;
 //          div_1.style.paddingTop=0+'px';
