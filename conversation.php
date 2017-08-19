@@ -2,18 +2,20 @@
 	require 'commonFunction.php';
 
 	if($_SERVER["REQUEST_METHOD"]=="POST"){
-		$type = $_POST["type"];
+		$serverType = $_POST["serverType"];
 		$line = array();
 		$mysqli = linkToSQL();
+		$openID	= getOpenID();
 		
-		if($type == "Send"){
+		if($serverType == "Send"){
 			$character	= $_POST["character"];
 			$content 	= $_POST["content"];
+			$type	 	= $_POST["type"];
 			$uid		= $_POST["UID"];
 			
 			if($uid==-1){
-				$order = "INSERT INTO conversation (word,content,good) ";
-				$order .="VALUES('$character','$content',0)";
+				$order = "INSERT INTO conversation (openID,word,content,type) ";
+				$order .="VALUES('$openID','$character','$content','$type')";
 
 				$rst = $mysqli->query($order);
 				
@@ -36,10 +38,12 @@
 					$line["error"] = "评论发起错误，错误提示:(".$mysqli->error.")";
 				}
 			}
-		}else if($type=="Get"){
+		}
+		else if($serverType=="Get"){
 			$num = $_POST["num"];
+			$type = 'debunk';
 			
-			$rst = $mysqli->query("SELECT * FROM conversation as a WHERE $num>(SELECT count(*) FROM conversation WHERE UID>a.UID) ORDER BY a.UID DESC");
+			$rst = $mysqli->query("SELECT * FROM conversation as a WHERE $num>(SELECT count(*) FROM conversation WHERE UID>a.UID AND type='$type') ORDER BY a.UID DESC");
 			if($rst){
 				$looptag = 0;
 				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
@@ -68,7 +72,7 @@
 				$line["error"] = "话题获取错误，错误提示: ".$mysqli->error;
 				$line["success"] = false;
 			}
-		}else if($type=="Good"){
+		}else if($serverType=="Good"){
 			$topicID = $_POST["topicID"];
 			
 			$openID = getOpenID();

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>讨论区</title>
+    <meta name="viewport"
+          content="width=375,initial-scale=0.84,user-scalable=0"/>
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+        .tlym{
+            background-color: #ffffff;
+        }
+        .tlqbt1{
+            position: relative;
+            height: 8em;
+        }
+        .tlqbt{
+            width: 100%;
+            margin-top: 3em;
+            margin-bottom: 0;
+            font-size: 1.1em;
+            font-weight: 900;
+            display: inline-block;
+            text-align: center;
+        }
+        .tlsj{
+            position: absolute;
+            right: 0;
+            display:block;
+            margin-top: 0;
+            margin-bottom: 1em;
+            color: #bfbfbf;
+        }
+        .tlqfg{
+            width: 100%;
+            display: inline-block;
+            height: 1.8em;
+            background-color: #f0ebf1;
+            text-align: right;
+        }
+        .tlsxtb {
+            width: 1.6em;
+            height: 1.6em;
+            background-color: green;
+            display: inline-block;
+        }
+        .tlltk{
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            height: 6em;
+        }
+        .tltx{
+            float: left;
+            display: inline-block;
+            width: 6em;
+            height:100%;
+        }
+        .tltxnr {
+            display: inline-block;
+            margin: 1em 1em;
+            width: 4em;
+            height: 4em;
+            border-radius: 50%;
+            background-color: #615f62;
+            color: #fefcff;
+        }
+        .tlkxx{
+            float: left;
+            width:73%;
+            height: 6em;
+            display: inline-block;
+            border-bottom: solid 0.01em #e0e0e0;
+        }
+        .tlkxxsj{
+            display: block;
+            height: 1.3em;
+            line-height: 2.3em;
+            width: 100%;
+            color: #bfbfbf;
+            margin-top: 0.8em;
+
+        }
+        .tlkxxnr{
+            display: block;
+            line-height: 3em;
+            height: 3em;
+        }
+        .tldzpl {
+            position: absolute;
+            float: right;
+            width: 6.7em;
+            height: 1.3em;
+            display: inline-block;
+            bottom: 0.3em;
+            right: 0;
+            /*background-color: red;*/
+        }
+
+        .tltb {
+            display: inline-block;
+            width: 1.3em;
+            height: 1.3em;
+            /*background-color: green;*/
+        }
+        .heisez {
+            color: #474547;
+        }
+        /*/-------------------------------------------------*/
+        .tlhfnr {
+            position: absolute;
+            display: inline-block;
+            margin-left: 4em;
+        }
+
+
+        .tlxjpl {
+            position: relative;
+            float: right;
+            background-color: #eae7de;
+            margin-top: 0.1em;
+            margin-right: 0.5em;
+            width: 1.3em;
+            height: 1.3em;
+            line-height: 1em;
+            display: inline-block;
+            border: solid;
+            border-width: thin;
+            border-color: #423d43;
+            text-align: center;
+            border-radius: 30%;
+        }
+
+        .tlhfyuan {
+            background-color: #646265;
+            width: 1.3em;
+            height: 1.3em;
+            line-height: 1.3em;
+            text-align: center;
+            border-radius: 0.65em;
+            display: inline-block;
+            color: #f6f6f6;
+            left: 1em;
+        }
+
+        .tlsl {
+            display: inline-block;
+            top: -0.3em;
+            line-height: 1.2em;
+            font-size: 0.9em;
+        }
+        /*--------------------------------------------------*/
+
+        .tlfenlei{
+            text-align: right;
+            background-color: #f7f7ff;
+        }
+        .tlxuanxiang2{
+            font-size:  1.2em;
+            line-height:0.9em;
+            color: #adadad;
+        }
+        span.tlxuanzhong{
+            color: #8ac148;
+        }
+        /*-------------------------------------*/
+        .tlhf {
+            background-color: #f0ebf1;
+            overflow: hidden;
+            border-radius: 2px;
+            cursor: pointer;
+            width: 100%;
+            height: 1.6em;
+            position: relative;
+        }
+        .tlhfyuan {
+            position: absolute;
+            background-color: #646265;
+            width: 1.3em;
+            height: 1.3em;
+            line-height: 1.3em;
+            text-align: center;
+            border-radius: 50%;
+            display: inline;
+            left: 2em;
+            color: #f6f6f6;
+            margin-top: 0.1em;
+        }
+
+        .tlplkuang {
+            width: 73%;
+            height: 1.6em;
+            position: absolute;
+            display: inline-block;
+            margin-left: 4em;
+            margin-top: 0.2em;
+            background-color: #f0eaf4;
+            border: thin;
+            font-size: 1em;
+            font-family: "微软雅黑"
+        }
+
+
+        .tlxjpl {
+            position: relative;
+            float: right;
+            background-color: #eae7de;
+            margin-top: 0.1em;
+            margin-right: 0.5em;
+            width: 1.3em;
+            height: 1.3em;
+            line-height: 1em;
+            display: inline-block;
+            border: solid;
+            border-width: thin;
+            border-color: #423d43;
+            text-align: center;
+            border-radius: 30%;
+        }
+
+        .tlxjplfs {
+            font-size: 1em;
+            position: relative;
+            float: right;
+            background-color: #eae7de;
+            margin-top: 0.1em;
+            margin-right: 0.5em;
+            width: 1.3em;
+            height: 1.3em;
+            line-height: 1em;
+            display: inline-block;
+            border-color: #423d43;
+            text-align: center;
+            border-radius: 30%;
+        }
+
+    </style>
+</head>
+<body>
+<div class="tlym">
+    <div class="tlqbt1"><span class="tlqbt">刚到中山大学你觉得最大的是什么</span><span class="tlsj">8月12日</span></div>
+    <!----------------------------------------------筛选-------------------------------->
+    <div id="tlfl"  class="tlfenlei buxianshi">
+        <span class="tlxuanxiang2 ciji tlxuanzhong"  onclick="xuanxiang(event)">最热</span>
+        <span class="tlxuanxiang2 ciji"  onclick="xuanxiang(event)">最新</span>
+    </div>
+    <script type="text/javascript">
+        <!--顶部次次级选项卡-->
+        function xuanxiang(evt, tabName) {
+            var i,ciji;
+            ciji = document.getElementsByClassName("ciji");
+            for (i = 0; i < ciji.length; i++) {
+                ciji[i].className = ciji[i].className.replace("tlxuanzhong", " ");
+            }
+            if (evt) evt.currentTarget.className += " tlxuanzhong";
+        }
+    </script>
+    <!--------------------聊天框------------------------->
+    <div class="tlltk">
+        <!--头像-->
+        <div class="tltx">
+            <img class="tltxnr">
+        </div>
+        <!--信息-->
+
+            <div class="tlkxxsj">2017年8月12日</div>
+            <div class="tlkxxnr">我觉得。。。。。。。。。</div>
+            <!--点赞评论-->
+            <div class="tldzpl">
+                <div class="tldzpl ">
+                    <span class="tltb"><i class="fa fa-thumbs-up" style="color: #7e7e7e"></i></span>
+                    <span class="tlsl heisez">11</span>&nbsp
+                    <span class="tltb"><i class="fa fa-comment"  style="color: #7e7e7e"></i></span>
+                    <span class="tlsl heisez">0</span>
+                </div>
+            </div>
+    </div>
+        <div class="tlhf zhongyang">
+            <img class="tlhfyuan">
+            <p class="tlhfnr">单纯的回复，后面没有加号的</p>
+        </div>
+        <!-------------带新建的回复------------------>
+        <div class="tlhf zhongyang">
+            <img class="tlhfyuan">
+            <p class="tlhfnr">最底下的一条评论</p>
+            <div class="tlxjpl">+</div>
+        </div>
+        <!--新建评论窗口--->
+        <div  class="tlhf zhongyang">
+            <img class="tlhfyuan">
+            <textarea type="text" style="color:#b8a4a4;" value="来发第一条评论吧" onfocus="if (value =='来发第一条评论吧'){value  =''}" onblur="if (value  ==''){value='来发第一条评论吧'}" class="tlplkuang" name="usrname">来发第一条评论吧</textarea>
+            <div class="tlxjpl tlxjplfs">+</div>
+        </div>
+</div>
+</body>
+</html>

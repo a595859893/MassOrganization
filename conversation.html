@@ -5,7 +5,7 @@
     <title>Title</title>
     <!--全屏显示-->
     <meta name="viewport"
-          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+          content="width=375,initial-scale=0.84,user-scalable=0"/>
 
     <!--引用weui框架做样式-->
     <!--<link rel="stylesheet" href="weui.min.css">-->
@@ -35,7 +35,7 @@
         }
 
         .hqxuanxiang1 {
-            left: 1.3em;
+            left: 1.6em;
         }
 
         .xuanxiang2 {
@@ -79,32 +79,35 @@
         }
 
         .wqhtyidong {
-            width: 600px;
+            position: absolute;
+            width: 100%;
             height: 100%;
-            /*border: 1px solid #000;*/
             margin: 0 auto;
             overflow: hidden;
+            overflow-x: auto;
+            overflow-y: hidden;
         }
 
         .wqht ul {
-            width: 2100;
-            height: 100%;
+            position: relative;
+            width: 110em;
+            height: 9em;
             background-color: #f8f8f8;
             animation: move 30s linear 0s infinite normal;
         }
 
         .wqht ul li {
+            position: relative;
+            display: inline-block;
             float: left;
             list-style: none;
-            width: 200px;
-            margin: 0 10px;
+            width: 13em;
+            margin: 0 0.5em;
             height: 100%;
             background-color: #fffbba;
             border-radius: 0.5em;
-            /*border: 1px solid #000;*/
             box-sizing: border-box;
         }
-
         .wqht ul:hover {
             /*动画添加给谁, 就让谁停止*/
             animation-play-state: paused;
@@ -133,6 +136,7 @@
             margin: 4em 0;
             text-align: center;
             display: block;
+            font-family: "微软雅黑";
         }
 
         .htwenzi {
@@ -226,10 +230,6 @@
             position: relative;
         }
 
-        .hqxuanxiang1 {
-            left: 1.3em;
-        }
-
         .hqxuanxiang2 {
             position: relative;
             margin-top: 0.3em;
@@ -257,6 +257,7 @@
             height: 5.4em;
             position: relative;
         }
+
         .hqhtxjdh {
             display: none;
             background-color: #f0eaf4;
@@ -265,10 +266,11 @@
             cursor: pointer;
             width: 100%;
             height: 2.5em;
-            position:fixed;
+            position: fixed;
             bottom: 0;
         }
-        .htsrfsk{
+
+        .htsrfsk {
             background-color: #f0eaf4;
             position: absolute;
             display: inline-block;
@@ -279,8 +281,9 @@
             word-wrap: break-word;
             font-size: 1.6em;
         }
+
         .baikuang {
-            background-color: #5a5a5a;
+            background-color:rgba(90, 90, 90, 0.65);
             overflow: hidden;
             border-radius: 2px;
             cursor: pointer;
@@ -311,15 +314,16 @@
             background-color: #f0eaf4;
             position: absolute;
             display: inline;
-            width: 55%;
+            width: 67%;
             height: 80%;
-            left: 33%;
-            top: 0.65em;
+            left: 9.1em;
+            top: 0.7em;
             border-color: #0D0D0D;
             border: thin;
             word-wrap: break-word;
         }
-        .hqhtsr{
+
+        .hqhtsr {
             background-color: #f0eaf4;
             position: absolute;
             display: inline;
@@ -331,7 +335,8 @@
             border: thin;
             word-wrap: break-word;
         }
-        .htsr{
+
+        .htsr {
             background-color: #f0eaf4;
             position: absolute;
             display: inline;
@@ -346,16 +351,17 @@
             position: absolute;
             display: inline;
             height: 100%;
-            line-height: 5.4em;
-            left: 7em;
+            line-height: 4.5em;
+            left: 6em;
             top: 0.15em;
             color: white;
+            font-size: 1.1em;
         }
 
         .dzpl {
             display: inline-block;
             position: absolute;
-            bottom: 0.3em;
+            bottom: 0.8em;
             right: 0;
             width: 6.7em;
             height: 1.3em;
@@ -372,7 +378,6 @@
         .hqsl {
             position: relative;
             display: inline-block;
-            top: -0.3em;
             line-height: 1.2em;
             font-size: 0.9em;
             color: #fffffd;
@@ -382,13 +387,14 @@
             position: relative;
             left: 93%;
             margin-right: 0.5em;
-            bottom: -3.3em;
+            bottom: -1em;
             /*background-color: yellow;*/
             display: inline-block;
         }
+
         .hphttjwz {
             position: relative;
-                    left: 93%;
+            left: 93%;
             margin-top: 0.5em;
             margin-right: 0.5em;
             /*background-color: yellow;*/
@@ -396,30 +402,32 @@
         }
 
         .hqxzajz {
-            position: absolute;
+            position: relative;
             top: 1.65em;
-            left: 2em;
+            left: 0.35em;
             display: inline-block;
         }
 
         .hqxzajy {
-            position: absolute;
+            position: relative;
             top: 1.65em;
-            left: 6.5em;
+            left: 3.9em;
             display: inline-block;
         }
 
         .yuan {
             position: absolute;
+            font-weight: 500;
+            width: 2em;
+            height: 2em;
+            font-size: 1.8em;
             background-color: whitesmoke;
-            width: 3.5em;
-            height: 3.5em;
-            line-height: 3.5em;
+            line-height: 2em;
             text-align: center;
             border-radius: 50%;
             display: inline;
-            left: 3em;
-            top: 0.65em;
+            left: 0.7em;
+            top: 0.4em;
         }
 
         .heised {
@@ -476,7 +484,8 @@
             height: 1.5em;
             border-radius: 50%;
         }
-        .hqxjht{
+
+        .hqxjht {
             float: right;
             text-align: center;
             background-color: #111111;
@@ -530,55 +539,23 @@
             text-align: center;
             border-radius: 30%;
         }
+        .fa-comment{
+            margin-left: 1em;
+        }
     </style>
 </head>
-<body style="overflow-x:hidden;">
+<body>
 
 <div class="hqfenlei">
     <div class="hqdingduan">
         <span id="conversation" class="hqxuanxiang2 hqxuanxiang1 ciji0 xuanzhong">话圈</span>
         <span id="debunk" class="hqxuanxiang2 ciji0">吐槽</span>
     </div>
-    <div id="hqdingduanxinjian" class="hqxinjian" style="display: none"><span class="hqjiahao" onclick="hqxinjian()">+</span></div>
+    <div id="hqdingduanxinjian" class="hqxinjian" style="display: none">
+        <span class="hqjiahao" onclick="hqxinjian('hqxjdh','xinhuaquan')" >+</span>
+    </div>
 </div>
 
-<script type="text/javascript">
-    var newConversation = false;
-
-    function hqxinjian() {
-        newConversation = !newConversation;
-        if (newConversation) {
-            document.getElementById('hqxjdh').style.display = "block";
-            document.getElementById('xinhuaquan').focus();
-        } else {
-            document.getElementById('hqxjdh').style.display = "none";
-        }
-    }
-
-
-    function hqqh(evt, tabName) {
-        var i, page, tab;
-        page = document.getElementsByClassName("hqncym");
-        for (i = 0; i < page.length; i++) {
-            page[i].style.display = 'none';
-        }
-        tab = document.getElementsByClassName("tab");
-        for (i = 0; i < tab.length; i++) {
-            tab[i].className = tab[i].className.replace(" weui-bar__item_on", "");
-        }
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " weui-bar__item_on";
-    }
-
-    function hqxuanxiang(evt) {
-        var i, ciji0;
-        ciji0 = document.getElementsByClassName("ciji0");
-        for (i = 0; i < ciji0.length; i++) {
-            ciji0[i].className = ciji0[i].className.replace("xuanzhong", "");
-        }
-        if (evt) evt.currentTarget.className += " xuanzhong";
-    }
-</script>
 <div class="hqncym" id="hqym">
     <div class="jrht"><span class="jrhtnr">中山大学是个怎么样的学校</span></div>
     <p class="htwenzi">往期话题</p>
@@ -597,7 +574,10 @@
             </div>
         </i></div>
     <div>
-        <p class="htwenzi">热门话题 <span class="htwh">?</span><span class="hqxjht" onclick="hqxjht()">+</span></p>
+        <p class="htwenzi">热门话题
+            <span class="htwh">?</span>
+            <span class="hqxjht" onclick="hqxinjian('hqxjht','xinhuati')">+</span>
+        </p>
     </div>
 
     <div class="rmht">
@@ -608,27 +588,16 @@
                     class="rmhtdprd">100</span></li>
         </ul>
     </div>
-</div>
-<!--新建发话窗口8.13到此-->
-    <div id="hqxjht" class="hqhtxjdh">
-        <textarea id="xinhuati" class="htsrfsk" style="color:#615f62;"placeholder="参与讨论"
+    <div id="hqxjht" class="hqhtxjdh" style="display: none">
+        <textarea id="xinhuati" class="htsrfsk" style="color:#615f62;" placeholder="参与讨论"
                   name="usrname"></textarea>
         <i id="sendMain2" class="fa fa-send-o hphttjwz"></i>
     </div>
-<script>
-    function hqxjht() {
-        newConversation = !newConversation;
-        if (newConversation) {
-            document.getElementById('hqxjht').style.display = "block";
-            document.getElementById('xinhuaquan').focus();
-        } else {
-            document.getElementById('hqxjht').style.display = "none";
-        }
-    }
-</script>
-<!--新建发话窗口-->
+</div>
+
+
 <div class="hqncym" id="ncym" style="display: none">
-    <div id="hqxjdh" class="hqxjdh hqzhongyang">
+    <div id="hqxjdh" class="hqxjdh hqzhongyang" style="display: none">
         <div class="hqmzxz">
             <i id="left" class="hqxzajz">&lt;</i>
             <span id="hqniming" class="yuan">A</span>
@@ -664,27 +633,30 @@
     };
     document.getElementById('sendMain').onclick = function () {
         document.getElementById("xinhuaquan").disabled = true;
-        var content = {
-            type: "Send",
+        postMessage({
+            serverType: "Send",
+            type: "debunk",
             character: document.getElementById('hqniming').innerText,
             content: document.getElementById("xinhuaquan").value,
             UID: -1
-        };
-        var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "conversation.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var json = JSON.parse(xmlhttp.responseText);
-                if (json.success) {
-                    document.getElementById("xinhuaquan").disabled = false;
-                    document.getElementById("xinhuaquan").value = "";
-                } else
-                    console.log(json.error);
-
-            }
-        }
+        }, "conversation.php", function () {
+            init();
+            document.getElementById("xinhuaquan").disabled = false;
+            document.getElementById("xinhuaquan").value = "";
+        });
+    }
+    document.getElementById('sendMain2').onclick = function () {
+        document.getElementById("xinhuati").disabled = true;
+        postMessage({
+            serverType: "Send",
+            type: "conversation",
+            character: "",
+            content: document.getElementById("xinhuati").value,
+            UID: -1
+        }, "conversation.php", function () {
+            document.getElementById("xinhuati").disabled = false;
+            document.getElementById("xinhuati").value = "";
+        });
     }
     top_conversation.onclick = function () {
         document.getElementById("ncym").style.display = 'none';
@@ -701,14 +673,6 @@
         top_debunk.className += " xuanzhong";
     }
     init();
-
-    function dealContent(json) {
-        var black = false;
-        for (var i = 0; i < json.length; i++) {
-            main.appendChild(appendTopic(json[i].UID, json[i].word, json[i].content, json[i].good, json[i].review, black));
-            black = !black;
-        }
-    }
 
 
     function appendTopic(uid, character, content, good, review, black) {
@@ -767,23 +731,9 @@
         span_send.innerText = "A";
         divWhole.onclick = function (e) {
             if (e.target == span_1) {
-                var content = {
-                    type: "Good",
-                    topicID: uid
-                };
-                var xmlhttp = GetXMLHTTPRequest();
-                xmlhttp.open("POST", "conversation.php", true);
-                xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-                xmlhttp.send(toStr(content));
-                xmlhttp.onreadystatechange = function () {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        var json = JSON.parse(xmlhttp.responseText);
-                        if (json.success) {
-                            span_1_text.innerText = (parseInt(span_1_text.innerText.replace(" ", "")) + 1) + "    ";
-                        } else
-                            console.log(json.error);
-                    }
-                }
+                postMessage({serverType: "Good", topicID: uid}, "conversation.php", function () {
+                    span_1_text.innerText = (parseInt(span_1_text.innerText.replace(" ", "")) + 1) + "    ";
+                });
                 return;
             }
             if (ul.style.display == "block") {
@@ -806,37 +756,26 @@
         }
         icon.onclick = function (e) {
             textarea.disabled = true;
-            var content = {
-                type: "Send",
+            postMessage({
+                serverType: "Send",
                 character: span_send.innerText,
                 content: textarea.value,
                 UID: uid
-            };
-            var xmlhttp = GetXMLHTTPRequest();
-            xmlhttp.open("POST", "conversation.php", true);
-            xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-            xmlhttp.send(toStr(content));
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    var json = JSON.parse(xmlhttp.responseText);
-                    if (json.success) {
-                        var tempLI = ul.getElementsByTagName("li");
-                        for (var i = 0; i < tempLI.length; i++) {
-                            var tempDIV = tempLI[i].getElementsByTagName("div");
-                            if (tempDIV.length > 0) {
-                                tempDIV[0].onclick = null;
-                                tempLI[i].removeChild(tempDIV[0]);
-                            }
-                        }
-                        ul.appendChild(appendReview(uid, span_send.innerText, textarea.value, true));
-                        liSend.style.display = "none";
-                        textarea.disabled = false;
-                        textarea.placeholder = "请输入评论";
-                        textarea.value = "";
-                    } else
-                        console.log(json.error);
+            }, "conversation.php", function () {
+                var tempLI = ul.getElementsByTagName("li");
+                for (var i = 0; i < tempLI.length; i++) {
+                    var tempDIV = tempLI[i].getElementsByTagName("div");
+                    if (tempDIV.length > 0) {
+                        tempDIV[0].onclick = null;
+                        tempLI[i].removeChild(tempDIV[0]);
+                    }
                 }
-            }
+                ul.appendChild(appendReview(uid, span_send.innerText, textarea.value, true));
+                liSend.style.display = "none";
+                textarea.disabled = false;
+                textarea.placeholder = "请输入评论";
+                textarea.value = "";
+            });
         }
         var charIndex = 90;
         right.onclick = function () {
@@ -907,34 +846,24 @@
         return li
     }
 
-    function hqxinjian() {
-        newConversation = !newConversation;
-        if (newConversation) {
-            document.getElementById('hqxjdh').style.display = "block";
-            document.getElementById('xinhuaquan').focus();
+    function hqxinjian(id, textarea) {
+        if (document.getElementById(id).style.display == "none") {
+            document.getElementById(id).style.display = "block";
+            document.getElementById(textarea).focus();
         } else {
-            document.getElementById('hqxjdh').style.display = "none";
+            document.getElementById(id).style.display = "none";
         }
     }
 
     function init() {
-        var content = {
-            type: "Get",
-            num: 20
-        };
-        var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "conversation.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var json = JSON.parse(xmlhttp.responseText);
-                if (json.success)
-                    dealContent(json);
-                else
-                    console.log(json.error);
+        postMessage({serverType: "Get", num: 20}, "conversation.php", function (json) {
+            main.innerHTML = "";
+            var black = false;
+            for (var i = 0; i < json.length; i++) {
+                main.appendChild(appendTopic(json[i].UID, json[i].word, json[i].content, json[i].good, json[i].review, black));
+                black = !black;
             }
-        }
+        });
     }
 </script>
 </body>
