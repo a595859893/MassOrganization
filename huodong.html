@@ -319,20 +319,9 @@
                     break;
 
                 case(i_1):
-                    var content = {serverType: "Mark", actID: index};
-                    var xmlhttp = GetXMLHTTPRequest();
-                    xmlhttp.open("POST", "activity.php", true);
-                    xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-                    xmlhttp.send(toStr(content));
-                    xmlhttp.onreadystatechange = function () {
-                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                            var json = JSON.parse(xmlhttp.responseText);
-                            if (json.success)
-                                event.target.style.color = json.mark ? '#E7CF0C' : '';
-                            else
-                                console.log(json.error);
-                        }
-                    };
+                    postMessage({serverType: "Mark", actID: index},"activity.php",function(json){
+                        event.target.style.color = json.mark ? '#E7CF0C' : '';
+                    });
                     break;
             }
         };
