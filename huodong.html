@@ -78,8 +78,7 @@
                 <div class="button-sp-area" style="justify-content: space-between;" name="other">
                     <button type="reset" class="weui-btn weui-btn_mini weui-btn_default">重置</button>
                     <button type="submit" class="weui-btn weui-btn_mini weui-btn_default"
-                            style="background-color: #86d0ff;color:#fff;margin-right: 24px;" onclick="display()">完成
-                    </button>
+                            style="background-color: #86d0ff;color:#fff;margin-right: 24px;">完成</button>
                 </div>
             </div>
         </div>
@@ -130,7 +129,7 @@
         <div class="weui-mask"></div>
         <div class="weui-dialog">
             <div class="weui-dialog__hd"><strong class="weui-dialog__title">发布流程</strong></div>
-            <div class="weui-dialog__bd">点击“我”&#8594 社团管理者登陆 &#8594 发布活动</div>
+            <div class="weui-dialog__bd">点击“我”&#8594; 社团管理者登陆 &#8594; 发布活动</div>
             <div class="weui-dialog__ft">
                 <a href="#" class="weui-dialog__btn weui-dialog__btn_primary"
                    onclick="document.getElementById('dialog_1').style.display='none'">确定</a>
@@ -213,8 +212,10 @@
                 setOptionColor(actOrder);
             }
 
-            if (ele == "完成")
+            if (ele == "完成") {
                 getActivity(actOrder);
+                display();
+            }
         }
     };
     document.getElementById("actRegister").onsubmit = function (event) {

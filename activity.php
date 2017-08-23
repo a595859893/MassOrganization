@@ -18,7 +18,7 @@
 			if($order=="最新")
 				$orderStr.="ORDER BY time DESC";
 			else if($order=="最热")//有待完善
-				$orderStr.="ORDER BY time";
+				$orderStr.="ORDER BY mark DESC";
 			
 			$rst = $mysqli->query($orderStr);
 			if($rst){
