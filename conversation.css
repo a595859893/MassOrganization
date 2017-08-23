@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: #f8f8f8;
+    /*background-color: #f8f8f8;*/
 }
 
 .hqfenlei {
@@ -43,9 +43,9 @@ span.xuanzhong {
     height: 10em;
     margin: 0 5%;
     /*border-radius: 2em;*/
-    border: solid 0.04em black;
+    border: solid 0.04em #cccccc;
     display: block;
-    box-shadow: 10px 10px 10px grey;
+    /*box-shadow: 10px 10px 10px grey;*/
 }
 
 .jrhtnr {
@@ -75,13 +75,13 @@ span.xuanzhong {
     overflow-y: hidden;
 }
 .wqhtyidong li{
-    box-shadow: 10px 10px 10px grey;
+    box-shadow: 3px 3px 2px #d9d9d9;
 }
 .wqht ul {
     position: relative;
     width: 110em;
     height: 9em;
-    background-color: #f8f8f8;
+    /*background-color: #f8f8f8;*/
     /*animation: move 30s linear 0s infinite normal;*/
 }
 
@@ -94,6 +94,7 @@ span.xuanzhong {
     margin: 0 0.5em;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.06);
+    border: solid 0.04em #d9d9d9;
     /*border-radius: 0.5em;*/
     box-sizing: border-box;
 }
@@ -151,13 +152,14 @@ span.xuanzhong {
 .rmhtxx {
     position: relative;
     display: inline-block;
-    width: 95%;
-    height: 3em;
+    width: 100%;
+    /*height: 3em;*/
     line-height: 3em;
     font-size: 0.9em;
-    margin: 0.5em 2.5% 0;
-    border: solid 0.04em black;
-    box-shadow: 10px 10px 10px grey;
+    margin: 0.1em 0 0;
+    background-color: #fff;
+    /*border: solid 0.04em black;*/
+    /*box-shadow: 10px 10px 10px grey;*/
     /*border-radius: 0.5em;*/
 }
 

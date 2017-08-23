@@ -4,84 +4,163 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <!--全屏显示-->
-    <!--<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">-->
-    <meta name="viewport" content="width=375,initial-scale=0.84,user-scalable=0">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
     <!--引用weui框架做样式-->
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
 
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
-    <link rel="stylesheet" href="billboard.css">
+
+    <style>
+        .weui-badge{
+            background-color: #fdea3b;
+        }
+    </style>
 
 </head>
 <body>
-<div class="phbtop"><i class="phbtubiao fa fa-fire" style="color:red"></i><span class="phbbiaoti">排行榜</span></div>
-<div class="head juzhong">
-    <div class="weui-tab ">
-        <div class="weui-navbar">
-            <div   class="weui-navbar__item weui-bar__item_on ding" onclick="tabNav(event,'page1')">
-                <span class="xuanxiang1">学生活动</span>
-            </div>
-            <div id="weui-navbar__item" class="weui-navbar__item ding" onclick="tabNav(event,'page2')">
-                <span class="xuanxiang1">社团组织</span>
-            </div>
+
+
+<div style="background-color: #f9f9f9;text-align: center;color:#000;padding: 8px">
+    <span><i class="fa fa-fire" style="color:indianred;font-size: 20px"></i> 排行榜 </span>
+</div>
+
+<!--顶部选项卡-->
+<div class="weui-tab">
+    <div class="weui-navbar">
+        <div class="weui-navbar__item weui-bar__item_on tab" onclick="tabNav1(event, 'page1')" id="defaultOpen">
+            &#9829 学生活动
         </div>
-        <div class="weui-tab__panel">
+        <div class="weui-navbar__item tab" onclick="tabNav1(event, 'page2')">
+            &#9830 社团组织
         </div>
     </div>
+
+
+    <div class="weui-tab__panel" id="content">
+        <!--页面一-->
+        <div class="page" id="page1">
+            <div class="weui-panel weui-panel_access">
+                <div class="weui-panel__hd">学生活动</div>
+                <div class="weui-panel__bd" id="frame">
+                    <!--JS添加处-->
+                </div>
+            </div>
+        </div>
+
+        <!--页面二-->
+        <div class="page" id="page2">
+            <div class="weui-panel weui-panel_access">
+                <div class="weui-panel__hd">社团组织</div>
+                <div class="weui-panel__bd" id="frame2">
+                    <!--JS添加处-->
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
-<script type="text/javascript">
+
+<script src="CommonJS.js"></script>
+<script>
+    // 触发 id="defaultOpen" click 事件
+    document.getElementById("defaultOpen").click();
+
+
+    init();
+
+    function init() {
+        var xmlhttp = GetXMLHTTPRequest();
+        var content = {serverType: "getList"};
+        xmlhttp.open("POST", "recruitment.php", true);
+        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+        xmlhttp.send(toStr(content));
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var json = JSON.parse(xmlhttp.responseText);
+                if (json.success)
+                    dealContent(json);
+                else
+                    console.log(json.error);
+            }
+        };
+    }
 
     <!--顶部选项卡-->
-    function tabNav(evt, tabName) {
-        var i,tab;
-        tab = document.getElementsByClassName("ding");
+    function tabNav1(evt, tabName) {
+        var i, page, tab;
+        page = document.getElementsByClassName("page");
+        for (i = 0; i < page.length; i++) {
+            page[i].style.display = 'none';
+        }
+        tab = document.getElementsByClassName("tab");
         for (i = 0; i < tab.length; i++) {
             tab[i].className = tab[i].className.replace(" weui-bar__item_on", "");
         }
-        if (evt) evt.currentTarget.className += " weui-bar__item_on";
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " weui-bar__item_on";
     }
 
-</script>
-<script type="text/javascript">
-    <!--顶部次级选项卡-->
-    function xuanxiang0(evt, tabName1,tabName2) {
-        var i,ciji0;
-        ciji0 = document.getElementsByClassName("ciji0");
-        for (i = 0; i < ciji0.length; i++) {
-            ciji0[i].className = ciji0[i].className.replace("xuanzhong", " ");
-        }
-        document.getElementById(tabName1).style.display = "block";
-        document.getElementById(tabName2).style.display = "none";
-        if (evt) evt.currentTarget.className += " xuanzhong";
-    }
-</script>
-<div id="xiaoquxuanxiang"  class="fenlei">
-    <span class="phbxuanxiang2">校区</span>
-    <span class="phbxuanxiang2 ciji xuanzhong"  onclick="xuanxiang(event)">所有</span>
-    <span class="phbxuanxiang2 ciji"  onclick="xuanxiang(event)">东校区</span>
-    <span class="phbxuanxiang2 ciji"  onclick="xuanxiang(event)">南校区</span>
-    <span class="phbxuanxiang2 ciji"  onclick="xuanxiang(event)">北校区</span>
-    <span class="phbxuanxiang2 ciji"  onclick="xuanxiang(event)">珠海校区</span>
-</div>
-<script type="text/javascript">
-    <!--顶部次次级选项卡-->
-    function xuanxiang(evt, tabName) {
-        var i,ciji;
-        ciji = document.getElementsByClassName("ciji");
-        for (i = 0; i < ciji.length; i++) {
-            ciji[i].className = ciji[i].className.replace("xuanzhong", " ");
-        }
-        if (evt) evt.currentTarget.className += " xuanzhong";
-    }
-</script>
-<div class="content">
-    <ul>
-        <li class="phbtiaokuang"><span class="phbbiaohao">1</span><img class="phbyuan"><span class="phbmingzi">社团组织</span><span class="phbredu">500</span></li>
-        <li class="phbtiaokuang"><span class="phbhdbiaohao">1</span><img class="phbhaibao"><span class="phbmingzi">学生活动</span><span class="phbredu">30</span></li>
-</ul>
-    <!--<div class="weui-flex__item"><div class="huidi">weui</div></div>-->
 
-</div>
-<div class="bottom"></div>
+    //    需要从后端获取title(活动名字/社团名字)，logo(社团logo)，order(序号),点赞数num
+    function dealContent(json) {
+        var frame = document.getElementById("frame");
+        var frame2 = document.getElementById("frame2");
+        for (var i = 0; i < json.length; i++) {
+            if (json[i].type == "zuzhi")
+                frame2.appendChild(createActivity(json[i].title, json[i].num, json[i].order,0));
+            else
+                frame.appendChild(createActivity(json[i].title, json[i].num, json[i].order,1));
+        }
+    }
+
+    function createActivity(name, num,order,star) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var h4 = document.createElement("h4");
+        var p_1 = document.createElement("p");
+        var img = document.createElement("img");
+        var span = document.createElement("span");
+
+        a.className = "weui-media-box weui-media-box_appmsg";
+        div_1.className = "weui-media-box__hd";
+        div_1.style="position: relative;margin-right: 10px;";
+        span.style="position: absolute;top: -.4em;right: -.6em;";
+        img.src='pic_160%20(1).png';
+//图片暂时用这个试试效果
+
+
+        div_2.className = "weui-media-box__bd";
+        h4.className = "weui-media-box__title";
+        p_1.className = "weui-media-box__desc";
+
+        h4.innerText = name;
+        if(star){
+            p_1.innerHTML = "<span style='color: #f47e17'>&#9733 </span> " + "&nbsp;" + num;
+        }else {
+            p_1.innerHTML = "<span style='color: red'> &#9829</span> " + "&nbsp;" + num;
+        }
+
+
+        if(order<10){
+            span.innerText ="NO."+ order;
+        }else {
+            span.innerText = order;
+        }
+
+        div_1.appendChild(img);
+        div_1.appendChild(span);
+
+        div_2.appendChild(h4);
+        div_2.appendChild(p_1);
+
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+
+        return a;
+
+    }
+</script>
 </body>
 </html>
