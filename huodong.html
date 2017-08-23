@@ -380,9 +380,9 @@
         var ele = target.getElementsByTagName("A");
         for (var i = 0; i < ele.length; i++) {
             var signTemp = false;
-            if (ele[i].innerText != "不限") {
+            if (ele[i].innerHTML != "不限") {
                 for (var j = 0; j < actOrder[title].length; j++)
-                    if (ele[i].innerText == actOrder[title][j]) {
+                    if (ele[i].innerHTML == actOrder[title][j]) {
                         signTemp = true;
                         break;
                     }
@@ -400,7 +400,7 @@
         var tempA = document.getElementById("panel").getElementsByTagName("A");
         for (var i = 0; i < tempA.length; i++) {
             var title = tempA[i].parentNode.getAttribute("name");
-            var ele = tempA[i].innerText;
+            var ele = tempA[i].innerHTML;
             tempA[i].style.backgroundColor = "#F8F8F8 ";
             if (title == "order") {
                 if (ele == actOrder[title])

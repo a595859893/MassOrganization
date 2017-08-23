@@ -65,18 +65,20 @@
 			if(!$exist){
 				$rst2 = $mysqli->query("INSERT INTO activityMark (openID,actID) VALUES('$openID',$actID)");
 				$line["mark"] = true;
-				if($rst2)
+				if($rst2){
+					$mysqli->query("UPDATE activity SET mark=mark+1 WHERE UID=$actID");
 					$line["success"] = true;
-				else{
+				}else{
 					$line["error"] = "收藏错误，错误提示: ".$mysqli->error;
 					$line["success"] = false;
 				}
 			}else{
 				$rst2 = $mysqli->query("DELETE FROM activityMark WHERE openID=$openID AND actID=$actID");
 				$line["mark"] = false;
-				if($rst2)
+				if($rst2){
+					$mysqli->query("UPDATE activity SET mark=mark-1 WHERE UID=$actID");
 					$line["success"] = true;
-				else{
+				}else{
 					$line["error"] = "收藏删除错误，错误提示: ".$mysqli->error;
 					$line["success"] = false;
 				}
