@@ -94,6 +94,31 @@
 				$line["error"] = "表单发布错误，错误提示: ".$mysqli->error;
 				$line["success"] = false;
 			}
+		}else if($serverType=="Billboard"){
+			$num = $_REQUEST["num"];
+			
+			$line["success"] = true;
+			$line["mass"] = array();
+			$line["activity"] = array();
+			
+			$rst = $mysqli->query("SELECT * FROM mass as a WHERE $num>(SELECT count(*) FROM mass WHERE good>a.good) ORDER BY a.good DESC");
+			if($rst){
+				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+					$line["mass"][]=$row;
+				}
+			}else{
+				$line["success"] = false;
+				$line["error"] = "排行榜获取错误，错误提示: ".$mysqli->error;
+			}
+			$rst = $mysqli->query("SELECT * FROM activity as a WHERE $num>(SELECT count(*) FROM mass WHERE mark>a.mark) ORDER BY a.mark DESC");
+			if($rst){
+				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+					$line["activity"][]=$row;
+				}
+			}else{
+				$line["success"] = false;
+				$line["error"] = "排行榜获取错误，错误提示: ".$mysqli->error;
+			}
 		}
 		
 		echo json_encode($line);
