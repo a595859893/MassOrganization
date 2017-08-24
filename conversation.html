@@ -28,7 +28,7 @@
 
 <div class="hqncym" id="hqym">
     <div class="jrht"><span class="jrhtnr">中山大学是个怎么样的学校</span></div>
-    <p class="htwenzi">往期话题</p>
+    <p class="htwenzi" style="margin: 10px">往期话题</p>
     <div class="wqht">
         <div class="wqhtts">
             <div class="wqhtyidong">
@@ -43,10 +43,10 @@
                 </ul>
             </div>
         </div></div>
-    <div>
+    <div style="margin: 10px">
         <p class="htwenzi" style="background-color: #f9f9f9;">热门话题
-            <span class="htwh">?</span>
-            <span class="hqxjht" onclick="hqxinjian('hqxjht','xinhuati')">+</span>
+            <i class="fa fa-question-circle-o" style="font-size:24px"></i>
+            <span class="fa fa-plus-circle hqjiahao" style="font-size:24px;float: right" onclick="hqxinjian('hqxjht','xinhuati')"></span>
         </p>
     </div>
 
@@ -112,7 +112,7 @@
             document.getElementById("xinhuaquan").disabled = false;
             document.getElementById("xinhuaquan").value = "";
         });
-    }
+    };
     document.getElementById('sendMain2').onclick = function () {
         document.getElementById("xinhuati").disabled = true;
         postMessage({
@@ -126,7 +126,7 @@
             document.getElementById("xinhuati").disabled = false;
             document.getElementById("xinhuati").value = "";
         });
-    }
+    };
     top_conversation.onclick = function () {
         init();
         document.getElementById("ncym").style.display = 'none';
@@ -134,7 +134,7 @@
         document.getElementById("hqym").style.display = 'block';
         top_debunk.className = top_debunk.className.replace(" xuanzhong", "");
         top_conversation.className += " xuanzhong";
-    }
+    };
     top_debunk.onclick = function () {
         init();
         document.getElementById("hqym").style.display = 'none';
@@ -142,7 +142,7 @@
         document.getElementById("hqdingduanxinjian").style.display = 'block';
         top_conversation.className = top_conversation.className.replace(" xuanzhong", "");
         top_debunk.className += " xuanzhong";
-    }
+    };
     init();
 
     function appendConversation(topic, good, index, uid) {
@@ -169,7 +169,7 @@
             postMessage({serverType: "Good", topicID: uid}, "conversation.php", function () {
                 span_5.innerText = (parseInt(span_5.innerText) + 1);
             });
-        }
+        };
 
         span_1.appendChild(span_2);
         span_1.appendChild(span_3);
@@ -255,10 +255,10 @@
                 if (review.length == 0)
                     liSend.style.display = "block";
             }
-        }
+        };
         div.onclick = function (e) {
             liSend.style.display = "block";
-        }
+        };
         icon.onclick = function (e) {
             textarea.disabled = true;
             postMessage({
@@ -281,7 +281,7 @@
                 textarea.placeholder = "请输入评论";
                 textarea.value = "";
             });
-        }
+        };
         var charIndex = 90;
         right.onclick = function () {
             charIndex = charIndex >= 90 ? 65 : charIndex + 1;
@@ -338,13 +338,13 @@
             div.className = "hqxjpl";
             div.innerText = "+";
             div.onclick = function () {
-                var tempLI = document.getElementById("piece " + targetUID).getElementsByTagName("li")
+                var tempLI = document.getElementById("piece " + targetUID).getElementsByTagName("li");
                 for (var i = 0; i < tempLI.length; i++) {
                     if (tempLI[i].style.display == "none")
                         tempLI[i].style.display = "block";
                 }
                 div.style.display = "none";
-            }
+            };
             li.appendChild(div);
         }
 

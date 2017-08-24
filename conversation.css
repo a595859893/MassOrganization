@@ -132,18 +132,18 @@ span.xuanzhong {
     font-size: 1.2em;
 }
 
-.htwh {
-    height: 1.1em;
-    width: 1.1em;
-    margin-top: 0.2em;
-    line-height: 1.1em;
-    text-align: center;
-    border-radius: 0.55em;
-    color: #3739ee;
-    border: solid 0.04em #161dd5;
-    display: inline-block;
-    font-size: 1em;
-}
+/*.htwh {*/
+    /*height: 1.1em;*/
+    /*width: 1.1em;*/
+    /*margin-top: 0.2em;*/
+    /*line-height: 1.1em;*/
+    /*text-align: center;*/
+    /*border-radius: 0.55em;*/
+    /*color: #3739ee;*/
+    /*border: solid 0.04em #161dd5;*/
+    /*display: inline-block;*/
+    /*font-size: 1em;*/
+/*}*/
 
 .rmhttk {
     display: block;
@@ -192,7 +192,7 @@ span.xuanzhong {
 .rmhtdp {
     position: relative;
     float: right;
-    right: 2.8em;
+    right: 2em;
     top: 0.4em;
     font-size: 1em;
     display: inline-block;
@@ -201,7 +201,7 @@ span.xuanzhong {
 .rmhtdprd {
     position: relative;
     float: right;
-    right: 1.6em;
+    right: 1.4em;
     font-size: 1em;
     font-weight: 500;
     display: inline-block;
@@ -493,11 +493,11 @@ span.xuanzhong {
     font-weight: 900;
 }
 
-.hqjiahao {
-    position: relative;
-    top: -0.3em;
-    font-weight: 900;
-}
+/*.hqjiahao {*/
+    /*position: relative;*/
+    /*top: -0.3em;*/
+    /*font-weight: 900;*/
+/*}*/
 
 .hqxjpl {
     position: relative;
