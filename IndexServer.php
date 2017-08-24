@@ -33,6 +33,12 @@
 			case("getActList"):
 				$line = getActList($mysqli);
 				break;
+			case("destroyAct"):
+				$line = destroyAct($mysqli);
+				break;
+			case("massDiary"):
+				$line = destroyAct($mysqli);
+				break;
 			default:
 				$line = array();
 				$line["success"]=false;
@@ -40,6 +46,34 @@
 		}
 		echo json_encode($line);
 		$mysqli->close();
+	}
+	
+	function massDiary($mysqli){
+		$title		= $_POST["title"];
+		$content	= $_POST["content"];
+		$logo		= $_POST["logo"];
+		$UID		= $_POST["UID"];
+		$img		= $_POST["img"];
+		$time	 	= time();
+		$order = "INSERT INTO massDiary (title,content,time,logo,img,massUID) ";
+		$order .="VALUES('$title','$content',FROM_UNIXTIME($time),'$logo','$img',$UID)";
+
+		$rst = $mysqli->query($order);
+	}
+	
+	function destroyAct($mysqli){
+		$actUID = $_POST["actUID"];
+		$line["success"]=true;
+		$rst = $mysqli->query("DELECT FROM actList WHERE actUID=$actUID");
+		if(!$rst)
+			$line["success"]=false;
+		$rst = $mysqli->query("DELECT FROM activityMark WHERE actID=$actUID");
+		if(!$rst)
+			$line["success"]=false;
+		$rst = $mysqli->query("DELECT FROM activity WHERE UID=$actUID");
+		if(!$rst)
+			$line["success"]=false;
+		$line["error"] = "活动删除错误，错误提示:".$mysqli->error;
 	}
 	
 	function getActList($mysqli){
