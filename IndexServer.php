@@ -30,6 +30,9 @@
 			case("addDate"):
 				$line = addDate($mysqli);
 				break;
+			case("getActList"):
+				$line = getActList($mysqli);
+				break;
 			default:
 				$line = array();
 				$line["success"]=false;
@@ -37,6 +40,24 @@
 		}
 		echo json_encode($line);
 		$mysqli->close();
+	}
+	
+	function getActList($mysqli){
+		$actUID = $_POST["actUID"];
+		
+		$rst = $mysqli->query("SELECT * FROM actList WHERE actUID=$actUID");
+		$line = array();
+		if($rst){
+			$line["success"] = true;
+			while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+				$line[] = $row;
+			}
+		}else{
+			$line["success"] = false;
+			$line["error"] = "日程添加错误，错误提示:".$mysqli->error;
+		}
+
+		return $line;
 	}
 	
 	function addDate($mysqli){

@@ -744,7 +744,7 @@
             remember: document.getElementById("remember").value
         };
 
-        postMessage(content, "IndexServer.php", function () {
+        postMessage(content, "IndexServer.php", function (json) {
             login(json);
             if (remember) {
                 document.cookie = "account_r=" + content.account;
@@ -1053,7 +1053,6 @@
         img.src = decodeURIComponent(logo);
         img.style.width = "70px";
         img.style.height = "110px";
-//        记得改尺寸
 
         a.className = "weui-media-box weui-media-box_appmsg";
         a.onclick = function (event) {
@@ -1113,7 +1112,6 @@
 
         return a;
     }
-
 
     function showCal() {
         function is_leap(year) {
