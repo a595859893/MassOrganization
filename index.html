@@ -749,29 +749,21 @@
     document.getElementById("defaultOpen").click();
     document.getElementById("login").onclick = function () {
         document.getElementById("login").disabled = true;
+
         var content = {
             serverType: "login",
             account: document.getElementById("uname").value,
             password: document.getElementById("psw").value,
             remember: document.getElementById("remember").value
         };
-        var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "IndexServer.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var json = JSON.parse(xmlhttp.responseText);
-                if (json.success) {
-                    login(json);
-                    if (remember) {
-                        document.cookie = "account_r=" + content.account;
-                        document.cookie = "password_r=" + content.password;
-                    }
-                } else
-                    console.log(json.error);
+
+        postMessage(content, "IndexServer.php", function () {
+            login(json);
+            if (remember) {
+                document.cookie = "account_r=" + content.account;
+                document.cookie = "password_r=" + content.password;
             }
-        }
+        });
     };
     document.getElementById("ACT_form").onsubmit = function (event) {
         event = event || window.event;
@@ -790,7 +782,7 @@
             listjson = {none: true};
         }
 
-        var content = {
+        postMessage({
             serverType: "acfForm",
             name: document.getElementById("ACT_name").value,
             location: document.getElementById("ACT_location").value,
@@ -802,28 +794,17 @@
             logo: encodeURIComponent(document.getElementById("ACT_logo").src),
             json: JSON.stringify(listjson),
             UID: uid
-        };
-        var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "IndexServer.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var json = JSON.parse(xmlhttp.responseText);
-                if (json.success) {
-                    document.getElementById('id02').style.display = 'none';
-                    document.getElementById('main_1').style.display = 'block'
-                } else
-                    console.log(json.error);
-            }
-        }
+        }, "IndexServer.php", function () {
+            document.getElementById('id02').style.display = 'none';
+            document.getElementById('main_1').style.display = 'block'
+        })
     };
     document.getElementById("NEW_form").onsubmit = function (event) {
         event = event || window.event;
         event.target.disabled = true;
         event.preventDefault();
 
-        var content = {
+        postMessage({
             serverType: "recruitment",
             type: document.getElementById("NEW_type").value,
             title: document.getElementById("NEW_title").value,
@@ -832,24 +813,10 @@
             introduction: document.getElementById("NEW_intro").value,
             link: document.getElementById("NEW_link").value,
             UID: uid
-        };
-
-        var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "IndexServer.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var res = xmlhttp.responseText;
-                var json = JSON.parse(res);
-                console.log(json);
-                if (json.success) {
-                    document.getElementById('id03').style.display = 'none';
-                    document.getElementById('main_1').style.display = 'block'
-                } else
-                    console.log(json.error);
-            }
-        }
+        }, "IndexServer.php", function () {
+            document.getElementById('id03').style.display = 'none';
+            document.getElementById('main_1').style.display = 'block'
+        });
     };
     document.getElementById("massConfig").onsubmit = function (event) {
         event = event || window.event;
@@ -858,11 +825,9 @@
 
         var type;
         var radio = document.getElementsByName("formChoose");
-        for (var i = 0; i < radio.length; i++) {
-            if (radio[i].checked) {
+        for (var i = 0; i < radio.length; i++)
+            if (radio[i].checked)
                 type = radio.value;
-            }
-        }
 
         var content = {
             serverType: "massConfig",
@@ -875,25 +840,13 @@
             UID: uid
         };
 
-        var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "IndexServer.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var res = xmlhttp.responseText;
-                var json = JSON.parse(res);
-                console.log(json);
-                if (json.success) {
-                    document.getElementById('id04').style.display = 'none';
-                    document.getElementById('main_1').style.display = 'block';
-                    document.getElementById('main_1').style.display = 'block';
-                    document.getElementById("user_name").innerText = content.name + "(UID:" + info.UID + ")";
-                    document.getElementById("user_intro").innerText = content.desc;
-                } else
-                    console.log(json.error);
-            }
-        }
+        postMessage(content, "IndexServer.php", function (json) {
+            document.getElementById('id04').style.display = 'none';
+            document.getElementById('main_1').style.display = 'block';
+            document.getElementById('main_1').style.display = 'block';
+            document.getElementById("user_name").innerText = content.name + "(UID:" + uid + ")";
+            document.getElementById("user_intro").innerText = content.desc;
+        });
     };
 
     document.getElementById("customerForm").onsubmit = function (event) {
@@ -942,43 +895,21 @@
     }
 
     function init() {
-        var xmlhttp = GetXMLHTTPRequest();
-        var content = {serverType: "autoLogin"};
-        xmlhttp.open("POST", "IndexServer.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var json = JSON.parse(xmlhttp.responseText);
-                if (json.success)
-                    login(json);
-                else
-                    console.log(json.error);
-            }
-        };
+        postMessage({serverType: "autoLogin"}, "IndexServer.php", function (json) {
+            login(json);
+        });
 
-        var xmlhttp2 = GetXMLHTTPRequest();
-        var content2 = {serverType: "getActivity"};
-        xmlhttp2.open("POST", "IndexServer.php", true);
-        xmlhttp2.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp2.send(toStr(content2));
-        xmlhttp2.onreadystatechange = function () {
-            if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
-                var json = JSON.parse(xmlhttp2.responseText);
-                if (json.success) {
-                    for (var i = 0; i < json.list.length; i++) {
-                        document.getElementById("MyList").appendChild(createActivity(json.list[i].name, json.list[i].introduction, json.list[i].location,
-                            json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo, json.list[i].mark));
-                    }
-
-                    for (var i = 0; i < json.mark.length; i++) {
-                        document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
-                            json.mark[i].holdtime, json.mark[i].time, json.mark[i].UID, json.mark[i].json, json.mark[i].logo, json.mark[i].mark));
-                    }
-                } else
-                    console.log(json.error);
+        postMessage({serverType: "getActivity"}, "IndexServer.php", function (json) {
+            for (var i = 0; i < json.list.length; i++) {
+                document.getElementById("MyList").appendChild(createActivity(json.list[i].name, json.list[i].introduction, json.list[i].location,
+                    json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo, json.list[i].mark));
             }
-        };
+
+            for (var i = 0; i < json.mark.length; i++) {
+                document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
+                    json.mark[i].holdtime, json.mark[i].time, json.mark[i].UID, json.mark[i].json, json.mark[i].logo, json.mark[i].mark));
+            }
+        });
 
         var cookie = document.cookie;
         var value = cookie.split("; ");
@@ -1011,25 +942,15 @@
     }
 
     function logout() {
-        var xmlhttp = GetXMLHTTPRequest();
-        var content = {serverType: "logout"};
-        xmlhttp.open("POST", "IndexServer.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var info = JSON.parse(xmlhttp.responseText);
-                if (info.success) {
-                    uid = -1;
-                    document.getElementById("myself").onclick = function (event) {
-                        tabNav(event, 'page3')
-                    };
-                    document.getElementById("footer").style.display = 'flex';
-                    document.getElementById("myself").click();
-                    document.getElementById("login").disabled = false;
-                }
-            }
-        }
+        postMessage({serverType: "logout"}, "IndexServer.php", function () {
+            uid = -1;
+            document.getElementById("myself").onclick = function (event) {
+                tabNav(event, 'page3')
+            };
+            document.getElementById("footer").style.display = 'flex';
+            document.getElementById("myself").click();
+            document.getElementById("login").disabled = false;
+        });
     }
 
     <!--底部选项卡-->
@@ -1268,21 +1189,26 @@
         document.getElementById('add').style.display = 'none';
         var time_1 = document.getElementById('start').innerText;
         var time_2 = document.getElementById('end').innerText;
-        console.log(time_1);
-        console.log(time_2);
         if (time_1 < time_2) {
             if (condition) {
                 var thing = document.getElementById('thing').value;
-                var li = document.createElement('li');
-                var span = document.createElement('span');
-                span.innerHTML = '<i class="fa fa-calendar-minus-o" style="font-size:15px;position:absolute;right: 0;"></i>';
-                li.innerHTML = time_1 + "&nbsp;~ &nbsp;" + time_2 + "&nbsp;&nbsp;" + "<br>" + thing;
-                var ul = document.getElementById('ul');
-                li.appendChild(span);
-                ul.appendChild(li);
-                span.onclick = function () {
-                    this.parentElement.style.display = 'none';
-                };
+                postMessage({
+                    serverType: "addDate",
+                    actName: thing,
+                    actStart: time_1,
+                    actEnd: time_2
+                }, "IndexServer.php", function () {
+                    var li = document.createElement('li');
+                    var span = document.createElement('span');
+                    span.innerHTML = '<i class="fa fa-calendar-minus-o" style="font-size:15px;position:absolute;right: 0;"></i>';
+                    li.innerHTML = time_1 + "&nbsp;~ &nbsp;" + time_2 + "&nbsp;&nbsp;" + "<br>" + thing;
+                    var ul = document.getElementById('ul');
+                    li.appendChild(span);
+                    ul.appendChild(li);
+                    span.onclick = function () {
+                        this.parentElement.style.display = 'none';
+                    };
+                });
             }
         }
         else alert('请正确输入时间');

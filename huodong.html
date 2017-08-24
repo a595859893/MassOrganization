@@ -78,8 +78,7 @@
                 <div class="button-sp-area" style="justify-content: space-between;" name="other">
                     <button type="reset" class="weui-btn weui-btn_mini weui-btn_default">重置</button>
                     <button type="submit" class="weui-btn weui-btn_mini weui-btn_default"
-                            style="background-color: #86d0ff;color:#fff;margin-right: 24px;" onclick="display()">完成
-                    </button>
+                            style="background-color: #86d0ff;color:#fff;margin-right: 24px;">完成</button>
                 </div>
             </div>
         </div>
@@ -130,7 +129,7 @@
         <div class="weui-mask"></div>
         <div class="weui-dialog">
             <div class="weui-dialog__hd"><strong class="weui-dialog__title">发布流程</strong></div>
-            <div class="weui-dialog__bd">点击“我”&#8594 社团管理者登陆 &#8594 发布活动</div>
+            <div class="weui-dialog__bd">点击“我”&#8594; 社团管理者登陆 &#8594; 发布活动</div>
             <div class="weui-dialog__ft">
                 <a href="#" class="weui-dialog__btn weui-dialog__btn_primary"
                    onclick="document.getElementById('dialog_1').style.display='none'">确定</a>
@@ -213,8 +212,10 @@
                 setOptionColor(actOrder);
             }
 
-            if (ele == "完成")
+            if (ele == "完成") {
                 getActivity(actOrder);
+                display();
+            }
         }
     };
     document.getElementById("actRegister").onsubmit = function (event) {
@@ -318,20 +319,9 @@
                     break;
 
                 case(i_1):
-                    var content = {serverType: "Mark", actID: index};
-                    var xmlhttp = GetXMLHTTPRequest();
-                    xmlhttp.open("POST", "activity.php", true);
-                    xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-                    xmlhttp.send(toStr(content));
-                    xmlhttp.onreadystatechange = function () {
-                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                            var json = JSON.parse(xmlhttp.responseText);
-                            if (json.success)
-                                event.target.style.color = json.mark ? '#E7CF0C' : '';
-                            else
-                                console.log(json.error);
-                        }
-                    };
+                    postMessage({serverType: "Mark", actID: index},"activity.php",function(json){
+                        event.target.style.color = json.mark ? '#E7CF0C' : '';
+                    });
                     break;
             }
         };
@@ -380,9 +370,9 @@
         var ele = target.getElementsByTagName("A");
         for (var i = 0; i < ele.length; i++) {
             var signTemp = false;
-            if (ele[i].innerText != "不限") {
+            if (ele[i].innerHTML != "不限") {
                 for (var j = 0; j < actOrder[title].length; j++)
-                    if (ele[i].innerText == actOrder[title][j]) {
+                    if (ele[i].innerHTML == actOrder[title][j]) {
                         signTemp = true;
                         break;
                     }
@@ -400,7 +390,7 @@
         var tempA = document.getElementById("panel").getElementsByTagName("A");
         for (var i = 0; i < tempA.length; i++) {
             var title = tempA[i].parentNode.getAttribute("name");
-            var ele = tempA[i].innerText;
+            var ele = tempA[i].innerHTML;
             tempA[i].style.backgroundColor = "#F8F8F8 ";
             if (title == "order") {
                 if (ele == actOrder[title])

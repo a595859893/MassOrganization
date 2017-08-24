@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
 
     <style>
-        .weui-badge{
+        .weui-badge {
             background-color: #fdea3b;
         }
     </style>
@@ -71,8 +71,8 @@
 
     function init() {
         var xmlhttp = GetXMLHTTPRequest();
-        var content = {serverType: "getList"};
-        xmlhttp.open("POST", "recruitment.php", true);
+        var content = {serverType: "Billboard", num: 10};
+        xmlhttp.open("POST", "activity.php", true);
         xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
         xmlhttp.send(toStr(content));
         xmlhttp.onreadystatechange = function () {
@@ -106,15 +106,14 @@
     function dealContent(json) {
         var frame = document.getElementById("frame");
         var frame2 = document.getElementById("frame2");
-        for (var i = 0; i < json.length; i++) {
-            if (json[i].type == "zuzhi")
-                frame2.appendChild(createActivity(json[i].title, json[i].num, json[i].order,0));
-            else
-                frame.appendChild(createActivity(json[i].title, json[i].num, json[i].order,1));
-        }
+        for (var i = 0; i < json.mass.length; i++)
+            frame2.appendChild(createActivity(json.mass[i].name, json.mass[i].good, json.mass[i].logo, i, 0));
+
+        for (var i = 0; i < json.activity.length; i++)
+            frame.appendChild(createActivity(json.activity[i].name, json.activity[i].mark, json.activity[i].logo, i, 1));
     }
 
-    function createActivity(name, num,order,star) {
+    function createActivity(name, num, imgURL, order, star) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var div_2 = document.createElement("div");
@@ -125,27 +124,27 @@
 
         a.className = "weui-media-box weui-media-box_appmsg";
         div_1.className = "weui-media-box__hd";
-        div_1.style="position: relative;margin-right: 10px;";
-        span.style="position: absolute;top: -.4em;right: -.6em;";
-        img.src='pic_160%20(1).png';
-//图片暂时用这个试试效果
-
+        div_1.style = "position: relative;margin-right: 10px;";
+        span.style = "position: absolute;top: -.4em;right: -.6em;";
+        img.src = imgURL;
+        img.style.width = "70px";
+        img.style.height = "110px";
 
         div_2.className = "weui-media-box__bd";
         h4.className = "weui-media-box__title";
         p_1.className = "weui-media-box__desc";
 
         h4.innerText = name;
-        if(star){
+        if (star) {
             p_1.innerHTML = "<span style='color: #f47e17'>&#9733 </span> " + "&nbsp;" + num;
-        }else {
+        } else {
             p_1.innerHTML = "<span style='color: red'> &#9829</span> " + "&nbsp;" + num;
         }
 
 
-        if(order<10){
-            span.innerText ="NO."+ order;
-        }else {
+        if (order < 10) {
+            span.innerText = "NO." + order;
+        } else {
             span.innerText = order;
         }
 

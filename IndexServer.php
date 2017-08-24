@@ -27,6 +27,9 @@
 			case("getActivity"):
 				$line = getActivity($mysqli);
 				break;
+			case("addDate"):
+				$line = addDate($mysqli);
+				break;
 			default:
 				$line = array();
 				$line["success"]=false;
@@ -36,9 +39,29 @@
 		$mysqli->close();
 	}
 	
+	function addDate($mysqli){
+		$openID = getOpenID();
+		$actName = $_POST["actName"];
+		$actStart = $_POST["actStart"];
+		$actEnd = $_POST["actEnd"];
+		$line = array();
+		
+		$order = "INSERT INTO dateRemind (openID,start,end,name) ";
+		$order .="VALUES('$openID','$actStart','$actEnd','$actName')";
+		$rst = $mysqli->query($order);
+		if($rst){
+			$line["success"] = true;
+		}else{
+			$line["success"] = false;
+			$line["error"] = "日程添加错误，错误提示:".$mysqli->error;
+		}
+		return $line;
+	}
+	
 	function getActivity($mysqli){
 		$openID = getOpenID();
 		$actID = $_POST["actID"];
+		$line = array();
 		
 		$line["success"] = true;
 		$line["mark"] = array();

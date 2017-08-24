@@ -18,7 +18,7 @@
 			if($order=="最新")
 				$orderStr.="ORDER BY time DESC";
 			else if($order=="最热")//有待完善
-				$orderStr.="ORDER BY time";
+				$orderStr.="ORDER BY mark DESC";
 			
 			$rst = $mysqli->query($orderStr);
 			if($rst){
@@ -65,18 +65,20 @@
 			if(!$exist){
 				$rst2 = $mysqli->query("INSERT INTO activityMark (openID,actID) VALUES('$openID',$actID)");
 				$line["mark"] = true;
-				if($rst2)
+				if($rst2){
+					$mysqli->query("UPDATE activity SET mark=mark+1 WHERE UID=$actID");
 					$line["success"] = true;
-				else{
+				}else{
 					$line["error"] = "收藏错误，错误提示: ".$mysqli->error;
 					$line["success"] = false;
 				}
 			}else{
 				$rst2 = $mysqli->query("DELETE FROM activityMark WHERE openID=$openID AND actID=$actID");
 				$line["mark"] = false;
-				if($rst2)
+				if($rst2){
+					$mysqli->query("UPDATE activity SET mark=mark-1 WHERE UID=$actID");
 					$line["success"] = true;
-				else{
+				}else{
 					$line["error"] = "收藏删除错误，错误提示: ".$mysqli->error;
 					$line["success"] = false;
 				}
@@ -91,6 +93,31 @@
 			}else{
 				$line["error"] = "表单发布错误，错误提示: ".$mysqli->error;
 				$line["success"] = false;
+			}
+		}else if($serverType=="Billboard"){
+			$num = $_REQUEST["num"];
+			
+			$line["success"] = true;
+			$line["mass"] = array();
+			$line["activity"] = array();
+			
+			$rst = $mysqli->query("SELECT * FROM mass as a WHERE $num>(SELECT count(*) FROM mass WHERE good>a.good) ORDER BY a.good DESC");
+			if($rst){
+				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+					$line["mass"][]=$row;
+				}
+			}else{
+				$line["success"] = false;
+				$line["error"] = "排行榜获取错误，错误提示: ".$mysqli->error;
+			}
+			$rst = $mysqli->query("SELECT * FROM activity as a WHERE $num>(SELECT count(*) FROM mass WHERE mark>a.mark) ORDER BY a.mark DESC");
+			if($rst){
+				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+					$line["activity"][]=$row;
+				}
+			}else{
+				$line["success"] = false;
+				$line["error"] = "排行榜获取错误，错误提示: ".$mysqli->error;
 			}
 		}
 		
