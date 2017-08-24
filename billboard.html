@@ -108,7 +108,6 @@
         var frame2 = document.getElementById("frame2");
         for (var i = 0; i < json.mass.length; i++)
             frame2.appendChild(createActivity(json.mass[i].name, json.mass[i].good, json.mass[i].logo, i, 0));
-
         for (var i = 0; i < json.activity.length; i++)
             frame.appendChild(createActivity(json.activity[i].name, json.activity[i].mark, json.activity[i].logo, i, 1));
     }
@@ -125,10 +124,11 @@
         a.className = "weui-media-box weui-media-box_appmsg";
         div_1.className = "weui-media-box__hd";
         div_1.style = "position: relative;margin-right: 10px;";
+        span.className="weui-badge";
         span.style = "position: absolute;top: -.4em;right: -.6em;";
         img.src = imgURL;
-        img.style.width = "70px";
-        img.style.height = "110px";
+        img.style.width = "50px";
+        img.style.height = "50px";
 
         div_2.className = "weui-media-box__bd";
         h4.className = "weui-media-box__title";
