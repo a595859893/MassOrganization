@@ -702,7 +702,7 @@
             remember: document.getElementById("remember").value
         };
 
-        postMessage(content, "IndexServer.php", function () {
+        postMessage(content, "IndexServer.php", function (json) {
             login(json);
             if (remember) {
                 document.cookie = "account_r=" + content.account;
@@ -1014,9 +1014,14 @@ console.log(json);
         }
 
         img.src = decodeURIComponent(logo);
+<<<<<<< HEAD
         img.style.width = "50px";
         img.style.height = "50px";
 //        记得改尺寸
+=======
+        img.style.width = "70px";
+        img.style.height = "110px";
+>>>>>>> 0d1f7f4994f1f72c82a847debd665c534381dcd1
 
         a.className = "weui-media-box weui-media-box_appmsg";
 //        a.onclick = function (event) {
