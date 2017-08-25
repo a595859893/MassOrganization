@@ -148,14 +148,14 @@
 
 <div id="page2" class="page">
     <div class="weui-panel">
-    <div class="weui-panel__hd">我的消息</div>
-    <div class="weui-panel__bd">
-        <div class="weui-media-box weui-media-box_small-appmsg">
-            <div class="weui-cells" id="message">
-                <!--js添加-->
+        <div class="weui-panel__hd">我的消息</div>
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_small-appmsg">
+                <div class="weui-cells" id="message">
+                    <!--js添加-->
+                </div>
             </div>
         </div>
-    </div>
     </div>
 
     <!--js添加dialog-->
@@ -209,7 +209,8 @@
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="month" id="month">
-            <i class="fa fa-calendar-plus-o" style="font-size:25px;color:#fff;position: relative;left: 281px;top: 11px;" onclick='workList()'></i>
+            <i class="fa fa-calendar-plus-o" style="font-size:25px;color:#fff;position: relative;left: 281px;top: 11px;"
+               onclick='workList()'></i>
             <ul>
                 <li style="text-align:center">
                     <span style="font-size:18px" id="thisYear"></span><br>
@@ -222,7 +223,7 @@
         <br>
         <div>
             <ul id="ul">
-            <!--js添加-->
+                <!--js添加-->
             </ul>
         </div>
 
@@ -292,7 +293,8 @@
 
         <br>
         <article class="main">
-            <button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i>
+            <button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard"
+                                                                                               style="font-size:18px;color: #136832;"></i>
                 活动管理
             </button>
             <div class="panel" id="MyAct">
@@ -891,7 +893,6 @@ console.log(json);
         } else {
             console.log(info.error);
         }
-
     }
 
     function logout() {
@@ -1019,6 +1020,59 @@ console.log(json);
         img.style.height = "50px";
 
         a.className = "weui-media-box weui-media-box_appmsg";
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        a.onclick = function (event) {
+            event = event || window.event;
+            switch (event.target) {
+                case(i_2):
+                    document.getElementById("custom").innerHTML = formStr;
+                    sign(index);
+                    break;
+                case(i_1):
+                    postMessage({serverType: "Mark", actID: postIndex}, "activity.php", function () {
+                        event.target.style.color = json.mark ? '#E7CF0C' : '';
+                    });
+                    break;
+            }
+        };
+
+        i_1.className = "fa fa-star";
+        i_2.className = "fa fa-pencil-square-o";
+        i_1.style.color = mark ? '#E7CF0C' : '';
+=======
+//        a.onclick = function (event) {
+//            event = event || window.event;
+//            switch (event.target) {
+//                case(i_2):
+//                    document.getElementById("custom").innerHTML = formStr;
+//                    sign(index);
+//                    break;
+//                case(i_1):
+//                    var content = {serverType: "Mark", actID: postIndex};
+//                    var xmlhttp = GetXMLHTTPRequest();
+//                    xmlhttp.open("POST", "activity.php", true);
+//                    xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+//                    xmlhttp.send(toStr(content));
+//                    xmlhttp.onreadystatechange = function () {
+//                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+//                            var json = JSON.parse(xmlhttp.responseText);
+//                            if (json.success)
+//                                event.target.style.color = json.mark ? '#E7CF0C' : '';
+//                            else
+//                                console.log(json.error);
+//                        }
+//                    };
+//                    break;
+//            }
+//      };
+
+//        i_1.className = "fa fa-star";
+//        i_2.className = "fa fa-pencil-square-o";
+//        i_1.style.color = mark ? '#E7CF0C' : '';
+>>>>>>> fc2fd62abcefddffd4729a0ac3f934ff8443043a
+>>>>>>> a19381035b68597504f9c97abde1c499ffc209ee
 
         div_1.className = "weui-media-box__hd";
         div_2.className = "weui-media-box__bd";
@@ -1046,43 +1100,34 @@ console.log(json);
         return a;
     }
 
-//消息的dom,并没有测试所以有问题再和我说吧~
-    function getMessage(){
-        var xmlhttp = GetXMLHTTPRequest();
-        var content = {serverType: " " };
-        xmlhttp.open("POST", " ", true);
-        xmlhttp.setRequestHeader(" ");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var json = JSON.parse(xmlhttp.responseText);
-                if (json.success)
-                    dealContent(json);
-                else
-                    console.log(json.error);
-            }
-        };
+    //消息的dom,并没有测试所以有问题再和我说吧~
+    function getMessage() {
+        postMessage({serverType: " "}, " ", function (json) {
+            dealContent(json);
+        });
     }
+
     function dealContent(json) {
         if (json.success) {
             var message = document.getElementById("message");
-            var page_2=document.getElementById('page2');
+            var page_2 = document.getElementById('page2');
             for (var i = 0; i < json.activity.length; i++) {
-                message.appendChild(createMessage(act,json[i].title,''));
-                page_2.appendChild(dialog(i, json[i].message,''));
+                message.appendChild(createMessage(act, json[i].title, ''));
+                page_2.appendChild(dialog(i, json[i].message, ''));
             }
             for (var i = 0; i < json.mass.length; i++) {
-                message.appendChild(createMessage(mass,json[i].title, json[i].url));
+                message.appendChild(createMessage(mass, json[i].title, json[i].url));
             }
             for (var i = 0; i < json.worklist.length; i++) {
-                message.appendChild(createMessage(work,json[i].title, json[i].time));
-                page_2.appendChild(dialog(i,json[i].time,json[i].title));
+                message.appendChild(createMessage(work, json[i].title, json[i].time));
+                page_2.appendChild(dialog(i, json[i].time, json[i].title));
             }
         } else {
             console.log(json.error);
         }
     }
-    function createMessage(type,title,content){
+
+    function createMessage(type, title, content) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var div_2 = document.createElement("div");
@@ -1094,20 +1139,24 @@ console.log(json);
         div_2.className = "weui-cell__bd weui-cell_primary";
         span.className = "weui-cell__ft";
 
-        if(type=act){
+        if (type == act) {
             div_1.innerHTML = "<i class='fa fa-language' style='font-size:20px;color: #136832'></i>";
-            p.innerText ='&nbsp;'+ title+ '报名成功';
-            a.onclick=function(){document.getElementById("date_"+index).style.display='block';}
+            p.innerText = '&nbsp;' + title + '报名成功';
+            a.onclick = function () {
+                document.getElementById("date_" + index).style.display = 'block';
+            }
         }
-        if(type=mass){
+        if (type == mass) {
             div_1.innerHTML = "<i class='fa fa-joomla' style='font-size:20px;color: #136832'></i>";
-            p.innerText ='&nbsp;'+ title+ '有新动态啦';
-            a.href=content;
+            p.innerText = '&nbsp;' + title + '有新动态啦';
+            a.href = content;
         }
-        if(type=work){
+        if (type == work) {
             div_1.innerHTML = "<i class='fa fa-clipboard' style='font-size:20px;color: #136832'></i>";
-            p.innerText ='&nbsp;'+ title+ '有新动态啦';
-            a.onclick=function(){document.getElementById("work_"+index).style.display='block';}
+            p.innerText = '&nbsp;' + title + '有新动态啦';
+            a.onclick = function () {
+                document.getElementById("work_" + index).style.display = 'block';
+            }
         }
 
         div_2.appendChild(p);
@@ -1117,7 +1166,8 @@ console.log(json);
 
         return a;
     }
-    function dialog(index,content,title){
+
+    function dialog(index, content, title) {
         var div_3 = document.createElement("div");
         var div_3_1 = document.createElement("div");
         var div_3_2 = document.createElement("div");
@@ -1127,9 +1177,11 @@ console.log(json);
         var a_1 = document.createElement("a");
 
         div_3_1.className = "weui-mask";
-        if(title=''){
-            div_3.id ="date_"+index;
-        }else {div_3.id="work_"+index}
+        if (title = '') {
+            div_3.id = "date_" + index;
+        } else {
+            div_3.id = "work_" + index
+        }
 
         div_3_2.className = "weui-dialog";
         div_3_2_1.className = "weui-dialog__hd";
@@ -1137,11 +1189,13 @@ console.log(json);
         div_3_2_3.className = "weui-dialog__ft";
         a_1.className = "eui-dialog__btn weui-dialog__btn_primary";
 
-        div_3.style='display: none';
-        div_3_2_1.innerHTML='<strong class="weui-dialog__title">'+title+'</strong>';
-        div_3_2_2.innerText=content;
-        a_1.onclick=function(){this.parentElement.style.display = 'none'};
-        a_1.innerText='确定';
+        div_3.style = 'display: none';
+        div_3_2_1.innerHTML = '<strong class="weui-dialog__title">' + title + '</strong>';
+        div_3_2_2.innerText = content;
+        a_1.onclick = function () {
+            this.parentElement.style.display = 'none'
+        };
+        a_1.innerText = '确定';
 
         div_3_2_3.appendChild(a_1);
         div_3_2.appendChild(div_3_2_1);
@@ -1211,7 +1265,7 @@ console.log(json);
     function submit(condition) {
         document.getElementById('add').style.display = 'none';
         var time_1 = document.getElementById('start').innerText;
-        var time  = document.getElementById('start').value;
+        var time = document.getElementById('start').value;
         var time_2 = document.getElementById('end').innerText;
         if (time_1 < time_2) {
             if (condition) {
@@ -1237,7 +1291,7 @@ console.log(json);
                 });
             }
         }
-        if (time_1 > time_2){
+        if (time_1 > time_2) {
             alert('请正确输入时间');
         }
     }
