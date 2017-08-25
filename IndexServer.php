@@ -220,7 +220,7 @@
 		
 		$rst = $mysqli->query("SELECT * FROM mass WHERE account='$account'");
 		while($row = $rst->fetch_array(MYSQLI_ASSOC)){
-			if($row["password"]==$password){
+			if($row["password"]==sha1($password)){
 				$is_login_success = true;
 				$line = $row;
 				$uid = $row["UID"];
