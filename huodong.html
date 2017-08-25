@@ -270,20 +270,23 @@
         };
     }
 
+
+//    推送链接没存？
     function dealContent(json) {
         if (json.success) {
             var card = document.getElementById("actlist");
             for (var i = 0; i < json.length; i++) {
                 card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location,
-                    json[i].holdtime, json[i].organizer, json[i].UID, json[i].json, json[i].logo, json[i].mark));
+                    json[i].holdtime, json[i].organizer, json[i].UID, json[i].json, json[i].logo, json[i].mark, json[i].url));
+//                console.log(json[i]);
             }
         } else {
             console.log(json.error);
         }
     }
 
-    //    把发布时间换成主办方
-    function createActivity(title, content, place, holdtime, organizer, index, labels, logo, mark) {
+
+    function createActivity(title, content, place, holdtime, organizer, index, labels, logo, mark,url) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var img = document.createElement("img");
@@ -310,6 +313,7 @@
 //        记得改尺寸
 
         a.className = "weui-media-box weui-media-box_appmsg";
+        a.href=url;
         a.onclick = function (event) {
             event = event || window.event;
             switch (event.target) {
