@@ -23,9 +23,9 @@
 
         .profile-cover {
             position: relative;
-            height: 11.25rem;
+            height: 9.5rem;
             background-repeat: no-repeat;
-            background-position: 50%;
+            /*background-position: 50%;*/
             background-size: cover;
             text-align: center;
         }
@@ -60,7 +60,7 @@
         .mod-fil-img span img {
             width: 4.375rem;
             height: 4.375rem;
-            border-radius: 50%;
+            /*border-radius: 50%;*/
         }
 
         .m-img-box img {
@@ -134,20 +134,17 @@
         <div class="mod-fil-img m-avatar-box">
             <span class="m-img-box">
                 <img id="mass_img" src="">
-                <!--<i class="m-icon m-icon-goldv"></i>-->
             </span>
         </div>
         <div class="item-list" style="position: relative;">
             <div class="mod-fil-name m-txt-cut">
                 <span class="mod-fil-n">
                     <span class="txt-shadow" id="mass_name">社团名字</span>
-                    <!--<i class="m-icon m-icon-female"></i> -->
                 </span>
-                <!--<i class="m-icon m-icon-vipl6"></i>-->
             </div>
 
             <div class="txt-shadow">
-                <i id="mass_num" class="fa fa-user-plus" onclick="color(event)"><span>0</span></i>
+                <i id="mass_num" class="fa fa-user-plus" onclick="color(event)"></i>
             </div>
 
         </div>
@@ -161,8 +158,7 @@
         <div class="weui-panel__hd">简介</div>
         <div class="weui-panel__bd">
             <div class="weui-media-box weui-media-box_text">
-                <!--<h4 class="weui-media-box__title">标题一</h4>-->
-                <p class="weui-media-box__desc">我们是……</p>
+                <p class="weui-media-box__desc" id="mass_intro"></p>
             </div>
         </div>
     </div>
@@ -179,11 +175,9 @@
                     <img class="" alt="">
                 </div>
                 <div class="weui-media-box__bd">
-                    <h4 class="weui-media-box__title"> 标题一 &nbsp;<i class="fa fa-star" onclick="color(event)"></i><i
-                            class="fa fa-calendar-plus-o" style="float: right;font-size: 20px;"></i></h4>
-                    <p class="weui-media-box__desc"><i class='fa fa-clock-o'></i> 时间 </p>
-                    <p class="weui-media-box__desc"><i class='fa fa-users'></i> 主办方</p>
-                    <!--<p class="weui-media-box__desc">简介</p>-->
+                    <h4 class="weui-media-box__title" id="title"> </h4>
+                    <p class="weui-media-box__desc" id="time"></p>
+                    <p class="weui-media-box__desc" id="host"></p>
                 </div>
             </a>
         </div>
@@ -191,7 +185,7 @@
 
 
     <!--社团日志栏-card形式-->
-    <br><br>
+    <br>
     <div id="mass_diary" class="weui-panel weui-panel_access">
         <div class="weui-panel__hd">社团日志 </div>
         <div class="weui-panel__bd">
@@ -203,10 +197,10 @@
 <br>
 <div class="weui-msg__extra-area" style="position:static">
     <div class="weui-footer">
-        <!--<p class="weui-footer__links">-->
-        <!--<a href="javascript:void(0);" class="weui-footer__link">底部链接文本</a>-->
-        <!--</p>-->
         <p class="weui-footer__text">社团二维码</p>
+        <p class="weui-footer__text">
+            <img src="" alt="" width="50px" height="50px" id="mass_qrCode">
+        </p>
     </div>
 </div>
 
@@ -217,7 +211,8 @@
 <script>
     var uid = getValue("uid");
     if (uid > -1)
-        init();
+        init_1();
+        init_2();
 
     function color(event) {
         var content = {serverType: "mark", markUID: uid};
@@ -230,7 +225,7 @@
                 var json = JSON.parse(xmlhttp.responseText);
                 if (json.success) {
                     var num = parseInt(document.getElementById("mass_num").innerHTML.replace("<span>", "").replace("</span>", ""));
-                    num = json.mark ? num + 1 : num - 1;
+                    num = json.mark ? num+1 : num-1 ;
                     event.target.innerHTML = " <span>" + num + " </span> ";
                     event.target.style.color = json.mark ? 'red' : '';
                 } else
@@ -239,7 +234,8 @@
         }
     }
 
-    function init() {
+    //                    后端没存传二维码
+    function init_1() {
         var xmlhttp = GetXMLHTTPRequest();
         var content = {serverType: "getMass", UID: uid};
         xmlhttp.open("POST", "mass.php", true);
@@ -250,8 +246,11 @@
                 var json = JSON.parse(xmlhttp.responseText);
                 if (json.success) {
                     document.getElementById("mass_num").innerHTML = " <span>" + json.mass.number + " </span> ";
+                    console.log(json.mass);
                     document.getElementById("mass_img").src = json.mass.logo;
                     document.getElementById("mass_name").innerText = json.mass.name;
+                    document.getElementById("mass_qrCode").src=json.mass.logo;
+                    document.getElementById("mass_intro").innerText = json.mass.intro;
                     document.getElementById("mass_num").style.color = json.mass.imark ? 'red' : '';
                     for (var i = 0; i < json.diary.length; i++) {
                         document.getElementById("mass_diary").appendChild(createDiary(json.diary[i].title, json.diary[i].content, json.diary[i].time,
@@ -270,6 +269,7 @@
         var div_2 = document.createElement("div");
         var logo_1 = document.createElement("img");
         var h4 = document.createElement("h4");
+        var span = document.createElement("i");
         var p_1= document.createElement("p");
         var p_2= document.createElement("p");
         var p_3= document.createElement("p");
@@ -279,12 +279,15 @@
         logo_1.className = "weui-media-box__thumb";
         div_2.className = "weui-media-box__bd";
         h4.className = "weui-media-box__title";
+        span.className = "fa fa-thumbs-o-up";
+        span.innerHTML='<span> </span>';
+        span.style='float: right';
+        span.onclick = color(event);
         p_1.className=p_2.className=p_3.className = "weui-media-box__desc";
 
-          h4.innerHTML = title + "<i class='fa fa-thumbs-o-up' style='float: right' onclick='color(event)'> "+ 3 +"</i> ";
+          h4.innerHTML = title ;
           p_1.innerText = time;
           p_2.innerText = content;
-//          div_1.style.paddingTop=0+'px';
           logo_1.src = logo;
           logo_1.style.width = 50+"px";
 
@@ -294,6 +297,7 @@
             p_3.appendChild(img);
         }
 
+        h4.appendChild(span);
         div_1.appendChild(logo_1);
         div_2.appendChild(h4);
         div_2.appendChild(p_1);
@@ -305,6 +309,34 @@
         return a;
     }
 
+
+    function init_2() {
+        var xmlhttp = GetXMLHTTPRequest();
+        var content = {serverType: "getList"};
+        xmlhttp.open("POST", "recruitment.php", true);
+        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+        xmlhttp.send(toStr(content));
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var json = JSON.parse(xmlhttp.responseText);
+                if (json.success)
+                    dealContent(json);
+                else
+                    console.log(json.error);
+            }
+        };
+    }
+
+    function dealContent(json) {
+
+        document.getElementById('title').innerHTML=json[0].title+'&nbsp;<i class="fa fa-star" onclick="color(event)"></i>'+'<i class="fa fa-calendar-plus-o" style="float: right;font-size: 20px;" onclick="tip()"></i>';
+        document.getElementById('time').innerHTML= '<i class="fa fa-clock-o"></i> &nbsp; '+ json[0].time ;
+        document.getElementById('host').innerHTML= '<i class="fa fa-users"></i> &nbsp; '+ json[0].host ;
+    }
+
+    function tip(){
+        alert('已成功加入日程');
+    }
 </script>
 
 </body>

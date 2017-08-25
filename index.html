@@ -297,21 +297,8 @@
                                                                                                style="font-size:18px;color: #136832;"></i>
                 活动管理
             </button>
-            <div class="panel">
-                <a class="weui-cell weui-cell_access"
-                   onclick="document.getElementById('table_1').style.display='block';document.getElementById('main_1').style.display='none'">
-                    <div class="weui-cell__bd">
-                        <p>活动A</p>
-                    </div>
-                    <div class="weui-cell__ft"></div>
-                </a>
-                <a class="weui-cell weui-cell_access"
-                   onclick="document.getElementById('table_1').style.display='block';document.getElementById('main_1').style.display='none'">
-                    <div class="weui-cell__bd">
-                        <p>活动B</p>
-                    </div>
-                    <div class="weui-cell__ft"></div>
-                </a>
+            <div class="panel" id="MyAct">
+                <!--js添加-->
             </div>
 
             <button onclick="document.getElementById('id02').style.display='block';document.getElementById('main_1').style.display='none'">
@@ -344,36 +331,21 @@
     </div>
 
     <!--活动管理表格-->
-    <div id="table_1" style="display: none">
-        <table style="">
-            <thead>
-            <tr>
-                <th><input type="checkbox" id="all" onclick="all()"></th>
-                <th>姓名</th>
-                <th>学号</th>
-                <th>学院</th>
-                <th>手机</th>
-                <th>QQ</th>
-                <th>备注</th>
-            </tr>
-            </thead>
-
-            <tbody id="tbody">
-            </tbody>
-
-        </table>
+    <div  style="display: none;" id="table_main">
+        <div id="table_1" style="overflow-x: visible">
+        </div>
         <div class="weui-cells__title">向报名者发送消息</div>
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
-                    <div class="weui-textarea-counter"><span>0</span>/200</div>
+                    <textarea class="weui-textarea" placeholder="您已成功报名此活动，请尽快与负责人联系" rows="3"></textarea>
+                    <div class="weui-textarea-counter"><span>0</span>/50</div>
                 </div>
             </div>
         </div>
         <div class="weui-btn-area">
             <button class="weui-btn weui-btn_plain-primary " style="width: 45%;float: left"
-                    onclick="document.getElementById('table_1').style.display='none';document.getElementById('main_1').style.display='block'">
+    onclick="document.getElementById('table_main').style.display='none';document.getElementById('main_1').style.display='block'">
                 返回
             </button>
             <button class="weui-btn weui-btn_plain-primary " style="width: 50%;float: right;margin-top: 0">确认并发送
@@ -756,7 +728,7 @@
         } else {
             listjson = {none: true};
         }
-
+//console.log(listjson);
         postMessage({
             serverType: "acfForm",
             name: document.getElementById("ACT_name").value,
@@ -877,13 +849,14 @@
         postMessage({serverType: "getActivity"}, "IndexServer.php", function (json) {
             for (var i = 0; i < json.list.length; i++) {
                 document.getElementById("MyList").appendChild(createActivity(json.list[i].name, json.list[i].introduction, json.list[i].location,
-                    json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo, json.list[i].mark));
+                    json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo));
             }
-
+console.log(json);
             for (var i = 0; i < json.mark.length; i++) {
                 document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
-                    json.mark[i].holdtime, json.mark[i].time, json.mark[i].UID, json.mark[i].json, json.mark[i].logo, json.mark[i].mark));
+                    json.mark[i].holdtime, json.mark[i].time, json.mark[i].UID, json.mark[i].json, json.mark[i].logo));
             }
+
         });
 
         var cookie = document.cookie;
@@ -901,13 +874,18 @@
     function login(info) {
         if (info.success) {
             uid = info.UID;
+            console.log(info);
             document.getElementById('id01').style.display = 'none';
             document.getElementById("user_name").innerText = info.name + "(UID:" + info.UID + ")";
-//            document.getElementById("user_intro").innerText = info.intro;
+
             document.getElementById("footer").style.display = 'none';
             document.getElementById("myself").onclick = function (event) {
                 tabNav(event, 'page4')
             };
+            for ( var i= 0;i<info.activity.length;i++){
+            document.getElementById("MyAct").appendChild(createAcc(info.activity[i].name));
+            document.getElementById("table_1").appendChild(table(info.activity[i].json));
+            }
             document.getElementById("myself").click();
         } else {
             console.log(info.error);
@@ -1014,15 +992,15 @@
         }
     }
 
-    function createActivity(title, content, place, holdtime, time, index, labels, logo, mark) {
+    function createActivity(title, content, place, holdtime, time, index, labels, logo) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var img = document.createElement("img");
 
         var div_2 = document.createElement("div");
         var h4 = document.createElement("h4");
-        var i_1 = document.createElement("i");
-        var i_2 = document.createElement("i");
+//        var i_1 = document.createElement("i");
+//        var i_2 = document.createElement("i");
 
         var p_1 = document.createElement("p");
         var p_2 = document.createElement("p");
@@ -1037,10 +1015,17 @@
         }
 
         img.src = decodeURIComponent(logo);
+<<<<<<< HEAD
+        img.style.width = "50px";
+        img.style.height = "50px";
+//        记得改尺寸
+=======
         img.style.width = "70px";
         img.style.height = "110px";
+>>>>>>> 0d1f7f4994f1f72c82a847debd665c534381dcd1
 
         a.className = "weui-media-box weui-media-box_appmsg";
+<<<<<<< HEAD
         a.onclick = function (event) {
             event = event || window.event;
             switch (event.target) {
@@ -1059,6 +1044,37 @@
         i_1.className = "fa fa-star";
         i_2.className = "fa fa-pencil-square-o";
         i_1.style.color = mark ? '#E7CF0C' : '';
+=======
+//        a.onclick = function (event) {
+//            event = event || window.event;
+//            switch (event.target) {
+//                case(i_2):
+//                    document.getElementById("custom").innerHTML = formStr;
+//                    sign(index);
+//                    break;
+//                case(i_1):
+//                    var content = {serverType: "Mark", actID: postIndex};
+//                    var xmlhttp = GetXMLHTTPRequest();
+//                    xmlhttp.open("POST", "activity.php", true);
+//                    xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+//                    xmlhttp.send(toStr(content));
+//                    xmlhttp.onreadystatechange = function () {
+//                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+//                            var json = JSON.parse(xmlhttp.responseText);
+//                            if (json.success)
+//                                event.target.style.color = json.mark ? '#E7CF0C' : '';
+//                            else
+//                                console.log(json.error);
+//                        }
+//                    };
+//                    break;
+//            }
+//      };
+
+//        i_1.className = "fa fa-star";
+//        i_2.className = "fa fa-pencil-square-o";
+//        i_1.style.color = mark ? '#E7CF0C' : '';
+>>>>>>> fc2fd62abcefddffd4729a0ac3f934ff8443043a
 
         div_1.className = "weui-media-box__hd";
         div_2.className = "weui-media-box__bd";
@@ -1074,8 +1090,6 @@
 
         div_1.appendChild(img);
 
-        h4.appendChild(i_1);
-        h4.appendChild(i_2);
         div_2.appendChild(h4);
         div_2.appendChild(p_1);
         div_2.appendChild(p_2);
@@ -1284,32 +1298,40 @@
         }
     }
 
+    function createAcc(title){
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var p = document.createElement("p");
+
+        a.className ='weui-cell weui-cell_access';
+        div_1.className ='weui-cell__bd';
+        div_2.className ='weui-cell__ft';
+
+        p.innerText = title;
+
+        div_1.appendChild(p);
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+        a.onclick = function(){
+            document.getElementById('table_main').style.display='block';
+            document.getElementById('main_1').style.display='none'
+        };
+        return a;
+    }
+
     function table(xml) {
-        var i;
-        var xmlDoc = xml.responseXML;
-        var table = "<tr><td>" + "<input type='checkbox'>" + "</td><td>" +
-            "</td><td>" + "</td><td>" +
-            "</td><td>" + "</td><td>" +
-            "</td><td>" + "</td></tr>";
-        var x = xmlDoc.getElementsByTagName("form");
-        for (i = 0; i < x.length; i++) {
-            table += "<tr><td>" +
-                "<input type='checkbox'>" +
-                "</td><td>" +
-                x[i].name +
-                "</td><td>" +
-                x[i].number +
-                "</td><td>" +
-                x[i].institute +
-                "</td><td>" +
-                x[i].telephone +
-                "</td><td>" +
-                x[i].weichat +
-                "</td><td>" +
-                x[i].remarks +
-                "</td></tr>";
+        var table = document.createElement('table');
+        var t = '';
+        var tt= '';
+        for(var i=0;i<xml[i].length;i++){
+            for(var m=0;m<xml.length;m++){
+                t += "<td>" + xml[i][m] + "</td>" ;
+            }
+            tt += "<tr>" + t + "</tr>" ;
         }
-        document.getElementById("tbody").appendChild(table);
+        table.innerHTML=tt;
+        return table;
     }
 
     function all() {
