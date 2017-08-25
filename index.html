@@ -882,7 +882,10 @@ console.log(json);
             };
             for ( var i= 0;i<info.activity.length;i++){
             document.getElementById("MyAct").appendChild(createAcc(info.activity[i].name));
-            document.getElementById("table_1").appendChild(table(info.activity[i].json));
+
+            for (var i= 0;i<info.activity.list.length;i++){
+            document.getElementById("table_1").appendChild(table(info.activity[i].list[i]));
+            }
             }
             document.getElementById("myself").click();
         } else {
@@ -998,14 +1001,11 @@ console.log(json);
 
         var div_2 = document.createElement("div");
         var h4 = document.createElement("h4");
-//        var i_1 = document.createElement("i");
-//        var i_2 = document.createElement("i");
 
         var p_1 = document.createElement("p");
         var p_2 = document.createElement("p");
         var p_3 = document.createElement("p");
         var p_4 = document.createElement("p");
-
 
         var formStr = "";
         var formLabel = JSON.parse(labels);
@@ -1017,7 +1017,6 @@ console.log(json);
 
         img.style.width = "50px";
         img.style.height = "50px";
-//        记得改尺寸
 
         a.className = "weui-media-box weui-media-box_appmsg";
 
@@ -1266,17 +1265,24 @@ console.log(json);
     }
 
     function table(xml) {
-        var table = document.createElement('table');
+        var obj = JSON.parse(xml);
         var t = '';
-        var tt= '';
-        for(var i=0;i<xml[i].length;i++){
-            for(var m=0;m<xml.length;m++){
-                t += "<td>" + xml[i][m] + "</td>" ;
-            }
-            tt += "<tr>" + t + "</tr>" ;
+        var th = '';
+        for( x in xml){
+           th +="<th>"+ x+ "</th>";
+           t += "<td>" +  xml.x+ "</td>";
         }
-        table.innerHTML=tt;
-        return table;
+//        var table = document.createElement('table');
+//        var t = '';
+//        var tt= '';
+//        for(var i=0;i<xml[i].length;i++){
+//            for(var m=0;m<xml.length;m++){
+//                t += "<td>" + xml[i][m] + "</td>" ;
+//            }
+//            tt += "<tr>" + t + "</tr>" ;
+//        }
+//        table.innerHTML=tt;
+//        return table;
     }
 
     function all() {
