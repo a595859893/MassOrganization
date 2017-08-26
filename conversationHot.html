@@ -6,7 +6,6 @@
     <meta name="viewport"
           content="width=375,initial-scale=0.84,user-scalable=0"/>
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
-    <link rel="stylesheet" href="css.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
     <style type="text/css">
         * {
@@ -102,7 +101,7 @@
         .tldzpl {
             position: absolute;
             float: right;
-            width: 6.7em;
+            width: 7.7em;
             height: 1.3em;
             display: inline-block;
             bottom: 0.3em;
@@ -252,6 +251,54 @@
             border-radius: 30%;
         }
 
+        .tljiahao{
+            position: fixed;
+            height: 0.8em;
+            width: 0.8em;
+            bottom: 0.8em;
+            right: 0.1em;
+            text-align: center;
+            border-radius: 1.5em;
+            font-weight: 800;
+            font-size: 4em;
+            line-height: 0.8em;
+            color: white;
+            background-color: black;
+        }
+
+        .tlxjdh {
+            position: fixed;
+            bottom: 0;
+            display: none;
+            background-color: #f0eaf4;
+            overflow: hidden;
+            border-radius: 2px;
+            cursor: pointer;
+            width: 100%;
+            height: 5.4em;
+            position: relative;
+        }
+
+        .tlsr {
+            background-color: #f0eaf4;
+            position: absolute;
+            display: inline;
+            width: 87%;
+            height: 80%;
+            left: 1em;
+            border-color: #0D0D0D;
+            border: thin;
+            word-wrap: break-word;
+        }
+        .tltjwz {
+            position: relative;
+            left: 93%;
+            margin-right: 0.5em;
+            bottom: -3em;
+            /*background-color: yellow;*/
+            display: inline-block;
+        }
+
     </style>
 </head>
 <body>
@@ -308,8 +355,23 @@
         <!--</div>-->
         <!--</div>-->
     </div>
+    <span class="tljiahao" onclick="tlxinjian('tlxjdh','xinhuaquan')">+</span>
+    <div id="tlxjdh" class="tlxjdh" style="display: none">
+        <textarea id="xinhuaquan" class="tlsr" style="color:#615f62;" placeholder="点击输入属于你的匿槽"
+                  name="usrname"></textarea>
+        <i id="sendMain" class="fa fa-send-o tltjwz"></i>
+    </div>
+    <script>
+        function tlxinjian(id, textarea) {
+            if (document.getElementById(id).style.display == "none") {
+                document.getElementById(id).style.display = "block";
+                document.getElementById(textarea).focus();
+            } else {
+                document.getElementById(id).style.display = "none";
+            }
+        }
 
-
+    </script>
     <script src="CommonJS.js"></script>
     <script>
         var uid = getValue("id");
@@ -345,7 +407,35 @@
             ]
 
         });
+        var xinjiancanshu=1;
+        var t1xinjian2=function(id) {
+            var objs = document.getElementById(id).children;
+            if (xinjiancanshu) {
+                for(var i = 4; i < objs.length; i++) {
+                    objs[i].style.display = "block";
+                    objs[objs.length-1].style.display = "none";
+                }
+                xinjiancanshu=0;
+            } else {
+                for(var a = 4; a < objs.length; a++) {
+                    objs[a].style.display = "none";}
+                xinjiancanshu=1;
+            }
+            console.log("1");
+        };
+        var t1xinjian3=function(id,event) {
+            var objs = document.getElementById(id).children;
+            if (!xinjiancanshu) {
+                    objs[objs.length-1].style.display = "block";
+                event.style.display="none";
+                xinjiancanshu=1;
+            } else {
+                    objs[objs.length-1].style.display = "none";
+                xinjiancanshu=0;
+            }
 
+            console.log("1");
+        };
         //    需要从后端获取今日话题topic，今日话题时间time1，
         //讨论者黑白框中的头像imgurl，时间time，内容content，点赞数dianzhan，留言数liuyanshu，以及这是该讨论的第几条i
         // 以及这条讨论的回复头像imgurl2，内容content2,以及这是该留言的第几条a
@@ -358,14 +448,16 @@
 
             for (var i = 0; i < json.hotCon.length; i++) {
                 content.appendChild(createActivity(json.hotCon[i].word, json.hotCon[i].time, json.hotCon[i].content,
-                    json.hotCon[i].good, json.hotCon[i].review.length, i));
+                        json.hotCon[i].good, json.hotCon[i].review.length, i));
+                var maincontent = document.getElementById(i);
                 if (json.hotCon[i].review.length > 0) {
                     for (var j = 0; j < json.hotCon[i].review.length; j++)
-                        content.appendChild(createReview(json.hotCon[i].review[j].word, json.hotCon[i].review[j].content,
-                            (j == json.hotCon[i].review.length - 1)));
+                        maincontent.appendChild(createReview(json.hotCon[i].review[j].word, json.hotCon[i].review[j].content,
+                                (j == json.hotCon[i].review.length - 1),i));
+                    maincontent.appendChild(createSend(userInfo.head));
                 } else {
                     //显示发送框
-                    content.appendChild(createSend(userInfo.head));
+                    maincontent.appendChild(createSend(userInfo.head));
                 }
             }
         }
@@ -385,12 +477,16 @@
             img.className = "tllogo";
             span_1.className = "tlkxxsj";
             span_2.className = "tlkxxnr";
-            div_0.className = "tldzpl";
+            div_0.className = "tlltk";
+            div_1.className = "tldzpl";
             i_1.className = "fa fa-thumbs-up tltb";
             i_1.style = "color: #7e7e7e";
             span_3.className = "tlsl heisez";
             i_2.className = "fa fa-comment tltb";
             i_2.style = "color: #7e7e7e";
+            i_2.onclick= function(){
+                t1xinjian2(i);
+            };
             span_4.className = "tlsl heisez";
             img.src = imgURL;
             span_1.innerText = time;
@@ -414,7 +510,7 @@
         }
 
         //    -----------------回复弹窗函数--------------------------------
-        function createReview(imgURL, content, i) {
+        function createReview(imgURL, content, i,a) {
             var div_1 = document.createElement("div");
             var img = document.createElement("img");
             var p_1 = document.createElement("span");
@@ -433,7 +529,11 @@
                 span_1.className = "tlxjpl";
                 span_1.innerText = "+";
                 div_1.appendChild(span_1);
+                span_1.onclick= function(){
+                    t1xinjian3(a,this);
+                };
             }
+            div_1.style.display="none";
             return div_1;
         }
 
@@ -453,9 +553,11 @@
             textarea.name = "usrname";
             img.src = imgURL;
             span_1.innerText = "+";
+            span_1.className="tlxjpl";
             div_1.appendChild(img);
             div_1.appendChild(textarea);
             div_1.appendChild(span_1);
+            div_1.style.display="none";
             return div_1;
         }
     </script>
