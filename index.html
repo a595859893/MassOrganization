@@ -331,8 +331,9 @@
     </div>
 
     <!--活动管理表格-->
-    <div  style="display: none;" id="table_main">
+    <div style="display: none;" id="table_main">
         <div id="table_1" style="overflow-x: visible">
+            <table id="activityListContainer"></table>
         </div>
         <div class="weui-cells__title">向报名者发送消息</div>
         <div class="weui-cells weui-cells_form">
@@ -345,7 +346,7 @@
         </div>
         <div class="weui-btn-area">
             <button class="weui-btn weui-btn_plain-primary " style="width: 45%;float: left"
-    onclick="document.getElementById('table_main').style.display='none';document.getElementById('main_1').style.display='block'">
+                    onclick="document.getElementById('table_main').style.display='none';document.getElementById('main_1').style.display='block'">
                 返回
             </button>
             <button class="weui-btn weui-btn_plain-primary " style="width: 50%;float: right;margin-top: 0">确认并发送
@@ -359,52 +360,53 @@
         <b>日志类型</b>
         <form style="margin: 15px 15px 35px ">
             <label for="option-one">
-                <input id="option-one" type="radio" name=" " value="option1">
+                <input id="option-one" type="radio" name="diaryOption" value="1">
                 图文说说
             </label>
             <br>
             <label for="option-two" class="pure-radio">
-                <input id="option-two" type="radio" name=" " value="option2">
+                <input id="option-two" type="radio" name="diaryOption" value="2">
                 推送小记
             </label>
         </form>
 
-        <form action="" id="form_1" style="display: none;margin-bottom:35px ;">
+        <form id="form_1" style="display: none;margin-bottom:35px ;">
             <label>
                 <b>说说你想表达的话~</b>
-                <input type="text" name=" " value=" ">
+                <input type="text" id="diary_1_text">
             </label>
             <br>
             <label>
                 <b>上传图片</b>
-                <button onclick="document.getElementById('input_1').click();">选择图片</button>
-                <input type="file" name=" " value=" " accept="image/*" id="input_1" style="display: none">
-                <img src="" alt="">
+                <button type="button" onclick="document.getElementById('diary_input_1').click();">选择图片</button>
+                <input type="file" accept="image/*" id="diary_input_1" style="display: none">
+                <img id="diary_img">
             </label>
         </form>
-        <form action="" id="form_2" style="display: none;margin-bottom:35px ;">
+
+        <form id="form_2" style="display: none;margin-bottom:35px ;">
             <label>
                 <b>推送标题</b>
-                <input type="text" name=" " value=" ">
+                <input type="text" id="diary_2_text">
             </label>
             <br>
             <label>
                 <b>推送图片</b>
-                <button onclick="document.getElementById('input_2').click();">选择图片</button>
-                <input type="file" name=" " accept="image/*" value=" " id="input_2" style="display: none">
-                <img src="" alt="">
+                <button type="button" onclick="document.getElementById('diary_input_2').click();">选择图片</button>
+                <input type="file" accept="image/*" id="diary_input_2" style="display: none">
+                <img id="diary_img2">
             </label>
             <br>
             <label>
                 <b>请务必填写正确的推送链接~</b>
-                <input type="text" name=" " value=" ">
+                <input type="url" id="diary_url">
             </label>
         </form>
 
         <button onclick="document.getElementById('dairy').style.display='none';document.getElementById('main_1').style.display='block'"
                 class="cancelbtn">返回
         </button>
-        <button>提交</button>
+        <button id="diary_submit">提交</button>
     </div>
 
     <!--活动发布表单-->
@@ -444,7 +446,7 @@
                 <input type="text" id="ACT_intro" id="ACT_intro" required>
 
                 <label><b>推送链接</b></label>
-                <input type="url" placeholder="复制推送链接至此处" required>
+                <input type="url" id="ACT_url" placeholder="复制推送链接至此处" required>
 
                 <label><b>主办方</b></label>
                 <input type="text" placeholder="校团工委" id="ACT_organizer" required>
@@ -728,7 +730,7 @@
         } else {
             listjson = {none: true};
         }
-//console.log(listjson);
+
         postMessage({
             serverType: "acfForm",
             name: document.getElementById("ACT_name").value,
@@ -739,6 +741,7 @@
             type: document.getElementById("ACT_type").value,
             campus: document.getElementById("ACT_campus").value,
             logo: encodeURIComponent(document.getElementById("ACT_logo").src),
+            url: document.getElementById("ACT_url").value,
             json: JSON.stringify(listjson),
             UID: uid
         }, "IndexServer.php", function () {
@@ -774,7 +777,7 @@
         var radio = document.getElementsByName("formChoose");
         for (var i = 0; i < radio.length; i++)
             if (radio[i].checked)
-                type = radio.value;
+                type = radio[i].value;
 
         var content = {
             serverType: "massConfig",
@@ -792,10 +795,43 @@
             document.getElementById('main_1').style.display = 'block';
             document.getElementById('main_1').style.display = 'block';
             document.getElementById("user_name").innerText = content.name + "(UID:" + uid + ")";
-            document.getElementById("user_intro").innerText = content.desc;
         });
     };
+    document.getElementById("diary_submit").onclick = function (event) {
+        event.target.disabled = true;
+        var type;
+        var radio = document.getElementsByName("diaryOption");
+        for (var i = 0; i < radio.length; i++)
+            if (radio[i].checked)
+                type = radio[i].value;
 
+        if (type == 1) {
+            var content = {
+                serverType: "massDiary",
+                title: "图文说说",
+                content: document.getElementById("diary_1_text").value,
+                logo: encodeURIComponent(document.getElementById("diary_img").src),
+                url: "#",
+                UID: uid
+            };
+        }
+        if (type == 2) {
+            var content = {
+                serverType: "massDiary",
+                title: document.getElementById("diary_2_text").value,
+                content: "",
+                logo: encodeURIComponent(document.getElementById("diary_img2").src),
+                url: document.getElementById("diary_url").value,
+                UID: uid
+            };
+        }
+
+        postMessage(content, "IndexServer.php", function (json) {
+            event.target.disabled = false;
+            document.getElementById('dairy').style.display = 'none';
+            document.getElementById('main_1').style.display = 'block'
+        });
+    }
     document.getElementById("customerForm").onsubmit = function (event) {
         event = event || window.event;
         event.target.disabled = true;
@@ -823,6 +859,16 @@
     document.getElementById("massCfg_input").onchange = function (event) {
         uploadImg(event || window.event, "massCfg_img");
     };
+    document.getElementById("diary_input_1").onchange = function (event) {
+        event = event || window.event;
+        event.preventDefault();
+        uploadImg(event, "diary_img");
+    };
+    document.getElementById("diary_input_2").onchange = function (event) {
+        event = event || window.event;
+        event.preventDefault();
+        uploadImg(event, "diary_img2");
+    };
 
     function uploadImg(event, id) {
         var file = event.target.files[0];
@@ -831,7 +877,7 @@
         if (reg.test(file.type)) {
             fr.onload = function (event) {
                 var url = event.target.result;
-                if (url.length <= 1024 * 500)//图片大小限制(dataURL本身的原因，多少不太明确)
+                if (url.length <= 1024 * 100)//图片大小限制(dataURL本身的原因，多少不太明确)
                     document.getElementById(id).src = event.target.result;
                 else
                     alert("图片过大，请选择较小的图片！");
@@ -851,10 +897,10 @@
                 document.getElementById("MyList").appendChild(createActivity(json.list[i].name, json.list[i].introduction, json.list[i].location,
                     json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo));
             }
-console.log(json);
+            console.log(json);
             for (var i = 0; i < json.mark.length; i++) {
                 document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
-                    json.mark[i].holdtime, json.mark[i].time, json.mark[i].UID, json.mark[i].json, json.mark[i].logo));
+                    json.mark[i].holdtime, json.mark[i].time, json.mark[i].url, json.mark[i].json, json.mark[i].logo));
             }
 
         });
@@ -882,12 +928,8 @@ console.log(json);
             document.getElementById("myself").onclick = function (event) {
                 tabNav(event, 'page4')
             };
-            for ( var i= 0;i<info.activity.length;i++){
-            document.getElementById("MyAct").appendChild(createAcc(info.activity[i].name));
-
-            for (var i= 0;i<info.activity.list.length;i++){
-            document.getElementById("table_1").appendChild(table(info.activity[i].list[i]));
-            }
+            for (var i = 0; i < info.activity.length; i++) {
+                document.getElementById("MyAct").appendChild(createAcc(info.activity[i].name, info.activity[i].list));
             }
             document.getElementById("myself").click();
         } else {
@@ -995,7 +1037,7 @@ console.log(json);
         }
     }
 
-    function createActivity(title, content, place, holdtime, time, index, labels, logo) {
+    function createActivity(title, content, place, holdtime, time, url, labels, logo) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var img = document.createElement("img");
@@ -1020,24 +1062,7 @@ console.log(json);
         img.style.height = "50px";
 
         a.className = "weui-media-box weui-media-box_appmsg";
-        a.onclick = function (event) {
-            event = event || window.event;
-            switch (event.target) {
-                case(i_2):
-                    document.getElementById("custom").innerHTML = formStr;
-                    sign(index);
-                    break;
-                case(i_1):
-                    postMessage({serverType: "Mark", actID: postIndex}, "activity.php", function () {
-                        event.target.style.color = json.mark ? '#E7CF0C' : '';
-                    });
-                    break;
-            }
-        };
-
-        i_1.className = "fa fa-star";
-        i_2.className = "fa fa-pencil-square-o";
-        i_1.style.color = mark ? '#E7CF0C' : '';
+        a.href = url;
 
         div_1.className = "weui-media-box__hd";
         div_2.className = "weui-media-box__bd";
@@ -1222,7 +1247,6 @@ console.log(json);
 
     document.getElementById('table').innerHTML = showCal();
 
-
     function workList() {
         document.getElementById('add').style.display = 'block';
     }
@@ -1261,60 +1285,53 @@ console.log(json);
         }
     }
 
-    function createAcc(title){
+    function createAcc(title, obj) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var div_2 = document.createElement("div");
         var p = document.createElement("p");
+        var t = '';
+        var th = '';
+        for (var i = 0; i < obj.length; i++) {
+            var json = JSON.parse(obj[i].json);
+            t += "<tr>";
+            for (var j in json) {
+                t += "<td>" + json[j] + "</td>";
+                if (i == 0)
+                    th += "<th>" + j + "</th>";
+            }
+            t += "</tr>";
+        }
 
-        a.className ='weui-cell weui-cell_access';
-        div_1.className ='weui-cell__bd';
-        div_2.className ='weui-cell__ft';
+
+        a.className = 'weui-cell weui-cell_access';
+        div_1.className = 'weui-cell__bd';
+        div_2.className = 'weui-cell__ft';
 
         p.innerText = title;
 
         div_1.appendChild(p);
         a.appendChild(div_1);
         a.appendChild(div_2);
-        a.onclick = function(){
-            document.getElementById('table_main').style.display='block';
-            document.getElementById('main_1').style.display='none'
+        a.onclick = function () {
+            document.getElementById('table_main').style.display = 'block';
+            document.getElementById('main_1').style.display = 'none';
+            document.getElementById('activityListContainer').innerHTML = "<tr>" + th + "</tr>" + t;
         };
-        return a;
-    }
 
-    function table(xml) {
-        var obj = JSON.parse(xml);
-        var t = '';
-        var th = '';
-        for( x in xml){
-           th +="<th>"+ x+ "</th>";
-           t += "<td>" +  xml.x+ "</td>";
-        }
-//        var table = document.createElement('table');
-//        var t = '';
-//        var tt= '';
-//        for(var i=0;i<xml[i].length;i++){
-//            for(var m=0;m<xml.length;m++){
-//                t += "<td>" + xml[i][m] + "</td>" ;
-//            }
-//            tt += "<tr>" + t + "</tr>" ;
-//        }
-//        table.innerHTML=tt;
-//        return table;
+        return a;
     }
 
     function all() {
         var tbody = document.getElementById("tbody");
         var checkBox = tbody.getElementsByTagName("input");
         var all = document.getElementById("all");
-        var i = 0;
         if (all.checked) {
-            for (; i < checkBox.length; i++) {
+            for (var i = 0; i < checkBox.length; i++) {
                 checkBox[i].checked = true;
             }
         } else {
-            for (; i < checkBox.length; i++) {
+            for (var i = 0; i < checkBox.length; i++) {
                 checkBox[i].checked = false;
             }
         }

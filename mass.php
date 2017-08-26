@@ -128,13 +128,33 @@
 					$row["imark"] = $exist;
 					$line["mass"] = $row;
 				}
+				
+				$line["diary"] = array();
 				$num = 0;
-				$rst2 = $mysqli->query("SELECT * FROM massDiary WHERE massUID=$uid");
-				while($row2 = $rst2->fetch_array(MYSQLI_ASSOC)){
+				$rst = $mysqli->query("SELECT * FROM massDiary WHERE massUID=$uid");
+				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+					$id = $row["UID"];
+		
+					$exist = 0;
+					$rst2 = $mysqli->query("SELECT * FROM massDiaryGood WHERE openID='$openID' AND diaryUID=$id");
+					while($row2 = $rst2->fetch_array(MYSQLI_ASSOC)){
+						$exist++;
+					}
+					$row["igood"] = $exist;
+					
+					$line["diary"][] = $row;
 					$num++;
-					$line["diary"][] = $row2;
 				}
 				$line["diary"]["length"] = $num;
+				
+				$line["recruitment"] = array();
+				$num = 0;
+				$rst = $mysqli->query("SELECT * FROM recruitment WHERE massUID=$uid");
+				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+					$line["recruitment"][] = $row;
+					$num++;
+				}
+				$line["recruitment"]["length"] = $num;
 			}else{
 				$line["success"] = false;
 				$line["error"] = "评论发起错误，错误提示:(".$mysqli->error.")";
@@ -144,32 +164,38 @@
 			$diaryUID = $_POST["diaryUID"];
 
 			$exist = false;
-			$rst = $mysqli->query("SELECT * from massDiaryGood WHERE openID='$openID' AND diaryUID=$diaryUID");
-			while($row = $rst->fetch_array(MYSQLI_ASSOC)){
-				$exist = true;
-				break;
-			}
 			
-			if(!$exist){
-				$rst2 = $mysqli->query("INSERT INTO massDiaryGood (openID,diaryUID) VALUES('$openID',$diaryUID)");
-				$mysqli->query("UPDATE mass SET good=good+1 WHERE UID=$diaryUID");
-				$line["good"] = true;
-				if($rst2)
-					$line["success"] = true;
-				else{
-					$line["error"] = "点赞错误，错误提示: ".$mysqli->error;
-					$line["success"] = false;
+			$rst = $mysqli->query("SELECT * from massDiaryGood WHERE openID='$openID' AND diaryUID=$diaryUID");
+			if($rst){
+				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+					$exist = true;
+					break;
+				}
+				
+				if(!$exist){
+					$rst2 = $mysqli->query("INSERT INTO massDiaryGood (openID,diaryUID) VALUES('$openID',$diaryUID)");
+					$mysqli->query("UPDATE massDiary SET good=good+1 WHERE UID=$diaryUID");
+					$line["good"] = true;
+					if($rst2)
+						$line["success"] = true;
+					else{
+						$line["error"] = "点赞错误，错误提示: ".$mysqli->error;
+						$line["success"] = false;
+					}
+				}else{
+					$rst2 = $mysqli->query("DELETE FROM massDiaryGood WHERE openID='$openID' AND diaryUID=$diaryUID");
+					$mysqli->query("UPDATE massDiary SET good=good-1 WHERE UID=$diaryUID");
+					$line["good"] = false;
+					if($rst2)
+						$line["success"] = true;
+					else{
+						$line["error"] = "点赞删除错误，错误提示: ".$mysqli->error;
+						$line["success"] = false;
+					}
 				}
 			}else{
-				$rst2 = $mysqli->query("DELETE FROM massDiaryGood WHERE openID='$openID' AND diaryUID=$diaryUID");
-				$mysqli->query("UPDATE mass SET good=good-1 WHERE UID=$diaryUID");
-				$line["good"] = false;
-				if($rst2)
-					$line["success"] = true;
-				else{
-					$line["error"] = "点赞删除错误，错误提示: ".$mysqli->error;
-					$line["success"] = false;
-				}
+				$line["error"] = "点赞判断错误，错误提示: ".$mysqli->error;
+				$line["success"] = false;		
 			}
 		}
 		

@@ -164,22 +164,12 @@
     </div>
 
 
-
     <!--社团招新栏-->
     <br>
     <div class="weui-panel weui-panel_access">
         <div class="weui-panel__hd">招新 &nbsp;</div>
-        <div class="weui-panel__bd">
-            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-                <div class="weui-media-box__hd">
-                    <img class="" alt="">
-                </div>
-                <div class="weui-media-box__bd">
-                    <h4 class="weui-media-box__title" id="title"> </h4>
-                    <p class="weui-media-box__desc" id="time"></p>
-                    <p class="weui-media-box__desc" id="host"></p>
-                </div>
-            </a>
+        <div class="weui-panel__bd" id="recruitment_board">
+
         </div>
     </div>
 
@@ -187,7 +177,7 @@
     <!--社团日志栏-card形式-->
     <br>
     <div id="mass_diary" class="weui-panel weui-panel_access">
-        <div class="weui-panel__hd">社团日志 </div>
+        <div class="weui-panel__hd">社团日志</div>
         <div class="weui-panel__bd">
             <!--js添加-->
         </div>
@@ -205,55 +195,53 @@
 </div>
 
 
-
-
 <script src="CommonJS.js"></script>
 <script>
     var uid = getValue("uid");
-    if (uid > -1){
-        init_1();
+    if (uid > -1) {
+        init();
     }
 
 
     function color(event) {
-        postMessage({serverType: "mark", markUID: uid}, "mass.php",function(json){
+        postMessage({serverType: "mark", markUID: uid}, "mass.php", function (json) {
             var num = parseInt(document.getElementById("mass_num").innerHTML.replace("<span>", "").replace("</span>", ""));
-            num = json.mark ? num+1 : num-1 ;
+            num = json.mark ? num + 1 : num - 1;
             event.target.innerHTML = " <span>" + num + " </span> ";
             event.target.style.color = json.mark ? 'red' : '';
         });
     }
 
-    //                    后端没存传二维码
-    function init_1() {
-        postMessage({serverType: "getMass", UID: uid},"mass.php",function(json){
+    function init() {
+        postMessage({serverType: "getMass", UID: uid}, "mass.php", function (json) {
             document.getElementById("mass_num").innerHTML = " <span>" + json.mass.number + " </span> ";
-            console.log(json.mass);
             document.getElementById("mass_img").src = json.mass.logo;
             document.getElementById("mass_name").innerText = json.mass.name;
-            document.getElementById("mass_qrCode").src=json.mass.logo;
+            document.getElementById("mass_qrCode").src = json.mass.QRcode;
             document.getElementById("mass_intro").innerText = json.mass.intro;
             document.getElementById("mass_num").style.color = json.mass.imark ? 'red' : '';
             for (var i = 0; i < json.diary.length; i++) {
                 document.getElementById("mass_diary").appendChild(createDiary(json.diary[i].title, json.diary[i].content, json.diary[i].time,
-                    json.diary[i].img, json.diary[i].logo, json.diary[i].UID));
+                    json.diary[i].img, json.diary[i].logo, json.diary[i].UID, json.diary[i].good, json.diary[i].igood));
             }
-        });
-        postMessage({serverType: "getList"},"mass.php",function(json){
-            dealContent(json);
+
+            for (var i = 0; i < json.recruitment.length; i++) {
+                document.getElementById("recruitment_board").appendChild(createRecruitment(json.recruitment[i].title,
+                    json.recruitment[i].object, json.recruitment[i].end, json.recruitment[i].intro, json.recruitment[i].link));
+            }
         });
     }
 
-    function createDiary(title, content, time, image, logo, uid) {
+    function createDiary(title, content, time, image, logo, uid, good, igood) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var div_2 = document.createElement("div");
         var logo_1 = document.createElement("img");
         var h4 = document.createElement("h4");
         var span = document.createElement("i");
-        var p_1= document.createElement("p");
-        var p_2= document.createElement("p");
-        var p_3= document.createElement("p");
+        var p_1 = document.createElement("p");
+        var p_2 = document.createElement("p");
+        var p_3 = document.createElement("p");
 
         a.className = "weui-media-box weui-media-box_appmsg";
         div_1.className = "weui-panel__hd";
@@ -261,20 +249,27 @@
         div_2.className = "weui-media-box__bd";
         h4.className = "weui-media-box__title";
         span.className = "fa fa-thumbs-o-up";
-        span.innerHTML='<span> </span>';
-        span.style='float: right';
-        span.onclick = color(event);
-        p_1.className=p_2.className=p_3.className = "weui-media-box__desc";
+        span.style = 'float: right';
+        span.style.color = igood ? 'red' : '';
+        span.innerText = good;
+        span.onclick = function (event) {
+            postMessage({serverType: "goodDiary", diaryUID: uid}, "mass.php", function (json) {
+                var num = parseInt(event.target.innerText);
+                num = json.good ? num + 1 : num - 1;
+                event.target.innerText = num;
+                event.target.style.color = json.good ? 'red' : '';
+            });
+        };
+        p_1.className = p_2.className = p_3.className = "weui-media-box__desc";
+        h4.innerHTML = title;
+        p_1.innerText = time;
+        p_2.innerText = content;
+        logo_1.src = logo;
+        logo_1.style.width = 50 + "px";
 
-          h4.innerHTML = title ;
-          p_1.innerText = time;
-          p_2.innerText = content;
-          logo_1.src = logo;
-          logo_1.style.width = 50+"px";
-
-        for (var i = 0; i < image.length; i++){
+        for (var i = 0; i < image.length; i++) {
             var img = document.createElement("img");
-            img.style="background-image:url(" + image[i] + ")";
+            img.style = "background-image:url(" + image[i] + ")";
             p_3.appendChild(img);
         }
 
@@ -290,15 +285,51 @@
         return a;
     }
 
-    function dealContent(json) {
+    function createRecruitment(title, object, end, intro, url) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var img = document.createElement("img");
+        var h4 = document.createElement("h4");
+        var p1 = document.createElement("p1");
+        var p2 = document.createElement("p2");
+        var i = document.createElement("i");
 
-        document.getElementById('title').innerHTML=json[0].title+'&nbsp;<i class="fa fa-star" onclick="color(event)"></i>'+'<i class="fa fa-calendar-plus-o" style="float: right;font-size: 20px;" onclick="tip()"></i>';
-        document.getElementById('time').innerHTML= '<i class="fa fa-clock-o"></i> &nbsp; '+ json[0].time ;
-        document.getElementById('host').innerHTML= '<i class="fa fa-users"></i> &nbsp; '+ json[0].host ;
-    }
+        a.className = "weui-media-box weui-media-box_appmsg";
+        div_1.className = "weui-media-box__hd";
+        div_2.className = "weui-media-box__bd";
+        h4.className = "weui-media-box__title";
+        p1.className = "weui-media-box__desc";
+        p2.className = "weui-media-box__desc";
+        i.className = "fa fa-calendar-plus-o";
+        i.style = "float: right;font-size: 20px;";
+        i.onclick = function (event) {
+            event = event || window.event;
+            event.preventDefault();
+            postMessage({
+                serverType: "addDate",
+                actName: title + " 日程活动",
+                actStart: end,
+                actEnd: end
+            }, "IndexServer.php", function () {
+                alert("加入日程成功");
+            });
+        }
+        a.href = url;
 
-    function tip(){
-        alert('已成功加入日程');
+        h4.innerText = title + ' ';
+        p1.innerHTML = '<i class="fa fa-clock-o"></i> &nbsp; ' + end;
+        p2.innerHTML = '<i class="fa fa-users"></i> &nbsp; ' + object;
+
+        h4.appendChild(i);
+        div_2.appendChild(h4);
+        div_2.appendChild(p1);
+        div_2.appendChild(p2);
+        div_1.appendChild(img);
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+
+        return a;
     }
 </script>
 

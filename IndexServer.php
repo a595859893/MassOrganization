@@ -37,7 +37,7 @@
 				$line = destroyAct($mysqli);
 				break;
 			case("massDiary"):
-				$line = destroyAct($mysqli);
+				$line = massDiary($mysqli);
 				break;
 			default:
 				$line = array();
@@ -54,15 +54,25 @@
 		$logo		= $_POST["logo"];
 		$UID		= $_POST["UID"];
 		$img		= $_POST["img"];
+		$url		= $_POST["url"];
 		$time	 	= time();
-		$order = "INSERT INTO massDiary (title,content,time,logo,img,massUID) ";
-		$order .="VALUES('$title','$content',FROM_UNIXTIME($time),'$logo','$img',$UID)";
-
+		$order = "INSERT INTO massDiary (title,content,time,logo,img,url,massUID) ";
+		$order .="VALUES('$title','$content',FROM_UNIXTIME($time),'$logo','$img','$url',$UID)";
+		$line = array();
 		$rst = $mysqli->query($order);
+		if($rst)
+			$line["success"] = true;
+		else{
+			$line["success"] = false;
+			$line["error"] = "日志添加错误，错误提示:".$mysqli->error;
+		}
+		
+		return $line;
 	}
 	
 	function destroyAct($mysqli){
 		$actUID = $_POST["actUID"];
+		$line = array();
 		$line["success"]=true;
 		$rst = $mysqli->query("DELECT FROM actList WHERE actUID=$actUID");
 		if(!$rst)
@@ -74,6 +84,7 @@
 		if(!$rst)
 			$line["success"]=false;
 		$line["error"] = "活动删除错误，错误提示:".$mysqli->error;
+		return $line;
 	}
 	
 	function getActList($mysqli){
@@ -268,11 +279,12 @@
 		$json		= $_POST["json"];
 		$campus		= $_POST["campus"];
 		$logo		= $_POST["logo"];
+		$url		= $_POST["url"];
 		$UID		= $_POST["UID"];
 		$time	 	= time();
 		
-		$order = "INSERT INTO activity (name,location,holdtime,time,organizer,introduction,type,campus,logo,json,organizerUID) ";
-		$order .="VALUES('$name','$location','$holdtime',FROM_UNIXTIME($time),'$organizer','$intro','$type','$campus','$logo','$json',$UID)";
+		$order = "INSERT INTO activity (name,location,holdtime,time,organizer,introduction,type,campus,logo,url,json,organizerUID) ";
+		$order .="VALUES('$name','$location','$holdtime',FROM_UNIXTIME($time),'$organizer','$intro','$type','$campus','$logo','$url','$json',$UID)";
 
 		$rst = $mysqli->query($order);
 		if($rst){
@@ -300,7 +312,7 @@
 		$QRcode = $_POST["QRcode"];
 		$UID	= $_POST["UID"];
 		
-		$order = "UPDATE mass SET name='$name',member='$head',logo='$logo',intro='$desc' type='$type' QRcode='$QRcode' WHERE UID=$UID";
+		$order = "UPDATE mass SET name='$name',member='$head',logo='$logo',intro='$desc',type='$type',QRcode='$QRcode' WHERE UID=$UID";
 
 		$rst = $mysqli->query($order);
 		if($rst){
