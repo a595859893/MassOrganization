@@ -455,7 +455,7 @@
                 <button type="button" onclick="document.getElementById('ACT_input').click();">点击上传图片</button>
                 <input type="file" style="display:none" accept="image/*" id="ACT_input">
                 <br>
-                <img id="ACT_logo">
+                <img id="ACT_logo" width="70px" height="110px">
                 <br>
                 <input type="radio" name="formChoose" value="default" checked> <b>使用默认报名表</b>
                 <button onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">
@@ -501,11 +501,11 @@
                 <label><b>招新对象</b></label>
                 <input type="text" id="NEW_object" required>
 
+                <label><b>报名开始时间</b></label>
+                <input class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_start'});" id="NEW_start" required>
+
                 <label><b>报名截止时间</b></label>
                 <input class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_end'});" id="NEW_end" required>
-
-                <!--<label><b>社团简介</b></label>-->
-                <!--<input type="text" id="NEW_intro" required>-->
 
                 <label><b>推送链接</b></label>
                 <input type="url" placeholder="复制推送链接至此处" id="NEW_link" required>
@@ -759,6 +759,7 @@
             type: document.getElementById("NEW_type").value,
             title: document.getElementById("NEW_title").value,
             object: document.getElementById("NEW_object").value,
+            start: document.getElementById("NEW_start").value,
             end: document.getElementById("NEW_end").value,
             introduction: document.getElementById("NEW_intro").value,
             link: document.getElementById("NEW_link").value,
@@ -1020,7 +1021,6 @@
         li.appendChild(label);
         li.appendChild(input);
         input.name = value;
-//        input.value = type;
         document.getElementById("myUL").appendChild(li);
         document.getElementById("myInput").value = "";
 
@@ -1288,7 +1288,6 @@
     function createAcc(title, obj,uid) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
-//        var div_2 = document.createElement("div");
         var p = document.createElement("p");
         var span = document.createElement("span");
         var t = '';
@@ -1315,29 +1314,31 @@
         a.appendChild(div_1);
         a.appendChild(span);
 
-        span.onclick = function(event){
+        span.onclick = function (event){
             event = event || window.event;
             event.preventDefault();
             var element = this.parentElement;
             var parent = element.parentElement;
-            postMessage({
-                serverType: "destroyAct",
-                actUID:uid
-            }, "IndexServer.php", function () {
-                parent.removeChild(element);
-                alert('成功删除');
-            })
+                postMessage({
+                    serverType: "destroyAct",
+                    actUID:uid
+                }, "IndexServer.php", function () {
+                    parent.removeChild(element);
+                    alert('成功删除');
+                })
         };
-
-        a.onclick = function () {
-            document.getElementById('table_main').style.display = 'block';
-            document.getElementById('main_1').style.display = 'none';
-            document.getElementById('activityListContainer').innerHTML = "<tr>" + th + "</tr>" + t;
+        div_1.onclick=function () {
+                document.getElementById('table_main').style.display = 'block';
+                document.getElementById('main_1').style.display = 'none';
+                document.getElementById('activityListContainer').innerHTML = "<tr>" + th + "</tr>" + t;
         };
 
         return a;
     }
 
+    function dele(){
+
+    }
     function all() {
         var tbody = document.getElementById("tbody");
         var checkBox = tbody.getElementsByTagName("input");
