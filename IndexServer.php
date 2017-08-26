@@ -74,13 +74,13 @@
 		$actUID = $_POST["actUID"];
 		$line = array();
 		$line["success"]=true;
-		$rst = $mysqli->query("DELECT FROM actList WHERE actUID=$actUID");
+		$rst = $mysqli->query("DELETE FROM actList WHERE actUID=$actUID");
 		if(!$rst)
 			$line["success"]=false;
-		$rst = $mysqli->query("DELECT FROM activityMark WHERE actID=$actUID");
+		$rst = $mysqli->query("DELETE FROM activityMark WHERE actID=$actUID");
 		if(!$rst)
 			$line["success"]=false;
-		$rst = $mysqli->query("DELECT FROM activity WHERE UID=$actUID");
+		$rst = $mysqli->query("DELETE FROM activity WHERE UID=$actUID");
 		if(!$rst)
 			$line["success"]=false;
 		$line["error"] = "活动删除错误，错误提示:".$mysqli->error;
