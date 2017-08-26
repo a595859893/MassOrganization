@@ -5,7 +5,7 @@
 	$rst = $mysqli->query("SELECT * FROM conversation AS a WHERE a.UID NOT IN (SELECT conID FROM conversationHot) AND type='conversation' ORDER BY good DESC");
 	while($row = $rst->fetch_array(MYSQLI_ASSOC)){
 		$id = $row["UID"];
-		$rst = $mysqli->query("INSERT INTO conversationHot (conID,time) VALUES($id,$time)");
+		$rst = $mysqli->query("INSERT INTO conversationHot (conID,time) VALUES($id,FROM_UNIXTIME($time))");
 		break;
 	}
 ?>

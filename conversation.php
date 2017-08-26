@@ -16,7 +16,7 @@
 			
 			if($uid==-1){
 				$order = "INSERT INTO conversation (openID,word,content,type,time) ";
-				$order .="VALUES('$openID','$character','$content','$type',FROM_UNIXTIME($time)";
+				$order .="VALUES('$openID','$character','$content','$type',FROM_UNIXTIME($time))";
 
 				$rst = $mysqli->query($order);
 				
@@ -135,11 +135,11 @@
 				}
 			}
 		}else if($serverType == "getHotReview"){
-			$id = $_POST["UID"];
+			$uid = $_POST["UID"];
 			$line["review"] = array();
 			$line["success"] = true;
 			
-			$rst = $mysqli->query("SELECT * FROM conversation WHERE UID=$id");
+			$rst = $mysqli->query("SELECT * FROM conversation WHERE UID=$uid");
 			if($rst){
 				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
 					$line["state"]= $row;
@@ -149,7 +149,7 @@
 				$line["error"] = "热门话题获取错误，错误提示:(".$mysqli->error.")";
 			}
 			
-			$rst = $mysqli->query("SELECT * FROM conversationHot WHERE conID=$id");
+			$rst = $mysqli->query("SELECT * FROM conversationHot WHERE conID=$uid");
 			if($rst){
 				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
 					$line["hot"]= $row;
@@ -159,28 +159,30 @@
 				$line["error"] = "热门话题获取错误，错误提示:(".$mysqli->error.")";
 			}
 			
-			$rst = $mysqli->query("SELECT * FROM conversation WHERE UID=$id");
+			$type = 'hot';
+			$rst = $mysqli->query("SELECT * FROM conversation WHERE type='hot' AND targetUID=$uid ORDER BY time DESC");
 			if($rst){
+				$looptag = 0;
 				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
-					$line["state"]= $row;
+					$id = $row["UID"];
+					$rst2 = $mysqli->query("SELECT * FROM conversationReview WHERE targetUID=$id ORDER BY UID DESC");
+					$reviewNum=0;
+					$row["review"] = array();
+					while($row2 = $rst2->fetch_array(MYSQLI_ASSOC)){
+						$reviewNum++;
+						$row["review"][] = $row2;
+					}
+					$row["review"]["length"]=$reviewNum;
+
+					$line["hotCon"][] = $row;
+					$looptag++;
 				}
+				$line["hotCon"]["length"] = $looptag;
 			}else{
+				$line["error"] = "匿槽获取错误，错误提示: ".$mysqli->error;
 				$line["success"] = false;
-				$line["error"] = "热门话题获取错误，错误提示:(".$mysqli->error.")";
 			}
 			
-			$rst = $mysqli->query("SELECT * FROM conversationReview WHERE targetUID=$id ORDER BY UID DESC");
-			$num = 0;
-			if($rst){
-				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
-					$line["review"][] = $row;
-					$num++;
-				}
-				$line["review"]["length"] = $num;
-			}else{
-				$line["success"] = false;
-				$line["error"] = "热门评论获取错误，错误提示:(".$mysqli->error.")";
-			}
 		}
 		
 		echo json_encode($line);

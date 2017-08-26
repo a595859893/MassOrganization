@@ -9,19 +9,21 @@
     <link rel="stylesheet" href="css.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
     <style type="text/css">
-        *{
+        * {
             margin: 0;
             padding: 0;
         }
 
-        .tlym{
+        .tlym {
             background-color: #ffffff;
         }
-        .tlqbt1{
+
+        .tlqbt1 {
             position: relative;
             height: 8em;
         }
-        .tlqbt{
+
+        .tlqbt {
             width: 100%;
             margin-top: 3em;
             margin-bottom: 0;
@@ -30,28 +32,32 @@
             display: inline-block;
             text-align: center;
         }
-        .tlsj{
+
+        .tlsj {
             position: absolute;
             right: 0;
-            display:block;
+            display: block;
             margin-top: 0;
             margin-bottom: 1em;
             color: #bfbfbf;
         }
-        .tlqfg{
+
+        .tlqfg {
             width: 100%;
             display: inline-block;
             height: 1.8em;
             background-color: #f0ebf1;
             text-align: right;
         }
+
         .tlsxtb {
             width: 1.6em;
             height: 1.6em;
             background-color: green;
             display: inline-block;
         }
-        .tlltk{
+
+        .tlltk {
             position: relative;
             display: inline-block;
             width: 100%;
@@ -68,14 +74,16 @@
             background-color: #615f62;
             color: #fefcff;
         }
-        .tlkxx{
+
+        .tlkxx {
             float: left;
-            width:73%;
+            width: 73%;
             height: 6em;
             display: inline-block;
             border-bottom: solid 0.01em #e0e0e0;
         }
-        .tlkxxsj{
+
+        .tlkxxsj {
             display: block;
             height: 1.3em;
             line-height: 2.3em;
@@ -84,11 +92,13 @@
             margin-top: 0.8em;
 
         }
-        .tlkxxnr{
+
+        .tlkxxnr {
             display: block;
             line-height: 3em;
             height: 3em;
         }
+
         .tldzpl {
             position: absolute;
             float: right;
@@ -106,16 +116,17 @@
             height: 1.3em;
             /*background-color: green;*/
         }
+
         .heisez {
             color: #474547;
         }
+
         /*/-------------------------------------------------*/
         .tlhfnr {
             position: absolute;
             display: inline-block;
             margin-left: 4em;
         }
-
 
         .tlxjpl {
             position: relative;
@@ -152,20 +163,24 @@
             line-height: 1.2em;
             font-size: 0.9em;
         }
+
         /*--------------------------------------------------*/
 
-        .tlfenlei{
+        .tlfenlei {
             text-align: right;
             background-color: #f7f7ff;
         }
-        .tlxuanxiang2{
-            font-size:  1.2em;
-            line-height:0.9em;
+
+        .tlxuanxiang2 {
+            font-size: 1.2em;
+            line-height: 0.9em;
             color: #adadad;
         }
-        span.tlxuanzhong{
+
+        span.tlxuanzhong {
             color: #8ac148;
         }
+
         /*-------------------------------------*/
         .tlhf {
             background-color: #f0ebf1;
@@ -176,6 +191,7 @@
             height: 1.6em;
             position: relative;
         }
+
         .tlhfyuan {
             position: absolute;
             background-color: #646265;
@@ -202,7 +218,6 @@
             font-size: 1em;
             font-family: "微软雅黑"
         }
-
 
         .tlxjpl {
             position: relative;
@@ -243,14 +258,14 @@
 <div class="tlym">
     <div class="tlqbt1"><span class="tlqbt">刚到中山大学你觉得最大的是什么</span><span class="tlsj">8月12日</span></div>
     <!----------------------------------------------筛选-------------------------------->
-    <div id="tlfl"  class="tlfenlei buxianshi">
-        <span class="tlxuanxiang2 ciji tlxuanzhong"  onclick="xuanxiang(event)">最热</span>
-        <span class="tlxuanxiang2 ciji"  onclick="xuanxiang(event)">最新</span>
+    <div id="tlfl" class="tlfenlei buxianshi">
+        <span class="tlxuanxiang2 ciji tlxuanzhong" onclick="xuanxiang(event)">最热</span>
+        <span class="tlxuanxiang2 ciji" onclick="xuanxiang(event)">最新</span>
     </div>
     <script type="text/javascript">
         <!--顶部次次级选项卡-->
         function xuanxiang(evt, tabName) {
-            var i,ciji;
+            var i, ciji;
             ciji = document.getElementsByClassName("ciji");
             for (i = 0; i < ciji.length; i++) {
                 ciji[i].className = ciji[i].className.replace("tlxuanzhong", " ");
@@ -259,164 +274,190 @@
         }
     </script>
     <!--------------------聊天框------------------------->
-    <div id="content"></div>
-    <div class="tlltk">
-        <!--头像-->
-            <img class="tllogo">
-        <!--信息-->
-            <span class="tlkxxsj">2017年8月12日</span>
-            <span class="tlkxxnr">我觉得。。。。。。。。。</span>
-            <!--点赞评论-->
-                <div class="tldzpl ">
-                    <i class="fa fa-thumbs-up tltb" style="color: #7e7e7e"></i>
-                    <span class="tlsl heisez">11</span>&nbsp
-                    <i class="fa fa-comment tltb"  style="color: #7e7e7e"></i>
-                    <span class="tlsl heisez">0</span>
-                </div>
-        <!------------------------------------------------------------------>
-        <div class="tlhf zhongyang">
-            <img class="tlhfyuan">
-            <p class="tlhfnr">单纯的回复，后面没有加号的</p>
-        </div>
-        <!-------------带新建的回复------------------>
-        <div class="tlhf zhongyang">
-            <img class="tlhfyuan">
-            <p class="tlhfnr">最底下的一条评论</p>
-            <span class="tlxjpl">+</span>
-        </div>
-        <!--新建评论窗口--->
-        <div  class="tlhf zhongyang">
-            <img class="tlhfyuan">
-            <textarea type="text" style="color:#b8a4a4;" value="来发第一条评论吧" onfocus="if (value =='来发第一条评论吧'){value  =''}" onblur="if (value  ==''){value='来发第一条评论吧'}" class="tlplkuang" name="usrname">来发第一条评论吧</textarea>
-            <div class="tlxjpl tlxjplfs">+</div>
-        </div>
-</div>
+    <div id="content">
+        <!--<div class="tlltk">-->
+        <!--&lt;!&ndash;头像&ndash;&gt;-->
+        <!--<img class="tllogo">-->
+        <!--&lt;!&ndash;信息&ndash;&gt;-->
+        <!--<span class="tlkxxsj">2017年8月12日</span>-->
+        <!--<span class="tlkxxnr">我觉得。。。。。。。。。</span>-->
+        <!--&lt;!&ndash;点赞评论&ndash;&gt;-->
+        <!--<div class="tldzpl ">-->
+        <!--<i class="fa fa-thumbs-up tltb" style="color: #7e7e7e"></i>-->
+        <!--<span class="tlsl heisez">11</span>&nbsp-->
+        <!--<i class="fa fa-comment tltb" style="color: #7e7e7e"></i>-->
+        <!--<span class="tlsl heisez">0</span>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+        <!--<div class="tlhf zhongyang">-->
+        <!--<img class="tlhfyuan">-->
+        <!--<p class="tlhfnr">单纯的回复，后面没有加号的</p>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;带新建的回复&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+        <!--<div class="tlhf zhongyang">-->
+        <!--<img class="tlhfyuan">-->
+        <!--<p class="tlhfnr">最底下的一条评论</p>-->
+        <!--<span class="tlxjpl">+</span>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;新建评论窗口-&ndash;&gt;-->
+        <!--<div class="tlhf zhongyang">-->
+        <!--<img class="tlhfyuan">-->
+        <!--<textarea type="text" style="color:#b8a4a4;" value="来发第一条评论吧" onfocus="if (value =='来发第一条评论吧'){value  =''}"-->
+        <!--onblur="if (value  ==''){value='来发第一条评论吧'}" class="tlplkuang" name="usrname">来发第一条评论吧</textarea>-->
+        <!--<div class="tlxjpl tlxjplfs">+</div>-->
+        <!--</div>-->
+        <!--</div>-->
+    </div>
 
-<script src="CommonJS.js"></script>
-<script>
-    var uid = getValue("uid");
-    if (uid > -1){
-        init();
-    }
 
-    function init() {
-        postMessage({serverType: "getHotReview", UID:uid},"conversation.php",function(json){
-            dealContent(json);
-        });
-    }
+    <script src="CommonJS.js"></script>
+    <script>
+        var uid = getValue("id");
+        if (uid > -1) {
+//        init();
+        }
+        var userInfo = {head: ""};
 
-    //    需要从后端获取今日话题topic，今日话题时间time1，
-    //讨论者黑白框中的头像imgurl，时间time，内容content，点赞数dianzhan，留言数liuyanshu，以及这是该讨论的第几条i
-    // 以及这条讨论的回复头像imgurl2，内容content2,以及这是该留言的第几条a
-    function dealContent(json) {
-        var content = document.getElementById("content");
-        var tlqbt = document.getElementsByClassName("tlqbt");
-        var tlsj = document.getElementsByClassName("tlsj");
-        tlqbt.innerText=json.state.content;
-        tlqbt.innerText=json.hot.time;
+        function init() {
+            postMessage({serverType: "getHotReview", UID: uid}, "conversation.php", function (json) {
+                dealContent(json);
+            });
+        }
 
-        for (var i = 0; i < json.review.length; i++){
-            content.appendChild(createActivity(json.review[i].word, json.review[i].time,json.mass[i].content, json.mass[i].dianzhan, json.mass[i].liuyanshu,i));//i为该话题的第几条
-//            --------创建评论
-            if(!liuyanshu){
-                for (var i = 0; i < json.activity.length; i++)
-                    content.appendChild(createActivity2(json.mass[i].imgURL2, json.mass[i].content2,json.mass[i].a));//a用来判断是否是最后一条评论，不是就显示
-            }
-            else{
-                //显示发送框
-             content.appendChild(createActivity3(json.mass[i].imgURL, json.mass[i].content,json.mass[i].a))
+//        dealContent({
+//            state: {content: "活动标题"},
+//            hot: {time: "时间"},
+//            hotCon: [
+//                {
+//                    word: "", time: "时间", content: "评论内容",
+//                    review: [
+//                        {word: "", content: "评论的评论的内容"},
+//                        {word: "", content: "评论的评论的内容"}
+//                    ]
+//                },
+//                {
+//                    word: "", time: "时间", content: "评论内容",
+//                    review: [
+//                        {word: "", content: "评论的评论的内容"},
+//                        {word: "", content: "评论的评论的内容"}
+//                    ]
+//                }
+//            ]
+//
+//        });
+
+        //    需要从后端获取今日话题topic，今日话题时间time1，
+        //讨论者黑白框中的头像imgurl，时间time，内容content，点赞数dianzhan，留言数liuyanshu，以及这是该讨论的第几条i
+        // 以及这条讨论的回复头像imgurl2，内容content2,以及这是该留言的第几条a
+        function dealContent(json) {
+            var content = document.getElementById("content");
+            var tlqbt = document.getElementsByClassName("tlqbt");
+            var tlsj = document.getElementsByClassName("tlsj");
+            tlqbt[0].innerText = json.state.content;
+            tlsj[0].innerText = json.hot.time;
+
+            for (var i = 0; i < json.hotCon.length; i++) {
+                content.appendChild(createActivity(json.hotCon[i].word, json.hotCon[i].time, json.hotCon[i].content,
+                    json.hotCon[i].good, json.hotCon[i].review.length, i));
+                if (json.hotCon[i].review.length > 0) {
+                    for (var j = 0; j < json.hotCon[i].review.length; j++)
+                        content.appendChild(createReview(json.hotCon[i].review[j].word, json.hotCon[i].review[j].content,
+                            (j == json.hotCon[i].review.length - 1)));
+                } else {
+                    //显示发送框
+                    content.appendChild(createSend(userInfo.head));
+                }
             }
         }
-    }
 
-//--------------------------主聊天函数------------------------
-    function createActivity(imgURL, time,content, dianzhan, liuyanshu,i) {
-        var div_0=document.createElement("div");
-        var img = document.createElement("img");
-        var span_1 = document.createElement("span");
-        var span_2 = document.createElement("span");
-        var div_1 = document.createElement("div");
-        var i_1 = document.createElement("i");
-        var span_3 = document.createElement("span");
-        var i_2 = document.createElement("i");
-        var span_4 = document.createElement("span");
-        img.className ="tllogo";
-        span_1.className="tlkxxsj";
-        span_2.className="tlkxxnr";
-        div.className = "tldzpl";
-        i_1.className="fa fa-thumbs-up tltb";
-        i_1.style = "color: #7e7e7e";
-        span_3.className="tlsl heisez";
-        i_2.className="fa fa-comment tltb";
-        i_2.style = "color: #7e7e7e";
-        span_4.className="tlsl heisez";
-        img.src = imgURL;
-        span_1.innerText = time;
-        span_2.innerText = content;
-        span_3.innerText = dianzhan;
-        span_4.innerText = liuyanshu;
-        div_0.id=i;
+        //--------------------------主聊天函数------------------------
+        function createActivity(imgURL, time, content, dianzhan, liuyanshu, i) {
+            var div_0 = document.createElement("div");
+            var img = document.createElement("img");
+            var span_1 = document.createElement("span");
+            var span_2 = document.createElement("span");
+            var div_1 = document.createElement("div");
+            var i_1 = document.createElement("i");
+            var span_3 = document.createElement("span");
+            var i_2 = document.createElement("i");
+            var span_4 = document.createElement("span");
 
-        div_1.appendChild(i_1);
-        div_1.appendChild(span_3);
-        div_1.appendChild(i_2);
-        div_1.appendChild(span_4);
-        div_0.appendChild(img);
-        div_0.appendChild(span_1);
-        div_0.appendChild(span_2);
-        div_0.appendChild(div_1);
+            img.className = "tllogo";
+            span_1.className = "tlkxxsj";
+            span_2.className = "tlkxxnr";
+            div_0.className = "tldzpl";
+            i_1.className = "fa fa-thumbs-up tltb";
+            i_1.style = "color: #7e7e7e";
+            span_3.className = "tlsl heisez";
+            i_2.className = "fa fa-comment tltb";
+            i_2.style = "color: #7e7e7e";
+            span_4.className = "tlsl heisez";
+            img.src = imgURL;
+            span_1.innerText = time;
+            span_2.innerText = content;
+            span_3.innerText = dianzhan;
+            span_4.innerText = liuyanshu;
+            div_0.id = i;
+
+            div_1.appendChild(i_1);
+            div_1.appendChild(span_3);
+            div_1.appendChild(i_2);
+            div_1.appendChild(span_4);
+            div_0.appendChild(img);
+            div_0.appendChild(span_1);
+            div_0.appendChild(span_2);
+            div_0.appendChild(div_1);
 
 
-        return div_0;
+            return div_0;
 
-    }
-//    -----------------回复弹窗函数--------------------------------
-    function createActivity2(imgURL, content,i) {
-        var div_1=document.createElement("div");
-        var img = document.createElement("img");
-        var p_1 = document.createElement("span");
-        var span_1 = document.createElement("span");
+        }
 
-        div_1.className="tlhf zhongyang";
-        img.className ="tlhfyuan";
-        p_1.className="tlhfnr";
-        span_1.className="tlxjpl";
+        //    -----------------回复弹窗函数--------------------------------
+        function createReview(imgURL, content, i) {
+            var div_1 = document.createElement("div");
+            var img = document.createElement("img");
+            var p_1 = document.createElement("span");
 
-        img.src = imgURL;
-        p_1.innerText = content;
-        span_1.innerText = "+";
+            div_1.className = "tlhf zhongyang";
+            img.className = "tlhfyuan";
+            p_1.className = "tlhfnr";
 
-        div_1.appendChild(img);
-        div_1.appendChild(p_1);
-        if(i){
+            img.src = imgURL;
+            p_1.innerText = content;
+
+            div_1.appendChild(img);
+            div_1.appendChild(p_1);
+            if (i) {
+                var span_1 = document.createElement("span");
+                span_1.className = "tlxjpl";
+                span_1.innerText = "+";
+                div_1.appendChild(span_1);
+            }
+            return div_1;
+        }
+
+        //    -----------------发送弹窗--------------------------------
+        function createSend(imgURL) {
+            var div_1 = document.createElement("div");
+            var img = document.createElement("img");
+            var textarea = document.createElement("textarea");
+            var span_1 = document.createElement("span");
+
+            div_1.className = "tlhf zhongyang";
+            img.className = "tlhfyuan";
+            textarea.className = "tlplkuang";
+            textarea.type = "text";
+            textarea.style = "color:#b8a4a4;";
+            textarea.placeholder = "来发第一条评论吧";
+            textarea.name = "usrname";
+            img.src = imgURL;
+            span_1.innerText = "+";
+            div_1.appendChild(img);
+            div_1.appendChild(textarea);
             div_1.appendChild(span_1);
+            return div_1;
         }
-        return div_1;
-    }
-    //    -----------------发送弹窗--------------------------------
-    function createActivity3(imgURL) {
-        var div_1 = document.createElement("div");
-        var img = document.createElement("img");
-        var textarea = document.createElement("textarea");
-        var span_1 = document.createElement("span");
-
-        div_1.className = "tlhf zhongyang";
-        img.className = "tlhfyuan";
-        textarea.className = "tlplkuang";
-        textarea.type = "text";
-        textarea.style = "color:#b8a4a4;";
-        textarea.value = "来发第一条评论吧";
-        textarea.onfocus = "if (value =='来发第一条评论吧'){value  =''}";
-        textarea.onblur = "if (value  ==''){value='来发第一条评论吧'}";
-        textarea.name = "usrname";
-        img.src = imgURL;
-        textarea.innerText = "来发第一条评论吧";
-        span_1.innerText = "+";
-        div_1.appendChild(img);
-        div_1.appendChild(textarea);
-        div_1.appendChild(span_1);
-        return div_1;
-    }
-</script>
+    </script>
 </body>
 </html>
