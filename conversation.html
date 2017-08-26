@@ -22,31 +22,27 @@
         <span id="debunk" class="hqxuanxiang2 ciji0">匿槽</span>
     </div>
     <div id="hqdingduanxinjian" class="hqxinjian" style="display: none">
-        <span class="hqjiahao" onclick="hqxinjian('hqxjdh','xinhuaquan')" >+</span>
+        <span class="hqjiahao" onclick="hqxinjian('hqxjdh','xinhuaquan')">+</span>
     </div>
 </div>
 
 <div class="hqncym" id="hqym">
-    <div class="jrht"><span class="jrhtnr">中山大学是个怎么样的学校</span></div>
+    <div class="jrht"><span class="jrhtnr" id="hotTopic">本期热门话题加载中...</span></div>
     <p class="htwenzi" style="margin: 10px">往期话题</p>
     <div class="wqht">
         <div class="wqhtts">
             <div class="wqhtyidong">
-                <ul>
-                    <li><span class="wqhtwz">读中大是一种怎样的体验1</span></li>
-                    <li><span class="wqhtwz">读中大是一种怎样的体验2</span></li>
-                    <li><span class="wqhtwz">读中大是一种怎样的体验3</span></li>
-                    <li><span class="wqhtwz">读中大是一种怎样的体验4</span></li>
-                    <li><span class="wqhtwz">读中大是一种怎样的体验5</span></li>
-                    <li><span class="wqhtwz">读中大是一种怎样的体验6</span></li>
-                    <li><span class="wqhtwz">读中大是一种怎样的体验7</span></li>
+                <ul id="topicHistory">
+                    <!--JS添加地点-->
                 </ul>
             </div>
-        </div></div>
+        </div>
+    </div>
     <div style="margin: 10px">
         <p class="htwenzi" style="background-color: #f9f9f9;">热门话题
             <i class="fa fa-question-circle-o" style="font-size:24px"></i>
-            <span class="fa fa-plus-circle hqjiahao" style="font-size:24px;float: right" onclick="hqxinjian('hqxjht','xinhuati')"></span>
+            <span class="fa fa-plus-circle hqjiahao" style="font-size:24px;float: right"
+                  onclick="hqxinjian('hqxjht','xinhuati')"></span>
         </p>
     </div>
 
@@ -88,6 +84,7 @@
 
     var main = document.getElementById("conversation_main");
     var main_2 = document.getElementById("conversation_piece");
+    var main_3 = document.getElementById("topicHistory");
     var top_conversation = document.getElementById("conversation");
     var top_debunk = document.getElementById("debunk");
     document.getElementById('right').onclick = function () {
@@ -362,12 +359,14 @@
     function init() {
         postMessage({serverType: "Get", num: 20}, "conversation.php", function (json) {
             main.innerHTML = "";
+            main_2.innerHTML = "";
+            main_3.innerHTML = "";
+
             var black = false;
             for (var i = 0; i < json.length; i++) {
                 main.appendChild(appendTopic(json[i].UID, json[i].word, json[i].content, json[i].good, json[i].review, black));
                 black = !black;
             }
-            main_2.innerHTML = "";
             var black = false;
             for (var i = 0; i < json.debunk.length; i++) {
                 main.appendChild(appendTopic(json.debunk[i].UID, json.debunk[i].word, json.debunk[i].content, json.debunk[i].good, json.debunk[i].review, black));
@@ -375,8 +374,23 @@
             }
             for (var i = 0; i < json.conversation.length; i++) {
                 main_2.appendChild(appendConversation(json.conversation[i].content, json.conversation[i].good, i, json.conversation[i].UID));
-                black = !black;
             }
+            if (json.hotTopic.length > 0) {
+                document.getElementById("hotTopic").innerText = json.hotTopic[0].content;
+                document.getElementById("hotTopic").name = "topic_" + json.hotTopic[0].conID;
+                json.hotTopic[i].conID;
+                for (var i = 1; i < json.hotTopic.length; i++) {
+                    var li = document.createElement("li");
+                    var span = document.createElement("span");
+                    span.className = "wqhtwz";
+                    span.innerText = json.hotTopic[i].content;
+                    li.id = "topic_" + json.hotTopic[i].conID;
+                    li.appendChild(span);
+                    main_3.appendChild(li);
+                }
+            }
+
+
         });
     }
 </script>

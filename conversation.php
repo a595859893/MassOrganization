@@ -41,12 +41,13 @@
 		}
 		else if($serverType=="Get"){
 			$num = $_POST["num"];
-			$type = 'debunk';
 			$line["success"] = true;
 			$line["debunk"] = array();
 			$line["conversation"] = array();
+			$line["hotTopic"] = array();
 			
-			$rst = $mysqli->query("SELECT * FROM conversation as a WHERE $num>(SELECT count(*) FROM conversation WHERE UID>a.UID AND type='$type') ORDER BY a.UID DESC");
+			$type = 'debunk';
+			$rst = $mysqli->query("SELECT * FROM conversation as a WHERE type='$type' ORDER BY a.UID DESC");
 			if($rst){
 				$looptag = 0;
 				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
@@ -84,6 +85,30 @@
 				$line["error"] = "话题获取错误，错误提示: ".$mysqli->error;
 				$line["success"] = false;
 			}
+			
+			
+			$rst = $mysqli->query("SELECT * FROM conversationHot ORDER BY time DESC");
+			if($rst){
+				$looptag = 0;
+				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+					$uid = $row["conID"];
+					$rst2 = $mysqli->query("SELECT * FROM conversation WHERE UID=$uid");
+					if($rst){
+						while($row2 = $rst2->fetch_array(MYSQLI_ASSOC)){
+							$line["hotTopic"][] = $row2;
+							$looptag++;
+						}
+					}else{
+						$line["error"] = "热门话题信息获取错误，错误提示: ".$mysqli->error;
+						$line["success"] = false;
+					}
+				}
+				$line["hotTopic"]["length"]=$looptag;
+			}else{
+				$line["error"] = "热门话题获取错误，错误提示: ".$mysqli->error;
+				$line["success"] = false;
+			}
+			
 		}
 		else if($serverType=="Good"){
 			$topicID = $_POST["topicID"];
@@ -107,27 +132,6 @@
 					$line["error"] = "点赞获取错误，错误提示: ".$mysqli->error;
 					$line["success"] = false;
 				}
-			}
-		}
-		else if($serverType=="HotTopic"){
-			$rst = $mysqli->query("SELECT * FROM conversationHot ORDER BY time DESC) ");
-			if($rst){
-				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
-					$uid = $row["conUID"];
-					$rst2 = $mysqli->query("SELECT * FROM conversationHot ORDER BY time DESC) ");
-					if($rst){
-						while($row2 = $rst2->fetch_array(MYSQLI_ASSOC)){
-							$line[] = $row2;
-							break;
-						}
-					else{
-						$line["error"] = "话题信息获取错误，错误提示: ".$mysqli->error;
-						$line["success"] = false;
-					}
-				}
-			}else{
-				$line["error"] = "话题获取错误，错误提示: ".$mysqli->error;
-				$line["success"] = false;
 			}
 		}
 		
