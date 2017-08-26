@@ -42,12 +42,9 @@
 		else if($serverType=="Get"){
 			$num = $_POST["num"];
 			$type = 'debunk';
-<<<<<<< HEAD
-=======
 			$line["success"] = true;
 			$line["debunk"] = array();
 			$line["conversation"] = array();
->>>>>>> 85c0348c87ca9a6d202f051160798ccaa16d0159
 			
 			$rst = $mysqli->query("SELECT * FROM conversation as a WHERE $num>(SELECT count(*) FROM conversation WHERE UID>a.UID AND type='$type') ORDER BY a.UID DESC");
 			if($rst){
@@ -87,7 +84,8 @@
 				$line["error"] = "话题获取错误，错误提示: ".$mysqli->error;
 				$line["success"] = false;
 			}
-		}else if($serverType=="Good"){
+		}
+		else if($serverType=="Good"){
 			$topicID = $_POST["topicID"];
 			
 			$openID = getOpenID();
@@ -109,6 +107,27 @@
 					$line["error"] = "点赞获取错误，错误提示: ".$mysqli->error;
 					$line["success"] = false;
 				}
+			}
+		}
+		else if($serverType=="HotTopic"){
+			$rst = $mysqli->query("SELECT * FROM conversationHot ORDER BY time DESC) ");
+			if($rst){
+				while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+					$uid = $row["conUID"];
+					$rst2 = $mysqli->query("SELECT * FROM conversationHot ORDER BY time DESC) ");
+					if($rst){
+						while($row2 = $rst2->fetch_array(MYSQLI_ASSOC)){
+							$line[] = $row2;
+							break;
+						}
+					else{
+						$line["error"] = "话题信息获取错误，错误提示: ".$mysqli->error;
+						$line["success"] = false;
+					}
+				}
+			}else{
+				$line["error"] = "话题获取错误，错误提示: ".$mysqli->error;
+				$line["success"] = false;
 			}
 		}
 		
