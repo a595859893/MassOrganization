@@ -585,10 +585,10 @@
                     </div>
                 </div>
             </div>
-            <label for="weuiAgree" class="weui-agree">
-                <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
-                <span class="weui-agree__text">阅读并同意<a href="javascript:void(0);">《相关条款》</a></span>
-            </label>
+            <!--<label for="weuiAgree" class="weui-agree">-->
+                <!--<input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">-->
+                <!--<span class="weui-agree__text">阅读并同意<a href="javascript:void(0);">《相关条款》</a></span>-->
+            <!--</label>-->
             <div class="weui-btn-area">
                 <button type="button"
                         onclick="document.getElementById('id04').style.display='none';document.getElementById('main_1').style.display='block'"
@@ -929,7 +929,7 @@
                 tabNav(event, 'page4')
             };
             for (var i = 0; i < info.activity.length; i++) {
-                document.getElementById("MyAct").appendChild(createAcc(info.activity[i].name, info.activity[i].list));
+                document.getElementById("MyAct").appendChild(createAcc(info.activity[i].name, info.activity[i].list,info.activity[i].UID));
             }
             document.getElementById("myself").click();
         } else {
@@ -1285,11 +1285,12 @@
         }
     }
 
-    function createAcc(title, obj) {
+    function createAcc(title, obj,uid) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
-        var div_2 = document.createElement("div");
+//        var div_2 = document.createElement("div");
         var p = document.createElement("p");
+        var span = document.createElement("span");
         var t = '';
         var th = '';
         for (var i = 0; i < obj.length; i++) {
@@ -1303,16 +1304,31 @@
             t += "</tr>";
         }
 
-
         a.className = 'weui-cell weui-cell_access';
         div_1.className = 'weui-cell__bd';
-        div_2.className = 'weui-cell__ft';
+        span.className = 'fa fa-trash';
+        span.style.float = 'right';
 
         p.innerText = title;
 
         div_1.appendChild(p);
         a.appendChild(div_1);
-        a.appendChild(div_2);
+        a.appendChild(span);
+
+        span.onclick = function(event){
+            event = event || window.event;
+            event.preventDefault();
+            var element = this.parentElement;
+            var parent = element.parentElement;
+            postMessage({
+                serverType: "destroyAct",
+                actUID:uid
+            }, "IndexServer.php", function () {
+                parent.removeChild(element);
+                alert('成功删除');
+            })
+        };
+
         a.onclick = function () {
             document.getElementById('table_main').style.display = 'block';
             document.getElementById('main_1').style.display = 'none';
