@@ -189,30 +189,17 @@
             event = event || window.event;
             event.preventDefault();
 
-            var content = {serverType: "mark", markUID: uid};
-            var xmlhttp = GetXMLHTTPRequest();
-            xmlhttp.open("POST", "mass.php", true);
-            xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-            xmlhttp.send(toStr(content));
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    var json = JSON.parse(xmlhttp.responseText);
-                    if (json.success) {
-                        var num = parseInt(li_1.innerHTML.replace("<span>", "").replace("</span>", ""));
-                        if (json.mark) {
-                            num++;
-                            li_1.style.color = 'red';
-                        } else {
-                            num--;
-                            li_1.style.color = '#818181'
-                        }
-                        li_1.innerHTML = " <span>" + num + " </span> ";
-                    }
-
-                    else
-                        console.log(json.error);
+            postMessage({serverType: "mark", markUID: uid}, "mass.php", function (json) {
+                var num = parseInt(li_1.innerHTML.replace("<span>", "").replace("</span>", ""));
+                if (json.mark) {
+                    num++;
+                    li_1.style.color = 'red';
+                } else {
+                    num--;
+                    li_1.style.color = '#818181'
                 }
-            }
+                li_1.innerHTML = " <span>" + num + " </span> ";
+            });
         };
         li_2.className = "weui-media-box__info__meta fa fa-thumbs-o-up";
         li_2.style.color = good ? 'red' : '#818181';
@@ -220,30 +207,17 @@
             event = event || window.event;
             event.preventDefault();
 
-            var content = {serverType: "good", massUID: uid};
-            var xmlhttp = GetXMLHTTPRequest();
-            xmlhttp.open("POST", "mass.php", true);
-            xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-            xmlhttp.send(toStr(content));
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    var json = JSON.parse(xmlhttp.responseText);
-                    if (json.success) {
-                        var num = parseInt(li_2.innerHTML.replace("<span>", "").replace("</span>", ""));
-                        if (json.good) {
-                            num++;
-                            li_2.style.color = 'red';
-                        } else {
-                            num--;
-                            li_2.style.color = '#818181'
-                        }
-                        li_2.innerHTML = " <span>" + num + " </span> ";
-                    }
-
-                    else
-                        console.log(json.error);
+            postMessage({serverType: "good", massUID: uid}, "mass.php", function (json) {
+                var num = parseInt(li_2.innerHTML.replace("<span>", "").replace("</span>", ""));
+                if (json.good) {
+                    num++;
+                    li_2.style.color = 'red';
+                } else {
+                    num--;
+                    li_2.style.color = '#818181'
                 }
-            }
+                li_2.innerHTML = " <span>" + num + " </span> ";
+            });
         };
 
         h4.innerText = name;

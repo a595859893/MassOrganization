@@ -294,24 +294,15 @@
 
 <script src="CommonJS.js"></script>
 <script>
-
-    init();
+    var uid = getValue("uid");
+    if (uid > -1){
+        init();
+    }
 
     function init() {
-        var xmlhttp = GetXMLHTTPRequest();
-        var content = {serverType: "Billboard", num: 10};
-        xmlhttp.open("POST", "activity.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var json = JSON.parse(xmlhttp.responseText);
-                if (json.success)
-                    dealContent(json);
-                else
-                    console.log(json.error);
-            }
-        };
+        postMessage({serverType: "getHotReview", UID:uid},"conversation.php",function(json){
+            dealContent(json);
+        });
     }
 
     //    需要从后端获取今日话题topic，今日话题时间time1，
@@ -321,11 +312,11 @@
         var content = document.getElementById("content");
         var tlqbt = document.getElementsByClassName("tlqbt");
         var tlsj = document.getElementsByClassName("tlsj");
-        tlqbt.innerText=json.topic;
-        tlqbt.innerText=json.time1;
+        tlqbt.innerText=json.state.content;
+        tlqbt.innerText=json.hot.time;
 
-        for (var i = 0; i < json.mass.length; i++){
-            content.appendChild(createActivity(json.mass[i].imgURL1, json.mass[i].time,json.mass[i].content, json.mass[i].dianzhan, json.mass[i].liuyanshu,i));//i为该话题的第几条
+        for (var i = 0; i < json.review.length; i++){
+            content.appendChild(createActivity(json.review[i].word, json.review[i].time,json.mass[i].content, json.mass[i].dianzhan, json.mass[i].liuyanshu,i));//i为该话题的第几条
 //            --------创建评论
             if(!liuyanshu){
                 for (var i = 0; i < json.activity.length; i++)

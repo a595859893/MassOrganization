@@ -27,7 +27,7 @@
 </div>
 
 <div class="hqncym" id="hqym">
-    <div class="jrht"><span class="jrhtnr" id="hotTopic">本期热门话题加载中...</span></div>
+    <div class="jrht"><a href="#" id="hotTopicLink"><span class="jrhtnr" id="hotTopic">本期热门话题加载中...</span></a></div>
     <p class="htwenzi" style="margin: 10px">往期话题</p>
     <div class="wqht">
         <div class="wqhtts">
@@ -377,15 +377,17 @@
             }
             if (json.hotTopic.length > 0) {
                 document.getElementById("hotTopic").innerText = json.hotTopic[0].content;
-                document.getElementById("hotTopic").name = "topic_" + json.hotTopic[0].conID;
-                json.hotTopic[i].conID;
+                document.getElementById("hotTopicLink").href = "conversationHot.html?id="+json.hotTopic[0].UID;
                 for (var i = 1; i < json.hotTopic.length; i++) {
+                    var a = document.createElement("a");
                     var li = document.createElement("li");
                     var span = document.createElement("span");
                     span.className = "wqhtwz";
                     span.innerText = json.hotTopic[i].content;
+                    a.href = "conversationHot.html?id="+json.hotTopic[i].UID;
                     li.id = "topic_" + json.hotTopic[i].conID;
-                    li.appendChild(span);
+                    a.appendChild(span);
+                    li.appendChild(a);
                     main_3.appendChild(li);
                 }
             }

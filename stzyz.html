@@ -210,57 +210,38 @@
 <script src="CommonJS.js"></script>
 <script>
     var uid = getValue("uid");
-    if (uid > -1)
+    if (uid > -1){
         init_1();
-        init_2();
+    }
+
 
     function color(event) {
-        var content = {serverType: "mark", markUID: uid};
-        var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "mass.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var json = JSON.parse(xmlhttp.responseText);
-                if (json.success) {
-                    var num = parseInt(document.getElementById("mass_num").innerHTML.replace("<span>", "").replace("</span>", ""));
-                    num = json.mark ? num+1 : num-1 ;
-                    event.target.innerHTML = " <span>" + num + " </span> ";
-                    event.target.style.color = json.mark ? 'red' : '';
-                } else
-                    console.log(json.error);
-            }
-        }
+        postMessage({serverType: "mark", markUID: uid}, "mass.php",function(json){
+            var num = parseInt(document.getElementById("mass_num").innerHTML.replace("<span>", "").replace("</span>", ""));
+            num = json.mark ? num+1 : num-1 ;
+            event.target.innerHTML = " <span>" + num + " </span> ";
+            event.target.style.color = json.mark ? 'red' : '';
+        });
     }
 
     //                    后端没存传二维码
     function init_1() {
-        var xmlhttp = GetXMLHTTPRequest();
-        var content = {serverType: "getMass", UID: uid};
-        xmlhttp.open("POST", "mass.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var json = JSON.parse(xmlhttp.responseText);
-                if (json.success) {
-                    document.getElementById("mass_num").innerHTML = " <span>" + json.mass.number + " </span> ";
-                    console.log(json.mass);
-                    document.getElementById("mass_img").src = json.mass.logo;
-                    document.getElementById("mass_name").innerText = json.mass.name;
-                    document.getElementById("mass_qrCode").src=json.mass.logo;
-                    document.getElementById("mass_intro").innerText = json.mass.intro;
-                    document.getElementById("mass_num").style.color = json.mass.imark ? 'red' : '';
-                    for (var i = 0; i < json.diary.length; i++) {
-                        document.getElementById("mass_diary").appendChild(createDiary(json.diary[i].title, json.diary[i].content, json.diary[i].time,
-                            json.diary[i].img, json.diary[i].logo, json.diary[i].UID));
-                    }
-                } else
-                    console.log(json.error);
+        postMessage({serverType: "getMass", UID: uid},"mass.php",function(json){
+            document.getElementById("mass_num").innerHTML = " <span>" + json.mass.number + " </span> ";
+            console.log(json.mass);
+            document.getElementById("mass_img").src = json.mass.logo;
+            document.getElementById("mass_name").innerText = json.mass.name;
+            document.getElementById("mass_qrCode").src=json.mass.logo;
+            document.getElementById("mass_intro").innerText = json.mass.intro;
+            document.getElementById("mass_num").style.color = json.mass.imark ? 'red' : '';
+            for (var i = 0; i < json.diary.length; i++) {
+                document.getElementById("mass_diary").appendChild(createDiary(json.diary[i].title, json.diary[i].content, json.diary[i].time,
+                    json.diary[i].img, json.diary[i].logo, json.diary[i].UID));
             }
-        };
-
+        });
+        postMessage({serverType: "getList"},"mass.php",function(json){
+            dealContent(json);
+        });
     }
 
     function createDiary(title, content, time, image, logo, uid) {
@@ -307,24 +288,6 @@
         a.appendChild(div_2);
 
         return a;
-    }
-
-
-    function init_2() {
-        var xmlhttp = GetXMLHTTPRequest();
-        var content = {serverType: "getList"};
-        xmlhttp.open("POST", "recruitment.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var json = JSON.parse(xmlhttp.responseText);
-                if (json.success)
-                    dealContent(json);
-                else
-                    console.log(json.error);
-            }
-        };
     }
 
     function dealContent(json) {
