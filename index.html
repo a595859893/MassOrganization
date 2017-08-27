@@ -636,6 +636,20 @@
             </div>
         </form>
     </div>
+
+    <!--dialog活动删除弹窗-->
+    <div id="dialog_act" style="display: none;">
+        <div class="weui-mask"></div>
+        <div class="weui-dialog">
+            <div class="weui-dialog__hd"><strong class="weui-dialog__title">是否删除？</strong></div>
+            <div class="weui-dialog__bd">删除之后无法恢复</div>
+            <div class="weui-dialog__ft">
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" onclick="dialog_act(0)">取消</a>
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" onclick="dialog_act(1)">确认</a>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
@@ -1314,19 +1328,16 @@
         a.appendChild(div_1);
         a.appendChild(span);
 
+
+
         span.onclick = function (event){
+            document.getElementById('dialog_act').style.display='block';
             event = event || window.event;
             event.preventDefault();
-            var element = this.parentElement;
-            var parent = element.parentElement;
-                postMessage({
-                    serverType: "destroyAct",
-                    actUID:uid
-                }, "IndexServer.php", function () {
-                    parent.removeChild(element);
-                    alert('成功删除');
-                })
+             element = this.parentElement;
+             parent = element.parentElement;
         };
+        
         div_1.onclick=function () {
                 document.getElementById('table_main').style.display = 'block';
                 document.getElementById('main_1').style.display = 'none';
@@ -1336,8 +1347,17 @@
         return a;
     }
 
-    function dele(){
-
+    function dialog_act(value){
+        document.getElementById('dialog_act').style.display='none';
+        if(value){
+            postMessage({
+                serverType: "destroyAct",
+                actUID:uid
+            }, "IndexServer.php", function (){
+                parent.removeChild(element);
+                alert('成功删除');
+            })
+        }
     }
     function all() {
         var tbody = document.getElementById("tbody");
