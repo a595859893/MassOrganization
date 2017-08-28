@@ -33,7 +33,21 @@ function getValue(par) {
     return get_par;
 }
 
-function postMessage(content, php, func) {
+function getCookies(par) {
+    var cookie = document.cookie;
+    var value = cookie.split("; ");
+    for (var i = 0; i < value.length; i++) {
+        var arr = value[i].split("=");
+        if ("par" == arr[0])
+            return arr[1];
+    }
+    return false;
+}
+
+function postMessage(content, php, func, failFunc) {
+    var failFunc = failFunc ? failFunc : function (json) {
+        console.log(json.error);
+    };
     var xmlhttp = GetXMLHTTPRequest();
     xmlhttp.open("POST", php, true);
     xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
@@ -41,10 +55,10 @@ function postMessage(content, php, func) {
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var json = JSON.parse(xmlhttp.responseText);
-            if (json.success)
-                func(json);
+            if (json.error || !json.success)
+                failFunc(json);
             else
-                console.log(json.error);
+                func(json);
         }
     }
 
