@@ -189,7 +189,7 @@
     <div class="weui-footer">
         <p class="weui-footer__text">社团二维码</p>
         <p class="weui-footer__text">
-            <img src="" alt="" width="50px" height="50px" id="mass_qrCode">
+            <img src="" alt="" width="80px" height="80px" id="mass_qrCode">
         </p>
     </div>
 </div>
@@ -214,6 +214,7 @@
 
     function init() {
         postMessage({serverType: "getMass", UID: uid}, "mass.php", function (json) {
+            console.log(json.mass);
             document.getElementById("mass_num").innerHTML = " <span>" + json.mass.number + " </span> ";
             document.getElementById("mass_img").src = json.mass.logo;
             document.getElementById("mass_name").innerText = json.mass.name;
@@ -313,8 +314,9 @@
                 actEnd: end
             }, "IndexServer.php", function () {
                 alert("加入日程成功");
+                event.target.style.color='#136832';
             });
-        }
+        };
         a.href = url;
 
         h4.innerText = title + ' ';

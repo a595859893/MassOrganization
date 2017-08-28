@@ -455,7 +455,7 @@
                 <button type="button" onclick="document.getElementById('ACT_input').click();">点击上传图片</button>
                 <input type="file" style="display:none" accept="image/*" id="ACT_input">
                 <br>
-                <img id="ACT_logo">
+                <img id="ACT_logo" width="70px" height="110px">
                 <br>
                 <input type="radio" name="formChoose" value="default" checked> <b>使用默认报名表</b>
                 <button onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">
@@ -501,11 +501,11 @@
                 <label><b>招新对象</b></label>
                 <input type="text" id="NEW_object" required>
 
+                <label><b>报名开始时间</b></label>
+                <input class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_start'});" id="NEW_start" required>
+
                 <label><b>报名截止时间</b></label>
                 <input class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_end'});" id="NEW_end" required>
-
-                <!--<label><b>社团简介</b></label>-->
-                <!--<input type="text" id="NEW_intro" required>-->
 
                 <label><b>推送链接</b></label>
                 <input type="url" placeholder="复制推送链接至此处" id="NEW_link" required>
@@ -585,10 +585,10 @@
                     </div>
                 </div>
             </div>
-            <label for="weuiAgree" class="weui-agree">
-                <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
-                <span class="weui-agree__text">阅读并同意<a href="javascript:void(0);">《相关条款》</a></span>
-            </label>
+            <!--<label for="weuiAgree" class="weui-agree">-->
+                <!--<input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">-->
+                <!--<span class="weui-agree__text">阅读并同意<a href="javascript:void(0);">《相关条款》</a></span>-->
+            <!--</label>-->
             <div class="weui-btn-area">
                 <button type="button"
                         onclick="document.getElementById('id04').style.display='none';document.getElementById('main_1').style.display='block'"
@@ -636,6 +636,20 @@
             </div>
         </form>
     </div>
+
+    <!--dialog活动删除弹窗-->
+    <div id="dialog_act" style="display: none;">
+        <div class="weui-mask"></div>
+        <div class="weui-dialog">
+            <div class="weui-dialog__hd"><strong class="weui-dialog__title">是否删除？</strong></div>
+            <div class="weui-dialog__bd">删除之后无法恢复</div>
+            <div class="weui-dialog__ft">
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" onclick="dialog_act(0)">取消</a>
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" onclick="dialog_act(1)">确认</a>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
@@ -759,6 +773,7 @@
             type: document.getElementById("NEW_type").value,
             title: document.getElementById("NEW_title").value,
             object: document.getElementById("NEW_object").value,
+            start: document.getElementById("NEW_start").value,
             end: document.getElementById("NEW_end").value,
             introduction: document.getElementById("NEW_intro").value,
             link: document.getElementById("NEW_link").value,
@@ -929,7 +944,7 @@
                 tabNav(event, 'page4')
             };
             for (var i = 0; i < info.activity.length; i++) {
-                document.getElementById("MyAct").appendChild(createAcc(info.activity[i].name, info.activity[i].list));
+                document.getElementById("MyAct").appendChild(createAcc(info.activity[i].name, info.activity[i].list,info.activity[i].UID));
             }
             document.getElementById("myself").click();
         } else {
@@ -1020,7 +1035,6 @@
         li.appendChild(label);
         li.appendChild(input);
         input.name = value;
-//        input.value = type;
         document.getElementById("myUL").appendChild(li);
         document.getElementById("myInput").value = "";
 
@@ -1285,13 +1299,14 @@
         }
     }
 
-    function createAcc(title, obj) {
+    function createAcc(title, obj,uid) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
-        var div_2 = document.createElement("div");
         var p = document.createElement("p");
+        var span = document.createElement("span");
         var t = '';
         var th = '';
+        act_id = uid;
         for (var i = 0; i < obj.length; i++) {
             var json = JSON.parse(obj[i].json);
             t += "<tr>";
@@ -1303,25 +1318,46 @@
             t += "</tr>";
         }
 
-
         a.className = 'weui-cell weui-cell_access';
         div_1.className = 'weui-cell__bd';
-        div_2.className = 'weui-cell__ft';
+        span.className = 'fa fa-trash';
+        span.style.float = 'right';
 
         p.innerText = title;
 
         div_1.appendChild(p);
         a.appendChild(div_1);
-        a.appendChild(div_2);
-        a.onclick = function () {
-            document.getElementById('table_main').style.display = 'block';
-            document.getElementById('main_1').style.display = 'none';
-            document.getElementById('activityListContainer').innerHTML = "<tr>" + th + "</tr>" + t;
+        a.appendChild(span);
+
+        span.onclick = function (event){
+            document.getElementById('dialog_act').style.display='block';
+            event = event || window.event;
+            event.preventDefault();
+             element = this.parentElement;
+             parent = element.parentElement;
+        };
+
+        div_1.onclick=function () {
+                document.getElementById('table_main').style.display = 'block';
+                document.getElementById('main_1').style.display = 'none';
+                document.getElementById('activityListContainer').innerHTML = "<tr>" + th + "</tr>" + t;
         };
 
         return a;
     }
 
+    function dialog_act(value){
+        document.getElementById('dialog_act').style.display='none';
+        if(value){
+            postMessage({
+                serverType: "destroyAct",
+                actUID:act_id
+            }, "IndexServer.php", function (){
+                parent.removeChild(element);
+                alert('成功删除');
+            })
+        }
+    }
     function all() {
         var tbody = document.getElementById("tbody");
         var checkBox = tbody.getElementsByTagName("input");
