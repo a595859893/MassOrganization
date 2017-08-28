@@ -6,10 +6,11 @@
 		$serverType = $_POST["serverType"];
 		
 		$mysqli = linkToSQL();
-		$openID = getOpenID();
+		//$openID = getOpenID();
+		$line["error"] = setError(0,"错误");
 		$line = array();
 		$time = time();
-		
+		/*
 		if("acfForm" == $serverType){
 			$name 		= $_POST["name"];
 			$location 	= $_POST["location"];
@@ -44,7 +45,7 @@
 			$end 		= $_POST["end"];
 			$intro	 	= $_POST["introduction"];
 			$link	 	= $_POST["link"];
-			$UID		= $_POST["UID"];
+			$UID		= $_SESSION["uid"];
 			
 			$order = "INSERT INTO recruitment (type,title,object,end,intro,link,time,massUID) ";
 			$order .="VALUES('$type','$title','$object','$end','$intro','$link',FROM_UNIXTIME($time),$UID)";
@@ -60,7 +61,7 @@
 			$logo 	= $_POST["logo"];
 			$desc 	= $_POST["desc"];
 			$QRcode = $_POST["QRcode"];
-			$UID	= $_POST["UID"];
+			$UID	= $_SESSION["uid"];
 			
 			$order = "UPDATE mass SET name='$name',member='$head',logo='$logo',intro='$desc',type='$type',QRcode='$QRcode' WHERE UID=$UID";
 
@@ -71,9 +72,9 @@
 			$title		= $_POST["title"];
 			$content	= $_POST["content"];
 			$logo		= $_POST["logo"];
-			$UID		= $_POST["UID"];
 			$img		= $_POST["img"];
 			$url		= $_POST["url"];
+			$UID		= $_SESSION["uid"];
 			$order = "INSERT INTO massDiary (title,content,time,logo,img,url,massUID) ";
 			$order .="VALUES('$title','$content',FROM_UNIXTIME($time),'$logo','$img','$url',$UID)";
 			$line = array();
@@ -81,8 +82,8 @@
 			if(!$rst)$line["error"] = setError(0,"社团日志发布时，数据库错误，提示：".$mysqli->error);
 		}else if("getActivity")
 		{
-			$actID = $_POST["actID"];
-
+			$line["error"] = setError(0,"OpenID".$openID);
+			
 			$line["mark"] = array();
 			$line["list"] = array();
 			
@@ -117,6 +118,7 @@
 				}
 				$line["list"]["length"]=$listNum;
 			}else $line["error"] = setError(0,"报名获取时，数据库错误，提示：".$mysqli->error);
+			
 		}else if("getActList" ==$serverType)
 		{
 			$actUID = $_POST["actUID"];
@@ -151,7 +153,7 @@
 		}else{
 			$line["error"] = setError(0,"不匹配的类型");
 		}
-		
+		*/
 		echo json_encode($line);
 		$mysqli->close();	
 	}

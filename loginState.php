@@ -1,13 +1,13 @@
 <?php
 	require 'commonFunction.php';
-	//session_start();
+	session_start();
 	
 	if($_SERVER["REQUEST_METHOD"]=="POST"){
 		$serverType = $_POST["serverType"];
 		
-		//$mysqli = linkToSQL();
+		$mysqli = linkToSQL();
 		$line = array();
-		/*
+		
 		if("login" == $serverType)
 		{
 			$account = $_POST["account"];
@@ -67,8 +67,8 @@
 		}else{
 			$line["error"] = setError(0,"不匹配的类型");
 		}
-		*/
+		
 		echo json_encode($line);
-		//$mysqli->close();
+		$mysqli->close();
 	}
 ?>
