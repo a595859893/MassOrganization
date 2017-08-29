@@ -14,24 +14,24 @@ function linkToSQL(){
 }
 
 function getOpenID(){
+	$openID = false;
 	if(isset($_COOKIE["openID"])){
-		$openID = $_COOKIE["openID"];
-	}else{
-		$exist = true;
+		$shaID = $_COOKIE["openID"];
 		$mysqli = linkToSQL();
-		while($exist){
-			$exist = false;
-			$openID = rand(100000,999999);
-			$order = "SELECT openID from openID WHERE openID=$openID";
-			$rst = $mysqli->query($order);
-			while($row = $rst->fetch_array(MYSQLI_ASSOC)){
-				$exist=true;
-			}
-		}
-		$order = "INSERT INTO openID (openID) VALUES($openID)";
+		$order = "SELECT openID from openID WHERE shaID=$shaID";
 		$rst = $mysqli->query($order);
+		while($row = $rst->fetch_array(MYSQLI_ASSOC)){
+			$openID = $row["openID"];
+			break;
+		}
 	}
-	setCookie("openID",$openID,time()+9999999);
 	return $openID;
+}
+
+function setError($code,$desc){
+	$err = array();
+	$err["code"] = $code;
+	$err["desc"] = $desc;
+	return $err;
 }
 ?>

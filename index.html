@@ -502,7 +502,8 @@
                 <input type="text" id="NEW_object" required>
 
                 <label><b>报名开始时间</b></label>
-                <input class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_start'});" id="NEW_start" required>
+                <input class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_start'});" id="NEW_start"
+                       required>
 
                 <label><b>报名截止时间</b></label>
                 <input class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_end'});" id="NEW_end" required>
@@ -586,8 +587,8 @@
                 </div>
             </div>
             <!--<label for="weuiAgree" class="weui-agree">-->
-                <!--<input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">-->
-                <!--<span class="weui-agree__text">阅读并同意<a href="javascript:void(0);">《相关条款》</a></span>-->
+            <!--<input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">-->
+            <!--<span class="weui-agree__text">阅读并同意<a href="javascript:void(0);">《相关条款》</a></span>-->
             <!--</label>-->
             <div class="weui-btn-area">
                 <button type="button"
@@ -673,7 +674,6 @@
 <script src="CommonJS.js"></script>
 <script>
     //页面初始化
-    var uid = -1;
     var listjson = {};
     var defaultjson = {};
     var formStr = "";
@@ -757,7 +757,6 @@
             logo: encodeURIComponent(document.getElementById("ACT_logo").src),
             url: document.getElementById("ACT_url").value,
             json: JSON.stringify(listjson),
-            UID: uid
         }, "IndexServer.php", function () {
             document.getElementById('id02').style.display = 'none';
             document.getElementById('main_1').style.display = 'block'
@@ -777,7 +776,6 @@
             end: document.getElementById("NEW_end").value,
             introduction: document.getElementById("NEW_intro").value,
             link: document.getElementById("NEW_link").value,
-            UID: uid
         }, "IndexServer.php", function () {
             document.getElementById('id03').style.display = 'none';
             document.getElementById('main_1').style.display = 'block'
@@ -800,9 +798,8 @@
             name: document.getElementById("MASS_name").value,
             head: document.getElementById("MASS_head").value,
             logo: encodeURIComponent(document.getElementById("MASS_logo").src),
+            QRcode: encodeURIComponent(document.getElementById("massCfg_img").src),
             desc: document.getElementById("MASS_desc").value,
-            QRcode: document.getElementById("massCfg_img").src,
-            UID: uid
         };
 
         postMessage(content, "IndexServer.php", function (json) {
@@ -826,8 +823,7 @@
                 title: "图文说说",
                 content: document.getElementById("diary_1_text").value,
                 logo: encodeURIComponent(document.getElementById("diary_img").src),
-                url: "#",
-                UID: uid
+                url: "#"
             };
         }
         if (type == 2) {
@@ -836,8 +832,7 @@
                 title: document.getElementById("diary_2_text").value,
                 content: "",
                 logo: encodeURIComponent(document.getElementById("diary_img2").src),
-                url: document.getElementById("diary_url").value,
-                UID: uid
+                url: document.getElementById("diary_url").value
             };
         }
 
@@ -903,58 +898,48 @@
     }
 
     function init() {
-        postMessage({serverType: "autoLogin"}, "IndexServer.php", function (json) {
-            login(json);
+        postMessage({serverType: "checkState"}, "loginState.php", function (json) {
+            if (json.state)
+                login(json.account);
+            else {
+                postMessage({serverType: "openID"}, "loginState.php", function (json) {
+                    //获取头像等操作
+                });
+                postMessage({serverType: "getActivity"}, "IndexServer.php", function (json) {
+                    for (var i = 0; i < json.list.length; i++)
+                        document.getElementById("MyList").appendChild(createActivity(json.list[i].name, json.list[i].introduction, json.list[i].location,
+                            json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo));
+                    for (var i = 0; i < json.mark.length; i++)
+                        document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
+                            json.mark[i].holdtime, json.mark[i].time, json.mark[i].url, json.mark[i].json, json.mark[i].logo));
+                });
+            }
         });
 
-        postMessage({serverType: "getActivity"}, "IndexServer.php", function (json) {
-            for (var i = 0; i < json.list.length; i++) {
-                document.getElementById("MyList").appendChild(createActivity(json.list[i].name, json.list[i].introduction, json.list[i].location,
-                    json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo));
-            }
-            console.log(json);
-            for (var i = 0; i < json.mark.length; i++) {
-                document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
-                    json.mark[i].holdtime, json.mark[i].time, json.mark[i].url, json.mark[i].json, json.mark[i].logo));
-            }
-
-        });
-
-        var cookie = document.cookie;
-        var value = cookie.split("; ");
-        for (var i = 0; i < value.length; i++) {
-            var arr = value[i].split("=");
-            if ("account_r" == arr[0])
-                document.getElementById("uname").value = arr[1];
-            if ("password_r" == arr[0])
-                document.getElementById("psw").value = arr[1];
+        var remind_account = getCookies("account");
+        var remind_password = getCookies("password");
+        if (remind_account && remind_password) {
+            document.getElementById("uname").value = remind_account;
+            document.getElementById("psw").value = remind_password;
         }
     }
 
     //登陆登出
     function login(info) {
-        if (info.success) {
-            uid = info.UID;
-            console.log(info);
-            document.getElementById('id01').style.display = 'none';
-            document.getElementById("user_name").innerText = info.name + "(UID:" + info.UID + ")";
+        document.getElementById('id01').style.display = 'none';
+        document.getElementById("user_name").innerText = info.name + "(UID:" + info.UID + ")";
+        document.getElementById("footer").style.display = 'none';
+        document.getElementById("myself").onclick = function (event) {
+            tabNav(event, 'page4')
+        };
+        for (var i = 0; i < info.activity.length; i++)
+            document.getElementById("MyAct").appendChild(createAcc(info.activity[i].name, info.activity[i].list, info.activity[i].UID));
 
-            document.getElementById("footer").style.display = 'none';
-            document.getElementById("myself").onclick = function (event) {
-                tabNav(event, 'page4')
-            };
-            for (var i = 0; i < info.activity.length; i++) {
-                document.getElementById("MyAct").appendChild(createAcc(info.activity[i].name, info.activity[i].list,info.activity[i].UID));
-            }
-            document.getElementById("myself").click();
-        } else {
-            console.log(info.error);
-        }
+        document.getElementById("myself").click();
     }
 
     function logout() {
-        postMessage({serverType: "logout"}, "IndexServer.php", function () {
-            uid = -1;
+        postMessage({serverType: "logout"}, "loginState.php", function () {
             document.getElementById("myself").onclick = function (event) {
                 tabNav(event, 'page3')
             };
@@ -1299,7 +1284,7 @@
         }
     }
 
-    function createAcc(title, obj,uid) {
+    function createAcc(title, obj, uid) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var p = document.createElement("p");
@@ -1329,35 +1314,36 @@
         a.appendChild(div_1);
         a.appendChild(span);
 
-        span.onclick = function (event){
-            document.getElementById('dialog_act').style.display='block';
+        span.onclick = function (event) {
+            document.getElementById('dialog_act').style.display = 'block';
             event = event || window.event;
             event.preventDefault();
-             element = this.parentElement;
-             parent = element.parentElement;
+            element = this.parentElement;
+            parent = element.parentElement;
         };
 
-        div_1.onclick=function () {
-                document.getElementById('table_main').style.display = 'block';
-                document.getElementById('main_1').style.display = 'none';
-                document.getElementById('activityListContainer').innerHTML = "<tr>" + th + "</tr>" + t;
+        div_1.onclick = function () {
+            document.getElementById('table_main').style.display = 'block';
+            document.getElementById('main_1').style.display = 'none';
+            document.getElementById('activityListContainer').innerHTML = "<tr>" + th + "</tr>" + t;
         };
 
         return a;
     }
 
-    function dialog_act(value){
-        document.getElementById('dialog_act').style.display='none';
-        if(value){
+    function dialog_act(value) {
+        document.getElementById('dialog_act').style.display = 'none';
+        if (value) {
             postMessage({
                 serverType: "destroyAct",
-                actUID:act_id
-            }, "IndexServer.php", function (){
+                actUID: act_id
+            }, "IndexServer.php", function () {
                 parent.removeChild(element);
                 alert('成功删除');
             })
         }
     }
+
     function all() {
         var activityListContainer = document.getElementById("activityListContainer");
         var checkBox = activityListContainer.getElementsByTagName("input");
