@@ -902,16 +902,21 @@
             if (json.state)
                 login(json.account);
             else {
-                postMessage({serverType: "openID"}, "loginState.php", function (json) {
+                postMessage({
+                    serverType: "openID",
+                    code: getValue("code"),
+                    state: getValue("state")
+                }, "loginState.php", function (json) {
                     //获取头像等操作
-                });
-                postMessage({serverType: "getActivity"}, "IndexServer.php", function (json) {
-                    for (var i = 0; i < json.list.length; i++)
-                        document.getElementById("MyList").appendChild(createActivity(json.list[i].name, json.list[i].introduction, json.list[i].location,
-                            json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo));
-                    for (var i = 0; i < json.mark.length; i++)
-                        document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
-                            json.mark[i].holdtime, json.mark[i].time, json.mark[i].url, json.mark[i].json, json.mark[i].logo));
+                    console.log(document.cookie);
+                    postMessage({serverType: "getActivity"}, "IndexServer.php", function (json) {
+                        for (var i = 0; i < json.list.length; i++)
+                            document.getElementById("MyList").appendChild(createActivity(json.list[i].name, json.list[i].introduction, json.list[i].location,
+                                json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo));
+                        for (var i = 0; i < json.mark.length; i++)
+                            document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
+                                json.mark[i].holdtime, json.mark[i].time, json.mark[i].url, json.mark[i].json, json.mark[i].logo));
+                    });
                 });
             }
         });
