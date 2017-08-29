@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <style type="text/css">
+        .topic_box{
+            border:1px solid #e5e5e5;
+            height: 120px;
+            width: 90%;
+            margin:0 auto;
+            text-align: center;
+        }
+        #old_topic{
+            position: relative;
+        }
+        .fa-angle-left{
+            position: absolute;
+            left: 0;
+            top:30%;
+            font-size:50px;
+            color: rgba(0,0,0,0.1);
+        }
+        .fa-angle-right{
+            position: absolute;
+            right: 0;
+            top:30%;
+            font-size:50px;
+            color: rgba(0,0,0,0.1);
+        }
+        .fa-angle-double-left:hover,.fa-angle-double-right:hover{
+            color: rgba(0,0,0,0.7);
+        }
+        .topic{
+            line-height: 120px;
+        }
+        .icon {
+            width: 50px;
+            height: 50px;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+        input::-webkit-input-placeholder {
+             /* WebKit browsers */
+                     color: #e4ebe0;
+             }
+        /*.weui-panel__bd{*/
+            /*border-bottom: 1px solid #e5e5e5;*/
+        /*}*/
+        .weui-cell:before{
+            border-top:0 ;
+        }
+        .add_topic .weui-cell:before{
+            border-top: 1px solid #e5e5e5;
+        }
+
+    </style>
+</head>
+<body>
+<div class="weui-tab">
+    <div class="weui-navbar">
+        <div class="weui-navbar__item weui-bar__item_on tab" id="defaultOpen" onclick="tabNav(event, 'page1')">
+            话圈
+        </div>
+        <div class="weui-navbar__item tab" onclick="tabNav(event, 'page2')">
+            匿槽
+        </div>
+    </div>
+    <div class="weui-tab__panel">
+        <!--话圈-->
+        <div class="page" id="page1">
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>#今日话题#</p>
+                </div>
+                <div class="weui-cell__ft"> 帮助 <i class="fa fa-map-signs" style="color: black;font-size: 17px;" onclick="alert('在#说说吧#中可创建新话题并为已有话题点灯，每日获得盏数最多的话题将开放讨论区 ,点击#今日话题#或#往期话题#即可进入讨论区 ^_^')"></i></div>
+            </div>
+            <div class="topic_box">
+                <span class="topic" id="hotTopic">
+                    <a href="" id="hotTopicLink"> </a>
+                </span>
+            </div>
+
+            <br>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>#往期话题#</p>
+                </div>
+                <div class="weui-cell__ft"> 所有 <i class="fa fa-newspaper-o" style="color: black;font-size: 17px;" onclick=" "></i></div>
+            </div>
+            <div id="old_topic">
+                <span class="fa fa-angle-left"></span>
+                <span class="fa fa-angle-right"></span>
+
+                <!--js添加-->
+            </div>
+
+            <br>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>#说说吧#</p>
+                </div>
+                <div class="weui-cell__ft"> 创建 <i class="fa fa-plus-square" style="color: black;font-size: 17px;" onclick=""></i></div>
+            </div>
+            <div class="weui-cell" id="my_topic" style="display: none">
+                <div class="weui-cell__bd" style="border: 1px solid #e5e5e5; ">
+                    <input class="weui-input" id="topic_value" type="text" placeholder="请输入话题"/>
+                </div>
+                <div class="weui-cell__ft">
+                    <span class="fa fa-send-o" id="send_topic" style="color: #000;margin-left:3px;"></span>
+                </div>
+            </div>
+            <div class="add_topic" id="add_topic">
+                <!--js添加-->
+
+            </div>
+        </div>
+
+
+        <!--匿巢-->
+        <div style="display:none" class="page" id="page2">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>#匿名吐槽#</p>
+                </div>
+                <div class="weui-cell__ft"> 我也来玩 <i class="fa fa-edit" style="color: black;font-size: 17px;"  onclick="add_2()"></i></div>
+            </div>
+
+            <div class="weui-panel weui-panel_access" id="create" style="margin-top: -3px;display: none">
+                <div class="weui-panel__bd">
+                    <div  class="weui-media-box weui-media-box_appmsg" style="position: relative">
+                        <div class="weui-media-box__hd" style="position: relative">
+                            <i class="fa fa-caret-square-o-left" style="position: absolute;top: 35%;left: -15px;font-size: 15px;color: #999;" onclick="plusIcons(-1)" ></i>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-panda"></use>
+                            </svg>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-deer"></use>
+                            </svg>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-owl"></use>
+                            </svg>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-bull"></use>
+                            </svg>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-lion"></use>
+                            </svg>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-horse"></use>
+                            </svg>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-seal"></use>
+                            </svg>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-dog"></use>
+                            </svg>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-deyi"></use>
+                            </svg>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-haixiu"></use>
+                            </svg>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-keai"></use>
+                            </svg>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-meiqianliao"></use>
+                            </svg>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-sikao"></use>
+                            </svg>
+                            <i class="fa fa-caret-square-o-right" style="position: absolute;top: 35%;right: -6px;font-size: 15px;color: #999;" onclick="plusIcons(1)"></i>
+                        </div>
+                        <div class="weui-media-box__bd">
+                            <textarea id="my_debunk" class="weui-textarea" placeholder="点击左右键可选择头像哦" rows="3"></textarea>
+                            <i class="fa fa-paper-plane-o" style="position: absolute;bottom: 5px; right:20px" id=" sendDebunk"><span> 发送 </span></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="conversation">
+            <!--js添加-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="iconfont3.js"></script>
+<script>
+
+    <!--顶部选项卡-->
+    document.getElementById("defaultOpen").click();
+    function tabNav(evt, tabName) {
+        var i, page, tab;
+        page = document.getElementsByClassName("page");
+        for (i = 0; i < page.length; i++) {
+            page[i].style.display = 'none';
+        }
+        tab = document.getElementsByClassName("tab");
+        for (i = 0; i < tab.length; i++) {
+            tab[i].className = tab[i].className.replace(" weui-bar__item_on", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        if (evt) evt.currentTarget.className += " weui-bar__item_on";
+    }
+
+//切换头像
+    var iconIndex = 1;
+    showIcons(iconIndex);
+
+    function plusIcons(n) {
+        showIcons(iconIndex += n);
+    }
+
+    function currentIcon(n) {
+        showIcons(iconIndex = n);
+    }
+
+    function showIcons(n) {
+        var i;
+        var create = document.getElementById('create');
+        var icons = create.getElementsByClassName("icon");
+        if (n > icons.length) {iconIndex = 1}
+        if (n < 1) {iconIndex = icons.length}
+        for (i = 0; i < icons.length; i++) {
+            icons[i].style.display = "none";
+        }
+        icons[iconIndex-1].style.display = "block";
+    }
+
+//往期话题
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var old_topic = document.getElementById('old_topic');
+        var slides = old_topic.getElementsByClassName("topic_box");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex-1].style.display = "block";
+    }
+
+    function add_1(){
+        var my_topic=document.getElementById('my_topic');
+        if(my_topic.style.display='none') {
+            my_topic.style.display='block';
+        }else{
+            my_topic.style.display='none';
+        }
+    }
+    function add_2(){
+        var create=document.getElementById('create');
+        if(create.style.display='none') {
+            create.style.display='block';
+        }else{
+            create.style.display='none';
+        }
+    }
+
+    var add_topic=document.getElementById('add_topic');
+    var old_topic=document.getElementById('old_topic');
+    var conversation=document.getElementById('conversation');
+    var create=document.getElementById('create');
+    var character=create.getElementsByClassName('icon');
+    var avatar='';
+
+    document.getElementById('sendDebunk').onclick = function () {
+        document.getElementById("sendDebunk").disabled = true;
+        for(i in character){
+            if(i.style.display='block'){
+                avatar=i;
+            }
+        }
+        postMessage({
+            serverType: "Send",
+            type: "debunk",
+            character: avatar,
+            content: document.getElementById("my_debunk").value,
+            UID: -1
+        }, "conversation.php", function () {
+            init();
+            document.getElementById("sendDebunk").disabled = false;
+            document.getElementById("my_debunk").value = "";
+            alert('发送成功');
+            create.style.display='none';
+        });
+    };
+
+    document.getElementById('send_topic').onclick = function () {
+        document.getElementById("send_topic").disabled = true;
+        postMessage({
+            serverType: "Send",
+            type: "conversation",
+            character: "",
+            content: document.getElementById("topic_value").value,
+            UID: -1
+        }, "conversation.php", function () {
+            init();
+            document.getElementById("send_topic").disabled = false;
+            document.getElementById("topic_value").value = "";
+            alert("发送成功");
+            document.getElementById('my_topic').style.display='none'
+        });
+    };
+
+    function init() {
+        postMessage({serverType: "Get", num: 20}, "conversation.php", function (json) {
+            for (var i = 0; i < json.debunk.length; i++) {
+                conversation.appendChild(appendConversation(json.debunk[i].UID, json.debunk[i].word, json.debunk[i].content, json.debunk[i].good, json.debunk[i].review))
+            }
+            for (var i = 0; i < json.conversation.length; i++) {
+                console.log(json.conversation[i]);
+                add_topic.appendChild(appendTopic(json.conversation[i].content, json.conversation[i].good, json.conversation[i].UID));
+            }
+            if (json.hotTopic.length > 0) {
+                document.getElementById("hotTopic").innerText = json.hotTopic[0].content;
+                document.getElementById("hotTopicLink").href = "conversationHot.html?id="+json.hotTopic[0].UID;
+                for (var i = 1; i < json.hotTopic.length; i++) {
+                    var a = document.createElement("a");
+                    var span = document.createElement("span");
+                    var div = document.createElement("div");
+                    span.className = "topic";
+                    a.href = "conversationHot.html?id="+json.hotTopic[i].UID;
+                    a.innerText = json.hotTopic[i].content;
+                    div.id = "topic_" + json.hotTopic[i].conID;
+                    span.appendChild(a);
+                    div.appendChild(span);
+                    old_topic.appendChild(div);
+                }
+            }
+        });
+    }
+
+
+    function appendTopic(topic, good, uid) {
+        var div = document.createElement("div");
+        var div_1 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var div_3 = document.createElement("div");
+        var span_1 = document.createElement("span");
+        var span_2 = document.createElement("span");
+
+        div.className='weui-cell';
+        div_1.className='weui-cell__hd';
+        div_2.className='weui-cell__bd';
+        div_3.className='weui-cell__ft';
+        span_1.className='fa fa-lightbulb-o';
+        div_1.innerHTML='<i class="fa fa-weixin" style="width:20px;margin-right:5px;display:block"></i>';
+        div_2.innerHTML="<p>"+ topic +"</p>";
+        span_2.innerText=good ;
+
+        span_1.onclick = function () {
+            postMessage({serverType: "Good", topicID: uid}, "conversation.php", function () {
+                span_1.style = '.color:#E7CF0C';
+                span_2.innerText = (parseInt(span_2.innerText) + 1);
+            });
+        };
+
+        div_3.appendChild(span_1);
+        div_3.appendChild(span_2);
+        div.appendChild(div_1);
+        div.appendChild(div_2);
+        div.appendChild(div_3);
+
+        return div;
+    }
+
+    function appendConversation(uid,character, content, good, review) {
+
+        var div_1 = document.createElement("div");
+        var div_1_1 = document.createElement("div");
+        var div_1_2 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var div_2_1 = document.createElement("div");
+        var div_2_1_1 = document.createElement("div");
+        var div = document.createElement("div");
+        var p = document.createElement("p");
+//        var use = document.createElement("use");
+        var span_1 = document.createElement("span");
+        var span_2 = document.createElement("span");
+        var icon = document.createElement("i");
+        var input = document.createElement("input");
+
+        div.className='weui-panel weui-panel_access';
+        div_1.className='weui-media-box weui-media-box_appmsg';
+        div_1.style='position: relative';
+        div_1_1.className='weui-media-box__hd';
+        div_1_2.className='weui-media-box__bd';
+        p.className='weui-media-box__desc';
+        span_1.className='fa fa-twitch';
+        span_2.className='fa fa-thumbs-o-up';
+        div_2.className='weui-panel__ft';
+        div_2_1.className='weui-cell weui-cell_access weui-cell_link';
+        div_2_1_1.className='weui-cell__bd';
+        icon.className='fa fa-send-o';
+        input.className='weui-input';
+
+//        use.href='character';
+        div_1_1.innerHTML=character;
+        span_1.style='position: absolute;bottom: 5px; right:45px';
+        span_2.style='position: absolute;bottom: 5px;right:5px';
+        icon.style='float: right;color: #000';
+        input.type='text';
+        input.placeholder='评论……';
+
+        p.innerText = content;
+        span_2.innerText ="    "  + good;
+        span_1.innerText ="    "  + review.length;
+
+        div_2_1_1.innerHTML='<i class="fa fa-twitch" ></i> me:  '+input+"  "+ icon;
+
+         for (var i = 0; i < review.length; i++){
+                div_2.appendChild(appendReview(i+1 , review[i].content));
+            }
+
+        icon.onclick = function () {
+            postMessage({
+                        serverType: "Send",
+                        content: input.value,
+                        UID: uid
+                    }, "conversation.php", function () {
+                        var num=review.length+1;
+                        appendReview(num,input.value);
+                    }
+            )
+        };
+        div_2_1.appendChild(div_2_1_1);
+        div_2.appendChild(div_2_1);
+
+        div_1_2.appendChild(p);
+        div_1_2.appendChild(span_1);
+        div_1_2.appendChild(span_2);
+        div_1.appendChild(div_1_1);
+        div_1.appendChild(div_1_2);
+
+        div_1.onclick = function (e) {
+            if (e.target == span_2) {
+                postMessage({serverType: "Good", topicID: uid}, "conversation.php", function () {
+                    span_2.innerText = (parseInt(span_2.innerText.replace(" ", "")) + 1) + "    ";
+                });
+                return;
+            }
+            if (div_2.style.display = "block") {
+                div_2.style.display = "none";
+            } else {
+                div_2.style.display = "block";
+                }
+            };
+
+        div.append(div_1);
+        div.append(div_2);
+        return div;
+    }
+
+    function appendReview(index,content){
+        var div = document.createElement("div");
+        var div_1 = document.createElement("div");
+
+        div.className='weui-cell weui-cell_access weui-cell_link';
+        div_1.className='weui-cell__bd';
+
+        div_1.innerHTML='<i class="fa fa-twitch"></i> ' + index + " : "+ content;
+
+        div.appendChild(div_1);
+        return div;
+    }
+
+
+
+    init();
+
+</script>
+
+</body>
+</html>

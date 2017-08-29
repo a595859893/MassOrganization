@@ -1309,7 +1309,7 @@
         act_id = uid;
         for (var i = 0; i < obj.length; i++) {
             var json = JSON.parse(obj[i].json);
-            t += "<tr>";
+            t += "<tr><input type='checkbox'>";
             for (var j in json) {
                 t += "<td>" + json[j] + "</td>";
                 if (i == 0)
@@ -1359,9 +1359,9 @@
         }
     }
     function all() {
-        var tbody = document.getElementById("tbody");
-        var checkBox = tbody.getElementsByTagName("input");
-        var all = document.getElementById("all");
+        var activityListContainer = document.getElementById("activityListContainer");
+        var checkBox = activityListContainer.getElementsByTagName("input");
+        var all = checkBox[0];
         if (all.checked) {
             for (var i = 0; i < checkBox.length; i++) {
                 checkBox[i].checked = true;
