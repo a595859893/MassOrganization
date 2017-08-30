@@ -78,7 +78,8 @@
                 <div class="button-sp-area" style="justify-content: space-between;" name="other">
                     <button type="reset" class="weui-btn weui-btn_mini weui-btn_default">重置</button>
                     <button type="submit" class="weui-btn weui-btn_mini weui-btn_default"
-                            style="background-color: #86d0ff;color:#fff;margin-right: 24px;">完成</button>
+                            style="background-color: #86d0ff;color:#fff;margin-right: 24px;">完成
+                    </button>
                 </div>
             </div>
         </div>
@@ -229,64 +230,30 @@
             if (list[i].name)
                 listjson[list[i].name] = list[i].value;
         }
-
-        var content = {
+        postMessage({
             serverType: "Post",
             json: JSON.stringify(listjson),
             UID: postIndex
-        };
-        var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "activity.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var json = JSON.parse(xmlhttp.responseText);
-                if (json.success) {
-                    document.getElementById('main_2').style.display = 'block';
-                    document.getElementById('id04').style.display = 'none';
-                } else
-                    console.log(json.error);
-            }
-        }
+        }, "activity.php", function () {
+            document.getElementById('main_2').style.display = 'block';
+            document.getElementById('id04').style.display = 'none';
+        });
     };
 
 
     function getActivity(type) {
         document.getElementById("actlist").innerHTML = "";
         type.serverType = "GetList";
-        var xmlhttp = GetXMLHTTPRequest();
-        xmlhttp.open("POST", "activity.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(type));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var json = JSON.parse(xmlhttp.responseText);
-                if (json.success)
-                    dealContent(json);
-                else
-                    console.log(json.error);
-            }
-        };
-    }
-
-
-//    推送链接没存？
-    function dealContent(json) {
-        if (json.success) {
+        postMessage(type, "activity.php", function (json) {
             var card = document.getElementById("actlist");
             for (var i = 0; i < json.length; i++) {
                 card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location,
                     json[i].holdtime, json[i].organizer, json[i].UID, json[i].json, json[i].logo, json[i].mark, json[i].url));
-//                console.log(json[i]);
             }
-        } else {
-            console.log(json.error);
-        }
+        });
     }
 
-
-    function createActivity(title, content, place, holdtime, organizer, index, labels, logo, mark,url) {
+    function createActivity(title, content, place, holdtime, organizer, index, labels, logo, mark, url) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var img = document.createElement("img");
@@ -313,28 +280,29 @@
 //        记得改尺寸
 
         a.className = "weui-media-box weui-media-box_appmsg";
-        a.href=url;
+        a.href = url;
         a.onclick = function (event) {
             event = event || window.event;
             switch (event.target) {
                 case(i_2):
+                    event.preventDefault();
                     document.getElementById("custom").innerHTML = formStr;
                     sign(index);
                     break;
 
                 case(i_1):
-                    postMessage({serverType: "Mark", actID: index},"activity.php",function(json){
+                    event.preventDefault();
+                    postMessage({serverType: "Mark", actID: index}, "activity.php", function (json) {
                         event.target.style.color = json.mark ? '#E7CF0C' : '';
                     });
                     break;
             }
         };
 
-
+        i_1.style.color = mark ? '#E7CF0C' : '';
         i_1.className = "fa fa-star";
         i_2.className = "fa fa-pencil-square-o";
-        i_2.style= ".float:right";
-//        i_1.style.color = mark ? '#E7CF0C' : '';
+        i_2.style = ".float:right";
 
         div_1.className = "weui-media-box__hd";
         div_2.className = "weui-media-box__bd";
