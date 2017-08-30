@@ -5,6 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $serverType = $_POST["serverType"];
 
     $mysqli = linkToSQL();
+    $openID = getOpenID();
     $line = array();
 
     if ("addDate" == $serverType) {
@@ -17,7 +18,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $rst = $mysqli->query($order);
         if (!$rst) $line["error"] = setError(0, "添加日程时，数据库错误，提示：" . $mysqli->error);
     } elseif ("getDate" == $serverType) {
-
+        $order = "SELECT * FROM dateRemind WHERE openID='$openID'";
+        $rst = $mysqli->query($order);
+        if ($rst) {
+            while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+                $line[] = $row;
+            }
+        } else $line["error"] = setError(0, "获取日程时，数据库错误，提示：" . $mysqli->error);
     } else $line["error"] = setError(0, "不匹配的类型");
 
     echo json_encode($line);

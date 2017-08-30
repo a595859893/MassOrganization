@@ -685,11 +685,13 @@
         QQ: "",
         备注: ""
     };
+
     for (var i in ne) {
         newElement(i, ne[i]);
         defaultjson[i] = ne[i];
         formStr += "<label><b>" + i + "</b></label>" + "<input name='" + i.value + "'>";
     }
+
     document.getElementById("custom").innerHTML = formStr;
 
     //    下拉菜单
@@ -706,7 +708,6 @@
         }
     }
     init();
-
 
     // 触发 id="defaultOpen" click 事件
     document.getElementById("defaultOpen").click();
@@ -915,6 +916,10 @@
                                 json.mark[i].holdtime, json.mark[i].time, json.mark[i].url, json.mark[i].json, json.mark[i].logo));
                     });
                 });
+
+                postMessage({serverType: "getDate"}, "schedule.php", function (json) {
+                    document.getElementById('table').appendChild(createCal(json));
+                })
             }
         });
 
@@ -1240,7 +1245,21 @@
         return div_3;
     }
 
-    function showCal() {
+    function createCalPiece(start, end, desc) {
+        var li = document.createElement('li');
+        var i = document.createElement('i');
+        i.className = "fa fa-calendar-minus-o";
+        i.style = "font-size:15px;position:absolute;right: 0;";
+        i.onclick = function () {
+            this.parentElement.style.display = 'none';
+        };
+
+        li.appendChild(i);
+        li.innerText = start + " ~ " + end + "  \n" + desc;
+        return li;
+    }
+
+    function createCal(json) {
         function is_leap(year) {
             return (year % 100 == 0 ? res = (year % 400 == 0 ? 1 : 0) : res = (year % 4 == 0 ? 1 : 0));
         } //是否为闰年
@@ -1254,41 +1273,70 @@
         var firstday = n1str.getDay(); //当月第一天星期几
 
         var m_days = new Array(31, 28 + is_leap(ynow), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31); //各月份的总天数
-
+        var week = ["日", "一", "二", "三", "四", "五", "六"];
         var tr_str = Math.ceil((m_days[mnow] + firstday) / 7); //表格所需要行数
 
+        document.getElementById("thisYear").innerText = ynow;
+        document.getElementById("thisMonth").innerText = mnow + 1 + '月';
 
-        //打印表格第一行（有星期标志）
-//        var div = document.createElement("div");
-        var div = '';
-        div += "<table  align='center' width='100%' cellspacing='0' cellpadding='10' ><tr bgcolor= '#ddd' ><th align='center'>日</th><th align='center'>一</th><th align='center'>二</th><th align='center'>三</th><th align='center'>四</th><th align='center'>五</th><th align='center'>六</th></tr>";
+        var table = document.createElement("table");
+        var tr_head = document.createElement("tr");
+        var nowTD;
+
+        table.align = "center";
+        table.width = '100%';
+        table.cellSpacing = "0";
+        table.cellPadding = "10";
+
+        tr_head.bgColor = "#ddd";
+        for (var i = 0; i < week.length; i++) {
+            var th = document.createElement("th");
+            th.align = "center";
+            th.innerText = week[i];
+            tr_head.appendChild(th);
+        }
+        table.appendChild(tr_head);
 
         for (i = 0; i < tr_str; i++) { //表格的行
-            div += "<tr class='day'>";
+            var tr = document.createElement("tr");
+            tr.className = "day";
+
             for (k = 0; k < 7; k++) { //表格每行的单元格
-                idx = i * 7 + k; //单元格自然序列号
-                date_str = idx - firstday + 1; //计算日期
-                (date_str <= 0 || date_str > m_days[mnow]) ? date_str = "&nbsp;" : date_str = idx - firstday + 1; //过滤无效日期（小于等于零的、大于月总天数的）
-                //打印日期：今天底色为绿
-                date_str == dnow ? div += "<td align='center'  bgcolor='#CBCBCB' >" + date_str + "</td>" : div += "<td align='center' bgcolor='#eee' >" + date_str + "</td>";
+                var idx = i * 7 + k; //单元格自然序列号
+                var date_str = idx - firstday + 1; //计算日期
+                date_str = (date_str <= 0 || date_str > m_days[mnow]) ? " " : idx - firstday + 1; //过滤无效日期（小于等于零的、大于月总天数的）
+
+                var td = document.createElement("td");
+                td.innerText = date_str;
+                td.align = "center";
+                td.day = date_str;
+
+                if (date_str == dnow) {
+                    td.bgColor = '#CBCBCB';
+                    nowTD = td;
+                } else {
+                    td.bgColor = '#eee';
+                }
+                tr.appendChild(td);
             }
-            div += "</tr>"; //表格的行结束
+            table.appendChild(tr);
         }
 
-        div += "</table>"; //表格结束
+        table.onclick = function (event) {
+            event = event || window.event;
+            var ul = document.getElementById('ul');
+            ul.innerHTML = "";
+            for (var i = 0; i < json.length; i++) {
+                var date = new Date(ynow, mnow, event.target.day);
+                if (date.getTime() - Date.parse(json[i].start) >= 0 && date.getTime() - Date.parse(json[i].end) <= 0)
+                    ul.appendChild(createCalPiece(json[i].start, json[i].end, json[i].name));
+            }
+        }
 
-//        document.getElementById('table').innerHTML =  div  ;
+        nowTD.click();
 
-        var y = document.getElementById("thisYear");
-        y.innerText = ynow;
-
-        var m = document.getElementById("thisMonth");
-        m.innerText = mnow + 1 + '月';
-
-        return div;
+        return table;
     }
-
-    document.getElementById('table').innerHTML = showCal();
 
     function workList() {
         document.getElementById('add').style.display = 'block';
@@ -1309,7 +1357,7 @@
                     actName: thing,
                     actStart: time_1,
                     actEnd: time_2
-                }, "IndexServer.php", function () {
+                }, "schedule.php", function () {
                     var li = document.createElement('li');
                     var span = document.createElement('span');
                     span.innerHTML = '<i class="fa fa-calendar-minus-o" style="font-size:15px;position:absolute;right: 0;"></i>';
