@@ -18,7 +18,7 @@ function linkToSQL()
 
 function getOpenID($mysqli)
 {
-    return  $_SESSION["openID"];;
+    return  $_SESSION["openID"];
 }
 
 function setError($code, $desc)

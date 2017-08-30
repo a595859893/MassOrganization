@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $openID = getOpenID();
         $exist = false;
-        $rst = $mysqli->query("SELECT * from conversationGood WHERE openID=$openID AND topicID=$topicID");
+        $rst = $mysqli->query("SELECT * from conversationGood WHERE openID='$openID' AND topicID=$topicID");
         while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
             $exist = true;
             $line["error"] = "点赞错误，错误提示: 已经点赞过了";

@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $serverType = $_POST["serverType"];
 
     $mysqli = linkToSQL();
-    $openID = getOpenID($mysqli);
+    $openID = getOpenID();
     $line = array();
     $time = time();
     if ($openID) {
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $rst = $mysqli->query($order);
             } else $line["error"] = setError(0, "活动发起时，数据库错误，提示：" . $mysqli->error);
-        } else if ("recruitment" == $serverType) {
+        } elseif ("recruitment" == $serverType) {
             $type = $_POST["type"];
             $title = $_POST["title"];
             $object = $_POST["object"];
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $rst = $mysqli->query($order);
 
             if (!$rst) $line["error"] = setError(0, "招新发起时，数据库错误，提示：" . $mysqli->error);
-        } else if ("massConfig" == $serverType) {
+        } elseif ("massConfig" == $serverType) {
             $type = $_POST["type"];
             $name = $_POST["name"];
             $head = $_POST["head"];
@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $rst = $mysqli->query($order);
             if (!$rst) $line["error"] = setError(0, "社团信息修改时，数据库错误，提示：" . $mysqli->error);
-        } else if ("massDiary" == $serverType) {
+        } elseif ("massDiary" == $serverType) {
             $title = $_POST["title"];
             $content = $_POST["content"];
             $logo = $_POST["logo"];
@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $line = array();
             $rst = $mysqli->query($order);
             if (!$rst) $line["error"] = setError(0, "社团日志发布时，数据库错误，提示：" . $mysqli->error);
-        } else if ("getActivity") {
+        } elseif ("getActivity" == $serverType) {
             $line["mark"] = array();
             $line["list"] = array();
 
@@ -97,7 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $line["mark"]["length"] = $markNum;
             } else $line["error"] = setError(0, "收藏获取时，数据库错误，提示：" . $mysqli->error);
 
-
             $rst = $mysqli->query("SELECT * FROM actList WHERE openID='$openID'");
             if ($rst) {
                 while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
@@ -111,16 +110,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $line["list"]["length"] = $listNum;
             } else $line["error"] = setError(0, "报名获取时，数据库错误，提示：" . $mysqli->error);
 
-        } else if ("getActList" == $serverType) {
-            $actUID = $_POST["actUID"];
-
-            $rst = $mysqli->query("SELECT * FROM actList WHERE actUID=$actUID");
+        } elseif ("getActList" == $serverType) {
+            $UID = $_SESSION["uid"];
+            $rst = $mysqli->query("SELECT UID,name FROM activity WHERE organizerUID=$UID");
             if ($rst) {
+                $line["activity"] = array();
+                $num = 0;
                 while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
-                    $line[] = $row;
+                    $actUID = $row["UID"];
+                    $rst2 = $mysqli->query("SELECT * FROM actList WHERE actUID=$actUID");
+                    if ($rst2) {
+                        $num2 = 0;
+                        $row["list"] = array();
+                        while ($row2 = $rst2->fetch_array(MYSQLI_ASSOC)) {
+                            $row["list"][] = $row2;
+                            $num2++;
+                        }
+                        $row["list"]["length"] = $num2;
+                    } else $line["error"] = setError(0, "活动报名列表获取时，数据库错误，提示：" . $mysqli->error);
+                    $line["activity"][] = $row;
+                    $num++;
                 }
-            } else $line["error"] = setError(0, "报名列表获取时，数据库错误，提示：" . $mysqli->error);
-        } else if ("destroyAct") {
+                $line["activity"]["length"] = $num;
+            } else $line["error"] = setError(0, "已发布活动获取时，数据库错误，提示：" . $mysqli->error);
+        } elseif ("destroyAct" == $serverType) {
             $actUID = $_POST["actUID"];
             $line = array();
             $line["success"] = true;
@@ -130,15 +143,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (!$rst) $line["error"] = setError(0, "删除收藏列表时，数据库错误，提示：" . $mysqli->error);
             $rst = $mysqli->query("DELETE FROM activity WHERE UID=$actUID");
             if (!$rst) $line["error"] = setError(0, "删除活动时，数据库错误，提示：" . $mysqli->error);
-        } else if ("addDate") {
-            $actName = $_POST["actName"];
-            $actStart = $_POST["actStart"];
-            $actEnd = $_POST["actEnd"];
-
-            $order = "INSERT INTO dateRemind (openID,start,end,name) ";
-            $order .= "VALUES('$openID','$actStart','$actEnd','$actName')";
-            $rst = $mysqli->query($order);
-            if (!$rst) $line["error"] = setError(0, "添加日程时，数据库错误，提示：" . $mysqli->error);
         } else $line["error"] = setError(-1, "不匹配的类型");
     } else $line["error"] = setError(-1, "OpenID获取错误" . $_COOKIE["openID"]);
     echo json_encode($line);
