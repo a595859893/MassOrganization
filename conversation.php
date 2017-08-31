@@ -55,10 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $looptag++;
             }
             $line["debunk"]["length"] = $looptag;
-        } else {
-            $line["error"] = "匿槽获取错误，错误提示: " . $mysqli->error;
-            $line["success"] = false;
-        }
+        } else  $line["error"] = setError(0, "匿槽获取时，数据库错误，提示：" . $mysqli->error);
 
         $type = 'conversation';
 
