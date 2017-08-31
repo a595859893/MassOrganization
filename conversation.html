@@ -174,14 +174,11 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD:conversation.html
+
 
 
 <!--<script src="iconfont3.js"></script>-->
-=======
-s'l
-<script src="iconfont3.js"></script>
->>>>>>> f7ef1abe5728707af1ff85c2428bfb8523a0868a:conversation.html
+
 <script src="CommonJS.js"></script>
 <script>
 
@@ -285,6 +282,11 @@ s'l
             document.getElementById("sendDebunk").disabled = false;
             document.getElementById("my_debunk").value = "";
             init();
+//            postMessage({serverType: "Get", num: 20}, "conversation.php",function(json){
+////                var i = json.debunk.length;
+////                conversation.appendChild(appendConversation(json.debunk[0].UID,json.debunk[0].word, json.debunk[0].content, json.debunk[0].good, json.debunk[0].review));
+//                init();
+//            })
         });
     };
 
@@ -307,6 +309,7 @@ s'l
 
     function init() {
         postMessage({serverType: "Get", num: 20}, "conversation.php", function (json){
+            conversation.innerHTML='';
             for(var i = 0; i < json.debunk.length; i++) {
                 conversation.appendChild(appendConversation(json.debunk[i].UID,json.debunk[i].word, json.debunk[i].content, json.debunk[i].good, json.debunk[i].review))
             }
