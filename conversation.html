@@ -108,11 +108,11 @@
             </div>
 
             <br>
-            <div class="weui-cell">
+            <div class="weui-cell" onclick="add_1()">
                 <div class="weui-cell__bd">
                     <p>#说说吧#</p>
                 </div>
-                <div class="weui-cell__ft"> 创建 <i class="fa fa-plus-square" style="color: black;font-size: 17px;" onclick="add_1()"></i></div>
+                <div class="weui-cell__ft"> 创建 <i class="fa fa-plus-square" style="color: black;font-size: 17px;"></i></div>
             </div>
             <div class="weui-cell" id="my_topic" style="display: none">
                 <div class="weui-cell__bd" style="border: 1px solid #e5e5e5; ">
@@ -131,11 +131,11 @@
 
         <!--匿巢-->
         <div style="display:none" class="page" id="page2">
-            <div class="weui-cell">
+            <div class="weui-cell"  onclick="add_2()">
                 <div class="weui-cell__bd">
                     <p>#匿名吐槽#</p>
                 </div>
-                <div class="weui-cell__ft"> 我也来玩 <span class="fa fa-edit" style="color: black;font-size: 17px;"  onclick="add_2()"></span></div>
+                <div class="weui-cell__ft"> 我也来玩 <span class="fa fa-edit" style="color: black;font-size: 17px;"></span></div>
             </div>
             <div class="weui-panel weui-panel_access" id="create" style="margin-top: -3px;display: none" >
                 <div class="weui-panel__bd">
@@ -378,7 +378,7 @@
         var img = document.createElement("img");
         var span_1 = document.createElement("span");
         var span_2 = document.createElement("span");
-        var icon = document.createElement("i");
+        var icon = document.createElement("span");
         var input = document.createElement("input");
 
         div.className='weui-panel weui-panel_access';
@@ -403,34 +403,38 @@
         icon.style='float: right;color: #000';
         input.type='text';
         input.placeholder='评论……';
-
+        div_2.style.display='none';
         p.innerText = content;
         span_2.innerText ="    "  + good;
         span_1.innerText ="    "  + review.length;
 
-        input.innerHTML=icon;
-        div_2_1_1.innerHTML='<i class="fa fa-twitch" ></i> me:  ';
+        div_2_1_1.innerHTML='<i class="fa fa-twitch" ></i> '+"我的评论:  ";
         div_2_1_1.appendChild(input);
+        div_2_1_1.appendChild(icon);
+        div_2_1.appendChild(div_2_1_1);
+        div_2.appendChild(div_2_1);
 
-         for (var i = 0; i < review.length; i++){
-                div_2.appendChild(appendReview(i+1 , review[i].content));
-            }
+        for (var i = 0; i < review.length; i++){
+            div_2.appendChild(appendReview(i+1 , review[i].content));
+        }
 
         icon.onclick = function () {
+            icon.disabled=true;
             postMessage({
                         serverType: "Send",
                         content: input.value,
                         UID: uid
                     }, "conversation.php", function () {
-                        var num=review.length+1;
+                    var num=review.length+1;
                     div_2.appendChild(appendReview(num,input.value));
-//                        appendReview(num,input.value);
-                    }
-            )
+                    icon.disabled=false;
+                    input.value='';
+                    input.placeholder='评论……';
+//                    div_2.innerHTML='';
+//                for (var i = 0; i < review.length; i++){
+//                    div_2.appendChild(appendReview(i+1 , review[i].content));}
+                  })
         };
-        div_2_1.appendChild(div_2_1_1);
-        div_2.appendChild(div_2_1);
-        div_2.style.display='none';
 
         div_1_2.appendChild(p);
         div_1_2.appendChild(span_1);
