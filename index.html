@@ -168,10 +168,10 @@
         <header>
             <div class="weui-media-box weui-media-box_appmsg">
                 <div class="weui-media-box__hd">
-                    <img class="weui-media-box__thumb" style="  border-radius: 50%;" src="" alt="">
+                    <img class="weui-media-box__thumb" style="  border-radius: 50%;" id="openID_head">
                 </div>
                 <div class="weui-media-box__bd">
-                    <h4 class="weui-media-box__title">名字</h4>
+                    <h4 class="weui-media-box__title" id="openID_name">名字</h4>
                     <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">
                         社团管理者登陆
                     </button>
@@ -685,11 +685,13 @@
         QQ: "",
         备注: ""
     };
+
     for (var i in ne) {
         newElement(i, ne[i]);
         defaultjson[i] = ne[i];
         formStr += "<label><b>" + i + "</b></label>" + "<input name='" + i.value + "'>";
     }
+
     document.getElementById("custom").innerHTML = formStr;
 
     //    下拉菜单
@@ -707,24 +709,20 @@
     }
     init();
 
-
     // 触发 id="defaultOpen" click 事件
     document.getElementById("defaultOpen").click();
     document.getElementById("login").onclick = function () {
         document.getElementById("login").disabled = true;
-
-        var content = {
+        postMessage({
             serverType: "login",
             account: document.getElementById("uname").value,
             password: document.getElementById("psw").value,
             remember: document.getElementById("remember").value
-        };
-
-        postMessage(content, "IndexServer.php", function (json) {
+        }, "loginState.php", function (json) {
             login(json);
             if (remember) {
-                document.cookie = "account_r=" + content.account;
-                document.cookie = "password_r=" + content.password;
+                document.cookie = "account=" + document.getElementById("uname").value;
+                document.cookie = "password=" + document.getElementById("psw").value;
             }
         });
     };
@@ -902,17 +900,26 @@
             if (json.state)
                 login(json.account);
             else {
-                postMessage({serverType: "openID"}, "loginState.php", function (json) {
-                    //获取头像等操作
+                postMessage({
+                    serverType: "openID",
+                    code: getValue("code"),
+                    state: getValue("state")
+                }, "loginState.php", function (json) {
+                    document.getElementById("openID_head").src = json.info.headimgurl;
+                    document.getElementById("openID_name").innerText = json.info.nickname;
+                    postMessage({serverType: "getActivity"}, "IndexServer.php", function (json) {
+                        for (var i = 0; i < json.list.length; i++)
+                            document.getElementById("MyList").appendChild(createActivity(json.list[i].name, json.list[i].introduction, json.list[i].location,
+                                json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo));
+                        for (var i = 0; i < json.mark.length; i++)
+                            document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
+                                json.mark[i].holdtime, json.mark[i].time, json.mark[i].url, json.mark[i].json, json.mark[i].logo));
+                    });
                 });
-                postMessage({serverType: "getActivity"}, "IndexServer.php", function (json) {
-                    for (var i = 0; i < json.list.length; i++)
-                        document.getElementById("MyList").appendChild(createActivity(json.list[i].name, json.list[i].introduction, json.list[i].location,
-                            json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo));
-                    for (var i = 0; i < json.mark.length; i++)
-                        document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
-                            json.mark[i].holdtime, json.mark[i].time, json.mark[i].url, json.mark[i].json, json.mark[i].logo));
-                });
+
+                postMessage({serverType: "getDate"}, "schedule.php", function (json) {
+                    document.getElementById('table').appendChild(createCal(json));
+                })
             }
         });
 
@@ -932,8 +939,10 @@
         document.getElementById("myself").onclick = function (event) {
             tabNav(event, 'page4')
         };
-        for (var i = 0; i < info.activity.length; i++)
-            document.getElementById("MyAct").appendChild(createAcc(info.activity[i].name, info.activity[i].list, info.activity[i].UID));
+        postMessage({serverType: "getActList"}, "IndexServer.php", function (json) {
+            for (var i = 0; i < json.activity.length; i++)
+                document.getElementById("MyAct").appendChild(createAcc(json.activity[i].name, json.activity[i].list, json.activity[i].UID));
+        });
 
         document.getElementById("myself").click();
     }
@@ -1004,6 +1013,7 @@
         document.body.style.backgroundColor = "white";
     }
 
+    //自定义表格
     function addElement() {
         var inputValue = document.getElementById("myInput").value;
         if (inputValue)
@@ -1036,6 +1046,7 @@
         }
     }
 
+    //管理员活动管理和表格查看
     function createActivity(title, content, place, holdtime, time, url, labels, logo) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
@@ -1089,15 +1100,55 @@
         return a;
     }
 
+    function createAcc(title, obj, uid) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var p = document.createElement("p");
+        var span = document.createElement("span");
+        var t = '';
+        var th = '';
+        for (var i = 0; i < obj.length; i++) {
+            var json = JSON.parse(obj[i].json);
+            t += "<tr><input type='checkbox'>";
+            for (var j in json) {
+                t += "<td>" + json[j] + "</td>";
+                if (i == 0)
+                    th += "<th>" + j + "</th>";
+            }
+            t += "</tr>";
+        }
+
+        a.className = 'weui-cell weui-cell_access';
+        div_1.className = 'weui-cell__bd';
+        span.className = 'fa fa-trash';
+        span.style.float = 'right';
+
+        p.innerText = title;
+
+        div_1.appendChild(p);
+        a.appendChild(div_1);
+        a.appendChild(span);
+
+        span.onclick = function (event) {
+            document.getElementById('dialog_act').style.display = 'block';
+            event = event || window.event;
+            event.preventDefault();
+            element = this.parentElement;
+            parent = element.parentElement;
+        };
+
+        div_1.onclick = function () {
+            document.getElementById('table_main').style.display = 'block';
+            document.getElementById('main_1').style.display = 'none';
+            document.getElementById('activityListContainer').innerHTML = "<tr>" + th + "</tr>" + t;
+        };
+
+        return a;
+    }
+
     //消息的dom,并没有测试所以有问题再和我说吧~
     function getMessage() {
         postMessage({serverType: " "}, " ", function (json) {
-            dealContent(json);
-        });
-    }
-
-    function dealContent(json) {
-        if (json.success) {
             var message = document.getElementById("message");
             var page_2 = document.getElementById('page2');
             for (var i = 0; i < json.activity.length; i++) {
@@ -1111,9 +1162,7 @@
                 message.appendChild(createMessage(work, json[i].title, json[i].time));
                 page_2.appendChild(dialog(i, json[i].time, json[i].title));
             }
-        } else {
-            console.log(json.error);
-        }
+        });
     }
 
     function createMessage(type, title, content) {
@@ -1196,7 +1245,21 @@
         return div_3;
     }
 
-    function showCal() {
+    function createCalPiece(start, end, desc) {
+        var li = document.createElement('li');
+        var i = document.createElement('i');
+        i.className = "fa fa-calendar-minus-o";
+        i.style = "font-size:15px;position:absolute;right: 0;";
+        i.onclick = function () {
+            this.parentElement.style.display = 'none';
+        };
+
+        li.appendChild(i);
+        li.innerText = start + " ~ " + end + "  \n" + desc;
+        return li;
+    }
+
+    function createCal(json) {
         function is_leap(year) {
             return (year % 100 == 0 ? res = (year % 400 == 0 ? 1 : 0) : res = (year % 4 == 0 ? 1 : 0));
         } //是否为闰年
@@ -1210,41 +1273,70 @@
         var firstday = n1str.getDay(); //当月第一天星期几
 
         var m_days = new Array(31, 28 + is_leap(ynow), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31); //各月份的总天数
-
+        var week = ["日", "一", "二", "三", "四", "五", "六"];
         var tr_str = Math.ceil((m_days[mnow] + firstday) / 7); //表格所需要行数
 
+        document.getElementById("thisYear").innerText = ynow;
+        document.getElementById("thisMonth").innerText = mnow + 1 + '月';
 
-        //打印表格第一行（有星期标志）
-//        var div = document.createElement("div");
-        var div = '';
-        div += "<table  align='center' width='100%' cellspacing='0' cellpadding='10' ><tr bgcolor= '#ddd' ><th align='center'>日</th><th align='center'>一</th><th align='center'>二</th><th align='center'>三</th><th align='center'>四</th><th align='center'>五</th><th align='center'>六</th></tr>";
+        var table = document.createElement("table");
+        var tr_head = document.createElement("tr");
+        var nowTD;
+
+        table.align = "center";
+        table.width = '100%';
+        table.cellSpacing = "0";
+        table.cellPadding = "10";
+
+        tr_head.bgColor = "#ddd";
+        for (var i = 0; i < week.length; i++) {
+            var th = document.createElement("th");
+            th.align = "center";
+            th.innerText = week[i];
+            tr_head.appendChild(th);
+        }
+        table.appendChild(tr_head);
 
         for (i = 0; i < tr_str; i++) { //表格的行
-            div += "<tr class='day'>";
+            var tr = document.createElement("tr");
+            tr.className = "day";
+
             for (k = 0; k < 7; k++) { //表格每行的单元格
-                idx = i * 7 + k; //单元格自然序列号
-                date_str = idx - firstday + 1; //计算日期
-                (date_str <= 0 || date_str > m_days[mnow]) ? date_str = "&nbsp;" : date_str = idx - firstday + 1; //过滤无效日期（小于等于零的、大于月总天数的）
-                //打印日期：今天底色为绿
-                date_str == dnow ? div += "<td align='center'  bgcolor='#CBCBCB' >" + date_str + "</td>" : div += "<td align='center' bgcolor='#eee' >" + date_str + "</td>";
+                var idx = i * 7 + k; //单元格自然序列号
+                var date_str = idx - firstday + 1; //计算日期
+                date_str = (date_str <= 0 || date_str > m_days[mnow]) ? " " : idx - firstday + 1; //过滤无效日期（小于等于零的、大于月总天数的）
+
+                var td = document.createElement("td");
+                td.innerText = date_str;
+                td.align = "center";
+                td.day = date_str;
+
+                if (date_str == dnow) {
+                    td.bgColor = '#CBCBCB';
+                    nowTD = td;
+                } else {
+                    td.bgColor = '#eee';
+                }
+                tr.appendChild(td);
             }
-            div += "</tr>"; //表格的行结束
+            table.appendChild(tr);
         }
 
-        div += "</table>"; //表格结束
+        table.onclick = function (event) {
+            event = event || window.event;
+            var ul = document.getElementById('ul');
+            ul.innerHTML = "";
+            for (var i = 0; i < json.length; i++) {
+                var date = new Date(ynow, mnow, event.target.day);
+                if (date.getTime() - Date.parse(json[i].start) >= 0 && date.getTime() - Date.parse(json[i].end) <= 0)
+                    ul.appendChild(createCalPiece(json[i].start, json[i].end, json[i].name));
+            }
+        }
 
-//        document.getElementById('table').innerHTML =  div  ;
+        nowTD.click();
 
-        var y = document.getElementById("thisYear");
-        y.innerText = ynow;
-
-        var m = document.getElementById("thisMonth");
-        m.innerText = mnow + 1 + '月';
-
-        return div;
+        return table;
     }
-
-    document.getElementById('table').innerHTML = showCal();
 
     function workList() {
         document.getElementById('add').style.display = 'block';
@@ -1265,7 +1357,7 @@
                     actName: thing,
                     actStart: time_1,
                     actEnd: time_2
-                }, "IndexServer.php", function () {
+                }, "schedule.php", function () {
                     var li = document.createElement('li');
                     var span = document.createElement('span');
                     span.innerHTML = '<i class="fa fa-calendar-minus-o" style="font-size:15px;position:absolute;right: 0;"></i>';
@@ -1282,53 +1374,6 @@
         if (time_1 > time_2) {
             alert('请正确输入时间');
         }
-    }
-
-    function createAcc(title, obj, uid) {
-        var a = document.createElement("a");
-        var div_1 = document.createElement("div");
-        var p = document.createElement("p");
-        var span = document.createElement("span");
-        var t = '';
-        var th = '';
-        act_id = uid;
-        for (var i = 0; i < obj.length; i++) {
-            var json = JSON.parse(obj[i].json);
-            t += "<tr><input type='checkbox'>";
-            for (var j in json) {
-                t += "<td>" + json[j] + "</td>";
-                if (i == 0)
-                    th += "<th>" + j + "</th>";
-            }
-            t += "</tr>";
-        }
-
-        a.className = 'weui-cell weui-cell_access';
-        div_1.className = 'weui-cell__bd';
-        span.className = 'fa fa-trash';
-        span.style.float = 'right';
-
-        p.innerText = title;
-
-        div_1.appendChild(p);
-        a.appendChild(div_1);
-        a.appendChild(span);
-
-        span.onclick = function (event) {
-            document.getElementById('dialog_act').style.display = 'block';
-            event = event || window.event;
-            event.preventDefault();
-            element = this.parentElement;
-            parent = element.parentElement;
-        };
-
-        div_1.onclick = function () {
-            document.getElementById('table_main').style.display = 'block';
-            document.getElementById('main_1').style.display = 'none';
-            document.getElementById('activityListContainer').innerHTML = "<tr>" + th + "</tr>" + t;
-        };
-
-        return a;
     }
 
     function dialog_act(value) {
