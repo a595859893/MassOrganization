@@ -210,7 +210,7 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="month" id="month">
             <i class="fa fa-calendar-plus-o" style="font-size:25px;color:#fff;position: relative;left: 281px;top: 11px;"
-               onclick='workList()'></i>
+               onclick="document.getElementById('add').style.display = 'block';"></i>
             <ul>
                 <li style="text-align:center">
                     <span style="font-size:18px" id="thisYear"></span><br>
@@ -677,6 +677,9 @@
     var listjson = {};
     var defaultjson = {};
     var formStr = "";
+    var del_id = -1;
+    var del_element;
+    var del_parent;
     var ne = {
         姓名: "",
         学号: "",
@@ -958,61 +961,6 @@
         });
     }
 
-    <!--底部选项卡-->
-    function tabNav(evt, tabName) {
-        var i, page, tab;
-        page = document.getElementsByClassName("page");
-        for (i = 0; i < page.length; i++) {
-            page[i].style.display = 'none';
-        }
-        tab = document.getElementsByClassName("tab");
-        for (i = 0; i < tab.length; i++) {
-            tab[i].className = tab[i].className.replace(" weui-bar__item_on", "");
-        }
-        document.getElementById(tabName).style.display = "block";
-        if (evt) evt.currentTarget.className += " weui-bar__item_on";
-    }
-
-    //    第一页顶部幻灯片
-    var slideIndex = 1;
-    showSlides(slideIndex);
-
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-    }
-
-    function showSlides(n) {
-        var i;
-        var slides = document.getElementsByClassName("mySlides");
-        var dots = document.getElementsByClassName("dot");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        if (slideIndex > slides.length) {
-            slideIndex = 1
-        }
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
-        setTimeout(showSlides, 8000);
-        slideIndex++;
-    }
-
-    //    第三页侧拉菜单--显示日程
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "100%";
-        document.getElementById("main").style.marginLeft = "0%";
-//      document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-        document.body.style.backgroundColor = "white";
-    }
-
     //自定义表格
     function addElement() {
         var inputValue = document.getElementById("myInput").value;
@@ -1105,18 +1053,6 @@
         var div_1 = document.createElement("div");
         var p = document.createElement("p");
         var span = document.createElement("span");
-        var t = '';
-        var th = '';
-        for (var i = 0; i < obj.length; i++) {
-            var json = JSON.parse(obj[i].json);
-            t += "<tr><input type='checkbox'>";
-            for (var j in json) {
-                t += "<td>" + json[j] + "</td>";
-                if (i == 0)
-                    th += "<th>" + j + "</th>";
-            }
-            t += "</tr>";
-        }
 
         a.className = 'weui-cell weui-cell_access';
         div_1.className = 'weui-cell__bd';
@@ -1133,14 +1069,61 @@
             document.getElementById('dialog_act').style.display = 'block';
             event = event || window.event;
             event.preventDefault();
-            element = this.parentElement;
-            parent = element.parentElement;
+            del_id = uid;
+            del_element = this.parentElement;
+            del_parent = del_element.parentElement;
         };
 
         div_1.onclick = function () {
             document.getElementById('table_main').style.display = 'block';
             document.getElementById('main_1').style.display = 'none';
-            document.getElementById('activityListContainer').innerHTML = "<tr>" + th + "</tr>" + t;
+            document.getElementById('activityListContainer').innerHTML = '';
+
+            var table = document.getElementById('activityListContainer');
+            var header = document.createElement("tr");
+            for (var i = 0; i < obj.length; i++) {
+                var json = JSON.parse(obj[i].json);
+                var tr = document.createElement("tr");
+                var td = document.createElement("td");
+                var td_checkBox = document.createElement("input");
+
+                td_checkBox.type = "checkbox";
+
+
+                td.appendChild(td_checkBox);
+                tr.appendChild(td);
+
+                if (i == 0) {
+                    var h_th = document.createElement("th");
+                    var h_th_checkBox = document.createElement("input");
+                    h_th_checkBox.onclick = function (event) {
+                        event = event || window.event;
+                        var activityListContainer = document.getElementById("activityListContainer");
+                        var checkBox = activityListContainer.getElementsByTagName("input");
+                        for (var i = 0; i < checkBox.length; i++) {
+                            checkBox[i].checked = event.target.checked;
+                        }
+                    }
+                    h_th_checkBox.type = "checkbox";
+                    h_th.appendChild(h_th_checkBox);
+                    header.appendChild(h_th);
+                }
+
+                for (var j in json) {
+                    var td = document.createElement("td");
+                    td.innerText = json[j];
+                    tr.appendChild(td);
+                    if (i == 0) {
+                        var th = document.createElement("th");
+                        th.innerText = j ? j : " ";
+                        header.appendChild(th);
+                    }
+                }
+
+                if (i == 0)
+                    table.appendChild(header);
+                table.appendChild(tr);
+            }
         };
 
         return a;
@@ -1203,46 +1186,6 @@
         a.appendChild(span);
 
         return a;
-    }
-
-    function dialog(index, content, title) {
-        var div_3 = document.createElement("div");
-        var div_3_1 = document.createElement("div");
-        var div_3_2 = document.createElement("div");
-        var div_3_2_1 = document.createElement("div");
-        var div_3_2_2 = document.createElement("div");
-        var div_3_2_3 = document.createElement("div");
-        var a_1 = document.createElement("a");
-
-        div_3_1.className = "weui-mask";
-        if (title = '') {
-            div_3.id = "date_" + index;
-        } else {
-            div_3.id = "work_" + index
-        }
-
-        div_3_2.className = "weui-dialog";
-        div_3_2_1.className = "weui-dialog__hd";
-        div_3_2_2.className = "weui-dialog__bd";
-        div_3_2_3.className = "weui-dialog__ft";
-        a_1.className = "eui-dialog__btn weui-dialog__btn_primary";
-
-        div_3.style = 'display: none';
-        div_3_2_1.innerHTML = '<strong class="weui-dialog__title">' + title + '</strong>';
-        div_3_2_2.innerText = content;
-        a_1.onclick = function () {
-            this.parentElement.style.display = 'none'
-        };
-        a_1.innerText = '确定';
-
-        div_3_2_3.appendChild(a_1);
-        div_3_2.appendChild(div_3_2_1);
-        div_3_2.appendChild(div_3_2_2);
-        div_3_2.appendChild(div_3_2_3);
-
-        div_3.appendChild(div_3_1);
-        div_3.appendChild(div_3_2);
-        return div_3;
     }
 
     function createCalPiece(start, end, desc) {
@@ -1338,10 +1281,6 @@
         return table;
     }
 
-    function workList() {
-        document.getElementById('add').style.display = 'block';
-    }
-
     function submit(condition) {
         document.getElementById('add').style.display = 'none';
         var time_1 = document.getElementById('start').innerText;
@@ -1376,31 +1315,56 @@
         }
     }
 
-    function dialog_act(value) {
-        document.getElementById('dialog_act').style.display = 'none';
-        if (value) {
-            postMessage({
-                serverType: "destroyAct",
-                actUID: act_id
-            }, "IndexServer.php", function () {
-                parent.removeChild(element);
-                alert('成功删除');
-            })
+    function dialog(index, content, title) {
+        var div_3 = document.createElement("div");
+        var div_3_1 = document.createElement("div");
+        var div_3_2 = document.createElement("div");
+        var div_3_2_1 = document.createElement("div");
+        var div_3_2_2 = document.createElement("div");
+        var div_3_2_3 = document.createElement("div");
+        var a_1 = document.createElement("a");
+
+        div_3_1.className = "weui-mask";
+        if (title = '') {
+            div_3.id = "date_" + index;
+        } else {
+            div_3.id = "work_" + index
         }
+
+        div_3_2.className = "weui-dialog";
+        div_3_2_1.className = "weui-dialog__hd";
+        div_3_2_2.className = "weui-dialog__bd";
+        div_3_2_3.className = "weui-dialog__ft";
+        a_1.className = "eui-dialog__btn weui-dialog__btn_primary";
+
+        div_3.style = 'display: none';
+        div_3_2_1.innerHTML = '<strong class="weui-dialog__title">' + title + '</strong>';
+        div_3_2_2.innerText = content;
+        a_1.onclick = function () {
+            this.parentElement.style.display = 'none'
+        };
+        a_1.innerText = '确定';
+
+        div_3_2_3.appendChild(a_1);
+        div_3_2.appendChild(div_3_2_1);
+        div_3_2.appendChild(div_3_2_2);
+        div_3_2.appendChild(div_3_2_3);
+
+        div_3.appendChild(div_3_1);
+        div_3.appendChild(div_3_2);
+        return div_3;
     }
 
-    function all() {
-        var activityListContainer = document.getElementById("activityListContainer");
-        var checkBox = activityListContainer.getElementsByTagName("input");
-        var all = checkBox[0];
-        if (all.checked) {
-            for (var i = 0; i < checkBox.length; i++) {
-                checkBox[i].checked = true;
-            }
-        } else {
-            for (var i = 0; i < checkBox.length; i++) {
-                checkBox[i].checked = false;
-            }
+    function dialog_act(value) {
+        document.getElementById('dialog_act').style.display = 'none';
+        if (value && del_id >= 0) {
+            postMessage({
+                serverType: "destroyAct",
+                actUID: del_id
+            }, "IndexServer.php", function () {
+                del_parent.removeChild(del_element);
+                alert('成功删除');
+            })
         }
     }
 
@@ -1413,6 +1377,61 @@
             document.getElementById('form_2').style.display = 'block';
             document.getElementById('form_1').style.display = 'none';
         }
+    }
+
+    <!--底部选项卡-->
+    function tabNav(evt, tabName) {
+        var i, page, tab;
+        page = document.getElementsByClassName("page");
+        for (i = 0; i < page.length; i++) {
+            page[i].style.display = 'none';
+        }
+        tab = document.getElementsByClassName("tab");
+        for (i = 0; i < tab.length; i++) {
+            tab[i].className = tab[i].className.replace(" weui-bar__item_on", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        if (evt) evt.currentTarget.className += " weui-bar__item_on";
+    }
+
+    //    第一页顶部幻灯片
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        if (slideIndex > slides.length) {
+            slideIndex = 1
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 8000);
+        slideIndex++;
+    }
+
+    //    第三页侧拉菜单--显示日程
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "100%";
+        document.getElementById("main").style.marginLeft = "0%";
+//      document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+        document.body.style.backgroundColor = "white";
     }
 </script>
 <script type="text/javascript">
