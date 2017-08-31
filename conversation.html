@@ -112,7 +112,7 @@
                 <div class="weui-cell__bd">
                     <p>#说说吧#</p>
                 </div>
-                <div class="weui-cell__ft"> 创建 <i class="fa fa-plus-square" style="color: black;font-size: 17px;" onclick=""></i></div>
+                <div class="weui-cell__ft"> 创建 <i class="fa fa-plus-square" style="color: black;font-size: 17px;" onclick="add_1()"></i></div>
             </div>
             <div class="weui-cell" id="my_topic" style="display: none">
                 <div class="weui-cell__bd" style="border: 1px solid #e5e5e5; ">
@@ -135,10 +135,9 @@
                 <div class="weui-cell__bd">
                     <p>#匿名吐槽#</p>
                 </div>
-                <div class="weui-cell__ft"> 我也来玩 <i class="fa fa-edit" style="color: black;font-size: 17px;"  onclick="add_2()"></i></div>
+                <div class="weui-cell__ft"> 我也来玩 <span class="fa fa-edit" style="color: black;font-size: 17px;"  onclick="add_2()"></span></div>
             </div>
-
-            <div class="weui-panel weui-panel_access" id="create" style="margin-top: -3px;">
+            <div class="weui-panel weui-panel_access" id="create" style="margin-top: -3px;display: none" >
                 <div class="weui-panel__bd">
                     <div  class="weui-media-box weui-media-box_appmsg" style="position: relative">
                         <div class="weui-media-box__hd" style="position: relative">
@@ -246,10 +245,9 @@
         slides[slideIndex-1].style.display = "block";
     }
 
-
+    var my_topic=document.getElementById('my_topic');
     function add_1(){
-        var my_topic=document.getElementById('my_topic');
-        if(my_topic.style.display='none') {
+        if(my_topic.style.display=='none') {
             my_topic.style.display='block';
         }else{
             my_topic.style.display='none';
@@ -257,10 +255,10 @@
     }
     var create=document.getElementById('create');
     function add_2(){
-        if(create.style.maxHeight) {
-            create.style.maxHeight=null;
+        if(create.style.display=='none') {
+            create.style.display='block';
         }else{
-            create.style.maxHeight=create.scrollHeight + "px";
+            create.style.display='none';
         }
     }
 
@@ -281,12 +279,8 @@
             alert('发送成功');
             document.getElementById("sendDebunk").disabled = false;
             document.getElementById("my_debunk").value = "";
+            create.style.display='none';
             init();
-//            postMessage({serverType: "Get", num: 20}, "conversation.php",function(json){
-////                var i = json.debunk.length;
-////                conversation.appendChild(appendConversation(json.debunk[0].UID,json.debunk[0].word, json.debunk[0].content, json.debunk[0].good, json.debunk[0].review));
-//                init();
-//            })
         });
     };
 
@@ -303,13 +297,14 @@
             document.getElementById("send_topic").disabled = false;
             document.getElementById("topic_value").value = "";
             alert("发送成功");
-            document.getElementById('my_topic').style.display='none'
+            my_topic.style.display='none';
         });
     };
 
     function init() {
         postMessage({serverType: "Get", num: 20}, "conversation.php", function (json){
             conversation.innerHTML='';
+            add_topic.innerHTML='';
             for(var i = 0; i < json.debunk.length; i++) {
                 conversation.appendChild(appendConversation(json.debunk[i].UID,json.debunk[i].word, json.debunk[i].content, json.debunk[i].good, json.debunk[i].review))
             }
@@ -370,7 +365,7 @@
         return div;
     }
 
-    function appendConversation(uid,avatar, content, good, review) {
+    function appendConversation(uid,avatar, content, good, review){
 
         var div_1 = document.createElement("div");
         var div_1_1 = document.createElement("div");
@@ -428,7 +423,8 @@
                         UID: uid
                     }, "conversation.php", function () {
                         var num=review.length+1;
-                        appendReview(num,input.value);
+                    div_2.appendChild(appendReview(num,input.value));
+//                        appendReview(num,input.value);
                     }
             )
         };
@@ -449,15 +445,15 @@
                 });
                 return;
             }
-            if (div_2.style.display = "block") {
-                div_2.style.display = "none";
-            } else {
-                div_2.style.display = "block";
+                if (div_2.style.display == "block") {
+                    div_2.style.display = "none";
+                } else {
+                    div_2.style.display = "block";
                 }
             };
 
-        div.append(div_1);
-        div.append(div_2);
+        div.appendChild(div_1);
+        div.appendChild(div_2);
         return div;
     }
 
