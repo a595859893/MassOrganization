@@ -19,19 +19,19 @@
         }
         .fa-angle-left{
             position: absolute;
-            left: 0;
+            left: 18px;
             top:30%;
             font-size:50px;
             color: rgba(0,0,0,0.1);
         }
         .fa-angle-right{
             position: absolute;
-            right: 0;
+            right: 18px;
             top:30%;
             font-size:50px;
             color: rgba(0,0,0,0.1);
         }
-        .fa-angle-double-left:hover,.fa-angle-double-right:hover{
+        .fa-angle-left:hover,.fa-angle-right:hover{
             color: rgba(0,0,0,0.7);
         }
         .topic{
@@ -59,6 +59,10 @@
         }
         .weui-media-box__desc{
             display: block;
+            color: #353535;
+        }
+        #conversation .weui-cell{
+            padding:1px 15px;
         }
     </style>
 </head>
@@ -85,6 +89,7 @@
             <div class="topic_box">
                 <a href="" id="hotTopicLink">
                 <span class="topic" id="hotTopic">
+                    中山大学
                 </span>
                 </a>
             </div>
@@ -101,7 +106,7 @@
                 <span class="fa fa-angle-right"></span>
                 <div class="topic_box">
                 <span class="topic" >
-                    <a href="" >#说点什么#</a>
+                    <a href="" >说点什么</a>
                 </span>
                 </div>
                 <!--js添加-->
@@ -269,11 +274,13 @@
 
     document.getElementById('sendDebunk').onclick = function () {
         document.getElementById("sendDebunk").disabled = true;
+        var debunk_value = document.getElementById("my_debunk").value;
+        if (debunk_value){
         postMessage({
             serverType: "Send",
             type: "debunk",
             character: icons[iconIndex-1].src,
-            content: document.getElementById("my_debunk").value,
+            content: debunk_value,
             UID: -1
         }, "conversation.php", function () {
             alert('发送成功');
@@ -281,16 +288,20 @@
             document.getElementById("my_debunk").value = "";
             create.style.display='none';
             init();
-        });
+        });}else{
+            alert('请输入内容');
+        }
     };
 
     document.getElementById('send_topic').onclick = function () {
         document.getElementById("send_topic").disabled = true;
+        var topic_value=document.getElementById("topic_value").value;
+        if(topic_value){
         postMessage({
             serverType: "Send",
             type: "conversation",
             character: "",
-            content: document.getElementById("topic_value").value,
+            content:topic_value,
             UID: -1
         }, "conversation.php", function () {
             init();
@@ -298,7 +309,9 @@
             document.getElementById("topic_value").value = "";
             alert("发送成功");
             my_topic.style.display='none';
-        });
+        });}else{
+            alert('请输入内容');
+        }
     };
 
     function init() {
@@ -308,16 +321,18 @@
             for(var i = 0; i < json.debunk.length; i++) {
                 conversation.appendChild(appendConversation(json.debunk[i].UID,json.debunk[i].word, json.debunk[i].content, json.debunk[i].good, json.debunk[i].review))
             }
+//            console.log(json.debunk[0]);
             for (var i = 0; i < json.conversation.length; i++) {
                 add_topic.appendChild(appendTopic(json.conversation[i].content, json.conversation[i].good, json.conversation[i].UID));
             }
+//            console.log(json.conversation[0]);
             if (json.hotTopic.length > 0) {
                 document.getElementById("hotTopic").innerText = json.hotTopic[0].content;
                 document.getElementById("hotTopicLink").href = "conversationHot.html?id="+json.hotTopic[0].UID;
                 for (var i = 1; i < json.hotTopic.length; i++) {
                     var a = document.createElement("a");
                     var span = document.createElement("span");
-                    var div = document.createElement("div");
+                    var div= document.createElement("div");
                     span.className = "topic";
                     div.className='topic_box';
                     a.href = "conversationHot.html?id="+json.hotTopic[i].UID;
@@ -351,7 +366,7 @@
 
         span_1.onclick = function () {
             postMessage({serverType: "Good", topicID: uid}, "conversation.php", function () {
-                span_1.style = '.color:#E7CF0C';
+                span_1.style = 'color:#E7CF0C';
                 span_2.innerText = (parseInt(span_2.innerText) + 1);
             });
         };
@@ -420,6 +435,7 @@
 
         icon.onclick = function () {
             icon.disabled=true;
+            if(input.value){
             postMessage({
                         serverType: "Send",
                         content: input.value,
@@ -430,10 +446,10 @@
                     icon.disabled=false;
                     input.value='';
                     input.placeholder='评论……';
-//                    div_2.innerHTML='';
-//                for (var i = 0; i < review.length; i++){
-//                    div_2.appendChild(appendReview(i+1 , review[i].content));}
                   })
+            }else{
+                alert('不能输入空消息');
+            }
         };
 
         div_1_2.appendChild(p);
@@ -445,6 +461,7 @@
         div_1.onclick = function (e) {
             if (e.target == span_2) {
                 postMessage({serverType: "Good", topicID: uid}, "conversation.php", function () {
+                    span_2.style.color= 'red' ;
                     span_2.innerText = (parseInt(span_2.innerText.replace(" ", "")) + 1) + "    ";
                 });
                 return;
