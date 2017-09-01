@@ -28,5 +28,4 @@ function setError($code, $desc)
     $err["desc"] = $desc;
     return $err;
 }
-
 ?>

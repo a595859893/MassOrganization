@@ -62,11 +62,15 @@ function postMessage(content, php, func, failFunc) {
     xmlhttp.send(toStr(content));
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            var json = JSON.parse(xmlhttp.responseText);
-            if (json.error || (json.success == false))
-                failFunc(json);
-            else
-                func(json);
+            var respon = xmlhttp.responseText;
+            if (respon) {
+                var json = JSON.parse(respon);
+                if (json.error || (json.success == false))
+                    failFunc(json);
+                else
+                    func(json);
+            } else
+                console.log("没有返回值！");
         }
     }
 

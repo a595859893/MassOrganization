@@ -706,7 +706,6 @@
         }
     }
     init();
-
     // 触发 id="defaultOpen" click 事件
     document.getElementById("defaultOpen").click();
     document.getElementById("login").onclick = function () {
@@ -925,7 +924,26 @@
 
                 postMessage({serverType: "getDate"}, "schedule.php", function (json) {
                     document.getElementById('table').appendChild(createCal(json));
-                })
+                });
+
+                postMessage({serverType: "Get"}, "message.php", function (json) {
+                    var message = document.getElementById("message");
+                    var page_2 = document.getElementById('page2');
+                    for (var i = 0; i < json.length; i++) {
+                        if (json.type == "act") {
+                            message.appendChild(createMessage(json.type, json[i].title, ''));
+                            page_2.appendChild(dialog(i, json[i].message, ''));
+                        }
+                        if (json.type == "mass")
+                            message.appendChild(createMessage(json.type, json[i].title, json[i].url));
+
+                        if (json.type == "work") {
+                            message.appendChild(createMessage("work", json[i].title, json[i].time));
+                            page_2.appendChild(dialog(i, json[i].time, json[i].title));
+                        }
+
+                    }
+                });
             }
         });
 
@@ -1151,25 +1169,6 @@
         return a;
     }
 
-    //消息的dom,并没有测试所以有问题再和我说吧~
-    function getMessage() {
-        postMessage({serverType: " "}, " ", function (json) {
-            var message = document.getElementById("message");
-            var page_2 = document.getElementById('page2');
-            for (var i = 0; i < json.activity.length; i++) {
-                message.appendChild(createMessage(act, json[i].title, ''));
-                page_2.appendChild(dialog(i, json[i].message, ''));
-            }
-            for (var i = 0; i < json.mass.length; i++) {
-                message.appendChild(createMessage(mass, json[i].title, json[i].url));
-            }
-            for (var i = 0; i < json.worklist.length; i++) {
-                message.appendChild(createMessage(work, json[i].title, json[i].time));
-                page_2.appendChild(dialog(i, json[i].time, json[i].title));
-            }
-        });
-    }
-
     function createMessage(type, title, content) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
@@ -1182,21 +1181,21 @@
         div_2.className = "weui-cell__bd weui-cell_primary";
         span.className = "weui-cell__ft";
 
-        if (type == act) {
+        if (type == "act") {
             div_1.innerHTML = "<i class='fa fa-language' style='font-size:20px;color: #136832'></i>";
-            p.innerText = '&nbsp;' + title + '报名成功';
+            p.innerText = ' ' + title + '报名成功';
             a.onclick = function () {
                 document.getElementById("date_" + index).style.display = 'block';
             }
         }
-        if (type == mass) {
+        if (type == "mass") {
             div_1.innerHTML = "<i class='fa fa-joomla' style='font-size:20px;color: #136832'></i>";
-            p.innerText = '&nbsp;' + title + '有新动态啦';
+            p.innerText = ' ' + title + '有新动态啦';
             a.href = content;
         }
-        if (type == work) {
+        if (type == "work") {
             div_1.innerHTML = "<i class='fa fa-clipboard' style='font-size:20px;color: #136832'></i>";
-            p.innerText = '&nbsp;' + title + '有新动态啦';
+            p.innerText = ' ' + title + '有新动态啦';
             a.onclick = function () {
                 document.getElementById("work_" + index).style.display = 'block';
             }
