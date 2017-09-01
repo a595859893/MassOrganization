@@ -22,8 +22,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else if ($serverType == "Get") {
         $startUID = $_POST["startUID"];
         $num = $_POST["num"];
-
-        $rst = $mysqli->query("SELECT * FROM message WHERE openID='$openID'AND UID>$startUID ORDER BY UID DESC LIMIT $num");
+        $order = "SELECT * FROM message WHERE openID='$openID'";
+        if ($startUID > 0)
+            $order .= "AND UID>$startUID";
+        $order .= "ORDER BY UID DESC";
+        if ($num > 0)
+            $order .= "LIMIT $num";
+        $rst = $mysqli->query($order);
         if ($rst) {
             $looptag = 0;
             while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
