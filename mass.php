@@ -8,8 +8,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mysqli = linkToSQL();
 
     if ($serverType == "getList") {
-        $rst = $mysqli->query("SELECT * FROM mass");
+        $startUID = $_POST["startUID"];
+        $num = $_POST["num"];
+        $order = "SELECT * FROM mass";
+        if ($startUID > 0)
+            $order .= " WHERE UID<$startUID";
+        if ($num > 0)
+            $order .= " LIMIT $num";
 
+        $rst = $mysqli->query($order);
         if ($rst) {
             $line["success"] = true;
             $num = 0;
@@ -26,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             $line["length"] = $num;
         } else  $line["error"] = setError(0, "列表获取时，数据库错误，提示：" . $mysqli->error);
-    } else if ($serverType == "good") {
+    } elseif ($serverType == "good") {
         $massUID = $_POST["massUID"];
 
         $exist = false;
@@ -43,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $line["good"] = true;
             if (!$rst2) $line["error"] = setError(0, "点赞时，数据库错误，提示：" . $mysqli->error);
         }
-    } else if ($serverType == "mark") {
+    } elseif ($serverType == "mark") {
         $markUID = $_POST["markUID"];
 
         $exist = false;
@@ -60,47 +67,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $line["mark"] = true;
             if (!$rst2) $line["error"] = setError(0, "收藏添加时，数据库错误，提示：" . $mysqli->error);
         }
-    } else if ($serverType == "getMass") {
+    } elseif ($serverType == "getMass") {
         $uid = $_POST["UID"];
         $rst = $mysqli->query("SELECT * FROM mass WHERE UID=$uid");
 
         if ($rst) {
-            $line["success"] = true;
-            while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+            if ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
                 $rst2 = $mysqli->query("SELECT * FROM massGood WHERE openID='$openID' AND massUID=$uid LIMIT 1");
                 $row["igood"] = ($row2 = $rst2->fetch_array(MYSQLI_ASSOC)) ? true : false;
-
                 $rst2 = $mysqli->query("SELECT * FROM massMark WHERE openID='$openID' AND markUID=$uid LIMIT 1");
                 $row["imark"] = ($row2 = $rst2->fetch_array(MYSQLI_ASSOC)) ? true : false;
-
                 $line["mass"] = $row;
+
+
+                $num = 0;
+                $line["diary"] = array();
+                $rst2 = $mysqli->query("SELECT * FROM massDiary WHERE massUID=$uid");
+                while ($row2 = $rst2->fetch_array(MYSQLI_ASSOC)) {
+                    $id = $row["UID"];
+
+                    $rst3 = $mysqli->query("SELECT * FROM massDiaryGood WHERE openID='$openID' AND diaryUID=$id LIMIT 1");
+                    $row2["igood"] = ($row3 = $rst3->fetch_array(MYSQLI_ASSOC)) ? true : false;
+                    $line["diary"][] = $row2;
+                    $num++;
+                }
+                $line["diary"]["length"] = $num;
+
+                $num = 0;
+                $line["recruitment"] = array();
+                $rst = $mysqli->query("SELECT * FROM recruitment WHERE massUID=$uid");
+                while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+                    $line["recruitment"][] = $row;
+                    $num++;
+                }
+                $line["recruitment"]["length"] = $num;
             }
-
-            $line["diary"] = array();
-            $num = 0;
-            $rst = $mysqli->query("SELECT * FROM massDiary WHERE massUID=$uid");
-            while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
-                $id = $row["UID"];
-
-                $exist = 0;
-                $rst2 = $mysqli->query("SELECT * FROM massDiaryGood WHERE openID='$openID' AND diaryUID=$id LIMIT 1");
-                $row["igood"] = ($row2 = $rst2->fetch_array(MYSQLI_ASSOC)) ? true : false;
-
-                $line["diary"][] = $row;
-                $num++;
-            }
-            $line["diary"]["length"] = $num;
-
-            $line["recruitment"] = array();
-            $num = 0;
-            $rst = $mysqli->query("SELECT * FROM recruitment WHERE massUID=$uid");
-            while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
-                $line["recruitment"][] = $row;
-                $num++;
-            }
-            $line["recruitment"]["length"] = $num;
+            $line["error"] = setError(0, "社团不存在");
         } else  $line["error"] = setError(0, "获取社团时，数据库错误，提示：" . $mysqli->error);
-    } else if ($serverType == "goodDiary") {
+    } elseif ($serverType == "goodDiary") {
         $diaryUID = $_POST["diaryUID"];
 
         $rst = $mysqli->query("SELECT * from massDiaryGood WHERE openID='$openID' AND diaryUID=$diaryUID");

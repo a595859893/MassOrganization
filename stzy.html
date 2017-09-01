@@ -84,6 +84,7 @@
 <script src="CommonJS.js"></script>
 <script>
     //Test
+    var startUID = 0;
     var massList = [];
     var searchBar = document.getElementById("search_input");
 
@@ -104,31 +105,17 @@
 
 
     function init() {
-        var xmlhttp = GetXMLHTTPRequest();
-        var content = {serverType: "getList"};
-        xmlhttp.open("POST", "mass.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var json = JSON.parse(xmlhttp.responseText);
-                if (json.success)
-                    dealContent(json);
-                else
-                    console.log(json.error);
+        postMessage({serverType: "getList", startUID: -1, num: -1}, "mass.php", function (json) {
+            for (var i = 0; i < json.length; i++) {
+                var mass = {};
+                mass.name = json[i].name;
+                mass.div = createActivity(json[i].name, json[i].intro, json[i].number, json[i].good,
+                    json[i].UID, json[i].igood, json[i].imark);
+                massList.push(mass);
+                document.getElementById("frame").appendChild(mass.div);
+                startUID = Math.max(startUID, json[i].UID);
             }
-        };
-    }
-
-    function dealContent(json) {
-        for (var i = 0; i < json.length; i++) {
-            var mass = {};
-            mass.name = json[i].name;
-            mass.div = createActivity(json[i].name, json[i].intro, json[i].number, json[i].good,
-                json[i].UID, json[i].igood, json[i].imark);
-            massList.push(mass);
-            document.getElementById("frame").appendChild(mass.div);
-        }
+        });
     }
 
     function Search() {

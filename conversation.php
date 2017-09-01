@@ -29,17 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (!$rst) $line["error"] = setError(0, "评论发起时，数据库错误，提示：" . $mysqli->error);
         }
-    } else if ($serverType == "Get") {
-        //$startUID   = $_POST["startUID"];
-        //$num        = $_POST["num"];
+    } elseif ($serverType == "Get") {
+        $startUID = $_POST["startUID"];
+        $num = $_POST["num"];
 
-        $line["success"] = true;
-        $line["debunk"] = array();
-        $line["conversation"] = array();
-        $line["hotTopic"] = array();
-
-        $type = 'debunk';
-        $rst = $mysqli->query("SELECT * FROM conversation WHERE type='$type' ORDER BY UID DESC");
+        $rst = $mysqli->query("SELECT * FROM conversation WHERE type='$type' AND UID<$startUID ORDER BY UID DESC LIMIT $num");
         if ($rst) {
             $looptag = 0;
             while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
@@ -59,15 +53,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
                 $row["review"]["length"] = $reviewNum;
 
-                $line["debunk"][] = $row;
+                $line[] = $row;
                 $looptag++;
             }
-            $line["debunk"]["length"] = $looptag;
+            $line["length"] = $looptag;
         } else  $line["error"] = setError(0, "匿槽获取时，数据库错误，提示：" . $mysqli->error);
+    } elseif ("GetConversation" == $serverType) {
+        $startUID = $_POST["startUID"];
+        $num = $_POST["num"];
 
-        $type = 'conversation';
-
-        $rst = $mysqli->query("SELECT * FROM conversation WHERE type='$type' ORDER BY good DESC");
+        $rst = $mysqli->query("SELECT * FROM conversation WHERE type='$type' AND UID<$startUID ORDER BY good DESC  LIMIT $num");
         if ($rst) {
             $looptag = 0;
             while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
@@ -78,11 +73,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $row["igood"] = ($row2 = $rst2->fetch_array(MYSQLI_ASSOC)) ? true : false;
                 } else $line["error"] = setError(0, "点赞判断时，数据库错误，提示：" . $mysqli->error);
 
-                $line["conversation"][] = $row;
+                $line[] = $row;
                 $looptag++;
             }
-            $line["conversation"]["length"] = $looptag;
+            $line["length"] = $looptag;
         } else $line["error"] = setError(0, "话题获取时，数据库错误，提示：" . $mysqli->error);
+    } elseif ("GetHotTopic" == $serverType) {
+        $startUID = $_POST["startUID"];
+        $num = $_POST["num"];
 
         $rst = $mysqli->query("SELECT * FROM conversationHot ORDER BY time DESC");
         if ($rst) {
@@ -92,15 +90,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $rst2 = $mysqli->query("SELECT * FROM conversation WHERE UID=$uid");
                 if ($rst) {
                     while ($row2 = $rst2->fetch_array(MYSQLI_ASSOC)) {
-                        $line["hotTopic"][] = $row2;
+                        $line[] = $row2;
                         $looptag++;
                     }
                 } else $line["error"] = setError(0, "热门话题评论获取时，数据库错误，提示：" . $mysqli->error);
             }
-            $line["hotTopic"]["length"] = $looptag;
+            $line["length"] = $looptag;
         } else $line["error"] = setError(0, "热门话题获取时，数据库错误，提示：" . $mysqli->error);
-
-    } else if ($serverType == "Good") {
+    } elseif ($serverType == "Good") {
         $topicID = $_POST["topicID"];
 
         $exist = false;
@@ -118,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (!$rst2) $line["error"] = setError(0, "点赞时，数据库错误，提示：" . $mysqli->error);
             }
         } else $line["error"] = setError(0, "点赞判断时，数据库错误，提示：" . $mysqli->error);
-    } else if ($serverType == "getHotReview") {
+    } elseif ($serverType == "getHotReview") {
         $uid = $_POST["UID"];
         $line["review"] = array();
         $line["success"] = true;
