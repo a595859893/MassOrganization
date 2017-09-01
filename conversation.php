@@ -30,21 +30,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (!$rst) $line["error"] = setError(0, "评论发起时，数据库错误，提示：" . $mysqli->error);
         }
     } else if ($serverType == "Get") {
-        $num = $_POST["num"];
+        //$startUID   = $_POST["startUID"];
+        //$num        = $_POST["num"];
+
         $line["success"] = true;
         $line["debunk"] = array();
         $line["conversation"] = array();
         $line["hotTopic"] = array();
 
         $type = 'debunk';
-        $rst = $mysqli->query("SELECT * FROM conversation as a WHERE type='$type' ORDER BY a.UID DESC");
+        $rst = $mysqli->query("SELECT * FROM conversation WHERE type='$type' ORDER BY UID DESC");
         if ($rst) {
             $looptag = 0;
             while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
                 $id = $row["UID"];
-                $rst2 = $mysqli->query("SELECT * FROM conversationReview WHERE targetUID=$id ORDER BY UID DESC");
+
+                $rst2 = $mysqli->query("SELECT * from conversationGood WHERE openID='$openID' AND topicID=$id LIMIT 1");
+                if ($rst2) {
+                    $row["igood"] = ($row2 = $rst2->fetch_array(MYSQLI_ASSOC)) ? true : false;
+                } else $line["error"] = setError(0, "点赞判断时，数据库错误，提示：" . $mysqli->error);
+
                 $reviewNum = 0;
                 $row["review"] = array();
+                $rst2 = $mysqli->query("SELECT * FROM conversationReview WHERE targetUID=$id ORDER BY UID DESC");
                 while ($row2 = $rst2->fetch_array(MYSQLI_ASSOC)) {
                     $reviewNum++;
                     $row["review"][] = $row2;
@@ -64,6 +72,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $looptag = 0;
             while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
                 $id = $row["UID"];
+
+                $rst2 = $mysqli->query("SELECT * from conversationGood WHERE openID='$openID' AND topicID=$id LIMIT 1");
+                if ($rst2) {
+                    $row["igood"] = ($row2 = $rst2->fetch_array(MYSQLI_ASSOC)) ? true : false;
+                } else $line["error"] = setError(0, "点赞判断时，数据库错误，提示：" . $mysqli->error);
+
                 $line["conversation"][] = $row;
                 $looptag++;
             }
@@ -89,21 +103,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else if ($serverType == "Good") {
         $topicID = $_POST["topicID"];
 
-        $openID = getOpenID();
         $exist = false;
         $rst = $mysqli->query("SELECT * from conversationGood WHERE openID='$openID' AND topicID=$topicID LIMIT 1");
-
-        if ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
-            $rst2 = $mysqli->query("DELETE FROM conversationGood WHERE openID='$openID' AND topicID=$topicID");
-            $mysqli->query("UPDATE conversation SET good=good-1 WHERE UID=$topicID");
-            $line["good"] = false;
-            if (!$rst2) $line["error"] = setError(0, "点赞删除时，数据库错误，提示：" . $mysqli->error);
-        } else {
-            $rst2 = $mysqli->query("INSERT INTO conversationGood (openID,topicID) VALUES('$openID',$topicID)");
-            $mysqli->query("UPDATE conversation SET good=good+1 WHERE UID=$topicID");
-            $line["good"] = true;
-            if (!$rst2) $line["error"] = setError(0, "点赞时，数据库错误，提示：" . $mysqli->error);
-        }
+        if ($rst) {
+            if ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+                $rst2 = $mysqli->query("DELETE FROM conversationGood WHERE openID='$openID' AND topicID=$topicID");
+                $mysqli->query("UPDATE conversation SET good=good-1 WHERE UID=$topicID");
+                $line["good"] = false;
+                if (!$rst2) $line["error"] = setError(0, "点赞删除时，数据库错误，提示：" . $mysqli->error);
+            } else {
+                $rst2 = $mysqli->query("INSERT INTO conversationGood (openID,topicID) VALUES('$openID',$topicID)");
+                $mysqli->query("UPDATE conversation SET good=good+1 WHERE UID=$topicID");
+                $line["good"] = true;
+                if (!$rst2) $line["error"] = setError(0, "点赞时，数据库错误，提示：" . $mysqli->error);
+            }
+        } else $line["error"] = setError(0, "点赞判断时，数据库错误，提示：" . $mysqli->error);
     } else if ($serverType == "getHotReview") {
         $uid = $_POST["UID"];
         $line["review"] = array();

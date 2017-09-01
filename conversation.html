@@ -18,7 +18,8 @@
         #old_topic {
             position: relative;
         }
-        .topic a{
+
+        .topic a {
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
@@ -26,13 +27,14 @@
             -webkit-line-clamp: 1;
             color: #000;
         }
-        .fa-angle-left{
+
+        .fa-angle-left {
             position: absolute;
             left: 18px;
-            top:30%;
-            font-size:50px;
+            top: 30%;
+            font-size: 50px;
             font-weight: bolder;
-            color: rgba(0,0,0,0.1);
+            color: rgba(0, 0, 0, 0.1);
             /*width: 20px;*/
             /*height: 52px;*/
             /*display: block;*/
@@ -52,18 +54,20 @@
         .fa-angle-right {
             position: absolute;
             right: 18px;
-            top:30%;
-            font-size:50px;
-            color: rgba(0,0,0,0.1);
+            top: 30%;
+            font-size: 50px;
+            color: rgba(0, 0, 0, 0.1);
             width: 20px;
             height: 52px;
             display: block;
             /*background-color:rgba(0,0,0,0.1);*/
             border-radius: 8px 0 0 8px;
         }
+
         .fa-angle-left:hover, .fa-angle-right:hover {
             color: rgba(0, 0, 0, 0.7);
         }
+
         .topic {
             line-height: 120px;
         }
@@ -146,12 +150,12 @@
                 <span class="fa fa-angle-right" onclick="plusSlides(1)"></span>
                 <!--<div class="topic_box">-->
                 <!--&lt;!&ndash;<span class="topic" >&ndash;&gt;-->
-                    <!--&lt;!&ndash;<a href="" >说点什么1</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a href="" >说点什么1</a>&ndash;&gt;-->
                 <!--&lt;!&ndash;</span>&ndash;&gt;-->
                 <!--</div>-->
                 <!--<div class="topic_box">-->
                 <!--<span class="topic" >-->
-                    <!--<a href="" >说点什么2</a>-->
+                <!--<a href="" >说点什么2</a>-->
                 <!--</span>-->
                 <!--</div>-->
                 <!--js添加-->
@@ -231,8 +235,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 <!--<script src="iconfont3.js"></script>-->
@@ -388,11 +390,13 @@
             conversation.innerHTML = '';
             add_topic.innerHTML = '';
             for (var i = 0; i < json.debunk.length; i++) {
-                conversation.appendChild(appendConversation(json.debunk[i].UID, json.debunk[i].word, json.debunk[i].content, json.debunk[i].good, json.debunk[i].review))
+                conversation.appendChild(appendConversation(json.debunk[i].UID, json.debunk[i].word, json.debunk[i].content,
+                    json.debunk[i].good, json.debunk[i].review, json.debunk[i].igood));
             }
 //            console.log(json.debunk[0]);
             for (var i = 0; i < json.conversation.length; i++) {
-                add_topic.appendChild(appendTopic(json.conversation[i].content, json.conversation[i].good, json.conversation[i].UID));
+                add_topic.appendChild(appendTopic(json.conversation[i].content, json.conversation[i].good,
+                    json.conversation[i].UID, json.conversation[i].igood));
             }
 //            console.log(json.conversation[0]);
             if (json.hotTopic.length > 0) {
@@ -417,7 +421,7 @@
     }
 
 
-    function appendTopic(topic, good, uid) {
+    function appendTopic(topic, good, uid, igood) {
         var div = document.createElement("div");
         var div_1 = document.createElement("div");
         var div_2 = document.createElement("div");
@@ -430,15 +434,17 @@
         div_2.className = 'weui-cell__bd';
         div_3.className = 'weui-cell__ft';
         span_1.className = 'fa fa-lightbulb-o';
-        span_1.style.color = '#5E6F66';
+        span_1.style.color = igood ? '#E7CF0C' : '#5E6F66';
         div_1.innerHTML = '<i class="fa fa-weixin" style="width:20px;margin-right:5px;display:block;color:#5E6F66"></i>';
         div_2.innerHTML = "<p>" + topic + "</p>";
         span_2.innerText = good;
 
+
         span_1.onclick = function () {
-            postMessage({serverType: "Good", topicID: uid}, "conversation.php", function () {
-                span_1.style = 'color:#E7CF0C';
-                span_2.innerText = (parseInt(span_2.innerText) + 1);
+            postMessage({serverType: "Good", topicID: uid}, "conversation.php", function (json) {
+                var num = parseInt(span_2.innerText);
+                span_1.style.color = json.good ? '#E7CF0C' : '#5E6F66';
+                span_2.innerText = json.good ? (num + 1) : (num - 1);
             });
         };
 
@@ -451,7 +457,7 @@
         return div;
     }
 
-    function appendConversation(uid, avatar, content, good, review) {
+    function appendConversation(uid, avatar, content, good, review, igood) {
         var div_1 = document.createElement("div");
         var div_1_1 = document.createElement("div");
         var div_1_2 = document.createElement("div");
@@ -485,6 +491,7 @@
         div_1_1.appendChild(img);
         span_1.style = 'position: absolute;bottom: 5px; right:45px';
         span_2.style = 'position: absolute;bottom: 5px;right:5px';
+        span_2.style.color = igood ? 'red' : '';
         icon.style = 'float: right;color: #000';
         input.type = 'text';
         input.placeholder = '评论……';
@@ -531,9 +538,9 @@
         div_1.onclick = function (e) {
             if (e.target == span_2) {
                 postMessage({serverType: "Good", topicID: uid}, "conversation.php", function (json) {
-                    var num = parseInt(span_2.innerText.replace(" ", "")) + 1;
+                    var num = parseInt(span_2.innerText.replace(" ", ""));
                     span_2.style.color = json.good ? 'red' : '';
-                    span_2.innerText = (json.good ? (num + 1) : (num - 1)) + "    ";
+                    span_2.innerText = "    " + (json.good ? (num + 1) : (num - 1));
                 });
                 return;
             }
