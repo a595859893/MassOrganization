@@ -264,7 +264,7 @@
                 <input type="password" name="psw" id="psw" required>
 
                 <button type="button" id="login">登陆</button>
-                <input type="checkbox" checked="checked" id="remember"> 记住我
+                <input type="checkbox" checked id="remember"> 记住我
             </div>
 
             <div class="container" style="background-color:#f1f1f1">
@@ -293,7 +293,8 @@
 
         <br>
         <article class="main">
-            <button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard"style="font-size:18px;color: #136832;"></i>
+            <button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard"
+                                                                                               style="font-size:18px;color: #136832;"></i>
                 活动管理
             </button>
             <div class="panel" id="MyAct">
@@ -714,13 +715,16 @@
         postMessage({
             serverType: "login",
             account: document.getElementById("uname").value,
-            password: document.getElementById("psw").value,
-            remember: document.getElementById("remember").value
+            password: document.getElementById("psw").value
         }, "loginState.php", function (json) {
             login(json);
-            if (remember) {
+            if (document.getElementById("remember").checked) {
                 document.cookie = "account=" + document.getElementById("uname").value;
                 document.cookie = "password=" + document.getElementById("psw").value;
+            } else {
+                console.log("123");
+                delCookie("account");
+                delCookie("password");
             }
         });
     };
@@ -914,7 +918,7 @@
                             document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
                                 json.mark[i].holdtime, json.mark[i].time, json.mark[i].url, json.mark[i].json, json.mark[i].logo));
                         for (var i = 0; i < json.mass.length; i++)
-                            document.getElementById("MyMass").appendChild(createMass(json.mass[i].name,json.mass[i].UID));
+                            document.getElementById("MyMass").appendChild(createMass(json.mass[i].name, json.mass[i].UID));
                     });
                 });
 
@@ -1046,7 +1050,7 @@
         return a;
     }
 
-    function createMass(title,uid){
+    function createMass(title, uid) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var div_2 = document.createElement("div");
@@ -1056,8 +1060,8 @@
         div_1.className = 'weui-cell__bd';
         div_2.className = 'weui-cell__ft';
 
-        a.href="http://www.campuscircle.top/stzyz.html?uid="+uid;
-        p.innerText=title;
+        a.href = "http://www.campuscircle.top/stzyz.html?uid=" + uid;
+        p.innerText = title;
 
         div_1.appendChild(p);
         a.appendChild(div_1);
