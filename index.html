@@ -189,7 +189,7 @@
         </div>
 
         <button class="accordion"><i class="fa fa-star" style="font-size:18px;color: #136832;"></i> 我的收藏</button>
-        <div class="panel weui-cells" id="MyMark">
+        <div class="panel " id="MyMark">
             <!--JS添加点-->
         </div>
 
@@ -332,7 +332,7 @@
     <!--活动管理表格-->
     <div style="display: none;" id="table_main">
         <div id="table_1" style="overflow-x: visible">
-            <table id="activityListContainer"></table>
+            <table id="activityListContainer" style="overflow-x: auto;"></table>
         </div>
         <div class="weui-cells__title">向报名者发送消息</div>
         <div class="weui-cells weui-cells_form">
@@ -585,10 +585,6 @@
                     </div>
                 </div>
             </div>
-            <!--<label for="weuiAgree" class="weui-agree">-->
-            <!--<input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">-->
-            <!--<span class="weui-agree__text">阅读并同意<a href="javascript:void(0);">《相关条款》</a></span>-->
-            <!--</label>-->
             <div class="weui-btn-area">
                 <button type="button"
                         onclick="document.getElementById('id04').style.display='none';document.getElementById('main_1').style.display='block'"
@@ -918,7 +914,7 @@
                             document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
                                 json.mark[i].holdtime, json.mark[i].time, json.mark[i].url, json.mark[i].json, json.mark[i].logo));
                         for (var i = 0; i < json.mass.length; i++)
-                            document.getElementById("MyMass").appendChild(createMass(json.mass[i].name,json.mass[i].url));
+                            document.getElementById("MyMass").appendChild(createMass(json.mass[i].name,json.mass[i].UID));
                     });
                 });
 
@@ -1050,7 +1046,7 @@
         return a;
     }
 
-    function createMass(title,url){
+    function createMass(title,uid){
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var div_2 = document.createElement("div");
@@ -1060,7 +1056,7 @@
         div_1.className = 'weui-cell__bd';
         div_2.className = 'weui-cell__ft';
 
-        a.href=url;
+        a.href="http://www.campuscircle.top/stzyz.html?uid="+uid;
         p.innerText=title;
 
         div_1.appendChild(p);
