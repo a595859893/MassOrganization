@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <style type="text/css">
+        .topic_box{
+            border:1px solid #e5e5e5;
+            height: 120px;
+            width: 90%;
+            margin:0 auto;
+            text-align: center;
+        }
+        #old_topic{
+            position: relative;
+        }
+        .fa-angle-left{
+            position: absolute;
+            left: 18px;
+            top:30%;
+            font-size:50px;
+            color: rgba(0,0,0,0.1);
+        }
+        .fa-angle-right{
+            position: absolute;
+            right: 18px;
+            top:30%;
+            font-size:50px;
+            color: rgba(0,0,0,0.1);
+        }
+        .fa-angle-left:hover,.fa-angle-right:hover{
+            color: rgba(0,0,0,0.7);
+        }
+        .topic{
+            line-height: 120px;
+        }
+        .icon {
+            width: 50px;
+            height: 50px;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+        input::-webkit-input-placeholder {
+            /* WebKit browsers */
+            color: #e4ebe0;
+        }
+        .weui-panel__bd{
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .weui-cell:before{
+            border-top:0 ;
+        }
+        .add_topic .weui-cell:before{
+            border-top: 1px solid #e5e5e5;
+        }
+        .weui-media-box__desc{
+            display: block;
+            color: #353535;
+        }
+        #conversation .weui-cell{
+            padding:1px 15px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <p>#讨论区#</p>
+        </div>
+        <div class="weui-cell__ft" id="topic_time"> </div>
+    </div>
+    <div class="topic_box">
+        <a href="" id="hotTopicLink">
+                <span class="topic" id="hotTopic">
+                    中山大学
+                </span>
+        </a>
+    </div>
+    <br>
+    <div class="weui-cell" onclick="add()" style="padding-bottom: 0">
+            <span class="fa fa-edit" style="color: black;font-size: 17px;"> 我也来玩 </span>
+    </div>
+    <div class="weui-panel weui-panel_access" id="create" style="margin-top: 5px;display: none">
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_appmsg" style="position: relative">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src=" " alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                            <textarea id="my_content" class="weui-textarea" placeholder="写点什么吧" rows="3"></textarea>
+                    <i class="fa fa-paper-plane-o" style="position: absolute;bottom: 5px; right:20px" id="send"><span> 发送 </span></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="weui-panel weui-panel_access" id="content">
+        <div class="weui-panel__bd">
+            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="pic_160%20(1).png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <!--<p class="weui-media-box__title">标题一</p>-->
+                    <p style="color:#e5e5e5">time</p>
+                    <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+                    <span class="fa fa-twitch"></span>
+                    <span class="fa fa-thumbs-o-up"></span>
+                </div>
+            </a>
+            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="pic_160%20(1).png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">标题二</h4>
+                    <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <script src="CommonJS.js"></script>
+    <script>
+        var uid = getValue("id");
+        if (uid > -1) {
+//        init();
+        }
+        var userInfo = {head: ""};
+
+        var content=document.getElementById('content');
+        var create=document.getElementById('create');
+
+        function init() {
+            postMessage({serverType: "getHotReview", UID: uid}, "conversation.php", function (json) {
+                dealContent(json);
+            });
+        }
+
+        dealContent({
+            state: {content: "活动标题"},
+            hot: {time: "时间"},
+            hotCon: [
+                {
+                    word: "", time: "时间", content: "评论内容",
+                    review: [
+                        {word: "", content: "评论的评论的内容"},
+                        {word: "", content: "评论的评论的内容"}
+                    ]
+                },
+                {
+                    word: "", time: "时间", content: "评论内容",
+                    review: [
+                        {word: "", content: "评论的评论的内容"},
+                        {word: "", content: "评论的评论的内容"}
+                    ]
+                }
+            ]
+        });
+
+
+        function dealContent(json){
+            document.getElementById("hotTopic").innerText = json.state.content;
+            document.getElementById("topic_time").innerHTML = json.hot.time+' <i class="fa fa-map-signs" style="color: black;font-size: 17px;"></i>';
+            content.innerHTML='';
+            for (var i = 0; i < json.hotCon.length; i++){
+                content.appendChild(appendConversation(uid,json.hotCon[i].word, json.hotCon[i].time, json.hotCon[i].content,json.hotCon[i].good, json.hotCon[i].review,json.hotCon[i].igood))
+            }
+        }
+
+        function appendConversation(uid, avatar,time,content, good, review, igood) {
+            var div_1 = document.createElement("div");
+            var div_1_1 = document.createElement("div");
+            var div_1_2 = document.createElement("div");
+            var div_2 = document.createElement("div");
+            var div_2_1 = document.createElement("div");
+            var div_2_1_1 = document.createElement("div");
+            var div = document.createElement("div");
+            var p = document.createElement("p");
+            var p_1 = document.createElement("p");
+            var img = document.createElement("img");
+            var span_1 = document.createElement("span");
+            var span_2 = document.createElement("span");
+            var icon = document.createElement("span");
+            var input = document.createElement("input");
+
+            div.className = 'weui-panel weui-panel_access';
+            div_1.className = 'weui-media-box weui-media-box_appmsg';
+            div_1.style = 'position: relative';
+            div_1_1.className = 'weui-media-box__hd';
+            div_1_2.className = 'weui-media-box__bd';
+            p.className = 'weui-media-box__desc';
+            span_1.className = 'fa fa-twitch';
+            span_2.className = 'fa fa-thumbs-o-up';
+            div_2.className = 'weui-panel__ft';
+            div_2_1.className = 'weui-cell weui-cell_access weui-cell_link';
+            div_2_1_1.className = 'weui-cell__bd';
+            icon.className = 'fa fa-send-o';
+            input.className = 'weui-input';
+            img.className = 'icon';
+            img.src = avatar;
+
+            div_1_1.appendChild(img);
+            span_1.style = 'position: absolute;bottom: 5px; right:45px';
+            span_2.style = 'position: absolute;bottom: 5px;right:5px';
+            span_2.style.color = igood ? 'red' : '';
+            icon.style = 'float: right;color: #000';
+            input.type = 'text';
+            input.placeholder = '评论……';
+            div_2.style.display = 'none';
+            p_1.innerText=time;
+            p_1.style='color: #e5e5e5;font-size: 13px;';
+            p.innerText = content;
+            span_2.innerText = "    " + good;
+            span_1.innerText = "    " + review.length;
+
+            div_2_1_1.innerHTML = '<i class="fa fa-twitch" ></i> ' + "我的评论:  ";
+            div_2_1_1.appendChild(input);
+            div_2_1_1.appendChild(icon);
+            div_2_1.appendChild(div_2_1_1);
+            div_2.appendChild(div_2_1);
+
+            for (var i = 0; i < review.length; i++) {
+                div_2.appendChild(appendReview(i + 1, review[i].content));
+            }
+
+            icon.onclick = function () {
+                icon.disabled = true;
+                if (input.value) {
+                    postMessage({
+                        serverType: "Send",
+                        content: input.value,
+                        UID: uid
+                    }, "conversation.php", function () {
+                        var num = review.length + 1;
+                        div_2.appendChild(appendReview(num, input.value));
+                        icon.disabled = false;
+                        input.value = '';
+                        input.placeholder = '评论……';
+                    })
+                } else {
+                    alert('不能输入空消息');
+                }
+            };
+
+            div_1_2.appendChild(p_1);
+            div_1_2.appendChild(p);
+            div_1_2.appendChild(span_1);
+            div_1_2.appendChild(span_2);
+            div_1.appendChild(div_1_1);
+            div_1.appendChild(div_1_2);
+
+            div_1.onclick = function (e) {
+                if (e.target == span_2) {
+                    postMessage({serverType: "Good", topicID: uid}, "conversation.php", function (json) {
+                        var num = parseInt(span_2.innerText.replace(" ", ""));
+                        span_2.style.color = json.good ? 'red' : '';
+                        span_2.innerText = "    " + (json.good ? (num + 1) : (num - 1));
+                    });
+                    return;
+                }
+
+                if (div_2.style.display = "block") {
+                    div_2.style.display = "none";
+                } else {
+                    div_2.style.display = "block";
+                }
+            };
+
+            div.appendChild(div_1);
+            div.appendChild(div_2);
+            return div;
+        }
+
+        function appendReview(index, content) {
+            var div = document.createElement("div");
+            var div_1 = document.createElement("div");
+            div.className = 'weui-cell weui-cell_access weui-cell_link';
+            div_1.className = 'weui-cell__bd';
+            div_1.innerHTML = '<i class="fa fa-twitch"></i> ' + index + " : " + content;
+            div.appendChild(div_1);
+            return div;
+        }
+
+        function add(){
+            if (create.style.display == 'none') {
+                create.style.display = 'block';
+            } else {
+                create.style.display = 'none';
+            }
+        }
+
+        document.getElementById('send').onclick = function () {
+            document.getElementById("send").disabled = true;
+            var my_content = document.getElementById("my_content").value;
+            if (my_content) {
+                postMessage({
+                    serverType: "Send",
+                    content: my_content,
+                    UID: uid
+                }, "conversation.php", function () {
+                    alert('发送成功');
+                    document.getElementById("send").disabled = false;
+                    document.getElementById("my_content").value = "";
+                    create.style.display = 'none';
+                    init();
+                });
+            } else {
+                alert('请输入内容');
+            }
+        };
+    </script>
+
+
+</body>
+</html>
