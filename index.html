@@ -98,7 +98,7 @@
                         排行榜
                     </p>
                 </a>
-                <a href="conversation .html" class="weui-grid">
+                <a href="conversation.html" class="weui-grid">
                     <div class="weui-grid__icon">
                         <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-gaoxiao-copy"></use>
@@ -189,7 +189,7 @@
         </div>
 
         <button class="accordion"><i class="fa fa-star" style="font-size:18px;color: #136832;"></i> 我的收藏</button>
-        <div class="panel" id="MyMark">
+        <div class="panel " id="MyMark">
             <!--JS添加点-->
         </div>
 
@@ -293,8 +293,7 @@
 
         <br>
         <article class="main">
-            <button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard"
-                                                                                               style="font-size:18px;color: #136832;"></i>
+            <button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard"style="font-size:18px;color: #136832;"></i>
                 活动管理
             </button>
             <div class="panel" id="MyAct">
@@ -333,7 +332,7 @@
     <!--活动管理表格-->
     <div style="display: none;" id="table_main">
         <div id="table_1" style="overflow-x: visible">
-            <table id="activityListContainer"></table>
+            <table id="activityListContainer" style="overflow-x: auto;"></table>
         </div>
         <div class="weui-cells__title">向报名者发送消息</div>
         <div class="weui-cells weui-cells_form">
@@ -586,10 +585,6 @@
                     </div>
                 </div>
             </div>
-            <!--<label for="weuiAgree" class="weui-agree">-->
-            <!--<input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">-->
-            <!--<span class="weui-agree__text">阅读并同意<a href="javascript:void(0);">《相关条款》</a></span>-->
-            <!--</label>-->
             <div class="weui-btn-area">
                 <button type="button"
                         onclick="document.getElementById('id04').style.display='none';document.getElementById('main_1').style.display='block'"
@@ -911,12 +906,15 @@
                     document.getElementById("openID_head").src = json.info.headimgurl;
                     document.getElementById("openID_name").innerText = json.info.nickname;
                     postMessage({serverType: "getActivity"}, "IndexServer.php", function (json) {
+//                        console.log(json[0]);
                         for (var i = 0; i < json.list.length; i++)
                             document.getElementById("MyList").appendChild(createActivity(json.list[i].name, json.list[i].introduction, json.list[i].location,
                                 json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo));
                         for (var i = 0; i < json.mark.length; i++)
                             document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
                                 json.mark[i].holdtime, json.mark[i].time, json.mark[i].url, json.mark[i].json, json.mark[i].logo));
+                        for (var i = 0; i < json.mass.length; i++)
+                            document.getElementById("MyMass").appendChild(createMass(json.mass[i].name,json.mass[i].UID));
                     });
                 });
 
@@ -1042,6 +1040,26 @@
         div_2.appendChild(p_3);
         div_2.appendChild(p_4);
 
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+
+        return a;
+    }
+
+    function createMass(title,uid){
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var p = document.createElement("p");
+
+        a.className = 'weui-cell weui-cell_access';
+        div_1.className = 'weui-cell__bd';
+        div_2.className = 'weui-cell__ft';
+
+        a.href="http://www.campuscircle.top/stzyz.html?uid="+uid;
+        p.innerText=title;
+
+        div_1.appendChild(p);
         a.appendChild(div_1);
         a.appendChild(div_2);
 
