@@ -279,6 +279,7 @@
 
 #id02 input[type=text],#id02 input[type=number],#id02 input[type=url],#id02 input[type=date],#id02 select,#id03 input[type=text],#id03 input[type=date],#id03 input[type=number],#id03 input[type=url],#id03 select,#myDIV input,#dairy input[type=text],#dairy input[type=url],#id04 input,#id05 input{
     width: 100%;
+    height: 45px;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;

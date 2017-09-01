@@ -6,50 +6,88 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
-    <script src="iconfont.js"></script>
-    <link rel="stylesheet" href="css.css">
 </head>
 <body>
 <div class="weui-cells weui-cells_form">
+    <div class="weui-cells__title">注册 （非社团管理者请勿在此注册！）</div>
     <div class="weui-cell">
-        <div class="weui-cell__hd"><label class="weui-label">qq</label></div>
+        <div class="weui-cell__hd"><label for="MASS_name" class="weui-label">社团名字</label></div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入qq号"/>
+            <input class="weui-input" type="text" id="MASS_name"/>
         </div>
     </div>
-    <div class="weui-cell weui-cell_vcode">
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">登陆账号</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="MASS_account" placeholder=" "/>
+        </div>
+    </div>
+    <div class="weui-cell ">
+        <div class="weui-cell__hd"><label class="weui-label">登录密码</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="password" id="MASS_code" placeholder=" "/>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cells__title" style="color: #000;font-size: 16px;">社团类型</div>
+        <div class="weui-cells weui-cells_checkbox" style="border: 0">
+            <label class="weui-cell weui-check__label">
+                <input type="radio" class="weui-check" name="formChoose" value="shetuan">
+                <i class="weui-icon-checked"></i>
+                兴趣社团
+            </label>
+            <label class="weui-cell weui-check__label">
+                <input type="radio" name="formChoose" class="weui-check" value="zuzhi">
+                <i class="weui-icon-checked"></i>
+                学生组织
+            </label>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label for="MASS_head" class="weui-label">社团负责人</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="MASS_head"/>
+        </div>
+    </div>
+    <div class="weui-cell  ">
         <div class="weui-cell__hd">
-            <label class="weui-label">手机号</label>
+            <label class="weui-label">负责人手机号</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="tel" placeholder="请输入手机号">
-        </div>
-        <div class="weui-cell__ft">
-            <a href="javascript:;" class="weui-vcode-btn">获取验证码</a>
-        </div>
-    </div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd"><label for="" class="weui-label">日期</label></div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="date" value=""/>
-        </div>
-    </div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd"><label for="" class="weui-label">时间</label></div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="datetime-local" value="" placeholder=""/>
-        </div>
-    </div>
-    <div class="weui-cell weui-cell_vcode">
-        <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="number" placeholder="请输入验证码"/>
-        </div>
-        <div class="weui-cell__ft">
-            <img class="weui-vcode-img" src="./images/vcode.jpg" />
+            <input class="weui-input" type="tel" id="MASS_tel" placeholder=" ">
         </div>
     </div>
 </div>
+<br>
+<div class="weui-btn-area">
+    <button class="weui-btn weui-btn_plain-primary" id="massConfig">提交</button>
+</div>
+
+
+<script>
+    document.getElementById("massConfig").onsubmit = function (event) {
+        event = event || window.event;
+        event.target.disabled = true;
+        event.preventDefault();
+
+        var type;
+        var radio = document.getElementsByName("formChoose");
+        for (var i = 0; i < radio.length; i++)
+            if (radio[i].checked)
+                type = radio[i].value;
+
+        var content = {
+            serverType: "massConfig",
+            type: type,
+            name: document.getElementById("MASS_name").value,
+            head: document.getElementById("MASS_head").value,
+            tel: document.getElementById("MASS_tel").value
+        };
+        postMessage(content, "IndexServer.php", function ( ) {
+            alert('注册成功！');
+        });
+    };
+</script>
 
 </body>
 </html>
