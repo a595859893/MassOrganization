@@ -438,7 +438,7 @@
 
                 <label><b>活动时间</b></label>
                 <!--<input class="laydate-icon" type="text" onClick="laydate({elem: '#ACT_time'});" id="ACT_time" required>-->
-                <input class="weui-input" type="date" value="" id="ACT_time" required/>
+                <input class="weui-input" type="date" value="2017-09-01" id="ACT_time" required/>
 
                 <label><b>活动简介</b></label>
                 <input type="text" id="ACT_intro" id="ACT_intro" required>
@@ -500,11 +500,11 @@
                 <input type="text" id="NEW_object" required>
 
                 <label><b>报名开始时间</b></label>
-                <input class="weui-input" type="date" value="" id="NEW_start" required/>
+                <input class="weui-input" type="date" value="2017-09-01" id="NEW_start" required/>
                 <!--<input class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_start'});" id="NEW_start" required>-->
 
                 <label><b>报名截止时间</b></label>
-                <input class="weui-input" type="date" value="" id="NEW_end" required/>
+                <input class="weui-input" type="date" value="2017-09-03" id="NEW_end" required/>
                 <!--<input class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_end'});" id="NEW_end" required>-->
 
                 <label><b>推送链接</b></label>
@@ -560,8 +560,7 @@
                                 style="width: 60%">点击上传图片
                         </button>
                         <img id="MASS_logo" style="width:150px;height:150px">
-                        <input class="weui-input" type="file" style="display:none" accept="image/*"
-                               id="MASS_logoInput"/>
+                        <input class="weui-input" type="file" style="display:none" accept="image/*"  id="MASS_logoInput"/>
                     </div>
                 </div>
 
@@ -664,7 +663,7 @@
         <p class="weui-tabbar__label">我</p>
     </a>
 </div>
-<script type="text/javascript" src="date-picker-js/laydate.js"></script>
+
 
 <script src="CommonJS.js"></script>
 <script>
@@ -839,7 +838,7 @@
             document.getElementById('dairy').style.display = 'none';
             document.getElementById('main_1').style.display = 'block'
         });
-    }
+    };
     document.getElementById("customerForm").onsubmit = function (event) {
         event = event || window.event;
         event.target.disabled = true;
@@ -1184,19 +1183,19 @@
 
         if (type == act) {
             div_1.innerHTML = "<i class='fa fa-language' style='font-size:20px;color: #136832'></i>";
-            p.innerText = '&nbsp;' + title + '报名成功';
+            p.innerHTML = '&nbsp;' + title + '报名成功';
             a.onclick = function () {
                 document.getElementById("date_" + index).style.display = 'block';
             }
         }
         if (type == mass) {
             div_1.innerHTML = "<i class='fa fa-joomla' style='font-size:20px;color: #136832'></i>";
-            p.innerText = '&nbsp;' + title + '有新动态啦';
+            p.innerHTML = '&nbsp;' + title + '有新动态啦';
             a.href = content;
         }
         if (type == work) {
             div_1.innerHTML = "<i class='fa fa-clipboard' style='font-size:20px;color: #136832'></i>";
-            p.innerText = '&nbsp;' + title + '有新动态啦';
+            p.innerHTML = '&nbsp;' + title + '有新动态啦';
             a.onclick = function () {
                 document.getElementById("work_" + index).style.display = 'block';
             }
@@ -1306,34 +1305,28 @@
     function submit(condition) {
         document.getElementById('add').style.display = 'none';
         var time_1 = document.getElementById('start').value;
-<<<<<<< HEAD
-        var time = document.getElementById('start').value;
         var time_2 = document.getElementById('end').value;
-        var time_3 = document.getElementById('end');
+//        var time_3 = document.getElementById('end');
         if (time_1 < time_2) {
             if (condition) {
                 var thing = document.getElementById('thing').value;
-                console.log(time_1);
-                console.log(time_3);
-                console.log(time);
-=======
-        var time_2 = document.getElementById('end').value;
-        if (condition) {
-            if (time_1 < time_2) {
-                var thing = document.getElementById('thing').value;
->>>>>>> 8eb0974422be063cf4d9977f9b2abcac5e94d972
-                postMessage({
-                    serverType: "addDate",
-                    actName: thing,
-                    actStart: time_1,
-                    actEnd: time_2
-                }, "schedule.php", function () {
-                    alert('添加成功！');
-                });
-            } else
-                alert('请正确输入时间');
+                if (condition){
+                    if (time_1 < time_2) {
+                        postMessage({
+                            serverType: "addDate",
+                            actName: thing,
+                            actStart: time_1,
+                            actEnd: time_2
+                        }, "schedule.php", function () {
+                            alert('添加成功！');
+                        });
+                    } else
+                        alert('请正确输入时间');
+                }
+            }
         }
     }
+
 
     function dialog(index, content, title) {
         var div_3 = document.createElement("div");
