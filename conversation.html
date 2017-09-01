@@ -17,12 +17,25 @@
         #old_topic{
             position: relative;
         }
+        .topic a{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            color: #000;
+        }
         .fa-angle-left{
             position: absolute;
             left: 18px;
             top:30%;
             font-size:50px;
             color: rgba(0,0,0,0.1);
+            width: 20px;
+            height: 52px;
+            display: block;
+            /*background-color:rgba(0,0,0,0.1);*/
+            border-radius: 0 8px 8px 0;
         }
         .fa-angle-right{
             position: absolute;
@@ -30,9 +43,15 @@
             top:30%;
             font-size:50px;
             color: rgba(0,0,0,0.1);
+            width: 20px;
+            height: 52px;
+            display: block;
+            /*background-color:rgba(0,0,0,0.1);*/
+            border-radius: 8px 0 0 8px;
         }
         .fa-angle-left:hover,.fa-angle-right:hover{
             color: rgba(0,0,0,0.7);
+            /*background-color:rgba(0,0,0,0.7);*/
         }
         .topic{
             line-height: 120px;
@@ -89,7 +108,7 @@
             <div class="topic_box">
                 <a href="" id="hotTopicLink">
                 <span class="topic" id="hotTopic">
-                    中山大学
+                    <!--中山大学-->
                 </span>
                 </a>
             </div>
@@ -102,13 +121,18 @@
                 <div class="weui-cell__ft"> 所有 <i class="fa fa-newspaper-o" style="color: black;font-size: 17px;" onclick=" "></i></div>
             </div>
             <div id="old_topic">
-                <span class="fa fa-angle-left"></span>
-                <span class="fa fa-angle-right"></span>
-                <div class="topic_box">
-                <span class="topic" >
-                    <a href="" >说点什么</a>
-                </span>
-                </div>
+                <span class="fa fa-angle-left" onclick="plusSlides(-1)"></span>
+                <span class="fa fa-angle-right" onclick="plusSlides(1)"></span>
+                <!--<div class="topic_box">-->
+                <!--&lt;!&ndash;<span class="topic" >&ndash;&gt;-->
+                    <!--&lt;!&ndash;<a href="" >说点什么1</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                <!--</div>-->
+                <!--<div class="topic_box">-->
+                <!--<span class="topic" >-->
+                    <!--<a href="" >说点什么2</a>-->
+                <!--</span>-->
+                <!--</div>-->
                 <!--js添加-->
             </div>
 
@@ -180,9 +204,6 @@
 </div>
 
 
-
-<!--<script src="iconfont3.js"></script>-->
-
 <script src="CommonJS.js"></script>
 <script>
 
@@ -228,7 +249,7 @@
 
     //往期话题
     var slideIndex = 1;
-    showSlides(slideIndex);
+
 
     function plusSlides(n){
         showSlides(slideIndex += n);
@@ -342,6 +363,7 @@
                     div.appendChild(span);
                     old_topic.appendChild(div);
                 }
+                showSlides(slideIndex);
             }
         });
     }
@@ -493,7 +515,7 @@
 
     init();
 
-
+//    showSlides();
 
 </script>
 

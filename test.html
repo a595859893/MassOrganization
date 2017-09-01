@@ -3,8 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <style type="text/css">
+        .topic_box{
+            border:1px solid #e5e5e5;
+            height: 120px;
+            width: 90%;
+            margin:0 auto;
+            text-align: center;
+        }
+        #old_topic{
+            position: relative;
+        }
+        .fa-angle-left{
+            position: absolute;
+            left: 18px;
+            top:30%;
+            font-size:50px;
+            color: rgba(0,0,0,0.1);
+        }
+        .fa-angle-right{
+            position: absolute;
+            right: 18px;
+            top:30%;
+            font-size:50px;
+            color: rgba(0,0,0,0.1);
+        }
+        .fa-angle-left:hover,.fa-angle-right:hover{
+            color: rgba(0,0,0,0.7);
+        }
+        .topic{
+            line-height: 120px;
+        }
+        .icon {
+            width: 50px;
+            height: 50px;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+        input::-webkit-input-placeholder {
+            /* WebKit browsers */
+            color: #e4ebe0;
+        }
+        .weui-panel__bd{
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .weui-cell:before{
+            border-top:0 ;
+        }
+        .add_topic .weui-cell:before{
+            border-top: 1px solid #e5e5e5;
+        }
+        .weui-media-box__desc{
+            display: block;
+            color: #353535;
+        }
+        #conversation .weui-cell{
+            padding:1px 15px;
+        }
+    </style>
 </head>
 <body>
+
+
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <p>#讨论区#</p>
+        </div>
+        <div class="weui-cell__ft"> <i class="fa fa-map-signs" style="color: black;font-size: 17px;"></i></div>
+    </div>
+    <div class="topic_box">
+        <a href="" id="hotTopicLink">
+                <span class="topic" id="hotTopic">
+                    中山大学
+                </span>
+        </a>
+    </div>
 
 </body>
 </html>
