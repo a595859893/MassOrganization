@@ -20,24 +20,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $rst = $mysqli->query($order);
 
-            if ($rst) {
-                $line["success"] = true;
-            } else {
-                $line["success"] = false;
-                $line["error"] = "话题发起错误，错误提示:(" . $mysqli->error . ")";
-            }
+            if (!$rst) $line["error"] = setError(0, "话题发起时，数据库错误，提示：" . $mysqli->error);
         } else {
             $order = "INSERT INTO conversationReview (word,content,targetUID,time) ";
             $order .= "VALUES('$character','$content',$uid,FROM_UNIXTIME($time))";
 
             $rst = $mysqli->query($order);
 
-            if ($rst) {
-                $line["success"] = true;
-            } else {
-                $line["success"] = false;
-                $line["error"] = "评论发起错误，错误提示:(" . $mysqli->error . ")";
-            }
+            if (!$rst) $line["error"] = setError(0, "评论发起时，数据库错误，提示：" . $mysqli->error);
         }
     } else if ($serverType == "Get") {
         $num = $_POST["num"];
@@ -65,10 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $looptag++;
             }
             $line["debunk"]["length"] = $looptag;
-        } else {
-            $line["error"] = "匿槽获取错误，错误提示: " . $mysqli->error;
-            $line["success"] = false;
-        }
+        } else  $line["error"] = setError(0, "匿槽获取时，数据库错误，提示：" . $mysqli->error);
 
         $type = 'conversation';
 
@@ -81,11 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $looptag++;
             }
             $line["conversation"]["length"] = $looptag;
-        } else {
-            $line["error"] = "话题获取错误，错误提示: " . $mysqli->error;
-            $line["success"] = false;
-        }
-
+        } else $line["error"] = setError(0, "话题获取时，数据库错误，提示：" . $mysqli->error);
 
         $rst = $mysqli->query("SELECT * FROM conversationHot ORDER BY time DESC");
         if ($rst) {
@@ -98,64 +81,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $line["hotTopic"][] = $row2;
                         $looptag++;
                     }
-                } else {
-                    $line["error"] = "热门话题信息获取错误，错误提示: " . $mysqli->error;
-                    $line["success"] = false;
-                }
+                } else $line["error"] = setError(0, "热门话题评论获取时，数据库错误，提示：" . $mysqli->error);
             }
             $line["hotTopic"]["length"] = $looptag;
-        } else {
-            $line["error"] = "热门话题获取错误，错误提示: " . $mysqli->error;
-            $line["success"] = false;
-        }
+        } else $line["error"] = setError(0, "热门话题获取时，数据库错误，提示：" . $mysqli->error);
 
     } else if ($serverType == "Good") {
         $topicID = $_POST["topicID"];
 
         $openID = getOpenID();
         $exist = false;
-        $rst = $mysqli->query("SELECT * from conversationGood WHERE openID='$openID' AND topicID=$topicID");
-        while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
-            $exist = true;
-            $line["error"] = "点赞错误，错误提示: 已经点赞过了";
-            $line["success"] = false;
-            break;
-        }
+        $rst = $mysqli->query("SELECT * from conversationGood WHERE openID='$openID' AND topicID=$topicID LIMIT 1");
 
-        if (!$exist) {
-            $rst = $mysqli->query("INSERT INTO conversationGood (openID,topicID) VALUES('$openID',$topicID)");
-            if ($rst) {
-                $mysqli->query("UPDATE conversation SET good=good+1 WHERE UID=$topicID");
-                $line["success"] = true;
-            } else {
-                $line["error"] = "点赞获取错误，错误提示: " . $mysqli->error;
-                $line["success"] = false;
-            }
+        if ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+            $rst2 = $mysqli->query("DELETE FROM conversationGood WHERE openID='$openID' AND topicID=$topicID");
+            $mysqli->query("UPDATE conversation SET good=good-1 WHERE UID=$topicID");
+            $line["good"] = false;
+            if (!$rst2) $line["error"] = setError(0, "点赞删除时，数据库错误，提示：" . $mysqli->error);
+        } else {
+            $rst2 = $mysqli->query("INSERT INTO conversationGood (openID,topicID) VALUES('$openID',$topicID)");
+            $mysqli->query("UPDATE conversation SET good=good+1 WHERE UID=$topicID");
+            $line["good"] = true;
+            if (!$rst2) $line["error"] = setError(0, "点赞时，数据库错误，提示：" . $mysqli->error);
         }
     } else if ($serverType == "getHotReview") {
         $uid = $_POST["UID"];
         $line["review"] = array();
         $line["success"] = true;
 
-        $rst = $mysqli->query("SELECT * FROM conversation WHERE UID=$uid");
+        $rst = $mysqli->query("SELECT * FROM conversation WHERE UID=$uid LIMIT 1");
         if ($rst) {
-            while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+            if ($row = $rst->fetch_array(MYSQLI_ASSOC))
                 $line["state"] = $row;
-            }
-        } else {
-            $line["success"] = false;
-            $line["error"] = "热门话题获取错误，错误提示:(" . $mysqli->error . ")";
-        }
+        } else  $line["error"] = setError(0, "热门话题获取阶段1时，数据库错误，提示：" . $mysqli->error);
 
-        $rst = $mysqli->query("SELECT * FROM conversationHot WHERE conID=$uid");
+        $rst = $mysqli->query("SELECT * FROM conversationHot WHERE conID=$uid  LIMIT 1");
         if ($rst) {
-            while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+            if ($row = $rst->fetch_array(MYSQLI_ASSOC))
                 $line["hot"] = $row;
-            }
-        } else {
-            $line["success"] = false;
-            $line["error"] = "热门话题获取错误，错误提示:(" . $mysqli->error . ")";
-        }
+        } else  $line["error"] = setError(0, "热门话题获取阶段2时，数据库错误，提示：" . $mysqli->error);
 
         $type = 'hot';
         $rst = $mysqli->query("SELECT * FROM conversation WHERE type='hot' AND targetUID=$uid ORDER BY time DESC");
@@ -176,10 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $looptag++;
             }
             $line["hotCon"]["length"] = $looptag;
-        } else {
-            $line["error"] = "匿槽获取错误，错误提示: " . $mysqli->error;
-            $line["success"] = false;
-        }
+        } else $line["error"] = setError(0, "匿槽获取阶段2时，数据库错误，提示：" . $mysqli->error);
 
     }
 

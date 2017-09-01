@@ -7,14 +7,15 @@
     <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
     <style type="text/css">
-        .topic_box{
-            border:1px solid #e5e5e5;
+        .topic_box {
+            border: 1px solid #e5e5e5;
             height: 120px;
             width: 90%;
-            margin:0 auto;
+            margin: 0 auto;
             text-align: center;
         }
-        #old_topic{
+
+        #old_topic {
             position: relative;
         }
         .topic a{
@@ -30,14 +31,25 @@
             left: 18px;
             top:30%;
             font-size:50px;
+            font-weight: bolder;
             color: rgba(0,0,0,0.1);
-            width: 20px;
-            height: 52px;
-            display: block;
+            /*width: 20px;*/
+            /*height: 52px;*/
+            /*display: block;*/
             /*background-color:rgba(0,0,0,0.1);*/
-            border-radius: 0 8px 8px 0;
+            /*border-radius: 0 8px 8px 0;*/
         }
-        .fa-angle-right{
+
+        .fa-angle-left {
+            position: absolute;
+            left: 18px;
+            top: 30%;
+            font-size: 50px;
+            font-weight: bolder;
+            color: rgba(0, 0, 0, 0.1);
+        }
+
+        .fa-angle-right {
             position: absolute;
             right: 18px;
             top:30%;
@@ -49,13 +61,13 @@
             /*background-color:rgba(0,0,0,0.1);*/
             border-radius: 8px 0 0 8px;
         }
-        .fa-angle-left:hover,.fa-angle-right:hover{
-            color: rgba(0,0,0,0.7);
-            /*background-color:rgba(0,0,0,0.7);*/
+        .fa-angle-left:hover, .fa-angle-right:hover {
+            color: rgba(0, 0, 0, 0.7);
         }
-        .topic{
+        .topic {
             line-height: 120px;
         }
+
         .icon {
             width: 50px;
             height: 50px;
@@ -63,25 +75,31 @@
             fill: currentColor;
             overflow: hidden;
         }
+
         input::-webkit-input-placeholder {
-             /* WebKit browsers */
-                     color: #e4ebe0;
-             }
-        .weui-panel__bd{
-               border-bottom: 1px solid #e5e5e5;
-           }
-        .weui-cell:before{
-            border-top:0 ;
+            /* WebKit browsers */
+            color: #e4ebe0;
         }
-        .add_topic .weui-cell:before{
+
+        .weui-panel__bd {
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .weui-cell:before {
+            border-top: 0;
+        }
+
+        .add_topic .weui-cell:before {
             border-top: 1px solid #e5e5e5;
         }
-        .weui-media-box__desc{
+
+        .weui-media-box__desc {
             display: block;
             color: #353535;
         }
-        #conversation .weui-cell{
-            padding:1px 15px;
+
+        #conversation .weui-cell {
+            padding: 1px 15px;
         }
     </style>
 </head>
@@ -103,7 +121,9 @@
                 <div class="weui-cell__bd">
                     <p>#今日话题#</p>
                 </div>
-                <div class="weui-cell__ft"> 帮助 <i class="fa fa-map-signs" style="color: black;font-size: 17px;" onclick="alert('在#说说吧#中可创建新话题并为已有话题点灯，每日获得盏数最多的话题将开放讨论区 ,点击#今日话题#或#往期话题#即可进入讨论区 ^_^')"></i></div>
+                <div class="weui-cell__ft"> 帮助 <i class="fa fa-map-signs" style="color: black;font-size: 17px;"
+                                                  onclick="alert('在#说说吧#中可创建新话题并为已有话题点灯，每日获得盏数最多的话题将开放讨论区 ,点击#今日话题#或#往期话题#即可进入讨论区 ^_^')"></i>
+                </div>
             </div>
             <div class="topic_box">
                 <a href="" id="hotTopicLink">
@@ -118,7 +138,8 @@
                 <div class="weui-cell__bd">
                     <p>#往期话题#</p>
                 </div>
-                <div class="weui-cell__ft"> 所有 <i class="fa fa-newspaper-o" style="color: black;font-size: 17px;" onclick=" "></i></div>
+                <div class="weui-cell__ft"> 所有 <i class="fa fa-newspaper-o" style="color: black;font-size: 17px;"
+                                                  onclick=" "></i></div>
             </div>
             <div id="old_topic">
                 <span class="fa fa-angle-left" onclick="plusSlides(-1)"></span>
@@ -141,7 +162,8 @@
                 <div class="weui-cell__bd">
                     <p>#说说吧#</p>
                 </div>
-                <div class="weui-cell__ft"> 创建 <i class="fa fa-plus-square" style="color: black;font-size: 17px;"></i></div>
+                <div class="weui-cell__ft"> 创建 <i class="fa fa-plus-square" style="color: black;font-size: 17px;"></i>
+                </div>
             </div>
             <div class="weui-cell" id="my_topic" style="display: none">
                 <div class="weui-cell__bd" style="border: 1px solid #e5e5e5; ">
@@ -160,17 +182,20 @@
 
         <!--匿巢-->
         <div style="display:none" class="page" id="page2">
-            <div class="weui-cell"  onclick="add_2()">
+            <div class="weui-cell" onclick="add_2()">
                 <div class="weui-cell__bd">
                     <p>#匿名吐槽#</p>
                 </div>
-                <div class="weui-cell__ft"> 我也来玩 <span class="fa fa-edit" style="color: black;font-size: 17px;"></span></div>
+                <div class="weui-cell__ft"> 我也来玩 <span class="fa fa-edit" style="color: black;font-size: 17px;"></span>
+                </div>
             </div>
-            <div class="weui-panel weui-panel_access" id="create" style="margin-top: -3px;display: none" >
+            <div class="weui-panel weui-panel_access" id="create" style="margin-top: -3px;display: none">
                 <div class="weui-panel__bd">
-                    <div  class="weui-media-box weui-media-box_appmsg" style="position: relative">
+                    <div class="weui-media-box weui-media-box_appmsg" style="position: relative">
                         <div class="weui-media-box__hd" style="position: relative">
-                            <i class="fa fa-caret-square-o-left" style="position: absolute;top: 35%;left: -15px;font-size: 15px;color: #999;" onclick="plusIcons(-1)" ></i>
+                            <i class="fa fa-caret-square-o-left"
+                               style="position: absolute;top: 35%;left: -15px;font-size: 15px;color: #999;"
+                               onclick="plusIcons(-1)"></i>
                             <img class="icon" src="avatar/bull.svg">
                             <img class="icon" src="avatar/horse.svg">
                             <img class="icon" src="avatar/斑马.svg">
@@ -186,22 +211,31 @@
                             <img class="icon" src="avatar/牛.svg">
                             <img class="icon" src="avatar/亲亲.svg">
                             <img class="icon" src="avatar/思考.svg">
-                            <i class="fa fa-caret-square-o-right" style="position: absolute;top: 35%;right: -6px;font-size: 15px;color: #999;" onclick="plusIcons(1)"></i>
+                            <i class="fa fa-caret-square-o-right"
+                               style="position: absolute;top: 35%;right: -6px;font-size: 15px;color: #999;"
+                               onclick="plusIcons(1)"></i>
                         </div>
                         <div class="weui-media-box__bd">
-                            <textarea id="my_debunk" class="weui-textarea" placeholder="点击左右键可选择头像哦" rows="3"></textarea>
-                            <i class="fa fa-paper-plane-o" style="position: absolute;bottom: 5px; right:20px" id="sendDebunk"><span> 发送 </span></i>
+                            <textarea id="my_debunk" class="weui-textarea" placeholder="点击左右键可选择头像哦"
+                                      rows="3"></textarea>
+                            <i class="fa fa-paper-plane-o" style="position: absolute;bottom: 5px; right:20px"
+                               id="sendDebunk"><span> 发送 </span></i>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div id="conversation">
-            <!--js添加-->
+                <!--js添加-->
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+<!--<script src="iconfont3.js"></script>-->
 
 
 <script src="CommonJS.js"></script>
@@ -209,6 +243,7 @@
 
     <!--顶部选项卡-->
     document.getElementById("defaultOpen").click();
+
     function tabNav(evt, tabName) {
         var i, page, tab;
         page = document.getElementsByClassName("page");
@@ -223,7 +258,7 @@
         if (evt) evt.currentTarget.className += " weui-bar__item_on";
     }
 
-//切换头像
+    //切换头像
     var iconIndex = 1;
     showIcons(iconIndex);
 
@@ -239,19 +274,23 @@
         var i;
         var create = document.getElementById('create');
         var icons = create.getElementsByClassName("icon");
-        if (n > icons.length) {iconIndex = 1}
-        if (n < 1) {iconIndex = icons.length}
+        if (n > icons.length) {
+            iconIndex = 1
+        }
+        if (n < 1) {
+            iconIndex = icons.length
+        }
         for (i = 0; i < icons.length; i++) {
             icons[i].style.display = "none";
         }
-        icons[iconIndex-1].style.display = "block";
+        icons[iconIndex - 1].style.display = "block";
     }
 
     //往期话题
     var slideIndex = 1;
 
 
-    function plusSlides(n){
+    function plusSlides(n) {
         showSlides(slideIndex += n);
     }
 
@@ -263,84 +302,93 @@
         var i;
         var old_topic = document.getElementById('old_topic');
         var slides = old_topic.getElementsByClassName("topic_box");
-        if (n > slides.length) {slideIndex = 1}
-        if (n < 1) {slideIndex = slides.length}
+        if (n > slides.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = slides.length
+        }
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
         }
-        slides[slideIndex-1].style.display = "block";
+        slides[slideIndex - 1].style.display = "block";
     }
 
-    var my_topic=document.getElementById('my_topic');
-    function add_1(){
-        if(my_topic.style.display=='none') {
-            my_topic.style.display='block';
-        }else{
-            my_topic.style.display='none';
-        }
-    }
-    var create=document.getElementById('create');
-    function add_2(){
-        if(create.style.display=='none') {
-            create.style.display='block';
-        }else{
-            create.style.display='none';
+    var my_topic = document.getElementById('my_topic');
+
+    function add_1() {
+        if (my_topic.style.display == 'none') {
+            my_topic.style.display = 'block';
+        } else {
+            my_topic.style.display = 'none';
         }
     }
 
-    var add_topic=document.getElementById('add_topic');
-    var old_topic=document.getElementById('old_topic');
-    var conversation=document.getElementById('conversation');
-    var icons=create.getElementsByClassName('icon');
+    var create = document.getElementById('create');
+
+    function add_2() {
+        if (create.style.display == 'none') {
+            create.style.display = 'block';
+        } else {
+            create.style.display = 'none';
+        }
+    }
+
+    var add_topic = document.getElementById('add_topic');
+    var old_topic = document.getElementById('old_topic');
+    var conversation = document.getElementById('conversation');
+    var icons = create.getElementsByClassName('icon');
 
     document.getElementById('sendDebunk').onclick = function () {
         document.getElementById("sendDebunk").disabled = true;
         var debunk_value = document.getElementById("my_debunk").value;
-        if (debunk_value){
-        postMessage({
-            serverType: "Send",
-            type: "debunk",
-            character: icons[iconIndex-1].src,
-            content: debunk_value,
-            UID: -1
-        }, "conversation.php", function () {
-            alert('发送成功');
-            document.getElementById("sendDebunk").disabled = false;
-            document.getElementById("my_debunk").value = "";
-            create.style.display='none';
-            init();
-        });}else{
+        if (debunk_value) {
+            postMessage({
+                serverType: "Send",
+                type: "debunk",
+                character: icons[iconIndex - 1].src,
+                content: debunk_value,
+                UID: -1
+            }, "conversation.php", function () {
+                alert('发送成功');
+                document.getElementById("sendDebunk").disabled = false;
+                document.getElementById("my_debunk").value = "";
+                create.style.display = 'none';
+                init();
+            });
+        } else {
             alert('请输入内容');
         }
     };
 
     document.getElementById('send_topic').onclick = function () {
         document.getElementById("send_topic").disabled = true;
-        var topic_value=document.getElementById("topic_value").value;
-        if(topic_value){
-        postMessage({
-            serverType: "Send",
-            type: "conversation",
-            character: "",
-            content:topic_value,
-            UID: -1
-        }, "conversation.php", function () {
-            init();
-            document.getElementById("send_topic").disabled = false;
-            document.getElementById("topic_value").value = "";
-            alert("发送成功");
-            my_topic.style.display='none';
-        });}else{
+        var topic_value = document.getElementById("topic_value").value;
+        if (topic_value) {
+            postMessage({
+                serverType: "Send",
+                type: "conversation",
+                character: "",
+                content: topic_value,
+                UID: -1
+            }, "conversation.php", function () {
+                init();
+                document.getElementById("send_topic").disabled = false;
+                document.getElementById("topic_value").value = "";
+                alert("发送成功");
+                my_topic.style.display = 'none';
+            });
+        } else {
             alert('请输入内容');
         }
     };
 
     function init() {
-        postMessage({serverType: "Get", num: 20}, "conversation.php", function (json){
-            conversation.innerHTML='';
-            add_topic.innerHTML='';
-            for(var i = 0; i < json.debunk.length; i++) {
-                conversation.appendChild(appendConversation(json.debunk[i].UID,json.debunk[i].word, json.debunk[i].content, json.debunk[i].good, json.debunk[i].review))
+        postMessage({serverType: "Get", num: 20}, "conversation.php", function (json) {
+            conversation.innerHTML = '';
+            add_topic.innerHTML = '';
+            for (var i = 0; i < json.debunk.length; i++) {
+                conversation.appendChild(appendConversation(json.debunk[i].UID, json.debunk[i].word, json.debunk[i].content, json.debunk[i].good, json.debunk[i].review))
             }
 //            console.log(json.debunk[0]);
             for (var i = 0; i < json.conversation.length; i++) {
@@ -349,14 +397,14 @@
 //            console.log(json.conversation[0]);
             if (json.hotTopic.length > 0) {
                 document.getElementById("hotTopic").innerText = json.hotTopic[0].content;
-                document.getElementById("hotTopicLink").href = "conversationHot.html?id="+json.hotTopic[0].UID;
+                document.getElementById("hotTopicLink").href = "conversationHot.html?id=" + json.hotTopic[0].UID;
                 for (var i = 1; i < json.hotTopic.length; i++) {
                     var a = document.createElement("a");
                     var span = document.createElement("span");
-                    var div= document.createElement("div");
+                    var div = document.createElement("div");
                     span.className = "topic";
-                    div.className='topic_box';
-                    a.href = "conversationHot.html?id="+json.hotTopic[i].UID;
+                    div.className = 'topic_box';
+                    a.href = "conversationHot.html?id=" + json.hotTopic[i].UID;
                     a.innerText = json.hotTopic[i].content;
                     div.id = "topic_" + json.hotTopic[i].conID;
                     span.appendChild(a);
@@ -377,15 +425,15 @@
         var span_1 = document.createElement("span");
         var span_2 = document.createElement("span");
 
-        div.className='weui-cell';
-        div_1.className='weui-cell__hd';
-        div_2.className='weui-cell__bd';
-        div_3.className='weui-cell__ft';
-        span_1.className='fa fa-lightbulb-o';
-        span_1.style.color='#5E6F66';
-        div_1.innerHTML='<i class="fa fa-weixin" style="width:20px;margin-right:5px;display:block;color:#5E6F66"></i>';
-        div_2.innerHTML="<p>"+ topic +"</p>";
-        span_2.innerText=good ;
+        div.className = 'weui-cell';
+        div_1.className = 'weui-cell__hd';
+        div_2.className = 'weui-cell__bd';
+        div_3.className = 'weui-cell__ft';
+        span_1.className = 'fa fa-lightbulb-o';
+        span_1.style.color = '#5E6F66';
+        div_1.innerHTML = '<i class="fa fa-weixin" style="width:20px;margin-right:5px;display:block;color:#5E6F66"></i>';
+        div_2.innerHTML = "<p>" + topic + "</p>";
+        span_2.innerText = good;
 
         span_1.onclick = function () {
             postMessage({serverType: "Good", topicID: uid}, "conversation.php", function () {
@@ -403,8 +451,7 @@
         return div;
     }
 
-    function appendConversation(uid,avatar, content, good, review){
-
+    function appendConversation(uid, avatar, content, good, review) {
         var div_1 = document.createElement("div");
         var div_1_1 = document.createElement("div");
         var div_1_2 = document.createElement("div");
@@ -419,58 +466,58 @@
         var icon = document.createElement("span");
         var input = document.createElement("input");
 
-        div.className='weui-panel weui-panel_access';
-        div_1.className='weui-media-box weui-media-box_appmsg';
-        div_1.style='position: relative';
-        div_1_1.className='weui-media-box__hd';
-        div_1_2.className='weui-media-box__bd';
-        p.className='weui-media-box__desc';
-        span_1.className='fa fa-twitch';
-        span_2.className='fa fa-thumbs-o-up';
-        div_2.className='weui-panel__ft';
-        div_2_1.className='weui-cell weui-cell_access weui-cell_link';
-        div_2_1_1.className='weui-cell__bd';
-        icon.className='fa fa-send-o';
-        input.className='weui-input';
-        img.className='icon';
-        img.src=avatar;
+        div.className = 'weui-panel weui-panel_access';
+        div_1.className = 'weui-media-box weui-media-box_appmsg';
+        div_1.style = 'position: relative';
+        div_1_1.className = 'weui-media-box__hd';
+        div_1_2.className = 'weui-media-box__bd';
+        p.className = 'weui-media-box__desc';
+        span_1.className = 'fa fa-twitch';
+        span_2.className = 'fa fa-thumbs-o-up';
+        div_2.className = 'weui-panel__ft';
+        div_2_1.className = 'weui-cell weui-cell_access weui-cell_link';
+        div_2_1_1.className = 'weui-cell__bd';
+        icon.className = 'fa fa-send-o';
+        input.className = 'weui-input';
+        img.className = 'icon';
+        img.src = avatar;
 
         div_1_1.appendChild(img);
-        span_1.style='position: absolute;bottom: 5px; right:45px';
-        span_2.style='position: absolute;bottom: 5px;right:5px';
-        icon.style='float: right;color: #000';
-        input.type='text';
-        input.placeholder='评论……';
-        div_2.style.display='none';
+        span_1.style = 'position: absolute;bottom: 5px; right:45px';
+        span_2.style = 'position: absolute;bottom: 5px;right:5px';
+        icon.style = 'float: right;color: #000';
+        input.type = 'text';
+        input.placeholder = '评论……';
+        div_2.style.display = 'none';
         p.innerText = content;
-        span_2.innerText ="    "  + good;
-        span_1.innerText ="    "  + review.length;
+        span_2.innerText = "    " + good;
+        span_1.innerText = "    " + review.length;
 
-        div_2_1_1.innerHTML='<i class="fa fa-twitch" ></i> '+"我的评论:  ";
+        div_2_1_1.innerHTML = '<i class="fa fa-twitch" ></i> ' + "我的评论:  ";
         div_2_1_1.appendChild(input);
         div_2_1_1.appendChild(icon);
         div_2_1.appendChild(div_2_1_1);
         div_2.appendChild(div_2_1);
 
-        for (var i = 0; i < review.length; i++){
-            div_2.appendChild(appendReview(i+1 , review[i].content));
+        for (var i = 0; i < review.length; i++) {
+            div_2.appendChild(appendReview(i + 1, review[i].content));
         }
 
         icon.onclick = function () {
-            icon.disabled=true;
-            if(input.value){
-            postMessage({
-                        serverType: "Send",
-                        content: input.value,
-                        UID: uid
-                    }, "conversation.php", function () {
-                    var num=review.length+1;
-                    div_2.appendChild(appendReview(num,input.value));
-                    icon.disabled=false;
-                    input.value='';
-                    input.placeholder='评论……';
-                  })
-            }else{
+            icon.disabled = true;
+            if (input.value) {
+                postMessage({
+                    serverType: "Send",
+                    content: input.value,
+                    UID: uid
+                }, "conversation.php", function () {
+                    var num = review.length + 1;
+                    div_2.appendChild(appendReview(num, input.value));
+                    icon.disabled = false;
+                    input.value = '';
+                    input.placeholder = '评论……';
+                })
+            } else {
                 alert('不能输入空消息');
             }
         };
@@ -483,39 +530,38 @@
 
         div_1.onclick = function (e) {
             if (e.target == span_2) {
-                postMessage({serverType: "Good", topicID: uid}, "conversation.php", function () {
-                    span_2.style.color= 'red' ;
-                    span_2.innerText = (parseInt(span_2.innerText.replace(" ", "")) + 1) + "    ";
+                postMessage({serverType: "Good", topicID: uid}, "conversation.php", function (json) {
+                    var num = parseInt(span_2.innerText.replace(" ", "")) + 1;
+                    span_2.style.color = json.good ? 'red' : '';
+                    span_2.innerText = (json.good ? (num + 1) : (num - 1)) + "    ";
                 });
                 return;
             }
-                if (div_2.style.display == "block") {
-                    div_2.style.display = "none";
-                } else {
-                    div_2.style.display = "block";
-                }
-            };
+
+            if (div_2.style.display = "block") {
+                div_2.style.display = "none";
+            } else {
+                div_2.style.display = "block";
+            }
+        };
 
         div.appendChild(div_1);
         div.appendChild(div_2);
         return div;
     }
 
-    function appendReview(index,content){
+    function appendReview(index, content) {
         var div = document.createElement("div");
         var div_1 = document.createElement("div");
 
-        div.className='weui-cell weui-cell_access weui-cell_link';
-        div_1.className='weui-cell__bd';
-
-        div_1.innerHTML='<i class="fa fa-twitch"></i> ' + index + " : "+ content;
+        div.className = 'weui-cell weui-cell_access weui-cell_link';
+        div_1.className = 'weui-cell__bd';
+        div_1.innerHTML = '<i class="fa fa-twitch"></i> ' + index + " : " + content;
         div.appendChild(div_1);
         return div;
     }
 
     init();
-
-//    showSlides();
 
 </script>
 

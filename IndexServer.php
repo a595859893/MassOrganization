@@ -6,6 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $mysqli = linkToSQL();
     $openID = getOpenID();
+    $UID = $_SESSION["uid"];
     $line = array();
     $time = time();
     if ($openID) {
@@ -20,7 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $campus = $_POST["campus"];
             $logo = $_POST["logo"];
             $url = $_POST["url"];
-            $UID = $_POST["UID"];
 
             $order = "INSERT INTO activity (name,location,holdtime,time,organizer,introduction,type,campus,logo,url,json,organizerUID) ";
             $order .= "VALUES('$name','$location','$holdtime',FROM_UNIXTIME($time),'$organizer','$intro','$type','$campus','$logo','$url','$json',$UID)";
@@ -42,7 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $end = $_POST["end"];
             $intro = $_POST["introduction"];
             $link = $_POST["link"];
-            $UID = $_SESSION["uid"];
 
             $order = "INSERT INTO recruitment (type,title,object,end,intro,link,time,massUID) ";
             $order .= "VALUES('$type','$title','$object','$end','$intro','$link',FROM_UNIXTIME($time),$UID)";
@@ -57,7 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $logo = $_POST["logo"];
             $desc = $_POST["desc"];
             $QRcode = $_POST["QRcode"];
-            $UID = $_SESSION["uid"];
 
             $order = "UPDATE mass SET name='$name',member='$head',logo='$logo',intro='$desc',type='$type',QRcode='$QRcode' WHERE UID=$UID";
 
@@ -69,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $logo = $_POST["logo"];
             $img = $_POST["img"];
             $url = $_POST["url"];
-            $UID = $_SESSION["uid"];
+
             $order = "INSERT INTO massDiary (title,content,time,logo,img,url,massUID) ";
             $order .= "VALUES('$title','$content',FROM_UNIXTIME($time),'$logo','$img','$url',$UID)";
             $line = array();
@@ -111,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else $line["error"] = setError(0, "报名获取时，数据库错误，提示：" . $mysqli->error);
 
         } elseif ("getActList" == $serverType) {
-            $UID = $_SESSION["uid"];
+
             $rst = $mysqli->query("SELECT UID,name FROM activity WHERE organizerUID=$UID");
             if ($rst) {
                 $line["activity"] = array();
