@@ -235,9 +235,9 @@
                     <label style="float: left" for="thing" >事件：</label>
                     <input type="text" id="thing">
                     <label style="float: left" for="start">开始时间：</label>
-                    <input type="datetime-local" value="" placeholder="" id="start">
+                    <input type="datetime-local" value="2017-09-01T15:25:33"  placeholder="" id="start">
                     <label style="float: left " for="end">结束时间：</label>
-                    <input type="datetime-local" value="" placeholder="" id="end">
+                    <input type="datetime-local" value="2017-09-03T15:25:33" placeholder="" id="end">
                 </div>
                 <div class="weui-dialog__ft">
                     <a class="weui-dialog__btn weui-dialog__btn_default" onclick="submit(0)">取消</a>
@@ -1303,13 +1303,15 @@
 
     function submit(condition) {
         document.getElementById('add').style.display = 'none';
-        var time_1 = document.getElementById('start').innerText;
+        var time_1 = document.getElementById('start').value;
         var time = document.getElementById('start').value;
-        var time_2 = document.getElementById('end').innerText;
+        var time_2 = document.getElementById('end').value;
+        var time_3 = document.getElementById('end');
         if (time_1 < time_2) {
             if (condition) {
                 var thing = document.getElementById('thing').value;
                 console.log(time_1);
+                console.log(time_3);
                 console.log(time);
                 postMessage({
                     serverType: "addDate",
