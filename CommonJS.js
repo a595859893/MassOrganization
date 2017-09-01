@@ -38,10 +38,18 @@ function getCookies(par) {
     var value = cookie.split("; ");
     for (var i = 0; i < value.length; i++) {
         var arr = value[i].split("=");
-        if ("par" == arr[0])
+        if (par == arr[0])
             return arr[1];
     }
     return false;
+}
+
+function delCookie(par) {
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = getCookies(par);
+    if (cval != null)
+        document.cookie = par + "=" + cval + ";expires=" + exp.toGMTString();
 }
 
 function postMessage(content, php, func, failFunc) {
