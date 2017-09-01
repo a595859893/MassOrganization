@@ -232,16 +232,12 @@
             <div class="weui-dialog">
                 <div class="weui-dialog__hd"><strong class="weui-dialog__title">添加日程</strong></div>
                 <div class="weui-dialog__bd">
-                    <span style="display: block">事件：</span>
+                    <label style="float: left" for="thing" >事件：</label>
                     <input type="text" id="thing">
-                    <ul class="inline">
-                        开始时间：
-                        <li class="inline laydate-icon" id="start"
-                            onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})"></li>
-                        结束时间：
-                        <li class="inline laydate-icon" id="end"
-                            onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})"></li>
-                    </ul>
+                    <label style="float: left" for="start">开始时间：</label>
+                    <input type="datetime-local" value="" placeholder="" id="start">
+                    <label style="float: left " for="end">结束时间：</label>
+                    <input type="datetime-local" value="" placeholder="" id="end">
                 </div>
                 <div class="weui-dialog__ft">
                     <a class="weui-dialog__btn weui-dialog__btn_default" onclick="submit(0)">取消</a>
@@ -265,6 +261,7 @@
 
                 <button type="button" id="login">登陆</button>
                 <input type="checkbox" checked id="remember"> 记住我
+                <span style="float: right"><a href="resign.html">去注册</a></span>
             </div>
 
             <div class="container" style="background-color:#f1f1f1">
@@ -440,7 +437,8 @@
                 <input type="text" placeholder="中珠-风雨球场" id="ACT_location" required>
 
                 <label><b>活动时间</b></label>
-                <input class="laydate-icon" type="text" onClick="laydate({elem: '#ACT_time'});" id="ACT_time" required>
+                <!--<input class="laydate-icon" type="text" onClick="laydate({elem: '#ACT_time'});" id="ACT_time" required>-->
+                <input class="weui-input" type="date" value="" id="ACT_time" required />
 
                 <label><b>活动简介</b></label>
                 <input type="text" id="ACT_intro" id="ACT_intro" required>
@@ -502,11 +500,12 @@
                 <input type="text" id="NEW_object" required>
 
                 <label><b>报名开始时间</b></label>
-                <input class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_start'});" id="NEW_start"
-                       required>
+                <input class="weui-input" type="date" value="" id="NEW_start" required />
+                <!--<input class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_start'});" id="NEW_start" required>-->
 
                 <label><b>报名截止时间</b></label>
-                <input class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_end'});" id="NEW_end" required>
+                <input class="weui-input" type="date" value="" id="NEW_end" required />
+                <!--<input class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_end'});" id="NEW_end" required>-->
 
                 <label><b>推送链接</b></label>
                 <input type="url" placeholder="复制推送链接至此处" id="NEW_link" required>
@@ -1253,7 +1252,7 @@
         table.cellSpacing = "0";
         table.cellPadding = "10";
 
-        tr_head.bgColor = "#ddd";
+        tr_head.bgColor = "#fff";
         for (var i = 0; i < week.length; i++) {
             var th = document.createElement("th");
             th.align = "center";
@@ -1280,7 +1279,7 @@
                     td.bgColor = '#CBCBCB';
                     nowTD = td;
                 } else {
-                    td.bgColor = '#eee';
+                    td.bgColor = '#fff';
                 }
                 tr.appendChild(td);
             }
@@ -1296,7 +1295,7 @@
                 if (date.getTime() - Date.parse(json[i].start) >= 0 && date.getTime() - Date.parse(json[i].end) <= 0)
                     ul.appendChild(createCalPiece(json[i].start, json[i].end, json[i].name));
             }
-        }
+        };
 
         nowTD.click();
 
@@ -1447,7 +1446,7 @@
     function openNav() {
         document.getElementById("mySidenav").style.width = "100%";
         document.getElementById("main").style.marginLeft = "0%";
-//      document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+
     }
 
     function closeNav() {
@@ -1456,41 +1455,7 @@
         document.body.style.backgroundColor = "white";
     }
 </script>
-<script type="text/javascript">
-    !function () {
-        laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
-        laydate({elem: '#demo'});//绑定元素
-    }();
 
-    //日期范围限制
-    var start = {
-        elem: '#start',
-        format: 'YYYY-MM-DD',
-        min: laydate.now(), //设定最小日期为当前日期
-        max: '2099-06-16', //最大日期
-        istime: true,
-        istoday: false,
-        choose: function (datas) {
-            end.min = datas; //开始日选好后，重置结束日的最小日期
-            end.start = datas;  //将结束日的初始值设定为开始日
-        }
-    };
-
-    var end = {
-        elem: '#end',
-        format: 'YYYY-MM-DD',
-        min: laydate.now(),
-        max: '2099-06-16',
-        istime: true,
-        istoday: false,
-        choose: function (datas) {
-            start.max = datas; //结束日选好后，充值开始日的最大日期
-        }
-    };
-    laydate(start);
-    laydate(end);
-
-</script>
 
 </body>
 </html>
