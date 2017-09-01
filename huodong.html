@@ -168,10 +168,10 @@
 
 <script src="CommonJS.js"></script>
 <script>
-
     var panel = document.getElementById('panel');
     var actOrder = defaultActOther();
     var postIndex = -1;
+    var startUID = -1;
 
     getActivity(actOrder);
     setOptionColor(actOrder);
@@ -240,15 +240,17 @@
         });
     };
 
-
     function getActivity(type) {
         document.getElementById("actlist").innerHTML = "";
         type.serverType = "GetList";
+        type.startUID = startUID;
+        type.num = 20;
         postMessage(type, "activity.php", function (json) {
             var card = document.getElementById("actlist");
             for (var i = 0; i < json.length; i++) {
                 card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location,
                     json[i].holdtime, json[i].organizer, json[i].UID, json[i].json, json[i].logo, json[i].mark, json[i].url));
+                startUID = Math.min(startUID, json[i].UID);
             }
         });
     }

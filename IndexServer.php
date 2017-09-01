@@ -39,11 +39,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $title = $_POST["title"];
         $object = $_POST["object"];
         $end = $_POST["end"];
-        $intro = $_POST["introduction"];
+        $start = $_POST["start"];
+        $end = $_POST["end"];
         $link = $_POST["link"];
 
-        $order = "INSERT INTO recruitment (type,title,object,end,intro,link,time,massUID) ";
-        $order .= "VALUES('$type','$title','$object','$end','$intro','$link',FROM_UNIXTIME($time),$UID)";
+        $order = "INSERT INTO recruitment (type,title,object,start,end,link,time,massUID) ";
+        $order .= "VALUES('$type','$title','$object','$start','$end','$link',FROM_UNIXTIME($time),$UID)";
 
         $rst = $mysqli->query($order);
 

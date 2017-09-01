@@ -243,8 +243,8 @@
 
 <script src="CommonJS.js"></script>
 <script>
-
-    <!--顶部选项卡-->
+    var startUID_debunk = -1;
+    var startUID_conversation = -1;
     document.getElementById("defaultOpen").click();
 
     function tabNav(evt, tabName) {
@@ -291,7 +291,6 @@
 
     //往期话题
     var slideIndex = 1;
-
 
     function plusSlides(n) {
         showSlides(slideIndex += n);
@@ -387,31 +386,39 @@
     };
 
     function init() {
-        postMessage({serverType: "Get", num: 20}, "conversation.php", function (json) {
+        postMessage({serverType: "Get", type: "debunk", startUID: -1, num: 20}, "conversation.php", function (json) {
             conversation.innerHTML = '';
+            for (var i = 0; i < json.length; i++) {
+                conversation.appendChild(appendConversation(json[i].UID, json[i].word, json[i].content,
+                    json[i].good, json[i].review, json[i].igood));
+            }
+        });
+        postMessage({
+            serverType: "Get",
+            type: "conversation",
+            startUID: -1,
+            num: 20
+        }, "conversation.php", function (json) {
             add_topic.innerHTML = '';
-            for (var i = 0; i < json.debunk.length; i++) {
-                conversation.appendChild(appendConversation(json.debunk[i].UID, json.debunk[i].word, json.debunk[i].content,
-                    json.debunk[i].good, json.debunk[i].review, json.debunk[i].igood));
+            for (var i = 0; i < json.length; i++) {
+                add_topic.appendChild(appendTopic(json[i].content, json[i].good,
+                    json[i].UID, json[i].igood));
+                startUID_conversation = Math.max(startUID_conversation, json[i].UID);
             }
-//            console.log(json.debunk[0]);
-            for (var i = 0; i < json.conversation.length; i++) {
-                add_topic.appendChild(appendTopic(json.conversation[i].content, json.conversation[i].good,
-                    json.conversation[i].UID, json.conversation[i].igood));
-            }
-//            console.log(json.conversation[0]);
-            if (json.hotTopic.length > 0) {
-                document.getElementById("hotTopic").innerText = json.hotTopic[0].content;
-                document.getElementById("hotTopicLink").href = "conversationHot.html?id=" + json.hotTopic[0].UID;
-                for (var i = 1; i < json.hotTopic.length; i++) {
+        });
+        postMessage({serverType: "GetHotTopic"}, "conversation.php", function (json) {
+            if (json.length > 0) {
+                document.getElementById("hotTopic").innerText = json[0].content;
+                document.getElementById("hotTopicLink").href = "conversationHot.html?id=" + json[0].UID;
+                for (var i = 1; i < json.length; i++) {
                     var a = document.createElement("a");
                     var span = document.createElement("span");
                     var div = document.createElement("div");
                     span.className = "topic";
                     div.className = 'topic_box';
-                    a.href = "conversationHot.html?id=" + json.hotTopic[i].UID;
-                    a.innerText = json.hotTopic[i].content;
-                    div.id = "topic_" + json.hotTopic[i].conID;
+                    a.href = "conversationHot.html?id=" + json[i].UID;
+                    a.innerText = json[i].content;
+                    div.id = "topic_" + json[i].conID;
                     span.appendChild(a);
                     div.appendChild(span);
                     old_topic.appendChild(div);
@@ -420,7 +427,6 @@
             }
         });
     }
-
 
     function appendTopic(topic, good, uid, igood) {
         var div = document.createElement("div");
@@ -545,7 +551,7 @@
                 });
                 return;
             }
-            if (div_2.style.display == "block"){
+            if (div_2.style.display == "block") {
                 div_2.style.display = "none";
             } else {
                 div_2.style.display = "block";

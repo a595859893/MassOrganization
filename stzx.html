@@ -77,27 +77,28 @@
 
 <script src="CommonJS.js"></script>
 <script>
+    var startUID_zuzhi = -1;
+    var startUID_shetuan = -1;
     // 触发 id="defaultOpen" click 事件
     document.getElementById("defaultOpen").click();
-
 
     init();
 
     function init() {
-        var xmlhttp = GetXMLHTTPRequest();
-        var content = {serverType: "getList"};
-        xmlhttp.open("POST", "recruitment.php", true);
-        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
-        xmlhttp.send(toStr(content));
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var json = JSON.parse(xmlhttp.responseText);
-                if (json.success)
-                    dealContent(json);
-                else
-                    console.log(json.error);
+        var frame = document.getElementById("frame");
+        var frame2 = document.getElementById("frame2");
+        postMessage({serverType: "getList", type: "zuzhi"}, "recruitment.php", function (json) {
+            for (var i = 0; i < json.length; i++) {
+                frame2.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link));
+                startUID_zuzhi = Math.min(startUID_zuzhi, json[i].UID);
             }
-        };
+        });
+        postMessage({serverType: "getList", type: "shetuan"}, "recruitment.php", function (json) {
+            for (var i = 0; i < json.length; i++) {
+                frame.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link));
+                startUID_shetuan = Math.min(startUID_shetuan, json[i].UID);
+            }
+        });
     }
 
     <!--顶部选项卡-->
@@ -115,21 +116,7 @@
         evt.currentTarget.className += " weui-bar__item_on";
     }
 
-
-
-    function dealContent(json) {
-        var frame = document.getElementById("frame");
-        var frame2 = document.getElementById("frame2");
-        for (var i = 0; i < json.length; i++) {
-            if (json[i].type == "zuzhi")
-                frame2.appendChild(createActivity(json[i].title, json[i].time, json[i].host,json[i].link));
-            else
-                frame.appendChild(createActivity(json[i].title, json[i].time, json[i].host,json[i].link));
-            console.log(json[i]);
-        }
-    }
-
-    function createActivity(name, time, host,url) {
+    function createActivity(name, time, host, url) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var div_2 = document.createElement("div");
@@ -140,7 +127,7 @@
 
 
         a.className = "weui-media-box weui-media-box_appmsg";
-        a.href=url;
+        a.href = url;
         div_1.className = "weui-media-box__hd";
 
         div_2.className = "weui-media-box__bd";
@@ -163,7 +150,6 @@
         a.appendChild(div_2);
 
         return a;
-
     }
 </script>
 </body>

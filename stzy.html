@@ -113,7 +113,7 @@
                     json[i].UID, json[i].igood, json[i].imark);
                 massList.push(mass);
                 document.getElementById("frame").appendChild(mass.div);
-                startUID = Math.max(startUID, json[i].UID);
+                startUID = Math.min(startUID, json[i].UID);
             }
         });
     }

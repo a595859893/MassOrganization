@@ -12,14 +12,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $place = $_REQUEST["place"];
         $type = $_REQUEST["type"];
         $order = $_REQUEST["order"];
+        $startUID = $_POST["startUID"];
+        $num = $_POST["num"];
 
         $place = "'" . preg_replace("/,/", "','", $place) . "','不限'";
         $type = "'" . preg_replace("/,/", "','", $type) . "','不限'";
         $orderStr = "SELECT * FROM activity WHERE campus in(" . $place . ")AND type in(" . $type . ")";
+        if ($startUID > 0)
+            $orderStr .= " AND UID<$startUID";
         if ($order == "最新")
-            $orderStr .= "ORDER BY time DESC";
-        else if ($order == "最热")
-            $orderStr .= "ORDER BY mark DESC";
+            $orderStr .= " ORDER BY time DESC";
+        if ($order == "最热")
+            $orderStr .= " ORDER BY mark DESC";
+        if ($num > 0)
+            $orderStr .= " LIMIT $num";
 
         $rst = $mysqli->query($orderStr);
         if ($rst) {
