@@ -113,28 +113,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($row = $rst->fetch_array(MYSQLI_ASSOC))
                 $line["hot"] = $row;
         } else  $line["error"] = setError(0, "热门话题获取阶段2时，数据库错误，提示：" . $mysqli->error);
-
-        $type = 'hot';
-        $rst = $mysqli->query("SELECT * FROM conversation WHERE type='hot' AND targetUID=$uid ORDER BY time DESC");
-        if ($rst) {
-            $looptag = 0;
-            while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
-                $id = $row["UID"];
-                $rst2 = $mysqli->query("SELECT * FROM conversationReview WHERE targetUID=$id ORDER BY UID DESC");
-                $reviewNum = 0;
-                $row["review"] = array();
-                while ($row2 = $rst2->fetch_array(MYSQLI_ASSOC)) {
-                    $reviewNum++;
-                    $row["review"][] = $row2;
-                }
-                $row["review"]["length"] = $reviewNum;
-
-                $line["hotCon"][] = $row;
-                $looptag++;
-            }
-            $line["hotCon"]["length"] = $looptag;
-        } else $line["error"] = setError(0, "热门话题获取阶段3时，数据库错误，提示：" . $mysqli->error);
-
     }
 
     echo json_encode($line);

@@ -91,6 +91,7 @@
         init();
     }
     var userInfo = {};
+    var startUID = -1;
     postMessage({
         serverType: "openID",
         code: getValue("code"),
@@ -108,9 +109,17 @@
             document.getElementById("hotTopic").innerText = json.state.content;
             document.getElementById("topic_time").innerHTML = json.hot.time + ' <i class="fa fa-map-signs" style="color: black;font-size: 17px;"></i>';
             content.innerHTML = '';
-            for (var i = 0; i < json.hotCon.length; i++) {
-                content.appendChild(appendConversation(uid, json.hotCon[i].word, json.hotCon[i].time, json.hotCon[i].content, json.hotCon[i].good, json.hotCon[i].review, json.hotCon[i].igood))
-            }
+            postMessage({
+                serverType: "Get",
+                type: "hot",
+                UID: uid,
+                num: 20,
+                startUID: -1
+            }, "conversation.php", function (json) {
+                for (var i = 0; i < json.length; i++) {
+                    content.appendChild(appendConversation(uid, json[i].word, json[i].time, json[i].content, json[i].good, json[i].review, json[i].igood))
+                }
+            });
         });
     }
 
@@ -258,39 +267,21 @@
             alert('请输入内容');
         }
     };
-</script>
 
-<script>
-    //获取滚动条当前的位置
-    function getScrollTop() {
-        var scrollTop = 0;
-        if (document.documentElement && document.documentElement.scrollTop) {
-            scrollTop = document.documentElement.scrollTop;
-        } else if (document.body) {
-            scrollTop = document.body.scrollTop;
-        }
-        return scrollTop;
-    }
-
-    //获取当前可视范围的高度
-    function getClientHeight() {
-        var clientHeight = 0;
-        if (document.body.clientHeight && document.documentElement.clientHeight) {
-            clientHeight = Math.min(document.body.clientHeight, document.documentElement.clientHeight);
-        } else {
-            clientHeight = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
-        }
-        return clientHeight;
-    }
-
-    //获取文档完整的高度
-    function getScrollHeight() {
-        return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-    }
 
     window.onscroll = function () {
         if (getScrollTop() + getClientHeight() == getScrollHeight()) {
-            init();
+            postMessage({
+                serverType: "Get",
+                type: "hot",
+                UID: uid,
+                num: 20,
+                startUID: startUID
+            }, "conversation.php", function (json) {
+                for (var i = 0; i < json.length; i++) {
+                    content.appendChild(appendConversation(uid, json[i].word, json[i].time, json[i].content, json[i].good, json[i].review, json[i].igood))
+                }
+            });
         }
     }
 </script>
