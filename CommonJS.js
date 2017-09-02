@@ -83,7 +83,6 @@ function getBase64URL(url, width, height, func) {
         canvas.width = width;
         canvas.height = height;
         canvas.getContext("2d").drawImage(img, 0, 0, width, height);
-        console.log(canvas.toDataURL('image/jpeg'));
         func(canvas.toDataURL('image/jpeg'));
     };
 }

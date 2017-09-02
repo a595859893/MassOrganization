@@ -965,23 +965,23 @@
 
 
     document.getElementById("ACT_input").onchange = function (event) {
-        uploadImg(event || window.event, "ACT_logo");
+        uploadImg(event || window.event, "ACT_logo", 110, 70);
     };
     document.getElementById("MASS_logoInput").onchange = function (event) {
-        uploadImg(event || window.event, "MASS_logo");
+        uploadImg(event || window.event, "MASS_logo", 110, 70);
     };
     document.getElementById("massCfg_input").onchange = function (event) {
-        uploadImg(event || window.event, "massCfg_img");
+        uploadImg(event || window.event, "massCfg_img", 110, 70);
     };
     document.getElementById("diary_input_1").onchange = function (event) {
         event = event || window.event;
         event.preventDefault();
-        uploadImg(event, "diary_img");
+        uploadImg(event, "diary_img", 110, 70);
     };
     document.getElementById("diary_input_2").onchange = function (event) {
         event = event || window.event;
         event.preventDefault();
-        uploadImg(event, "diary_img2");
+        uploadImg(event, "diary_img2", 110, 70);
     };
 
     function uploadImg(event, id, width, height) {
