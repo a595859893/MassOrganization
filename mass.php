@@ -101,8 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $num++;
                 }
                 $line["recruitment"]["length"] = $num;
-            }
-            $line["error"] = setError(0, "社团不存在");
+            } else $line["error"] = setError(0, "社团不存在");
         } else  $line["error"] = setError(0, "获取社团时，数据库错误，提示：" . $mysqli->error);
     } elseif ($serverType == "goodDiary") {
         $diaryUID = $_POST["diaryUID"];

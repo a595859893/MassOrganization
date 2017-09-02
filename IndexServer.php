@@ -56,8 +56,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $logo = $_POST["logo"];
         $desc = $_POST["desc"];
         $QRcode = $_POST["QRcode"];
+        $start = true;
 
-        $order = "UPDATE mass SET name='$name',member='$head',logo='$logo',intro='$desc',type='$type',QRcode='$QRcode' WHERE UID=$UID";
+        $order = "UPDATE mass SET";
+        if ($name) {
+            $order .= ($start ? " " : ",") . "name='$name'";
+            $start = false;
+        }
+        if ($head) {
+            $order .= ($start ? " " : ",") . "member='$head'";
+            $start = false;
+        }
+        if ($logo) {
+            $order .= ($start ? " " : ",") . "logo='$logo'";
+            $start = false;
+        }
+        if ($desc) {
+            $order .= ($start ? " " : ",") . "intro='$desc'";
+            $start = false;
+        }
+        if ($type) {
+            $order .= ($start ? " " : ",") . "type='$type'";
+            $start = false;
+        }
+        if ($QRcode) {
+            $order .= ($start ? " " : ",") . "QRcode='$QRcode'";
+            $start = false;
+        }
+        $order .= " WHERE UID=$UID";
 
         $rst = $mysqli->query($order);
         if (!$rst) $line["error"] = setError(0, "社团信息修改时，数据库错误，提示：" . $mysqli->error);

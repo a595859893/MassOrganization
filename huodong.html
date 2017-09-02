@@ -182,10 +182,9 @@
                 actOrder[title] = ele;
             } else {
                 var index = actOrder[title].indexOf(ele);
+                var pn = event.target.parentNode;
+                var all = !isAllIn(pn);
                 if (ele == "不限") {
-                    //判断是否全部在里面
-                    var pn = event.target.parentNode;
-                    var all = !isAllIn(pn);
                     actOrder[title] = [];
                     if (all) {
                         var all = pn.getElementsByTagName("A");
@@ -194,9 +193,13 @@
                                 actOrder[title].push(all[i].innerText);
                     }
                 }
-                else if (index >= 0)
-                    actOrder[title].splice(index, 1);
-                else
+                else if (index >= 0) {
+                    if (!all) {
+                        actOrder[title] = [];
+                        actOrder[title].push(ele);
+                    } else
+                        actOrder[title].splice(index, 1);
+                } else
                     actOrder[title].push(ele);
             }
 
@@ -433,6 +436,7 @@
         }
         return scrollTop;
     }
+
     //获取当前可视范围的高度
     function getClientHeight() {
         var clientHeight = 0;
@@ -443,10 +447,12 @@
         }
         return clientHeight;
     }
+
     //获取文档完整的高度
     function getScrollHeight() {
         return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
     }
+
     window.onscroll = function () {
         if (getScrollTop() + getClientHeight() == getScrollHeight()) {
 //            init();

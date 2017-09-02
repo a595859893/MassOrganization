@@ -8,64 +8,66 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
 </head>
 <body>
-<div class="weui-cells weui-cells_form">
-    <div class="weui-cells__title">注册 （非社团管理者请勿在此注册！）</div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd"><label for="MASS_name" class="weui-label">社团名字</label></div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" id="MASS_name"/>
+<form id="mass">
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cells__title">注册 （非社团管理者请勿在此注册！）</div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label for="MASS_name" class="weui-label">社团名字</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" id="MASS_name"/>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">登陆账号</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" id="MASS_account" placeholder=" "/>
+            </div>
+        </div>
+        <div class="weui-cell ">
+            <div class="weui-cell__hd"><label class="weui-label">登录密码</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="password" id="MASS_code" placeholder=" "/>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cells__title" style="color: #000;font-size: 16px;">社团类型</div>
+            <div class="weui-cells weui-cells_checkbox" style="border: 0">
+                <label class="weui-cell weui-check__label">
+                    <input type="radio" class="weui-check" name="formChoose" value="shetuan">
+                    <i class="weui-icon-checked"></i>
+                    兴趣社团
+                </label>
+                <label class="weui-cell weui-check__label">
+                    <input type="radio" name="formChoose" class="weui-check" value="zuzhi">
+                    <i class="weui-icon-checked"></i>
+                    学生组织
+                </label>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label for="MASS_head" class="weui-label">社团负责人</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" id="MASS_head"/>
+            </div>
+        </div>
+        <div class="weui-cell  ">
+            <div class="weui-cell__hd">
+                <label class="weui-label">负责人手机号</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="tel" id="MASS_tel" placeholder=" ">
+            </div>
         </div>
     </div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd"><label class="weui-label">登陆账号</label></div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" id="MASS_account" placeholder=" "/>
-        </div>
+    <br>
+    <div class="weui-btn-area">
+        <button class="weui-btn weui-btn_plain-primary" id="massConfig">提交</button>
     </div>
-    <div class="weui-cell ">
-        <div class="weui-cell__hd"><label class="weui-label">登录密码</label></div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="password" id="MASS_code" placeholder=" "/>
-        </div>
-    </div>
-    <div class="weui-cell">
-        <div class="weui-cells__title" style="color: #000;font-size: 16px;">社团类型</div>
-        <div class="weui-cells weui-cells_checkbox" style="border: 0">
-            <label class="weui-cell weui-check__label">
-                <input type="radio" class="weui-check" name="formChoose" value="shetuan">
-                <i class="weui-icon-checked"></i>
-                兴趣社团
-            </label>
-            <label class="weui-cell weui-check__label">
-                <input type="radio" name="formChoose" class="weui-check" value="zuzhi">
-                <i class="weui-icon-checked"></i>
-                学生组织
-            </label>
-        </div>
-    </div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd"><label for="MASS_head" class="weui-label">社团负责人</label></div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" id="MASS_head"/>
-        </div>
-    </div>
-    <div class="weui-cell  ">
-        <div class="weui-cell__hd">
-            <label class="weui-label">负责人手机号</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="tel" id="MASS_tel" placeholder=" ">
-        </div>
-    </div>
-</div>
-<br>
-<div class="weui-btn-area">
-    <button class="weui-btn weui-btn_plain-primary" id="massConfig">提交</button>
-</div>
+</form>
 
-
+<script src="CommonJS.js"></script>
 <script>
-    document.getElementById("massConfig").onsubmit = function (event) {
+    document.getElementById("mass").onsubmit = function (event) {
         event = event || window.event;
         event.target.disabled = true;
         event.preventDefault();
@@ -76,16 +78,22 @@
             if (radio[i].checked)
                 type = radio[i].value;
 
-        var content = {
-            serverType: "massConfig",
+        postMessage({
+            serverType: "register",
             type: type,
+            account: document.getElementById("MASS_account").value,
+            password: document.getElementById("MASS_code").value,
             name: document.getElementById("MASS_name").value,
             head: document.getElementById("MASS_head").value,
             tel: document.getElementById("MASS_tel").value
-        };
-        postMessage(content, "IndexServer.php", function ( ) {
+        }, "loginState.php", function () {
             alert('注册成功！');
+            window.location.href = "http://www.campuscircle.top/";
+        }, function (json) {
+            if (json.error.code == 1)
+                alert('账号已被使用！');
         });
+
     };
 </script>
 

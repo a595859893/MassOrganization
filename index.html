@@ -235,7 +235,7 @@
                     <label style="float: left" for="thing">事件：</label>
                     <input type="text" id="thing">
                     <label style="float: left" for="start">开始时间：</label>
-                    <input type="datetime-local" value="2017-09-01T15:25:33"  placeholder="" id="start">
+                    <input type="datetime-local" value="2017-09-01T15:25:33" placeholder="" id="start">
                     <label style="float: left " for="end">结束时间：</label>
                     <input type="datetime-local" value="2017-09-03T15:25:33" placeholder="" id="end">
                 </div>
@@ -593,7 +593,8 @@
                                 style="width: 60%">点击上传图片
                         </button>
                         <img id="MASS_logo" style="width:150px;height:150px">
-                        <input class="weui-input" type="file" style="display:none" accept="image/*"  id="MASS_logoInput"/>
+                        <input class="weui-input" type="file" style="display:none" accept="image/*"
+                               id="MASS_logoInput"/>
                     </div>
                 </div>
 
@@ -752,7 +753,6 @@
                 document.cookie = "account=" + document.getElementById("uname").value;
                 document.cookie = "password=" + document.getElementById("psw").value;
             } else {
-                console.log("123");
                 delCookie("account");
                 delCookie("password");
             }
@@ -790,6 +790,16 @@
         }, "IndexServer.php", function () {
             document.getElementById('id02').style.display = 'none';
             document.getElementById('main_1').style.display = 'block'
+            postMessage({
+                serverType: "SendGroup",
+                type: "mass",
+                title: "发布了活动:" + document.getElementById("ACT_name").value + ",点击进入社团主页",
+                content: "uid",
+                gourpType: "MassMark",
+                groupUID: "uid"
+            }, "message.php", function () {
+                alert("活动发布成功！");
+            });
         })
     };
     document.getElementById("NEW_form").onsubmit = function (event) {
@@ -808,6 +818,16 @@
         }, "IndexServer.php", function () {
             document.getElementById('id03').style.display = 'none';
             document.getElementById('main_1').style.display = 'block'
+            postMessage({
+                serverType: "SendGroup",
+                type: "mass",
+                title: "发布了招新:" + document.getElementById("NEW_title").value + ",点击进入社团主页",
+                content: "uid",
+                groupType: "MassMark",
+                groupUID: "uid"
+            }, "message.php", function () {
+                alert("招新发布成功！");
+            });
         });
     };
     document.getElementById("massConfig").onsubmit = function (event) {
@@ -835,7 +855,18 @@
             document.getElementById('id04').style.display = 'none';
             document.getElementById('main_1').style.display = 'block';
             document.getElementById('main_1').style.display = 'block';
-            document.getElementById("user_name").innerText = content.name + "(UID:" + uid + ")";
+            document.getElementById("user_name").innerText = content.name;
+
+            postMessage({
+                serverType: "SendGroup",
+                type: "mass",
+                title: "修改了社团信息，点击进入社团主页",
+                content: "uid",
+                groupType: "MassMark",
+                groupUID: "uid"
+            }, "message.php", function () {
+                alert("信息修改成功！");
+            });
         });
     };
     document.getElementById("diary_submit").onclick = function (event) {
@@ -869,6 +900,18 @@
             event.target.disabled = false;
             document.getElementById('dairy').style.display = 'none';
             document.getElementById('main_1').style.display = 'block'
+
+            postMessage({
+                serverType: "SendGroup",
+                type: "mass",
+                title: "发布了日志：" + content.title + "，点击进入社团主页",
+                content: "uid",
+                groupType: "MassMark",
+                groupUID: "uid"
+            }, "message.php", function (json) {
+                console.log(json)
+                alert("日志发送成功！");
+            });
         });
     };
     document.getElementById("customerForm").onsubmit = function (event) {
@@ -975,15 +1018,15 @@
                     var message = document.getElementById("message");
                     var page_2 = document.getElementById('page2');
                     var read=0;
-                    for (var i = 0; i < json.length; i++){
-                        if (json.type == "act") {
-                            message.appendChild(createMessage(json.type, json[i].title, ''));
+                    for (var i = 0; i < json.length; i++) {
+                        if (json[i].type == "act") {
+                            message.appendChild(createMessage(json[i].type, json[i].title, ''));
                             page_2.appendChild(dialog(i, json[i].message, ''));
                         }
-                        if (json.type == "mass")
-                            message.appendChild(createMessage(json.type, json[i].title, json[i].url));
+                        if (json[i].type == "mass")
+                            message.appendChild(createMessage(json[i].type, json[i].title, json[i].url));
 
-                        if (json.type == "work") {
+                        if (json[i].type == "work") {
                             message.appendChild(createMessage("work", json[i].title, json[i].time));
                             page_2.appendChild(dialog(i, json[i].time, json[i].title));
                         }
@@ -1243,19 +1286,19 @@
 
         if (type == "act") {
             div_1.innerHTML = "<i class='fa fa-language' style='font-size:20px;color: #136832'></i>";
-            p.innerHTML = '&nbsp;' + title + '报名成功';
+            p.innerText = ' ' + title + '报名成功';
             a.onclick = function () {
                 document.getElementById("date_" + index).style.display = 'block';
             }
         }
         if (type == "mass") {
             div_1.innerHTML = "<i class='fa fa-joomla' style='font-size:20px;color: #136832'></i>";
-            p.innerHTML = '&nbsp;' + title + '有新动态啦';
+            p.innerText = title;
             a.href = content;
         }
         if (type == "work") {
             div_1.innerHTML = "<i class='fa fa-clipboard' style='font-size:20px;color: #136832'></i>";
-            p.innerText = ' ' + title + '有新动态啦';
+            p.innerText = title;
             a.onclick = function () {
                 document.getElementById("work_" + index).style.display = 'block';
             }
@@ -1380,7 +1423,7 @@
         if (time_1 < time_2) {
             if (condition) {
                 var thing = document.getElementById('thing').value;
-                if (condition){
+                if (condition) {
                     if (time_1 < time_2) {
                         postMessage({
                             serverType: "addDate",
@@ -1396,7 +1439,6 @@
             }
         }
     }
-
 
     function dialog(index, content, title) {
         var div_3 = document.createElement("div");
