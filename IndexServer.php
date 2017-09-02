@@ -56,20 +56,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $logo = $_POST["logo"];
         $desc = $_POST["desc"];
         $QRcode = $_POST["QRcode"];
+        $start = true;
 
         $order = "UPDATE mass SET";
-        if ($name)
-            $order .= " name='$name'";
-        if ($head)
-            $order .= " member='$head'";
-        if ($logo)
-            $order .= " logo='$logo'";
-        if ($desc)
-            $order .= " intro='$desc'";
-        if ($type)
-            $order .= " type='$type'";
-        if ($QRcode)
-            $order .= " QRcode='$QRcode'";
+        if ($name) {
+            $order .= ($start ? " " : ",") . "name='$name'";
+            $start = false;
+        }
+        if ($head) {
+            $order .= ($start ? " " : ",") . "member='$head'";
+            $start = false;
+        }
+        if ($logo) {
+            $order .= ($start ? " " : ",") . "logo='$logo'";
+            $start = false;
+        }
+        if ($desc) {
+            $order .= ($start ? " " : ",") . "intro='$desc'";
+            $start = false;
+        }
+        if ($type) {
+            $order .= ($start ? " " : ",") . "type='$type'";
+            $start = false;
+        }
+        if ($QRcode) {
+            $order .= ($start ? " " : ",") . "QRcode='$QRcode'";
+            $start = false;
+        }
         $order .= " WHERE UID=$UID";
 
         $rst = $mysqli->query($order);
