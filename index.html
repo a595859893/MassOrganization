@@ -246,6 +246,19 @@
             </div>
         </div>
 
+        <div id="delete_act" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog">
+                <div class="weui-dialog__hd"><strong class="weui-dialog__title">是否删除？</strong></div>
+                <div class="weui-dialog__bd">删除之后无法恢复</div>
+                <div class="weui-dialog__ft">
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" onclick="delete_act(0)">取消</a>
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" onclick="delete_act(1)">确认</a>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
 
@@ -271,6 +284,8 @@
             </div>
         </form>
     </div>
+
+
 </div>
 
 <div id="page4" class="page">
@@ -336,7 +351,7 @@
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <textarea class="weui-textarea" placeholder="您已成功报名此活动，请尽快与负责人联系" rows="3"></textarea>
+                    <textarea class="weui-textarea" placeholder="您已成功报名此活动，请尽快与负责人联系" rows="3" id="message_mass"></textarea>
                     <div class="weui-textarea-counter"><span>0</span>/40</div>
                 </div>
             </div>
@@ -345,7 +360,7 @@
             <button class="weui-btn weui-btn_mini  weui-btn_plain-primary " style="float: left" onclick="document.getElementById('table_main').style.display='none';document.getElementById('main_1').style.display='block'">
                 返回
             </button>
-            <button class="weui-btn weui-btn_mini weui-btn_plain-primary " style="float: right;margin-top: 0">确认并发送
+            <button class="weui-btn weui-btn_mini weui-btn_plain-primary " style="float: right;margin-top: 0" id="sendMessage">确认并发送
             </button>
         </div>
         </div>
@@ -458,7 +473,7 @@
                 <input type="text" placeholder="中珠-风雨球场" id="ACT_location" required>
 
                 <label><b>活动时间</b></label>
-                <!--<input class="laydate-icon" type="text" onClick="laydate({elem: '#ACT_time'});" id="ACT_time" required>-->
+
                 <input class="weui-input" type="date" value="2017-09-01" id="ACT_time" required/>
 
                 <label><b>活动简介</b></label>
@@ -471,16 +486,14 @@
                 <input type="text" placeholder="校团工委" id="ACT_organizer" required>
 
                 <label><b>上传Logo</b></label>
-                <!--<button type="button" onclick="document.getElementById('ACT_input').click();">点击上传图片</button>-->
+
                 <button class="weui-btn weui-btn_mini weui-btn_plain-primary" onclick="document.getElementById('ACT_input').click();">点击上传图片</button>
                 <input type="file" style="display:none" accept="image/*" id="ACT_input">
                 <br>
                 <img id="ACT_logo" width="70px" height="110px" style="    margin-left: 3%;">
                 <br>
                 <input type="radio" name="formChoose" value="default" checked> <b>使用默认报名表</b>
-                <!--<button  onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">-->
-                    <!--点此处预览-->
-                <!--</button>-->
+
                 <button class="weui-btn weui-btn_mini weui-btn_plain-primary" onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">点此处预览</button>
                 &nbsp;
                 <br>
@@ -674,8 +687,8 @@
         <i class="weui-tabbar__icon fa fa-home" style="font-size:25px;"></i>
         <p class="weui-tabbar__label">首页</p>
     </a>
-    <a href="#" class="weui-tabbar__item tab" onclick="tabNav(event,'page2')">
-        <i class="weui-tabbar__icon fa fa-bell" style="font-size:22px;"></i>
+    <a href="#" class="weui-tabbar__item tab" onclick="tabNav(event,'page2');read_message()">
+        <i class="weui-tabbar__icon fa fa-bell" style="font-size:22px;position: relative"></i><span class="weui-badge weui-badge_dot" style="position: absolute;top:5px;display: none" id="mess_dot"></span>
         <p class="weui-tabbar__label">消息</p>
     </a>
     <a href="#" class="weui-tabbar__item tab" id="myself" onclick="tabNav(event,'page3')">
@@ -875,6 +888,19 @@
         document.getElementById('myDIV').style.display = 'none';
         document.getElementById('id02').style.display = 'block';
     };
+    document.getElementById("sendMessage").onclick = function (event){
+        event.target.disabled = true;
+        postMessage({
+            serverType: "Send",
+            type: "",
+            title: "",
+            content:document.getElementById("message_mass").value
+        }, "conversation.php", function () {
+            event.target.disabled = false;
+            alert('发送成功');
+        })
+    };
+
 
     document.getElementById("ACT_input").onchange = function (event) {
         uploadImg(event || window.event, "ACT_logo");
@@ -896,7 +922,7 @@
         uploadImg(event, "diary_img2");
     };
 
-    function uploadImg(event, id) {
+    function uploadImg(event, id){
         var file = event.target.files[0];
         var fr = new FileReader();
         var reg = new RegExp(/image\/\w+/);
@@ -906,7 +932,7 @@
                 if (url.length <= 1024 * 100)//图片大小限制(dataURL本身的原因，多少不太明确)
                     document.getElementById(id).src = event.target.result;
                 else
-                    alert("图片过大，请选择较小的图片！");
+                    alert("图片过大，请选择50kb以下的图片！");
             };
             fr.readAsDataURL(file);
         } else
@@ -948,7 +974,8 @@
                 postMessage({serverType: "Get"}, "message.php", function (json) {
                     var message = document.getElementById("message");
                     var page_2 = document.getElementById('page2');
-                    for (var i = 0; i < json.length; i++) {
+                    var read=0;
+                    for (var i = 0; i < json.length; i++){
                         if (json.type == "act") {
                             message.appendChild(createMessage(json.type, json[i].title, ''));
                             page_2.appendChild(dialog(i, json[i].message, ''));
@@ -960,7 +987,10 @@
                             message.appendChild(createMessage("work", json[i].title, json[i].time));
                             page_2.appendChild(dialog(i, json[i].time, json[i].title));
                         }
-
+                        if(json[i].watch=0){ read=read+1;}
+                    }
+                    if(read>0){
+                        document.getElementById('mess_dot').style.display='inline-block';
                     }
                 });
             }
@@ -972,6 +1002,15 @@
             document.getElementById("uname").value = remind_account;
             document.getElementById("psw").value = remind_password;
         }
+    }
+
+    function read_message(){
+        postMessage({serverType: "Tag"}, "message.php", function (json){
+            for (var i = 0; i < json.length; i++){
+                json[i].watch=1;
+            }
+            document.getElementById('mess_dot').style.display='none';
+        });
     }
 
     //登陆登出
@@ -1108,7 +1147,7 @@
         return a;
     }
 
-    function createAcc(title, obj, uid) {
+    function createAcc(title, obj, uid){
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var p = document.createElement("p");
@@ -1166,6 +1205,7 @@
                     h_th.appendChild(h_th_checkBox);
                     header.appendChild(h_th);
                 }
+                console.log(json);
                 for (var j in json) {
                     var td = document.createElement("td");
                     td.innerText = json[j];
@@ -1187,6 +1227,7 @@
         };
         return a;
     }
+
 
     function createMessage(type, title, content) {
         var a = document.createElement("a");
@@ -1228,13 +1269,18 @@
         return a;
     }
 
-    function createCalPiece(start, end, desc) {
+    function createCalPiece(start, end, desc,uid) {
         var li = document.createElement('li');
         var span = document.createElement('span');
         span.className = "fa fa-calendar-minus-o";
         span.style = "font-size:15px;position:absolute;right:0;top:30%";
-        span.onclick = function (){
-            this.parentElement.style.display = 'none';
+        span.onclick = function (event){
+            document.getElementById('delete_act').style.display='block';
+            event = event || window.event;
+            event.preventDefault();
+            span_id = uid;
+            span_element = this.parentElement;
+            span_parent = span_element.parentElement;
         };
         li.innerText = start + " ~ " + end + "  \n" + desc;
         li.appendChild(span);
@@ -1299,6 +1345,12 @@
                 } else {
                     td.bgColor = '#fff';
                 }
+//                for (var i = 0; i < json.length; i++){
+//                if(date_str=json[i].start.getDay()){
+//                    td.style.color='red';
+//                    td.style.fontWeight='border';
+//                }
+//                }
                 tr.appendChild(td);
             }
             table.appendChild(tr);
@@ -1310,8 +1362,9 @@
             ul.innerHTML = "";
             for (var i = 0; i < json.length; i++) {
                 var date = new Date(ynow, mnow, event.target.day);
-                if (date.getTime() - Date.parse(json[i].start) >= 0 && date.getTime() - Date.parse(json[i].end) <= 0)
-                    ul.appendChild(createCalPiece(json[i].start, json[i].end, json[i].name));
+                if (date.getTime() - Date.parse(json[i].start) >= 0 && date.getTime() - Date.parse(json[i].end) <= 0){
+                    ul.appendChild(createCalPiece(json[i].start, json[i].end, json[i].name,json[i].UID));}
+                console.log(json[0].start.getDay());
             }
         };
 
@@ -1385,7 +1438,7 @@
         return div_3;
     }
 
-    function dialog_act(value) {
+    function dialog_act(value){
         document.getElementById('dialog_act').style.display = 'none';
         if (value && del_id >= 0) {
             postMessage({
@@ -1393,6 +1446,19 @@
                 actUID: del_id
             }, "IndexServer.php", function () {
                 del_parent.removeChild(del_element);
+                alert('成功删除');
+            })
+        }
+    }
+
+    function delete_act(value){
+        document.getElementById('delete_act').style.display = 'none';
+        if (value && span_id >= 0){
+            postMessage({
+                serverType: "delDate",
+                UID: span_id
+            }, "schedule.php", function () {
+                span_parent.removeChild(span_element);
                 alert('成功删除');
             })
         }
@@ -1455,7 +1521,6 @@
     function openNav() {
         document.getElementById("mySidenav").style.width = "100%";
         document.getElementById("main").style.marginLeft = "0%";
-
     }
 
     function closeNav() {
