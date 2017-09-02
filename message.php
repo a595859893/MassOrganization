@@ -69,6 +69,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             $line["length"] = $looptag;
         } else  $line["error"] = setError(0, "信息获取时，数据库错误，提示：" . $mysqli->error);
+    } elseif ($serverType == "Tag") {
+        $rst = $mysqli->query("UPDATE message SET watch=TRUE WHERE openID='$openID'");
+        if (!$rst) $line["error"] = setError(0, "信息获取时，数据库错误，提示：" . $mysqli->error);
     } else $line["error"] = setError(0, "不匹配的类型");
 
     echo json_encode($line);

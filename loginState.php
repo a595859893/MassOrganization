@@ -82,9 +82,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
 
-    } else {
-        $line["error"] = setError(0, "不匹配的类型");
-    }
+    } elseif ("register" == $serverType) {
+        $account = $_POST["account"];
+        $password = $_POST["password"];
+        $type = $_POST["type"];
+        $name = $_POST["name"];
+        $head = $_POST["head"];
+
+        $order = "SELECT account FROM mass WHERE account='$account'";
+        $rst = $mysqli->query($order);
+        if ($rst) {
+            if ($row = $rst->fetch_array(MYSQLI_ASSOC))
+                $line["error"] = setError(1, "用户名重复");
+            else {
+                $password = sha1($password);
+                $mysqli = linkToSQL();
+                $order = "INSERT INTO mass (account,password,type,name,member) VALUES('$account','$password','$type','$name','$head')";
+                $rst = $mysqli->query($order);
+                if (!$rst) $line["error"] = setError(0, "注册时，数据库错误，提示：" . $mysqli->error);
+            }
+        } else $line["error"] = setError(0, "注册时，数据库错误，提示：" . $mysqli->error);
+
+    } else  $line["error"] = setError(0, "不匹配的类型");
 
     echo json_encode($line);
     $mysqli->close();

@@ -25,6 +25,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $line[] = $row;
             }
         } else $line["error"] = setError(0, "获取日程时，数据库错误，提示：" . $mysqli->error);
+    } elseif ("delDate" == $serverType) {
+        $uid = $_POST["UID"];
+        $order = "DELETE FROM dateRemind WHERE UID=$uid";
+        $rst = $mysqli->query($order);
+        if (!$rst) $line["error"] = setError(0, "删除日程时，数据库错误，提示：" . $mysqli->error);
     } else $line["error"] = setError(0, "不匹配的类型");
 
     echo json_encode($line);
