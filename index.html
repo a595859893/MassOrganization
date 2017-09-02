@@ -328,6 +328,7 @@
 
     <!--活动管理表格-->
     <div style="display: none;" id="table_main">
+        <div id="fill">
         <div id="table_1" style="overflow: auto">
             <table id="activityListContainer"></table>
         </div>
@@ -347,29 +348,30 @@
             <button class="weui-btn weui-btn_mini weui-btn_plain-primary " style="float: right;margin-top: 0">确认并发送
             </button>
         </div>
-    </div>
-
-    <!--没有报名表-->
-    <div class="weui-msg" id="none_tip" style="display:none">
-        <div class="weui-msg__icon-area"><i class="weui-icon-info weui-icon_msg"></i></div>
-        <div class="weui-msg__text-area">
-            <h2 class="weui-msg__title">提示</h2>
-            <p class="weui-msg__desc">未使用报名表，无活动报名表信息</p>
         </div>
-        <div class="weui-msg__opr-area">
-            <p class="weui-btn-area">
-                <button class="weui-btn weui-btn_plain-primary" onclick="document.getElementById('none_tip').style.display='none';document.getElementById('main_1').style.display='block'">返回</button>
-            </p>
-        </div>
-        <div class="weui-msg__extra-area">
-            <div class="weui-footer">
-                <p class="weui-footer__links">
-                    <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67a84c01324490ca&redirect_uri=http%3A%2F%2Fwww.campuscircle.top%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect" class="weui-footer__link">中大园圈</a>
+        <!--没有报名表-->
+        <div class="weui-msg" id="none_tip" style="display:none">
+            <div class="weui-msg__icon-area"><i class="weui-icon-info weui-icon_msg"></i></div>
+            <div class="weui-msg__text-area">
+                <h2 class="weui-msg__title">提示</h2>
+                <p class="weui-msg__desc">未使用报名表，无活动报名表信息</p>
+            </div>
+            <div class="weui-msg__opr-area">
+                <p class="weui-btn-area">
+                    <button class="weui-btn weui-btn_plain-primary" onclick="document.getElementById('none_tip').style.display='none';document.getElementById('main_1').style.display='block'">返回</button>
                 </p>
-                <p class="weui-footer__text">Copyright &copy; 2017 SYSUcampuscircle</p>
+            </div>
+            <div class="weui-msg__extra-area">
+                <div class="weui-footer">
+                    <p class="weui-footer__links">
+                        <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67a84c01324490ca&redirect_uri=http%3A%2F%2Fwww.campuscircle.top%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect" class="weui-footer__link">中大园圈</a>
+                    </p>
+                    <p class="weui-footer__text">Copyright &copy; 2017 SYSUcampuscircle</p>
+                </div>
             </div>
         </div>
     </div>
+
 
     <!--社团日志-->
     <div id="dairy" class="container" onclick="check()" style="display: none;margin: 30px">
@@ -1179,9 +1181,8 @@
                 table.appendChild(tr);
             }
             if(obj.length==0){
-                var tip=document.getElementById('none_tip');
-                document.getElementById('table_main').innerHTML= tip ;
-                tip.style.display = 'block';
+                document.getElementById('fill').style.display = 'none';
+                document.getElementById('none_tip').style.display = 'block';
             }
         };
         return a;
