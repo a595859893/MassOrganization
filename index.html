@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Title</title>
+    <title>中大园圈</title>
     <!--<meta charset="UTF-8">-->
     <!--全屏显示-->
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
@@ -369,7 +369,7 @@
             <div class="weui-msg__icon-area"><i class="weui-icon-info weui-icon_msg"></i></div>
             <div class="weui-msg__text-area">
                 <h2 class="weui-msg__title">提示</h2>
-                <p class="weui-msg__desc">未使用报名表，无活动报名表信息</p>
+                <p class="weui-msg__desc">暂无活动报名表信息</p>
             </div>
             <div class="weui-msg__opr-area">
                 <p class="weui-btn-area">
@@ -413,7 +413,7 @@
                 <b>上传图片</b>
                 <button type="button" onclick="document.getElementById('diary_input_1').click();">选择图片</button>
                 <input type="file" accept="image/*" id="diary_input_1" style="display: none">
-                <img id="diary_img">
+                <img id="diary_img" width="50px" height="50px">
             </label>
         </form>
 
@@ -427,7 +427,7 @@
                 <b>推送图片</b>
                 <button type="button" onclick="document.getElementById('diary_input_2').click();">选择图片</button>
                 <input type="file" accept="image/*" id="diary_input_2" style="display: none">
-                <img id="diary_img2">
+                <img id="diary_img2" width="50px" height="50px">
             </label>
             <br>
             <label>
@@ -490,17 +490,16 @@
                 <button class="weui-btn weui-btn_mini weui-btn_plain-primary" onclick="document.getElementById('ACT_input').click();">点击上传图片</button>
                 <input type="file" style="display:none" accept="image/*" id="ACT_input">
                 <br>
-                <img id="ACT_logo" width="70px" height="110px" style="    margin-left: 3%;">
+                <img id="ACT_logo" width="70px" height="110px" style="margin-left: 3%;">
                 <br>
                 <input type="radio" name="formChoose" value="default" checked> <b>使用默认报名表</b>
-
-                <button class="weui-btn weui-btn_mini weui-btn_plain-primary" onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">点此处预览</button>
+                <button class="weui-btn weui-btn_mini weui-btn_plain-primary" onclick="document.getElementById('id05').style.display='block';document.getElementById('main_1').style.display='none';document.getElementById('id02').style.display='none';">点此处预览</button>
                 &nbsp;
                 <br>
                 <input type="radio" name="formChoose" value="make"
-                       onclick="document.getElementById('myDIV').style.display='block';document.getElementById('id02').style.display='none';">
+                       onclick="document.getElementById('myDIV').style.display='block';document.getElementById('id02').style.display='none';document.getElementById('main_1').style.display='none';">
                 <b>自定义报名表~</b>
-                <button class="weui-btn weui-btn_mini weui-btn_plain-primary" onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">
+                <button class="weui-btn weui-btn_mini weui-btn_plain-primary" onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';document.getElementById('main_1').style.display='none';">
                     点此处预览
                 </button>
                 &nbsp;
@@ -789,7 +788,7 @@
             json: JSON.stringify(listjson)
         }, "IndexServer.php", function () {
             document.getElementById('id02').style.display = 'none';
-            document.getElementById('main_1').style.display = 'block'
+            document.getElementById('main_1').style.display = 'block';
             postMessage({
                 serverType: "SendGroup",
                 type: "mass",
@@ -899,7 +898,7 @@
         postMessage(content, "IndexServer.php", function (json) {
             event.target.disabled = false;
             document.getElementById('dairy').style.display = 'none';
-            document.getElementById('main_1').style.display = 'block'
+            document.getElementById('main_1').style.display = 'block';
 
             postMessage({
                 serverType: "SendGroup",
@@ -1388,11 +1387,11 @@
                 } else {
                     td.bgColor = '#fff';
                 }
-//                for (var i = 0; i < json.length; i++){
-//                if(date_str=json[i].start.getDay()){
-//                    td.style.color='red';
-//                    td.style.fontWeight='border';
-//                }
+//                for (var i = 0; i < json.length; i++) {
+//                    var date_0 = new Date(ynow, mnow, date_str);
+//                    if (date_0.getTime() - Date.parse(json[i].start) >= 0 && date_0.getTime() - Date.parse(json[i].end) <= 0) {
+//                        td.style.color = 'red';
+//                    }
 //                }
                 tr.appendChild(td);
             }
@@ -1405,9 +1404,12 @@
             ul.innerHTML = "";
             for (var i = 0; i < json.length; i++) {
                 var date = new Date(ynow, mnow, event.target.day);
+//                console.log(event.target.day);
+                console.log(date);
                 if (date.getTime() - Date.parse(json[i].start) >= 0 && date.getTime() - Date.parse(json[i].end) <= 0){
-                    ul.appendChild(createCalPiece(json[i].start, json[i].end, json[i].name,json[i].UID));}
-                console.log(json[0].start.getDay());
+                    ul.appendChild(createCalPiece(json[i].start, json[i].end, json[i].name,json[i].UID));
+                }
+
             }
         };
 
