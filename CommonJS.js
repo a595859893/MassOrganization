@@ -73,5 +73,17 @@ function postMessage(content, php, func, failFunc) {
                 console.log("没有返回值！");
         }
     }
+}
 
+function getBase64URL(url, width, height, func) {
+    var img = new Image();
+    img.src = url;
+    img.onload = function () {
+        var canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+        console.log(canvas.toDataURL('image/jpeg'));
+        func(canvas.toDataURL('image/jpeg'));
+    };
 }

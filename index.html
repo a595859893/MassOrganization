@@ -172,7 +172,8 @@
                 </div>
                 <div class="weui-media-box__bd">
                     <h4 class="weui-media-box__title" id="openID_name">名字</h4>
-                    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;padding: 5px;margin-top: 5px;">
+                    <button onclick="document.getElementById('id01').style.display='block'"
+                            style="width:auto;padding: 5px;margin-top: 5px;">
                         社团管理者登陆
                     </button>
                 </div>
@@ -252,8 +253,10 @@
                 <div class="weui-dialog__hd"><strong class="weui-dialog__title">是否删除？</strong></div>
                 <div class="weui-dialog__bd">删除之后无法恢复</div>
                 <div class="weui-dialog__ft">
-                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" onclick="delete_act(0)">取消</a>
-                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" onclick="delete_act(1)">确认</a>
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default"
+                       onclick="delete_act(0)">取消</a>
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary"
+                       onclick="delete_act(1)">确认</a>
                 </div>
             </div>
         </div>
@@ -305,7 +308,8 @@
 
         <br>
         <article class="main">
-            <button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i>
+            <button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard"
+                                                                                               style="font-size:18px;color: #136832;"></i>
                 活动管理
             </button>
             <div class="panel" id="MyAct">
@@ -344,25 +348,28 @@
     <!--活动管理表格-->
     <div style="display: none;" id="table_main">
         <div id="fill">
-        <div id="table_1" style="overflow: auto">
-            <table id="activityListContainer"></table>
-        </div>
-        <div class="weui-cells__title">向报名者发送消息</div>
-        <div class="weui-cells weui-cells_form">
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <textarea class="weui-textarea" placeholder="您已成功报名此活动，请尽快与负责人联系" rows="3" id="message_mass"></textarea>
-                    <div class="weui-textarea-counter"><span>0</span>/40</div>
+            <div id="table_1" style="overflow: auto">
+                <table id="activityListContainer"></table>
+            </div>
+            <div class="weui-cells__title">向报名者发送消息</div>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <textarea class="weui-textarea" placeholder="您已成功报名此活动，请尽快与负责人联系" rows="3"
+                                  id="message_mass"></textarea>
+                        <div class="weui-textarea-counter"><span>0</span>/40</div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="weui-btn-area">
-            <button class="weui-btn weui-btn_mini  weui-btn_plain-primary " style="float: left" onclick="document.getElementById('table_main').style.display='none';document.getElementById('main_1').style.display='block'">
-                返回
-            </button>
-            <button class="weui-btn weui-btn_mini weui-btn_plain-primary " style="float: right;margin-top: 0" id="sendMessage">确认并发送
-            </button>
-        </div>
+            <div class="weui-btn-area">
+                <button class="weui-btn weui-btn_mini  weui-btn_plain-primary " style="float: left"
+                        onclick="document.getElementById('table_main').style.display='none';document.getElementById('main_1').style.display='block'">
+                    返回
+                </button>
+                <button class="weui-btn weui-btn_mini weui-btn_plain-primary " style="float: right;margin-top: 0"
+                        id="sendMessage">确认并发送
+                </button>
+            </div>
         </div>
         <!--没有报名表-->
         <div class="weui-msg" id="none_tip" style="display:none">
@@ -373,13 +380,17 @@
             </div>
             <div class="weui-msg__opr-area">
                 <p class="weui-btn-area">
-                    <button class="weui-btn weui-btn_plain-primary" onclick="document.getElementById('none_tip').style.display='none';document.getElementById('main_1').style.display='block'">返回</button>
+                    <button class="weui-btn weui-btn_plain-primary"
+                            onclick="document.getElementById('none_tip').style.display='none';document.getElementById('main_1').style.display='block'">
+                        返回
+                    </button>
                 </p>
             </div>
             <div class="weui-msg__extra-area">
                 <div class="weui-footer">
                     <p class="weui-footer__links">
-                        <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67a84c01324490ca&redirect_uri=http%3A%2F%2Fwww.campuscircle.top%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect" class="weui-footer__link">中大园圈</a>
+                        <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67a84c01324490ca&redirect_uri=http%3A%2F%2Fwww.campuscircle.top%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
+                           class="weui-footer__link">中大园圈</a>
                     </p>
                     <p class="weui-footer__text">Copyright &copy; 2017 SYSUcampuscircle</p>
                 </div>
@@ -487,20 +498,26 @@
 
                 <label><b>上传Logo</b></label>
 
-                <button class="weui-btn weui-btn_mini weui-btn_plain-primary" onclick="document.getElementById('ACT_input').click();">点击上传图片</button>
+                <button class="weui-btn weui-btn_mini weui-btn_plain-primary"
+                        onclick="document.getElementById('ACT_input').click();">点击上传图片
+                </button>
                 <input type="file" style="display:none" accept="image/*" id="ACT_input">
                 <br>
                 <img id="ACT_logo" width="70px" height="110px" style="    margin-left: 3%;">
                 <br>
                 <input type="radio" name="formChoose" value="default" checked> <b>使用默认报名表</b>
 
-                <button class="weui-btn weui-btn_mini weui-btn_plain-primary" onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">点此处预览</button>
+                <button class="weui-btn weui-btn_mini weui-btn_plain-primary"
+                        onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">
+                    点此处预览
+                </button>
                 &nbsp;
                 <br>
                 <input type="radio" name="formChoose" value="make"
                        onclick="document.getElementById('myDIV').style.display='block';document.getElementById('id02').style.display='none';">
                 <b>自定义报名表~</b>
-                <button class="weui-btn weui-btn_mini weui-btn_plain-primary" onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">
+                <button class="weui-btn weui-btn_mini weui-btn_plain-primary"
+                        onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">
                     点此处预览
                 </button>
                 &nbsp;
@@ -510,7 +527,8 @@
                 <!--取消和提交按钮-->
                 <div class="clearfix">
                     <button type="button"
-                            onclick="document.getElementById('id02').style.display='none';document.getElementById('main_1').style.display='block'" class="cancelbtn">取消
+                            onclick="document.getElementById('id02').style.display='none';document.getElementById('main_1').style.display='block'"
+                            class="cancelbtn">取消
                     </button>
                     <button type="submit" class="signupbtn">提交</button>
                 </div>
@@ -689,7 +707,8 @@
         <p class="weui-tabbar__label">首页</p>
     </a>
     <a href="#" class="weui-tabbar__item tab" onclick="tabNav(event,'page2');read_message()">
-        <i class="weui-tabbar__icon fa fa-bell" style="font-size:22px;position: relative"></i><span class="weui-badge weui-badge_dot" style="position: absolute;top:5px;display: none" id="mess_dot"></span>
+        <i class="weui-tabbar__icon fa fa-bell" style="font-size:22px;position: relative"></i><span
+            class="weui-badge weui-badge_dot" style="position: absolute;top:5px;display: none" id="mess_dot"></span>
         <p class="weui-tabbar__label">消息</p>
     </a>
     <a href="#" class="weui-tabbar__item tab" id="myself" onclick="tabNav(event,'page3')">
@@ -931,13 +950,13 @@
         document.getElementById('myDIV').style.display = 'none';
         document.getElementById('id02').style.display = 'block';
     };
-    document.getElementById("sendMessage").onclick = function (event){
+    document.getElementById("sendMessage").onclick = function (event) {
         event.target.disabled = true;
         postMessage({
             serverType: "Send",
             type: "",
             title: "",
-            content:document.getElementById("message_mass").value
+            content: document.getElementById("message_mass").value
         }, "conversation.php", function () {
             event.target.disabled = false;
             alert('发送成功');
@@ -965,17 +984,15 @@
         uploadImg(event, "diary_img2");
     };
 
-    function uploadImg(event, id){
+    function uploadImg(event, id, width, height) {
         var file = event.target.files[0];
         var fr = new FileReader();
         var reg = new RegExp(/image\/\w+/);
         if (reg.test(file.type)) {
             fr.onload = function (event) {
-                var url = event.target.result;
-                if (url.length <= 1024 * 100)//图片大小限制(dataURL本身的原因，多少不太明确)
-                    document.getElementById(id).src = event.target.result;
-                else
-                    alert("图片过大，请选择50kb以下的图片！");
+                getBase64URL(event.target.result, width, height, function (url) {
+                    document.getElementById(id).src = url;
+                });
             };
             fr.readAsDataURL(file);
         } else
@@ -1017,7 +1034,7 @@
                 postMessage({serverType: "Get"}, "message.php", function (json) {
                     var message = document.getElementById("message");
                     var page_2 = document.getElementById('page2');
-                    var read=0;
+                    var read = 0;
                     for (var i = 0; i < json.length; i++) {
                         if (json[i].type == "act") {
                             message.appendChild(createMessage(json[i].type, json[i].title, ''));
@@ -1030,10 +1047,12 @@
                             message.appendChild(createMessage("work", json[i].title, json[i].time));
                             page_2.appendChild(dialog(i, json[i].time, json[i].title));
                         }
-                        if(json[i].watch=0){ read=read+1;}
+                        if (json[i].watch = 0) {
+                            read = read + 1;
+                        }
                     }
-                    if(read>0){
-                        document.getElementById('mess_dot').style.display='inline-block';
+                    if (read > 0) {
+                        document.getElementById('mess_dot').style.display = 'inline-block';
                     }
                 });
             }
@@ -1047,12 +1066,12 @@
         }
     }
 
-    function read_message(){
-        postMessage({serverType: "Tag"}, "message.php", function (json){
-            for (var i = 0; i < json.length; i++){
-                json[i].watch=1;
+    function read_message() {
+        postMessage({serverType: "Tag"}, "message.php", function (json) {
+            for (var i = 0; i < json.length; i++) {
+                json[i].watch = 1;
             }
-            document.getElementById('mess_dot').style.display='none';
+            document.getElementById('mess_dot').style.display = 'none';
         });
     }
 
@@ -1190,7 +1209,7 @@
         return a;
     }
 
-    function createAcc(title, obj, uid){
+    function createAcc(title, obj, uid) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var p = document.createElement("p");
@@ -1263,7 +1282,7 @@
                     table.appendChild(header);
                 table.appendChild(tr);
             }
-            if(obj.length==0){
+            if (obj.length == 0) {
                 document.getElementById('fill').style.display = 'none';
                 document.getElementById('none_tip').style.display = 'block';
             }
@@ -1312,13 +1331,13 @@
         return a;
     }
 
-    function createCalPiece(start, end, desc,uid) {
+    function createCalPiece(start, end, desc, uid) {
         var li = document.createElement('li');
         var span = document.createElement('span');
         span.className = "fa fa-calendar-minus-o";
         span.style = "font-size:15px;position:absolute;right:0;top:30%";
-        span.onclick = function (event){
-            document.getElementById('delete_act').style.display='block';
+        span.onclick = function (event) {
+            document.getElementById('delete_act').style.display = 'block';
             event = event || window.event;
             event.preventDefault();
             span_id = uid;
@@ -1368,11 +1387,11 @@
         }
         table.appendChild(tr_head);
 
-        for (i = 0; i < tr_str; i++) { //表格的行
+        for (var i = 0; i < tr_str; i++) { //表格的行
             var tr = document.createElement("tr");
             tr.className = "day";
 
-            for (k = 0; k < 7; k++) { //表格每行的单元格
+            for (var k = 0; k < 7; k++) { //表格每行的单元格
                 var idx = i * 7 + k; //单元格自然序列号
                 var date_str = idx - firstday + 1; //计算日期
                 date_str = (date_str <= 0 || date_str > m_days[mnow]) ? " " : idx - firstday + 1; //过滤无效日期（小于等于零的、大于月总天数的）
@@ -1388,6 +1407,13 @@
                 } else {
                     td.bgColor = '#fff';
                 }
+                if (date_str != " ")
+                    for (var l = 0; l < json.length; l++) {
+                        var date = new Date(ynow, mnow, date_str);
+                        if (date.getTime() - Date.parse(json[l].start) >= 0 && date.getTime() - Date.parse(json[l].end) <= 0) {
+                            td.bgColor = 'red';
+                        }
+                    }
 //                for (var i = 0; i < json.length; i++){
 //                if(date_str=json[i].start.getDay()){
 //                    td.style.color='red';
@@ -1405,9 +1431,9 @@
             ul.innerHTML = "";
             for (var i = 0; i < json.length; i++) {
                 var date = new Date(ynow, mnow, event.target.day);
-                if (date.getTime() - Date.parse(json[i].start) >= 0 && date.getTime() - Date.parse(json[i].end) <= 0){
-                    ul.appendChild(createCalPiece(json[i].start, json[i].end, json[i].name,json[i].UID));}
-                console.log(json[0].start.getDay());
+                if (date.getTime() - Date.parse(json[i].start) >= 0 && date.getTime() - Date.parse(json[i].end) <= 0) {
+                    ul.appendChild(createCalPiece(json[i].start, json[i].end, json[i].name, json[i].UID));
+                }
             }
         };
 
@@ -1480,7 +1506,7 @@
         return div_3;
     }
 
-    function dialog_act(value){
+    function dialog_act(value) {
         document.getElementById('dialog_act').style.display = 'none';
         if (value && del_id >= 0) {
             postMessage({
@@ -1493,9 +1519,9 @@
         }
     }
 
-    function delete_act(value){
+    function delete_act(value) {
         document.getElementById('delete_act').style.display = 'none';
-        if (value && span_id >= 0){
+        if (value && span_id >= 0) {
             postMessage({
                 serverType: "delDate",
                 UID: span_id
