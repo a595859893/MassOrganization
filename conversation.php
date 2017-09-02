@@ -11,12 +11,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($serverType == "Send") {
         $character = $_POST["character"];
         $content = $_POST["content"];
+        $targetUID = $_POST["targetUID"] ? $_POST["targetUID"] : 0;
         $type = $_POST["type"];
         $uid = $_POST["UID"];
 
         if ($uid == -1) {
-            $order = "INSERT INTO conversation (openID,word,content,type,time) ";
-            $order .= "VALUES('$openID','$character','$content','$type',FROM_UNIXTIME($time))";
+            $order = "INSERT INTO conversation (openID,word,content,type,time,targetUID) ";
+            $order .= "VALUES('$openID','$character','$content','$type',FROM_UNIXTIME($time),$targetUID)";
             $rst = $mysqli->query($order);
             if (!$rst) $line["error"] = setError(0, "话题发起时，数据库错误，提示：" . $mysqli->error);
         } else {
@@ -99,8 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else $line["error"] = setError(0, "点赞判断时，数据库错误，提示：" . $mysqli->error);
     } elseif ("getHotReview" == $serverType) {
         $uid = $_POST["UID"];
-        $line["review"] = array();
-        $line["success"] = true;
+        $line["hotCon"] = array();
 
         $rst = $mysqli->query("SELECT * FROM conversation WHERE UID=$uid LIMIT 1");
         if ($rst) {
