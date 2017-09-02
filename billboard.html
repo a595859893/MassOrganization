@@ -21,7 +21,7 @@
 <body>
 
 
-<div style="background-color: #f9f9f9;text-align: center;color:#000;padding: 8px">
+<div style="background-color: #dedede;text-align: center;color:#000;padding: 8px">
     <span><i class="fa fa-fire" style="color:indianred;font-size: 20px"></i> 排行榜 </span>
 </div>
 
@@ -45,6 +45,8 @@
                 <div class="weui-panel__bd" id="frame">
                     <!--JS添加处-->
                 </div>
+
+                <div id="loading_1" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin" style="font-size: 30px;"></i></div>
             </div>
         </div>
 
@@ -55,6 +57,7 @@
                 <div class="weui-panel__bd" id="frame2">
                     <!--JS添加处-->
                 </div>
+                <div id="loading_2" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin" style="font-size: 30px;"></i></div>
             </div>
         </div>
 
@@ -72,16 +75,24 @@
     function init() {
         var xmlhttp = GetXMLHTTPRequest();
         var content = {serverType: "Billboard", num: 10};
+        var loading_1=document.getElementById('loading_1');
+        loading_1.style.display='block';
+        var loading_2=document.getElementById('loading_2');
+        loading_2.style.display='block';
         xmlhttp.open("POST", "activity.php", true);
         xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
         xmlhttp.send(toStr(content));
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var json = JSON.parse(xmlhttp.responseText);
-                if (json.success)
-                    dealContent(json);
-                else
+                if (json.success){
+                 dealContent(json);
+                loading_1.style.display='none';
+                loading_2.style.display='none';
+                }
+                else{
                     console.log(json.error);
+                }
             }
         };
     }
@@ -102,7 +113,6 @@
     }
 
 
-    //    需要从后端获取title(活动名字/社团名字)，logo(社团logo)，order(序号),点赞数num
     function dealContent(json) {
         var frame = document.getElementById("frame");
         var frame2 = document.getElementById("frame2");

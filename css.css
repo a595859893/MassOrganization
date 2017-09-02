@@ -294,7 +294,7 @@
     color: rgba(153, 153, 153, 0.4);
 }
 
-#id02 button,#id03 button,#myDIV button,#id04 button,#dairy button,#id05 button{
+#id02 .clearfix button,#id03 button,#myDIV button,#id04 button,#dairy button,#id05 button{
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -303,9 +303,11 @@
     cursor: pointer;
     width: 40%;
 }
-
-#id02 .cancelbtn, #id03 .cancelbtn,#myDIV button.cancelbtn, #id04 .cancelbtn, #id05 .cancelbtn,#dairy .cancelbtn{
-    padding: 14px 20px;
+#id02 button.weui-btn{
+    margin-bottom: 5px;
+}
+#id02 .clearfix .cancelbtn, #id03 .cancelbtn,#myDIV button.cancelbtn, #id04 .cancelbtn, #id05 .cancelbtn,#dairy .cancelbtn{
+    /*padding: 14px 20px;*/
     background-color: #2b72bc;
 }
 
@@ -374,23 +376,25 @@
             margin: 1% auto 5% auto;
         }
 
-        #page4 #table_1{
-            width:100%;
-            border-collapse:collapse;
+        #page4 #table_1 table{
+            width:1024px;
+            /*border-collapse:collapse;*/
         }
 
         #page4 #table_1 td,#page4 #table_1 th{
             border:1px solid  #136832;
             padding:3px 7px 2px 7px;
+            text-align: center;
         }
 
         #page4 #table_1 th{
             font-size:1.1em;
-            text-align:left;
+            text-align:center;
             padding-top:5px;
             padding-bottom:4px;
             background-color: #136832;
             color:#ffffff;
+            /*border-right: 1px solid #fff;*/
         }
 
         #id02 .clearfix::after {

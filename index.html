@@ -172,7 +172,7 @@
                 </div>
                 <div class="weui-media-box__bd">
                     <h4 class="weui-media-box__title" id="openID_name">名字</h4>
-                    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">
+                    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;padding: 5px;margin-top: 5px;">
                         社团管理者登陆
                     </button>
                 </div>
@@ -209,7 +209,7 @@
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="month" id="month">
-            <i class="fa fa-calendar-plus-o" style="font-size:25px;color:#fff;position: relative;left: 281px;top: 11px;"
+            <i class="fa fa-calendar-plus-o" style="font-size:25px;color:#fff;position: relative;left: 95%;"
                onclick="document.getElementById('add').style.display = 'block';"></i>
             <ul>
                 <li style="text-align:center">
@@ -290,8 +290,7 @@
 
         <br>
         <article class="main">
-            <button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard"
-                                                                                               style="font-size:18px;color: #136832;"></i>
+            <button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i>
                 活动管理
             </button>
             <div class="panel" id="MyAct">
@@ -329,27 +328,47 @@
 
     <!--活动管理表格-->
     <div style="display: none;" id="table_main">
-        <div id="table_1" style="overflow-x: visible">
-            <table id="activityListContainer" style="overflow-x: auto;"></table>
+        <div id="table_1" style="overflow: auto">
+            <table id="activityListContainer"></table>
         </div>
         <div class="weui-cells__title">向报名者发送消息</div>
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
                     <textarea class="weui-textarea" placeholder="您已成功报名此活动，请尽快与负责人联系" rows="3"></textarea>
-                    <div class="weui-textarea-counter"><span>0</span>/50</div>
+                    <div class="weui-textarea-counter"><span>0</span>/40</div>
                 </div>
             </div>
         </div>
         <div class="weui-btn-area">
-            <button class="weui-btn weui-btn_plain-primary " style="width: 45%;float: left"
-                    onclick="document.getElementById('table_main').style.display='none';document.getElementById('main_1').style.display='block'">
+            <button class="weui-btn weui-btn_mini  weui-btn_plain-primary " style="float: left" onclick="document.getElementById('table_main').style.display='none';document.getElementById('main_1').style.display='block'">
                 返回
             </button>
-            <button class="weui-btn weui-btn_plain-primary " style="width: 50%;float: right;margin-top: 0">确认并发送
+            <button class="weui-btn weui-btn_mini weui-btn_plain-primary " style="float: right;margin-top: 0">确认并发送
             </button>
         </div>
+    </div>
 
+    <!--没有报名表-->
+    <div class="weui-msg" id="none_tip" style="display:none">
+        <div class="weui-msg__icon-area"><i class="weui-icon-info weui-icon_msg"></i></div>
+        <div class="weui-msg__text-area">
+            <h2 class="weui-msg__title">提示</h2>
+            <p class="weui-msg__desc">未使用报名表，无活动报名表信息</p>
+        </div>
+        <div class="weui-msg__opr-area">
+            <p class="weui-btn-area">
+                <button class="weui-btn weui-btn_plain-primary" onclick="document.getElementById('none_tip').style.display='none';document.getElementById('main_1').style.display='block'">返回</button>
+            </p>
+        </div>
+        <div class="weui-msg__extra-area">
+            <div class="weui-footer">
+                <p class="weui-footer__links">
+                    <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67a84c01324490ca&redirect_uri=http%3A%2F%2Fwww.campuscircle.top%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect" class="weui-footer__link">中大园圈</a>
+                </p>
+                <p class="weui-footer__text">Copyright &copy; 2017 SYSUcampuscircle</p>
+            </div>
+        </div>
     </div>
 
     <!--社团日志-->
@@ -450,21 +469,23 @@
                 <input type="text" placeholder="校团工委" id="ACT_organizer" required>
 
                 <label><b>上传Logo</b></label>
-                <button type="button" onclick="document.getElementById('ACT_input').click();">点击上传图片</button>
+                <!--<button type="button" onclick="document.getElementById('ACT_input').click();">点击上传图片</button>-->
+                <button class="weui-btn weui-btn_mini weui-btn_plain-primary" onclick="document.getElementById('ACT_input').click();">点击上传图片</button>
                 <input type="file" style="display:none" accept="image/*" id="ACT_input">
                 <br>
-                <img id="ACT_logo" width="70px" height="110px">
+                <img id="ACT_logo" width="70px" height="110px" style="    margin-left: 3%;">
                 <br>
                 <input type="radio" name="formChoose" value="default" checked> <b>使用默认报名表</b>
-                <button onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">
-                    点此处预览
-                </button>
+                <!--<button  onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">-->
+                    <!--点此处预览-->
+                <!--</button>-->
+                <button class="weui-btn weui-btn_mini weui-btn_plain-primary" onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">点此处预览</button>
                 &nbsp;
                 <br>
                 <input type="radio" name="formChoose" value="make"
                        onclick="document.getElementById('myDIV').style.display='block';document.getElementById('id02').style.display='none';">
                 <b>自定义报名表~</b>
-                <button onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">
+                <button class="weui-btn weui-btn_mini weui-btn_plain-primary" onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';">
                     点此处预览
                 </button>
                 &nbsp;
@@ -474,8 +495,7 @@
                 <!--取消和提交按钮-->
                 <div class="clearfix">
                     <button type="button"
-                            onclick="document.getElementById('id02').style.display='none';document.getElementById('main_1').style.display='block'"
-                            class="cancelbtn">取消
+                            onclick="document.getElementById('id02').style.display='none';document.getElementById('main_1').style.display='block'" class="cancelbtn">取消
                     </button>
                     <button type="submit" class="signupbtn">提交</button>
                 </div>
@@ -501,11 +521,9 @@
 
                 <label><b>报名开始时间</b></label>
                 <input class="weui-input" type="date" value="2017-09-01" id="NEW_start" required/>
-                <!--<input class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_start'});" id="NEW_start" required>-->
 
                 <label><b>报名截止时间</b></label>
                 <input class="weui-input" type="date" value="2017-09-03" id="NEW_end" required/>
-                <!--<input class="laydate-icon" type="text" onClick="laydate({elem: '#NEW_end'});" id="NEW_end" required>-->
 
                 <label><b>推送链接</b></label>
                 <input type="url" placeholder="复制推送链接至此处" id="NEW_link" required>
@@ -753,7 +771,7 @@
             campus: document.getElementById("ACT_campus").value,
             logo: encodeURIComponent(document.getElementById("ACT_logo").src),
             url: document.getElementById("ACT_url").value,
-            json: JSON.stringify(listjson),
+            json: JSON.stringify(listjson)
         }, "IndexServer.php", function () {
             document.getElementById('id02').style.display = 'none';
             document.getElementById('main_1').style.display = 'block'
@@ -795,7 +813,7 @@
             head: document.getElementById("MASS_head").value,
             logo: encodeURIComponent(document.getElementById("MASS_logo").src),
             QRcode: encodeURIComponent(document.getElementById("massCfg_img").src),
-            desc: document.getElementById("MASS_desc").value,
+            desc: document.getElementById("MASS_desc").value
         };
 
         postMessage(content, "IndexServer.php", function (json) {
@@ -1118,7 +1136,6 @@
             document.getElementById('table_main').style.display = 'block';
             document.getElementById('main_1').style.display = 'none';
             document.getElementById('activityListContainer').innerHTML = '';
-
             var table = document.getElementById('activityListContainer');
             var header = document.createElement("tr");
             for (var i = 0; i < obj.length; i++) {
@@ -1142,12 +1159,11 @@
                         for (var i = 0; i < checkBox.length; i++) {
                             checkBox[i].checked = event.target.checked;
                         }
-                    }
+                    };
                     h_th_checkBox.type = "checkbox";
                     h_th.appendChild(h_th_checkBox);
                     header.appendChild(h_th);
                 }
-
                 for (var j in json) {
                     var td = document.createElement("td");
                     td.innerText = json[j];
@@ -1158,13 +1174,16 @@
                         header.appendChild(th);
                     }
                 }
-
                 if (i == 0)
                     table.appendChild(header);
                 table.appendChild(tr);
             }
+            if(obj.length==0){
+                var tip=document.getElementById('none_tip');
+                document.getElementById('table_main').innerHTML= tip ;
+                tip.style.display = 'block';
+            }
         };
-
         return a;
     }
 
@@ -1210,15 +1229,14 @@
 
     function createCalPiece(start, end, desc) {
         var li = document.createElement('li');
-        var i = document.createElement('i');
-        i.className = "fa fa-calendar-minus-o";
-        i.style = "font-size:15px;position:absolute;right: 0;";
-        i.onclick = function () {
+        var span = document.createElement('span');
+        span.className = "fa fa-calendar-minus-o";
+        span.style = "font-size:15px;position:absolute;right:0;top:30%";
+        span.onclick = function (){
             this.parentElement.style.display = 'none';
         };
-
-        li.appendChild(i);
         li.innerText = start + " ~ " + end + "  \n" + desc;
+        li.appendChild(span);
         return li;
     }
 
@@ -1305,7 +1323,6 @@
         document.getElementById('add').style.display = 'none';
         var time_1 = document.getElementById('start').value;
         var time_2 = document.getElementById('end').value;
-//        var time_3 = document.getElementById('end');
         if (time_1 < time_2) {
             if (condition) {
                 var thing = document.getElementById('thing').value;
