@@ -59,6 +59,7 @@
                 <div class="weui-panel__bd" id="frame">
                     <!--JS添加处-->
                 </div>
+                <div id="loading_1" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin" style="font-size: 30px;"></i></div>
             </div>
         </div>
 
@@ -69,6 +70,8 @@
                 <div class="weui-panel__bd" id="frame2">
                     <!--JS添加处-->
                 </div>
+
+                <div id="loading_2" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin" style="font-size: 30px;"></i></div>
             </div>
         </div>
 
@@ -85,8 +88,8 @@
     init();
 
     function init() {
-        var frame = document.getElementById("frame");
-        var frame2 = document.getElementById("frame2");
+          frame = document.getElementById("frame");
+          frame2 = document.getElementById("frame2");
         postMessage({serverType: "getList", type: "zuzhi"}, "recruitment.php", function (json) {
             for (var i = 0; i < json.length; i++) {
                 frame2.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link));
@@ -179,19 +182,28 @@
     }
     window.onscroll = function () {
         if (getScrollTop() + getClientHeight() == getScrollHeight()) {
-            init();
+            var loading_1=document.getElementById('loading_1');
+            loading_1.style.display='block';
+            postMessage({serverType: "getList", type: "zuzhi"}, "recruitment.php", function (json) {
+                for (var i = 0; i < json.length; i++) {
+                    frame2.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link));
+                    startUID_zuzhi = Math.min(startUID_zuzhi, json[i].UID);
+                }
+                loading_1.style.display='none';
+            });
+            var loading_2=document.getElementById('loading_2');
+            loading_2.style.display='block';
+            postMessage({serverType: "getList", type: "shetuan"}, "recruitment.php", function (json) {
+                for (var i = 0; i < json.length; i++) {
+                    frame.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link));
+                    startUID_shetuan = Math.min(startUID_shetuan, json[i].UID);
+                }
+                loading_2.style.display='none';
+            });
         }
     };
 
-    var _LoadingHtml = '页面加载中，请等待...';
-    document.write(_LoadingHtml);
-    document.onreadystatechange = completeLoading;
-    function completeLoading() {
-        if (document.readyState == "complete") {
-            var loadingMask = document.getElementById('loadingDiv');
-            loadingMask.parentNode.removeChild(loadingMask);
-        }
-    }
+
 
 </script>
 </body>

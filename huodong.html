@@ -42,12 +42,7 @@
     <header>
         <!--头部筛选栏-->
         <div id="top">
-
-            <button class="accordion" style="text-align: right" onclick="display()"> 筛选 &nbsp;<i class="fa fa-list-ul"
-                                                                                                 style="font-size:15px;color: black;"></i>
-            </button>
-            <button class="accordion" style="text-align: right;    position: absolute;top: 0;z-index: 999;"
-                    onclick="display()"> 筛选 &nbsp;<i class="fa fa-list-ul" style="font-size:15px;color: black;"></i>
+            <button class="accordion" onclick="display()" style="text-align: right; position: absolute; top: 0; z-index: 999; border-bottom:1px solid #e5e5e5"> 筛选 &nbsp;<i class="fa fa-list-ul" style="font-size:15px;color: black;"></i>
             </button>
             <div class="panel" id="panel" style="position: absolute;z-index: 999;top: 37px;">
                 <p>&nbsp;校区</p>
@@ -145,6 +140,7 @@
                 <!--活动JS添加地点-->
             </div>
         </div>
+        <div id="loading" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin" style="font-size: 30px;"></i></div>
     </article>
 </div>
 <!--以下是默认的报名表-->
@@ -367,14 +363,14 @@
             tempA[i].style.backgroundColor = "#F8F8F8 ";
             if (title == "order") {
                 if (ele == actOrder[title])
-                    tempA[i].style.backgroundColor = "#C6E2FF";
+                    tempA[i].style.backgroundColor = "#85CFFE";
             } else if (ele == "不限") {
                 if (isAllIn(tempA[i].parentNode))
-                    tempA[i].style.backgroundColor = "#C6E2FF";
+                    tempA[i].style.backgroundColor = "#85CFFE";
             } else {
                 for (var j = 0; j < actOrder[title].length; j++)
                     if (ele == actOrder[title][j] && !isAllIn(tempA[i].parentNode))
-                        tempA[i].style.backgroundColor = "#C6E2FF";
+                        tempA[i].style.backgroundColor = "#85CFFE";
             }
         }
     }
@@ -455,22 +451,22 @@
     window.onscroll = function () {
         if (getScrollTop() + getClientHeight() == getScrollHeight()) {
 //            init();
-            getActivity(actOrder);
+//            getActivity(actOrder);
+            var loading=document.getElementById('loading');
+            loading.style.display='block';
+            postMessage(type, "activity.php", function (json) {
+                var card = document.getElementById("actlist");
+                for (var i = 0; i < json.length; i++) {
+                    card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location,
+                            json[i].holdtime, json[i].organizer, json[i].UID, json[i].json, json[i].logo, json[i].mark, json[i].url));
+                    startUID = Math.min(startUID, json[i].UID);
+                }
+                loading.style.display='none';
+            });
         }
     };
 
-//    var loading = '页面加载中，请等待...';
-//    var complete = '页面加载完毕';
-//    document.onreadystatechange = completeLoading;
-//    function completeLoading() {
-//        if (document.readyState == "complete") {
-////            var loadingMask = document.getElementById('loadingDiv');
-////            loadingMask.parentNode.removeChild(loadingMask);
-//            document.write(complete);
-//        }else{
-//            document.write(_LoadingHtml);
-//        }
-//    }
+
 
 </script>
 </body>
