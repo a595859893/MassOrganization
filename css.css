@@ -1,5 +1,5 @@
 
-        body,html,#page1,#page2,#page3,#page4{
+        html,#page1,#page2,#page3,#page4{
             height: 100%;
             overflow-x: hidden;
         }

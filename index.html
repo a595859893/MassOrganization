@@ -1098,7 +1098,7 @@
 
         var radio = document.getElementsByName("formChoose");
         for (var i = 0; i < radio.length; i++)
-            if (info.type = radio[i].value)
+            if (info.type == radio[i].value)
                 radio[i].checked=true;
 
         document.getElementById("footer").style.display = 'none';
