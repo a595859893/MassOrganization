@@ -180,6 +180,7 @@
     function getScrollHeight(){
         return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
     }
+    var startUID=-1;
     window.onscroll = function () {
         if (getScrollTop() + getClientHeight() == getScrollHeight()) {
             var loading_1=document.getElementById('loading_1');

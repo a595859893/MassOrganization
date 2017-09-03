@@ -179,7 +179,7 @@
             </div>
             <div class="weui-cell" id="my_topic" style="display: none">
                 <div class="weui-cell__bd" style="border: 1px solid #e5e5e5; ">
-                    <input class="weui-input" id="topic_value" type="text" placeholder="请输入话题"/>
+                    <input class="weui-input" id="topic_value" type="text" maxlength="17" placeholder="请输入话题"/>
                 </div>
                 <div class="weui-cell__ft">
                     <span class="fa fa-send-o" id="send_topic" style="color: #000;margin-left:3px;"></span>
@@ -613,15 +613,17 @@
      function getScrollHeight() {
          return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
      }
+    var startUID=-1;
     window.onscroll = function (){
         if (getScrollTop() + getClientHeight() == getScrollHeight()) {
             var loading=document.getElementById('loading');
             loading.style.display='block';
-            postMessage({serverType: "Get", type: "debunk", startUID: -1, num: 20}, "conversation.php", function (json) {
-                conversation.innerHTML = '';
+            postMessage({serverType: "Get", type: "debunk", startUID:startUID, num: 20}, "conversation.php", function (json) {
+//                conversation.innerHTML = '';
                 for (var i = 0; i < json.length; i++) {
                     conversation.appendChild(appendConversation(json[i].UID, json[i].word, json[i].content,
                             json[i].good, json[i].review, json[i].igood));
+                    startUID = (startUID == -1) ? json[i].UID : Math.min(startUID, json[i].UID);
                 }
                 loading.style.display='none';
             });
