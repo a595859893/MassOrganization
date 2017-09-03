@@ -284,8 +284,9 @@
                 num: 20,
                 startUID: startUID
             }, "conversation.php", function (json) {
-                content.innerHTML = '';
+//                content.innerHTML = '';
                 for (var i = 0; i < json.length; i++) {
+                    startUID = startUID==-1?json[i].UID:Math.min(startUID,json[i].UID);
                     content.appendChild(appendConversation(uid, json[i].word, json[i].time, json[i].content, json[i].good, json[i].review, json[i].igood))
                 }
                 loading.style.display='none';
