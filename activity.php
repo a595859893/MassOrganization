@@ -80,12 +80,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $line["mass"] = array();
         $line["activity"] = array();
 
-        $rst = $mysqli->query("SELECT * FROM mass as a WHERE $num>(SELECT count(*) FROM mass WHERE good>a.good) ORDER BY a.good DESC");
+        $rst = $mysqli->query("SELECT * FROM mass ORDER BY good DESC LIMIT $num");
         if ($rst) {
             while ($row = $rst->fetch_array(MYSQLI_ASSOC))
                 $line["mass"][] = $row;
         } else $line["error"] = setError(0, "排行榜社团获取时，数据库错误，错误提示:" . $mysqli->error);
-        $rst = $mysqli->query("SELECT * FROM activity as a WHERE $num>(SELECT count(*) FROM mass WHERE mark>a.mark) ORDER BY a.mark DESC");
+        $rst = $mysqli->query("SELECT * FROM activity ORDER BY mark DESC LIMIT $num");
         if ($rst) {
             while ($row = $rst->fetch_array(MYSQLI_ASSOC))
                 $line["activity"][] = $row;

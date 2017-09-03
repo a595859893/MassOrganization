@@ -71,7 +71,7 @@
         <div class="page" id="page2">
             <div class="weui-panel weui-panel_access">
                 <div class="weui-panel__hd">学生组织</div>
-                <div class="weui-panel__bd">
+                <div class="weui-panel__bd" id="frame2">
                     <!--JS添加处-->
                     <a href=""></a>
                 </div>
@@ -112,7 +112,10 @@
                 mass.div = createActivity(json[i].name, json[i].intro, json[i].number, json[i].good,
                     json[i].UID, json[i].igood, json[i].imark);
                 massList.push(mass);
-                document.getElementById("frame").appendChild(mass.div);
+                if (json[i].type == "zuzhi")
+                    document.getElementById("frame2").appendChild(mass.div);
+                else
+                    document.getElementById("frame").appendChild(mass.div);
                 startUID = Math.min(startUID, json[i].UID);
             }
         });
