@@ -147,7 +147,7 @@
             /*overflow-x: hidden;*/
             overflow: auto;
             transition: 0.5s;
-            padding-top: 60px;
+            /*padding-top: 60px;*/
             /*height: 1024px;*/
         }
 
@@ -155,7 +155,7 @@
             padding: 8px 8px 8px 32px;
             text-decoration: none;
             font-size: 20px;
-            color: #818181;
+            color: #fff;
             display: block;
             transition: 0.3s;
         }
@@ -166,9 +166,9 @@
 
         #page3 .sidenav .closebtn {
             position: absolute;
-            top: 0;
-            right: 0;
-            font-size: 36px;
+            top: -15px;
+            right: 5px;
+            font-size: 50px;
             margin-left: 50px;
         }
         /*#page3 .sidenav{background-color: #f7f7f7;}*/

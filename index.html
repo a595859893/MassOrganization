@@ -210,7 +210,7 @@
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="month" id="month">
-            <i class="fa fa-calendar-plus-o" style="font-size:25px;color:#fff;position: relative;left: 95%;"
+            <i class="fa fa-calendar-plus-o" style="font-size:25px;color:#fff;position: relative;left: 68%;top: 50px;"
                onclick="document.getElementById('add').style.display = 'block';"></i>
             <ul>
                 <li style="text-align:center">
@@ -222,7 +222,7 @@
 
         <div id="table"></div>
         <br>
-        <div style="overflow: auto">
+        <div style="overflow: auto;height: 250px;">
             <ul id="ul" style="height: 1000px">
                 <!--js添加-->
             </ul>
@@ -1586,12 +1586,13 @@
     function openNav() {
         document.getElementById("mySidenav").style.width = "100%";
         document.getElementById("main").style.marginLeft = "0%";
+        document.getElementById("footer").style.display = "none";
     }
 
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
         document.getElementById("main").style.marginLeft = "0";
-        document.body.style.backgroundColor = "white";
+        document.getElementById("footer").style.display = "flex";
     }
 </script>
 

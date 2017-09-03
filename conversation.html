@@ -606,7 +606,7 @@
      function getScrollHeight() {
          return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
      }
-    window.onscroll = function () {
+    window.onscroll = function (){
         if (getScrollTop() + getClientHeight() == getScrollHeight()) {
             var loading=document.getElementById('loading');
             loading.style.display='block';
