@@ -14,7 +14,14 @@
             margin: 0 auto;
             text-align: center;
         }
-
+        .topic_box a{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            color: #000;
+        }
         #old_topic {
             position: relative;
         }
@@ -127,7 +134,7 @@
                     <p>#今日话题#</p>
                 </div>
                 <div class="weui-cell__ft"> 帮助 <i class="fa fa-map-signs" style="color: black;font-size: 17px;"
-                                                  onclick="alert('在#说说吧#中可创建新话题并为已有话题点灯，每日获得盏数最多的话题将开放讨论区 ,点击#今日话题#或#往期话题#即可进入讨论区 ^_^')"></i>
+                                                  onclick="alert('在 #待选话题# 中可创建新话题并为已有话题点灯，每日获得盏数最多的话题将开放讨论区 ,点击 #今日话题# 或 #往期话题# 即可进入讨论区 ^_^')"></i>
                 </div>
             </div>
             <div class="topic_box">
@@ -165,7 +172,7 @@
             <br>
             <div class="weui-cell" onclick="add_1()">
                 <div class="weui-cell__bd">
-                    <p>#说说吧#</p>
+                    <p>#待选话题#</p>
                 </div>
                 <div class="weui-cell__ft"> 创建 <i class="fa fa-plus-square" style="color: black;font-size: 17px;"></i>
                 </div>

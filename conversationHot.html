@@ -14,11 +14,26 @@
             margin: 0 auto;
             text-align: center;
         }
-
+        .topic_box a{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            color: #000;
+        }
         .topic {
             line-height: 120px;
+            color: #000;
         }
-
+        .topic a {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            color: #000;
+        }
         input::-webkit-input-placeholder {
             /* WebKit browsers */
             color: #e4ebe0;
@@ -74,8 +89,7 @@
             </div>
             <div class="weui-media-box__bd">
                 <textarea id="my_content" class="weui-textarea" placeholder="写点什么吧" rows="3"></textarea>
-                <i class="fa fa-paper-plane-o" style="position: absolute;bottom: 5px; right:20px"
-                   id="send"><span> 发送 </span></i>
+                <i class="fa fa-paper-plane-o" style="position: absolute;bottom: 5px; right:20px" id="send"><span> 发送 </span></i>
             </div>
         </div>
     </div>
