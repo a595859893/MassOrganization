@@ -247,7 +247,6 @@
     function getActivity(type) {
         var loading = document.getElementById('loading');
         loading.style.display = 'block';
-
         type.serverType = "GetList";
         type.startUID = startUID;
         type.num = 6;
@@ -435,8 +434,9 @@
     }
 
     window.onscroll = function () {
-        console.log(321);
-        console.log(getScrollHeight());
+        type.serverType = "GetList";
+        type.startUID = startUID;
+        type.num = 6;
         if (getScrollTop() + getClientHeight() == getScrollHeight()) {
             getActivity(type);
         }
