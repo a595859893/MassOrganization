@@ -137,16 +137,18 @@
         }
 
         #page3 .sidenav {
-            height: 100%;
+            /*height: 100%;*/
             width: 0;
             position: fixed;
             z-index: 1;
             top: 0;
             left: 0;
             background-color: #fff;
-            overflow-x: hidden;
+            /*overflow-x: hidden;*/
+            overflow: auto;
             transition: 0.5s;
             padding-top: 60px;
+            /*height: 1024px;*/
         }
 
         #page3 .sidenav a{
