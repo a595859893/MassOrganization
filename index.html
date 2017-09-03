@@ -192,17 +192,21 @@
                                                                                            style="font-size:18px;color: #136832;"></i>我的活动
         </button>
         <div class="panel" id="MyList">
+            <div class="weui-media-box__hd" id="tip1" style="display: none;text-align: center;color: grey">目前还没有参加活动哟，快去选择自己参加的活动吧</div>
             <!--JS添加点-->
         </div>
 
         <button class="accordion"><i class="fa fa-star" style="font-size:18px;color: #136832;"></i> 我的收藏</button>
+
         <div class="panel " id="MyMark">
+            <div class="weui-media-box__hd" id="tip2" style="display: none;text-align: center;color: grey">目前还没有收藏哟，快去选择自己收藏社团吧</div>
             <!--JS添加点-->
         </div>
 
 
         <button class="accordion"><i class="fa fa-black-tie" style="font-size:18px;color: #136832;"></i> 我的社团</button>
         <div class="panel" id="MyMass">
+            <div class="weui-media-box__hd" id="tip3" style="display: none; text-align: center;color: grey">目前还没有收藏哟，快去选择自己收藏社团吧</div>
             <!--JS添加点-->
         </div>
 
@@ -1020,15 +1024,24 @@
                     document.getElementById("openID_head").src = json.info.headimgurl;
                     document.getElementById("openID_name").innerText = json.info.nickname;
                     postMessage({serverType: "getActivity"}, "IndexServer.php", function (json) {
-//                        console.log(json[0]);
+//
                         for (var i = 0; i < json.list.length; i++)
                             document.getElementById("MyList").appendChild(createActivity(json.list[i].name, json.list[i].introduction, json.list[i].location,
-                                json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo));
+                                    json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo));
+                        if(json.list.length==0){
+                            document.getElementById("tip1").style.display='block';
+                        }
                         for (var i = 0; i < json.mark.length; i++)
                             document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
-                                json.mark[i].holdtime, json.mark[i].time, json.mark[i].url, json.mark[i].json, json.mark[i].logo));
+                                    json.mark[i].holdtime, json.mark[i].time, json.mark[i].url, json.mark[i].json, json.mark[i].logo));
+                        if(json.mark.length==0){
+                            document.getElementById("tip2").style.display='block';
+                        }
                         for (var i = 0; i < json.mass.length; i++)
                             document.getElementById("MyMass").appendChild(createMass(json.mass[i].name, json.mass[i].UID));
+                        if(json.mass.length==0){
+                            document.getElementById("tip3").style.display='block';
+                        }
                     });
                     postMessage({serverType: "Get", startUID: -1, num: -1}, "message.php", function (json) {
                         console.log(json);
@@ -1098,7 +1111,7 @@
 
         var radio = document.getElementsByName("formChoose");
         for (var i = 0; i < radio.length; i++)
-            if (info.type = radio[i].value)
+            if (info.type == radio[i].value)
                 radio[i].checked=true;
 
         document.getElementById("footer").style.display = 'none';
