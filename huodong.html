@@ -42,7 +42,9 @@
     <header>
         <!--头部筛选栏-->
         <div id="top">
-            <button class="accordion" onclick="display()" style="text-align: right; position: absolute; top: 0; z-index: 999; border-bottom:1px solid #e5e5e5"> 筛选 &nbsp;<i class="fa fa-list-ul" style="font-size:15px;color: black;"></i>
+            <button class="accordion" onclick="display()"
+                    style="text-align: right; position: absolute; top: 0; z-index: 999; border-bottom:1px solid #e5e5e5">
+                筛选 &nbsp;<i class="fa fa-list-ul" style="font-size:15px;color: black;"></i>
             </button>
             <div class="panel" id="panel" style="position: absolute;z-index: 999;top: 37px;">
                 <p>&nbsp;校区</p>
@@ -140,7 +142,8 @@
                 <!--活动JS添加地点-->
             </div>
         </div>
-        <div id="loading" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin" style="font-size: 30px;"></i></div>
+        <div id="loading" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin"
+                                                                      style="font-size: 30px;"></i></div>
     </article>
 </div>
 <!--以下是默认的报名表-->
@@ -152,7 +155,8 @@
             </div>
             <div class="clearfix">
                 <button type="button"
-                        onclick="document.getElementById('id04').style.display='none';document.getElementById('main_2').style.display='block'"  class="cancelbtn">
+                        onclick="document.getElementById('id04').style.display='none';document.getElementById('main_2').style.display='block'"
+                        class="cancelbtn">
                     取消
                 </button>
                 <button type="submit" class="signupbtn">提交</button>
@@ -168,6 +172,7 @@
     var postIndex = -1;
     var startUID = -1;
 
+    document.getElementById("actlist").innerHTML = "";
     getActivity(actOrder);
     setOptionColor(actOrder);
 
@@ -239,10 +244,12 @@
     };
 
     function getActivity(type) {
-        document.getElementById("actlist").innerHTML = "";
+        var loading = document.getElementById('loading');
+        loading.style.display = 'block';
+
         type.serverType = "GetList";
         type.startUID = startUID;
-        type.num = 20;
+        type.num = 6;
         postMessage(type, "activity.php", function (json) {
             var card = document.getElementById("actlist");
             for (var i = 0; i < json.length; i++) {
@@ -250,6 +257,7 @@
                     json[i].holdtime, json[i].organizer, json[i].UID, json[i].json, json[i].logo, json[i].mark, json[i].url));
                 startUID = Math.min(startUID, json[i].UID);
             }
+            loading.style.display = 'none';
         });
     }
 
@@ -424,53 +432,14 @@
         }
         return act;
     }
-</script>
-<script>
-    //获取滚动条当前的位置
-    function getScrollTop() {
-        var scrollTop = 0;
-        if (document.documentElement && document.documentElement.scrollTop) {
-            scrollTop = document.documentElement.scrollTop;
-        } else if (document.body) {
-            scrollTop = document.body.scrollTop;
-        }
-        return scrollTop;
-    }
-
-    //获取当前可视范围的高度
-    function getClientHeight() {
-        var clientHeight = 0;
-        if (document.body.clientHeight && document.documentElement.clientHeight) {
-            clientHeight = Math.min(document.body.clientHeight, document.documentElement.clientHeight);
-        } else {
-            clientHeight = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
-        }
-        return clientHeight;
-    }
-
-    //获取文档完整的高度
-    function getScrollHeight() {
-        return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-    }
 
     window.onscroll = function () {
+        console.log(321);
+        console.log(getScrollHeight());
         if (getScrollTop() + getClientHeight() == getScrollHeight()) {
-//            init();
-//            getActivity(actOrder);
-            var loading=document.getElementById('loading');
-            loading.style.display='block';
-            postMessage(type, "activity.php", function (json) {
-                var card = document.getElementById("actlist");
-                for (var i = 0; i < json.length; i++) {
-                    card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location,
-                            json[i].holdtime, json[i].organizer, json[i].UID, json[i].json, json[i].logo, json[i].mark, json[i].url));
-                    startUID = Math.min(startUID, json[i].UID);
-                }
-                loading.style.display='none';
-            });
+            getActivity(type);
         }
     };
-
 </script>
 </body>
 </html>

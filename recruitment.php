@@ -13,7 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $order = "SELECT * FROM recruitment WHERE type='$type'";
         if ($startUID > 0)
-            $order .= " WHERE UID<$startUID";
+            $order .= " AND UID<$startUID";
+        $order .= " ORDER BY UID DESC";
         if ($num > 0)
             $order .= " LIMIT $num";
 
