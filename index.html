@@ -27,25 +27,25 @@
         <div class="slideshow-container">
             <div class="mySlides fade">
                 <a href="http://mp.weixin.qq.com/s/SwSS9QgcUHQhNAtbtl4N2Q">
-                <div class="numbertext">1 / 3</div>
-                <img src="img/轮播一.jpg" style="width:100%">
-                <!--<div class="text">文本 1</div>-->
+                    <div class="numbertext">1 / 3</div>
+                    <img src="img/轮播一.jpg" style="width:100%">
+                    <!--<div class="text">文本 1</div>-->
                 </a>
             </div>
 
             <div class="mySlides fade">
                 <a href="http://mp.weixin.qq.com/s/PDcragJLyXbuiGmzVD9Srw">
-                <div class="numbertext">2 / 3</div>
-                <img src="img/轮播二.jpg" style="width:100%">
-                <!--<div class="text">文本 2</div>-->
+                    <div class="numbertext">2 / 3</div>
+                    <img src="img/轮播二.jpg" style="width:100%">
+                    <!--<div class="text">文本 2</div>-->
                 </a>
             </div>
 
             <div class="mySlides fade">
                 <a href="http://mp.weixin.qq.com/s/QjQ2rzUgtrCVDEs64OpNYQ">
-                <div class="numbertext">3 / 3</div>
-                <img src="img/轮播三.jpg" style="width:100%">
-                <!--<div class="text">文本 3</div>-->
+                    <div class="numbertext">3 / 3</div>
+                    <img src="img/轮播三.jpg" style="width:100%">
+                    <!--<div class="text">文本 3</div>-->
                 </a>
             </div>
 
@@ -178,7 +178,8 @@
                 </div>
                 <div class="weui-media-box__bd">
                     <h4 class="weui-media-box__title" id="openID_name">名字</h4>
-                    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;padding: 5px;margin-top: 5px;">
+                    <button onclick="document.getElementById('id01').style.display='block'"
+                            style="width:auto;padding: 5px;margin-top: 5px;">
                         社团管理者登陆
                     </button>
                 </div>
@@ -187,7 +188,8 @@
         <br>
         <!--通过下拉菜单查看-->
 
-        <button class="accordion" style="border-top: 0.01px solid rgba(19,104,50,0.6);"><i class="fa fa-paper-plane-o"  style="font-size:18px;color: #136832;"></i>我的活动
+        <button class="accordion" style="border-top: 0.01px solid rgba(19,104,50,0.6);"><i class="fa fa-paper-plane-o"
+                                                                                           style="font-size:18px;color: #136832;"></i>我的活动
         </button>
         <div class="panel" id="MyList">
             <!--JS添加点-->
@@ -511,14 +513,18 @@
                 <br>
                 <input type="radio" name="formChoose" value="default" checked> <b>使用默认报名表</b>
 
-                <button class="weui-btn weui-btn_mini weui-btn_plain-primary" onclick="document.getElementById('id05').style.display='block';document.getElementById('main_1').style.display='none';document.getElementById('id02').style.display='none';">点此处预览</button>
+                <button class="weui-btn weui-btn_mini weui-btn_plain-primary"
+                        onclick="document.getElementById('id05').style.display='block';document.getElementById('main_1').style.display='none';document.getElementById('id02').style.display='none';">
+                    点此处预览
+                </button>
                 &nbsp;
                 <br>
                 <input type="radio" name="formChoose" value="make"
                        onclick="document.getElementById('myDIV').style.display='block';document.getElementById('id02').style.display='none';document.getElementById('main_1').style.display='none';">
                 <b>自定义报名表~</b>
 
-                <button class="weui-btn weui-btn_mini weui-btn_plain-primary" onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';document.getElementById('main_1').style.display='none';">
+                <button class="weui-btn weui-btn_mini weui-btn_plain-primary"
+                        onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';document.getElementById('main_1').style.display='none';">
                     点此处预览
                 </button>
                 &nbsp;
@@ -856,7 +862,7 @@
         event.preventDefault();
 
         var type;
-        var radio = document.getElementsByName("formChoose");
+        var radio = document.getElementsByName("radio1");
         for (var i = 0; i < radio.length; i++)
             if (radio[i].checked)
                 type = radio[i].value;
@@ -1053,8 +1059,10 @@
                             read = read + 1;
                         }
                     }
+
 //                    if(json.length==0){document.getElementById('message').innerText='暂无消息……'}
                     if (read > 0) {document.getElementById('mess_dot').style.display = 'inline-block';}
+
                 });
             }
         });
@@ -1426,7 +1434,7 @@
                         var date = new Date(ynow, mnow, date_str);
                         if (date.getTime() - Date.parse(json[l].start) >= 0 && date.getTime() - Date.parse(json[l].end) <= 0) {
                             td.style.color = 'red';
-                            td.style.fontWeight='border';
+                            td.style.fontWeight = 'border';
                         }
                     }
                 tr.appendChild(td);
@@ -1440,8 +1448,8 @@
             ul.innerHTML = "";
             for (var i = 0; i < json.length; i++) {
                 var date = new Date(ynow, mnow, event.target.day);
-                if (date.getTime() - Date.parse(json[i].start) >= 0 && date.getTime() - Date.parse(json[i].end) <= 0){
-                    ul.appendChild(createCalPiece(json[i].start, json[i].end, json[i].name,json[i].UID));
+                if (date.getTime() - Date.parse(json[i].start) >= 0 && date.getTime() - Date.parse(json[i].end) <= 0) {
+                    ul.appendChild(createCalPiece(json[i].start, json[i].end, json[i].name, json[i].UID));
                 }
             }
         };
@@ -1467,7 +1475,7 @@
                             actEnd: time_2
                         }, "schedule.php", function () {
                             postMessage({serverType: "getDate"}, "schedule.php", function (json) {
-                                document.getElementById('table').innerHTML='';
+                                document.getElementById('table').innerHTML = '';
                                 document.getElementById('table').appendChild(createCal(json));
                             });
                             alert('添加成功！');

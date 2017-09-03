@@ -28,11 +28,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } elseif ("Get" == $serverType) {
         $startUID = $_POST["startUID"];
+        $UID = $_POST["UID"];
         $num = $_POST["num"];
         $type = $_POST["type"];
         $order = "SELECT * FROM conversation WHERE type='$type'";
+        if ($type == "hot")
+            $order .= " AND targetUID=$UID";
         if ($startUID > 0)
-            $order .= " AND WHERE UID<$startUID";
+            $order .= " AND UID<$startUID";
         $order .= " ORDER BY UID DESC";
         if ($num > 0)
             $order .= " LIMIT $num";
