@@ -26,21 +26,27 @@
     <header style="position: relative">
         <div class="slideshow-container">
             <div class="mySlides fade">
+                <a href="http://mp.weixin.qq.com/s/SwSS9QgcUHQhNAtbtl4N2Q">
                 <div class="numbertext">1 / 3</div>
-                <img src=" " style="width:100%">
+                <img src="img/轮播一.jpg" style="width:100%">
                 <!--<div class="text">文本 1</div>-->
+                </a>
             </div>
 
             <div class="mySlides fade">
+                <a href="http://mp.weixin.qq.com/s/PDcragJLyXbuiGmzVD9Srw">
                 <div class="numbertext">2 / 3</div>
-                <img src=" " style="width:100%">
+                <img src="img/轮播二.jpg" style="width:100%">
                 <!--<div class="text">文本 2</div>-->
+                </a>
             </div>
 
             <div class="mySlides fade">
+                <a href="http://mp.weixin.qq.com/s/QjQ2rzUgtrCVDEs64OpNYQ">
                 <div class="numbertext">3 / 3</div>
-                <img src=" " style="width:100%">
+                <img src="img/轮播三.jpg" style="width:100%">
                 <!--<div class="text">文本 3</div>-->
+                </a>
             </div>
 
         </div>
@@ -172,8 +178,7 @@
                 </div>
                 <div class="weui-media-box__bd">
                     <h4 class="weui-media-box__title" id="openID_name">名字</h4>
-                    <button onclick="document.getElementById('id01').style.display='block'"
-                            style="width:auto;padding: 5px;margin-top: 5px;">
+                    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;padding: 5px;margin-top: 5px;">
                         社团管理者登陆
                     </button>
                 </div>
@@ -182,8 +187,7 @@
         <br>
         <!--通过下拉菜单查看-->
 
-        <button class="accordion" style="border-top: 0.01px solid rgba(19,104,50,0.6);"><i class="fa fa-paper-plane-o"
-                                                                                           style="font-size:18px;color: #136832;"></i>我的活动
+        <button class="accordion" style="border-top: 0.01px solid rgba(19,104,50,0.6);"><i class="fa fa-paper-plane-o"  style="font-size:18px;color: #136832;"></i>我的活动
         </button>
         <div class="panel" id="MyList">
             <!--JS添加点-->
@@ -210,7 +214,7 @@
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="month" id="month">
-            <i class="fa fa-calendar-plus-o" style="font-size:25px;color:#fff;position: relative;left: 95%;"
+            <i class="fa fa-calendar-plus-o" style="font-size:25px;color:#fff;position: relative;left: 68%;top: 50px;"
                onclick="document.getElementById('add').style.display = 'block';"></i>
             <ul>
                 <li style="text-align:center">
@@ -222,8 +226,8 @@
 
         <div id="table"></div>
         <br>
-        <div>
-            <ul id="ul">
+        <div style="overflow: auto;height: 250px;">
+            <ul id="ul" style="height: 1000px">
                 <!--js添加-->
             </ul>
         </div>
@@ -965,20 +969,20 @@
         uploadImg(event || window.event, "ACT_logo", 110, 70);
     };
     document.getElementById("MASS_logoInput").onchange = function (event) {
-        uploadImg(event || window.event, "MASS_logo", 110, 70);
+        uploadImg(event || window.event, "MASS_logo", 50, 50);
     };
     document.getElementById("massCfg_input").onchange = function (event) {
-        uploadImg(event || window.event, "massCfg_img", 110, 70);
+        uploadImg(event || window.event, "massCfg_img", 80, 80);
     };
     document.getElementById("diary_input_1").onchange = function (event) {
         event = event || window.event;
         event.preventDefault();
-        uploadImg(event, "diary_img", 110, 70);
+        uploadImg(event, "diary_img", 50, 50);
     };
     document.getElementById("diary_input_2").onchange = function (event) {
         event = event || window.event;
         event.preventDefault();
-        uploadImg(event, "diary_img2", 110, 70);
+        uploadImg(event, "diary_img2", 50, 50);
     };
 
     function uploadImg(event, id, width, height) {
@@ -1048,9 +1052,8 @@
                             read = read + 1;
                         }
                     }
-                    if (read > 0) {
-                        document.getElementById('mess_dot').style.display = 'inline-block';
-                    }
+                    if(json.length==0){document.getElementById('message').innerText='暂无消息……'}
+                    if (read > 0) {document.getElementById('mess_dot').style.display = 'inline-block';}
                 });
             }
         });
@@ -1405,17 +1408,12 @@
                     td.bgColor = '#fff';
                 }
 
-//                for (var i = 0; i < json.length; i++) {
-//                    var date_0 = new Date(ynow, mnow, date_str);
-//                    if (date_0.getTime() - Date.parse(json[i].start) >= 0 && date_0.getTime() - Date.parse(json[i].end) <= 0) {
-//                        td.style.color = 'red';
-//                    }
-
                 if (date_str != " ")
                     for (var l = 0; l < json.length; l++) {
                         var date = new Date(ynow, mnow, date_str);
                         if (date.getTime() - Date.parse(json[l].start) >= 0 && date.getTime() - Date.parse(json[l].end) <= 0) {
-                            td.bgColor = 'red';
+                            td.style.color = 'red';
+                            td.style.fontWeight='border';
                         }
                     }
                 tr.appendChild(td);
@@ -1455,6 +1453,10 @@
                             actStart: time_1,
                             actEnd: time_2
                         }, "schedule.php", function () {
+                            postMessage({serverType: "getDate"}, "schedule.php", function (json) {
+                                document.getElementById('table').innerHTML='';
+                                document.getElementById('table').appendChild(createCal(json));
+                            });
                             alert('添加成功！');
                         });
                     } else
@@ -1587,12 +1589,13 @@
     function openNav() {
         document.getElementById("mySidenav").style.width = "100%";
         document.getElementById("main").style.marginLeft = "0%";
+        document.getElementById("footer").style.display = "none";
     }
 
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
         document.getElementById("main").style.marginLeft = "0";
-        document.body.style.backgroundColor = "white";
+        document.getElementById("footer").style.display = "flex";
     }
 </script>
 
