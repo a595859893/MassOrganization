@@ -880,7 +880,7 @@
         postMessage(content, "IndexServer.php", function (json) {
             document.getElementById('id04').style.display = 'none';
             document.getElementById('main_1').style.display = 'block';
-            document.getElementById('main_1').style.display = 'block';
+//            document.getElementById('main_1').style.display = 'block';
             document.getElementById("user_name").innerText = content.name;
 
             postMessage({
@@ -895,6 +895,7 @@
             });
         });
     };
+
     document.getElementById("diary_submit").onclick = function (event) {
         event.target.disabled = true;
         var type;
@@ -935,7 +936,7 @@
                 groupType: "MassMark",
                 groupUID: "uid"
             }, "message.php", function (json) {
-                console.log(json)
+                console.log(json);
                 alert("日志发送成功！");
             });
         });
@@ -1058,12 +1059,10 @@
                             read = read + 1;
                         }
                     }
-                    if (json.length == 0) {
-                        document.getElementById('message').innerText = '暂无消息……'
-                    }
-                    if (read > 0) {
-                        document.getElementById('mess_dot').style.display = 'inline-block';
-                    }
+
+//                    if(json.length==0){document.getElementById('message').innerText='暂无消息……'}
+                    if (read > 0) {document.getElementById('mess_dot').style.display = 'inline-block';}
+
                 });
             }
         });
@@ -1089,6 +1088,19 @@
     function login(info) {
         document.getElementById('id01').style.display = 'none';
         document.getElementById("user_name").innerText = info.name + "(UID:" + info.UID + ")";
+//        console.log(info);
+
+        document.getElementById("MASS_name").value=info.name;
+        document.getElementById("MASS_head").value=info.member;
+        document.getElementById("MASS_logo").src=info.logo;
+        document.getElementById("massCfg_img").src=info.QRcode;
+        document.getElementById("MASS_desc").value=info.intro;
+
+        var radio = document.getElementsByName("formChoose");
+        for (var i = 0; i < radio.length; i++)
+            if (info.type = radio[i].value)
+                radio[i].checked=true;
+
         document.getElementById("footer").style.display = 'none';
         document.getElementById("myself").onclick = function (event) {
             tabNav(event, 'page4')
@@ -1097,7 +1109,6 @@
             for (var i = 0; i < json.activity.length; i++)
                 document.getElementById("MyAct").appendChild(createAcc(json.activity[i].name, json.activity[i].list, json.activity[i].UID));
         });
-
         document.getElementById("myself").click();
     }
 
