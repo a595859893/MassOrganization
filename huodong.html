@@ -434,9 +434,6 @@
     }
 
     window.onscroll = function () {
-        type.serverType = "GetList";
-        type.startUID = startUID;
-        type.num = 6;
         if (getScrollTop() + getClientHeight() == getScrollHeight()) {
             getActivity(type);
         }
