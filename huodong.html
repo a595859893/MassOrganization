@@ -255,7 +255,7 @@
             for (var i = 0; i < json.length; i++) {
                 card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location,
                     json[i].holdtime, json[i].organizer, json[i].UID, json[i].json, json[i].logo, json[i].mark, json[i].url));
-                startUID = Math.min(startUID, json[i].UID);
+                startUID = startUID==-1?json[i].UID:Math.min(startUID, json[i].UID);
             }
             loading.style.display = 'none';
         });
