@@ -1,0 +1,481 @@
+
+        body,html,#page1,#page2,#page3,#page4{
+            height: 100%;
+            overflow-x: hidden;
+        }
+        body {
+            font-family: Verdana,sans-serif;
+            transition: background-color .5s;
+        }
+        .icon {
+            width: 2em; height: 2em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+        #page1 header{
+            height: 30%;
+        }
+        #page1 header .mySlides , #activity .talk .mySlides{
+            height: 100%;
+            display:none;
+        }
+        #page1 header .slideshow-container ,#activity .talk .slideshow-container {
+            position: relative;
+            margin: auto;
+            height: 100%;
+        }
+        #page1 header .text ,#activity .talk .text{
+            color: #666666;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+        }
+        #page1 header .numbertext,#activity .talk .numbertext{
+            color: #666666;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+        #page1 header img,#activity .talk img{
+            height: 100%;
+        }
+        #page1 header .dot ,#activity .talk .dot{
+            cursor:pointer;
+            height: 13px;
+            width: 13px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+        #page1 header .active, .dot:hover {
+            background-color: #717171;
+        }
+        #page1 header .fade ,#activity .talk .fade{
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 1.5s;
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+        @-webkit-keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
+        }
+        @keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
+        }
+        #page3 header{
+            height: 15%;
+        }
+        #page3 .modal input[type=text],#page3 .modal input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        #page3 .modal button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        #page3 .modal button:hover {
+            opacity: 0.8;
+        }
+        #page3 .modal .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #2b72bc;
+        }
+        #page3 .modal .container {
+            padding: 16px;
+        }
+        #page3 .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 3%;
+        }
+
+        #page3 .modal .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        #page3 .modal .animate {
+            -webkit-animation: animatezoom 0.6s;
+            animation: animatezoom 0.6s
+        }
+        @-webkit-keyframes animatezoom {
+            from {-webkit-transform: scale(0)}
+            to {-webkit-transform: scale(1)}
+        }
+
+        @keyframes animatezoom {
+            from {transform: scale(0)}
+            to {transform: scale(1)}
+        }
+
+        #page3 .sidenav {
+            /*height: 100%;*/
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #fff;
+            /*overflow-x: hidden;*/
+            overflow: auto;
+            transition: 0.5s;
+            /*padding-top: 60px;*/
+            /*height: 1024px;*/
+        }
+
+        #page3 .sidenav a{
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #fff;
+            display: block;
+            transition: 0.3s;
+        }
+
+        #page3 .sidenav a:hover, .offcanvas a:focus{
+            color: #f1f1f1;
+        }
+
+        #page3 .sidenav .closebtn {
+            position: absolute;
+            top: -15px;
+            right: 5px;
+            font-size: 50px;
+            margin-left: 50px;
+        }
+        /*#page3 .sidenav{background-color: #f7f7f7;}*/
+        #page3 .sidenav *{box-sizing:border-box;
+            }
+        #page3 .sidenav .month {
+            padding: 7%;
+            width: 100%;
+            background: #136832;
+        }
+        #page3 .sidenav .month ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        #page3 .sidenav .month ul li {
+            color: white;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        #page3 .sidenav #ul>li{
+            border:1px solid #ddd;
+            padding:5px;
+            position: relative;
+            display: block;
+            font-size:13px;
+        }
+        #page3 .sidenav #ul span{
+            /*position: absolute;*/
+            /*right: 0;*/
+            padding:5px;
+            font-size:25px;
+            /*top: -10%;*/
+        }
+        /*#page3 .sidenav table th{color:#fff;}*/
+        #page3 .sidenav table td{color:#777;}
+        #page3 .sidenav #add input{
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            width: 230px;
+            height: 31px;
+            margin: 4px;
+            padding: 4px;
+        }
+        #page3 .sidenav #add li{
+            list-style: none;
+            margin: auto;
+            width: 230px;
+            height: 31px;
+        }
+        #page3 #main{
+            transition: margin-left .5s;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+
+        #page3 #main button,#page4 .main button,#activity #top .accordion{
+            /*background-color: rgba(0, 0, 0, 0.1);*/
+            background-color: #fff;
+            color: #888;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            border-bottom: 0.01px solid rgba(19,104,50,0.5);
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+        }
+
+        #page3 #main header button,#page4 header button{
+            border: 0.01px solid rgba(19,104,50,0.6);
+            padding: 8px 6px;
+            border-radius:3px;
+            /*background-color: rgba(0,0,0,0.1);*/
+            color: #888;
+            cursor: pointer;
+        }
+
+        #page3 #main button.accordion.active, button:hover,#page4 article button.active {
+            /*background-color: #ddd;*/
+        }
+
+        #page3 #main button.accordion:after,#page4 article button:after {
+            content: '\25BC';
+            color: #136832;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+        #page3 #main button.accordion.active:after {
+            content: "\25B2";
+        }
+        #page3 #main div.panel,#page4 div.panel,#activity #top div.panel{
+            padding: 0 18px;
+            background-color: #fff;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+        #page4 article button:after {
+            content: '\25BA';
+        }
+
+#id02 input[type=text],#id02 input[type=number],#id02 input[type=url],#id02 input[type=date],#id02 select,#id03 input[type=text],#id03 input[type=date],#id03 input[type=number],#id03 input[type=url],#id03 select,#myDIV input,#dairy input[type=text],#dairy input[type=url],#id04 input,#id05 input{
+    width: 100%;
+    height: 45px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#id02 label,#id03 label,#myDIV label,#dairy label,#id04 label,#id05 label{display: block}
+
+#id02 input::-webkit-input-placeholder,#id03 input::-webkit-input-placeholder{
+    font-size:10px;
+    color: rgba(153, 153, 153, 0.4);
+}
+
+#id02 .clearfix button,#id03 button,#myDIV button,#id04 button,#dairy button,#id05 button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 3%;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+}
+#id02 button.weui-btn{
+    margin-bottom: 5px;
+}
+#id02 .clearfix .cancelbtn, #id03 .cancelbtn,#myDIV button.cancelbtn, #id04 .cancelbtn, #id05 .cancelbtn,#dairy .cancelbtn{
+    /*padding: 14px 20px;*/
+    background-color: #2b72bc;
+}
+
+#id02 .cancelbtn,.model .signupbtn {float:left;}
+
+#id02 .container,#id03 .container,#id04 .container,#id05 .container{
+    padding: 16px;
+}
+        #page4 .modal ,#activity #id04{
+            display: none;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            /*overflow: hidden;*/
+        }
+
+
+        #id02 .modal-content ,#id03 .modal-content, #myDIV .modal-content,#id04 .modal-content,#id05 .modal-content {
+            background-color: #fefefe;
+            width: 100%;
+            height: 100%;
+        }
+
+        #id02 label,#id03 label,#id04 label,#dairy label,#id05 label{
+            font-size:15px;
+        }
+
+#id04 .weui-cells.weui-cells_checkbox:before,#id04 .weui-cells.weui-cells_checkbox:after{border:0}
+
+        #page4 #myDIV{
+            width: 100%;
+            padding:1% 3%;
+            box-sizing: border-box;
+            display: none;
+        }
+
+
+        #page4 #myDIV input{
+            width: 80%;
+        }
+
+        #page4 #myDIV #myInput{
+            width: 60%;
+            margin: 1% auto ;
+        }
+
+        #page4 #myDIV li{
+            list-style: none;
+        }
+
+        #page4 #myDIV li>span{
+            font-size:25px;
+        }
+
+        #page4 #myDIV .addBtn{
+            background-color:#00ACEE;
+            width: 32%;
+            height: 45px;
+            text-align: center;
+            padding:14px 2px;
+        }
+
+        #page4 #myDIV .modal-content {
+            margin: 1% auto 5% auto;
+        }
+
+        #page4 #table_1 table{
+            width:1024px;
+            /*border-collapse:collapse;*/
+        }
+
+        #page4 #table_1 td,#page4 #table_1 th{
+            border:1px solid  #136832;
+            padding:3px 7px 2px 7px;
+            text-align: center;
+        }
+
+        #page4 #table_1 th{
+            font-size:1.1em;
+            text-align:center;
+            padding-top:5px;
+            padding-bottom:4px;
+            background-color: #136832;
+            color:#ffffff;
+            /*border-right: 1px solid #fff;*/
+        }
+
+        #id02 .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+
+        @media screen and (max-width: 300px) {
+            .cancelbtn, .signupbtn {
+                width: 100%;
+            }
+            span.psw {
+                display: block;
+                float: none;
+            }
+        }
+
+        #footer{
+            position: fixed;
+            bottom: 0;
+        }
+
+        #activity #top {
+            /*display: flex;*/
+            width: 100%;
+            height: 37px;
+        }
+        #activity #top .accordion{
+            color: black;
+            cursor: pointer;
+            padding: 8px;
+        }
+        #activity #top .accordion.active, .accordion:hover {
+            background-color: #ddd;
+            color: rgb(70, 70, 70);
+        }
+        #activity #top div.panel {
+            width: 100%;
+        }
+        #activity #top .button-sp-area {
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+        #activity #top .weui-btn.weui-btn_mini.weui-btn_default {
+            margin: 2%;
+            width: 20%;
+            padding: 0;
+        }
+        #activity #top .panel p {
+            color: #000;
+            font-size: 15px;
+        }
+        #activity .talk {
+            height: 128px;
+            width:100%;
+            position: relative;
+            /*top: 37px;*/
+        }
+        #activity .talk .active, .dot:hover {
+            background-color: #717171;
+        }
+
+        #activity article span.star {
+            color: #cfcfcf;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bolder;
+        }
+        #activity #id04 .cancelbtn,#activity #id04 .signupbtn {
+            float: left;
+            width: 40%
+        }
+        #activity #id04 .clearfix {
+            background-color: #fff;
+        }
+        #footer .weui-bar__item_on i,#footer .weui-bar__item_on p{
+            color: #136832;
+        }

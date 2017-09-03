@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>社团招新</title>
+    <!--全屏显示-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+    <!--引用weui框架做样式-->
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+    <style>
+        ul > li > span {
+            color: #a9a9a9;
+            font-size: 15px;
+        }
+
+        .weui-media-box__info__meta.fa {
+            font-size: 15px;
+            color: #dfdfdf
+        }
+
+        .weui-media-box__desc {
+            line-height: 1.6;
+        }
+
+        img {
+            border-radius: 50%;
+        }
+    </style>
+
+</head>
+<body>
+
+
+<div style="background-color: #dfdfdf;text-align: center;color:#000;padding: 8px">
+    <span>社团招新 <i class="fa fa-bullhorn" style="color:#136832;font-size: 20px"></i></span>
+</div>
+
+<!--顶部选项卡-->
+<div class="weui-tab">
+    <div class="weui-navbar">
+        <div class="weui-navbar__item weui-bar__item_on tab" onclick="tabNav1(event, 'page1')" id="defaultOpen">
+            &#9829 兴趣社团
+        </div>
+        <div class="weui-navbar__item tab" onclick="tabNav1(event, 'page2')">
+            &#9830 学生组织
+        </div>
+    </div>
+
+
+    <div class="weui-tab__panel" id="content">
+        <!--页面一-->
+        <div class="page" id="page1">
+            <div class="weui-panel weui-panel_access">
+                <div class="weui-panel__hd">兴趣社团</div>
+                <div class="weui-panel__bd" id="frame">
+                    <!--JS添加处-->
+                </div>
+                <div id="loading_1" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin"
+                                                                                style="font-size: 30px;"></i></div>
+            </div>
+        </div>
+
+        <!--页面二-->
+        <div class="page" id="page2">
+            <div class="weui-panel weui-panel_access">
+                <div class="weui-panel__hd">学生组织</div>
+                <div class="weui-panel__bd" id="frame2">
+                    <!--JS添加处-->
+                </div>
+
+                <div id="loading_2" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin"
+                                                                                style="font-size: 30px;"></i></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="CommonJS.js"></script>
+<script>
+    var startUID_zuzhi = -1;
+    var startUID_shetuan = -1;
+    var frame = document.getElementById("frame");
+    var frame2 = document.getElementById("frame2");
+    // 触发 id="defaultOpen" click 事件
+    document.getElementById("defaultOpen").click();
+
+    init();
+
+    function init() {
+        postMessage({
+            serverType: "getList",
+            type: "zuzhi",
+            num: 20,
+            startUID: startUID_zuzhi
+        }, "recruitment.php", function (json) {
+            for (var i = 0; i < json.length; i++) {
+                frame2.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link));
+                startUID_zuzhi = (startUID_zuzhi == -1) ? json[i].UID : Math.min(startUID_zuzhi, json[i].UID);
+            }
+        });
+        postMessage({
+            serverType: "getList",
+            type: "shetuan",
+            num: 20,
+            startUID: startUID_shetuan
+        }, "recruitment.php", function (json) {
+            for (var i = 0; i < json.length; i++) {
+                frame.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link));
+                startUID_shetuan = (startUID_shetuan == -1) ? json[i].UID : Math.min(startUID_shetuan, json[i].UID);
+            }
+        });
+    }
+
+    <!--顶部选项卡-->
+    function tabNav1(evt, tabName) {
+        var i, page, tab;
+        page = document.getElementsByClassName("page");
+        for (i = 0; i < page.length; i++) {
+            page[i].style.display = 'none';
+        }
+        tab = document.getElementsByClassName("tab");
+        for (i = 0; i < tab.length; i++) {
+            tab[i].className = tab[i].className.replace(" weui-bar__item_on", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " weui-bar__item_on";
+    }
+
+    function createActivity(name, time, host, url) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var h4 = document.createElement("h4");
+        var p_1 = document.createElement("p");
+        var p_2 = document.createElement("p");
+        var img = document.createElement("img");
+
+
+        a.className = "weui-media-box weui-media-box_appmsg";
+        a.href = url;
+        div_1.className = "weui-media-box__hd";
+
+        div_2.className = "weui-media-box__bd";
+        h4.className = "weui-media-box__title";
+        p_1.className = p_2.className = "weui-media-box__desc";
+
+
+        h4.innerText = name;
+        p_1.innerHTML = "<i class='fa fa-clock-o'></i> " + "&nbsp;" + time;
+        p_2.innerHTML = "<i class='fa fa-users'></i>" + "&nbsp;" + host;
+
+
+        div_1.appendChild(img);
+
+        div_2.appendChild(h4);
+        div_2.appendChild(p_1);
+        div_2.appendChild(p_2);
+
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+
+        return a;
+    }
+    window.onscroll = function () {
+        if (getScrollTop() + getClientHeight() == getScrollHeight()) {
+            var loading_1 = document.getElementById('loading_1');
+            var loading_2 = document.getElementById('loading_2');
+            if (document.getElementById("page1").style.display == "block" && loading_1.style.display != 'block') {
+                loading_1.style.display = 'block';
+                postMessage({
+                    serverType: "getList",
+                    type: "shetuan",
+                    num: 20,
+                    startUID: startUID_shetuan
+                }, "recruitment.php", function (json) {
+                    for (var i = 0; i < json.length; i++) {
+                        frame.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link));
+                        startUID_shetuan = (startUID_shetuan == -1) ? json[i].UID : Math.min(startUID_shetuan, json[i].UID);
+                    }
+                    loading_1.style.display = 'none';
+                });
+            }
+            if (document.getElementById("page2").style.display == "block" && loading_2.style.display != 'block') {
+                loading_2.style.display = 'block';
+                postMessage({
+                    serverType: "getList",
+                    type: "zuzhi",
+                    num: 20,
+                    startUID: startUID_zuzhi
+                }, "recruitment.php", function (json) {
+                    for (var i = 0; i < json.length; i++) {
+                        frame2.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link));
+                        startUID_zuzhi = (startUID_zuzhi == -1) ? json[i].UID : Math.min(startUID_zuzhi, json[i].UID);
+                    }
+                    loading_2.style.display = 'none';
+                });
+            }
+        }
+    };
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>社团主页</title>
+    <!--全屏显示-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+    <!--引用weui框架做样式-->
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <style>
+
+        a, button, div, input, select, textarea {
+            -webkit-tap-highlight-color: transparent !important;
+        }
+
+        body {
+            line-height: 1;
+            background-color: #f9f9f9;
+        }
+
+        .profile-cover {
+            position: relative;
+            height: 9.5rem;
+            background-repeat: no-repeat;
+            /*background-position: 50%;*/
+            background-size: cover;
+            text-align: center;
+        }
+
+        .overlay {
+            opacity: .7;
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .mod-fil-img {
+            padding-top: .625rem;
+        }
+
+        .m-avatar-box .m-img-box {
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .mod-fil-img span {
+            width: 4.375rem;
+            height: 4.375rem;
+            display: inline-block;
+            padding: .25rem;
+        }
+
+        .mod-fil-img span img {
+            width: 4.375rem;
+            height: 4.375rem;
+            /*border-radius: 50%;*/
+        }
+
+        .m-img-box img {
+            vertical-align: top;
+            object-fit: cover;
+        }
+
+        .mod-fil-name {
+            padding: .625rem 0;
+            font-size: 0;
+        }
+
+        .mod-fil-n {
+            font-size: 0;
+            margin-right: .3125rem;
+        }
+
+        .mod-fil-n .txt-shadow {
+            font-size: 1.125rem;
+            vertical-align: middle;
+            margin-right: .3125rem;
+        }
+
+        .mod-fil-n span {
+            display: inline-block;
+        }
+
+        .mod-fil-fans > div {
+            position: relative;
+            font-size: .75rem;
+            color: black;
+            display: inline-block;
+        }
+
+        .mod-fil-fans > div:last-child {
+            padding-left: .625rem;
+            margin-left: .625rem;
+        }
+
+        .mod-fil-fans span {
+            font-family: Arial;
+            margin-left: .3125rem;
+        }
+
+        .txt-shadow {
+            color: black;
+        }
+
+        p {
+            display: block;
+            -webkit-margin-before: 0.5em;
+            -webkit-margin-after: 0.5em;
+            -webkit-margin-start: 0px;
+            -webkit-margin-end: 0px;
+        }
+
+        .weui-panel.weui-panel_access {
+            /*border-radius: 5%;*/
+        }
+
+        .weui-media-box__desc{
+            display: block;
+        }
+    </style>
+
+
+</head>
+<body>
+
+<header>
+    <div class="profile-cover">
+        <div class="overlay"></div>
+        <div class="mod-fil-img m-avatar-box">
+            <span class="m-img-box">
+                <img id="mass_img" src="">
+            </span>
+        </div>
+        <div class="item-list" style="position: relative;">
+            <div class="mod-fil-name m-txt-cut">
+                <span class="mod-fil-n">
+                    <span class="txt-shadow" id="mass_name">社团名字</span>
+                </span>
+            </div>
+
+            <div class="txt-shadow">
+                <i id="mass_num" class="fa fa-user-plus" onclick="color(event)"></i>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<article>
+
+    <!--社团简介-->
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__hd">简介</div>
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_text">
+                <p class="weui-media-box__desc" id="mass_intro"></p>
+            </div>
+        </div>
+    </div>
+
+
+    <!--社团招新栏-->
+    <br>
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__hd">招新 &nbsp;</div>
+        <div class="weui-panel__bd" id="recruitment_board">
+
+        </div>
+    </div>
+
+
+    <!--社团日志栏-card形式-->
+    <br>
+    <div id="mass_diary" class="weui-panel weui-panel_access">
+        <div class="weui-panel__hd">社团日志</div>
+        <div class="weui-panel__bd">
+            <!--js添加-->
+        </div>
+    </div>
+</article>
+
+<br>
+<div class="weui-msg__extra-area" style="position:static">
+    <div class="weui-footer">
+        <p class="weui-footer__text">社团二维码</p>
+        <p class="weui-footer__text">
+            <img src="" alt="" width="80px" height="80px" id="mass_qrCode">
+        </p>
+    </div>
+</div>
+
+
+<script src="CommonJS.js"></script>
+<script>
+    var uid = getValue("uid");
+    if (uid > -1) {
+        init();
+    }
+
+
+    function color(event) {
+        postMessage({serverType: "mark", markUID: uid}, "mass.php", function (json) {
+            var num = parseInt(document.getElementById("mass_num").innerHTML.replace("<span>", "").replace("</span>", ""));
+            num = json.mark ? num + 1 : num - 1;
+            event.target.innerHTML = " <span>" + num + " </span> ";
+            event.target.style.color = json.mark ? 'red' : '';
+        });
+    }
+
+    function init() {
+        postMessage({serverType: "getMass", UID: uid}, "mass.php", function (json) {
+            console.log(json.mass);
+            document.getElementById("mass_num").innerHTML = " <span>" + json.mass.number + " </span> ";
+            document.getElementById("mass_img").src = json.mass.logo;
+            document.getElementById("mass_name").innerText = json.mass.name;
+            document.getElementById("mass_qrCode").src = json.mass.QRcode;
+            document.getElementById("mass_intro").innerText = json.mass.intro;
+            document.getElementById("mass_num").style.color = json.mass.imark ? 'red' : '';
+            for (var i = 0; i < json.diary.length; i++) {
+                document.getElementById("mass_diary").appendChild(createDiary(json.diary[i].title, json.diary[i].content, json.diary[i].time,
+                    json.diary[i].img, json.diary[i].logo, json.diary[i].UID, json.diary[i].good, json.diary[i].igood));
+            }
+
+            for (var i = 0; i < json.recruitment.length; i++) {
+                document.getElementById("recruitment_board").appendChild(createRecruitment(json.recruitment[i].title,
+                    json.recruitment[i].object, json.recruitment[i].end, json.recruitment[i].intro, json.recruitment[i].link));
+            }
+        });
+    }
+
+    function createDiary(title, content, time, image, logo, uid, good, igood) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var logo_1 = document.createElement("img");
+        var h4 = document.createElement("h4");
+        var span = document.createElement("i");
+        var p_1 = document.createElement("p");
+        var p_2 = document.createElement("p");
+        var p_3 = document.createElement("p");
+
+        a.className = "weui-media-box weui-media-box_appmsg";
+        div_1.className = "weui-panel__hd";
+        logo_1.className = "weui-media-box__thumb";
+        div_2.className = "weui-media-box__bd";
+        h4.className = "weui-media-box__title";
+        span.className = "fa fa-thumbs-o-up";
+        span.style = 'float: right';
+        span.style.color = igood ? 'red' : '';
+        span.innerText = good;
+        span.onclick = function (event) {
+            postMessage({serverType: "goodDiary", diaryUID: uid}, "mass.php", function (json) {
+                var num = parseInt(event.target.innerText);
+                num = json.good ? num + 1 : num - 1;
+                event.target.innerText = num;
+                event.target.style.color = json.good ? 'red' : '';
+            });
+        };
+        p_1.className = p_2.className = p_3.className = "weui-media-box__desc";
+        h4.innerHTML = title;
+        p_1.innerText = time;
+        p_2.innerText = content;
+        logo_1.src = logo;
+        logo_1.style.width = 50 + "px";
+
+        for (var i = 0; i < image.length; i++) {
+            var img = document.createElement("img");
+            img.style = "background-image:url(" + image[i] + ")";
+            p_3.appendChild(img);
+        }
+
+        h4.appendChild(span);
+        div_1.appendChild(logo_1);
+        div_2.appendChild(h4);
+        div_2.appendChild(p_1);
+        div_2.appendChild(p_2);
+        div_2.appendChild(p_3);
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+
+        return a;
+    }
+
+    function createRecruitment(title, object, end, intro, url) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var img = document.createElement("img");
+        var h4 = document.createElement("h4");
+        var p1 = document.createElement("p1");
+        var p2 = document.createElement("p2");
+        var i = document.createElement("i");
+
+        a.className = "weui-media-box weui-media-box_appmsg";
+        div_1.className = "weui-media-box__hd";
+        div_2.className = "weui-media-box__bd";
+        h4.className = "weui-media-box__title";
+        p1.className = "weui-media-box__desc";
+        p2.className = "weui-media-box__desc";
+        i.className = "fa fa-calendar-plus-o";
+        i.style = "float: right;font-size: 20px;";
+        i.onclick = function (event) {
+            event = event || window.event;
+            event.preventDefault();
+            postMessage({
+                serverType: "addDate",
+                actName: title + " 日程活动",
+                actStart: end,
+                actEnd: end
+            }, "IndexServer.php", function () {
+                alert("加入日程成功");
+                event.target.style.color='#136832';
+            });
+        };
+        a.href = url;
+
+        h4.innerText = title + ' ';
+        p1.innerHTML = '<i class="fa fa-clock-o"></i> &nbsp; ' + end;
+        p2.innerHTML = '<i class="fa fa-users"></i> &nbsp; ' + object;
+
+        h4.appendChild(i);
+        div_2.appendChild(h4);
+        div_2.appendChild(p1);
+        div_2.appendChild(p2);
+        div_1.appendChild(img);
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+
+        return a;
+    }
+</script>
+
+</body>
+</html>

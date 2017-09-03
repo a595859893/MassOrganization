@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>排行榜</title>
+    <!--全屏显示-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+    <!--引用weui框架做样式-->
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+    <style>
+        .weui-badge {
+            background-color: #fdea3b;
+        }
+    </style>
+
+</head>
+<body>
+
+
+<div style="background-color: #dedede;text-align: center;color:#000;padding: 8px">
+    <span><i class="fa fa-fire" style="color:indianred;font-size: 20px"></i> 排行榜 </span>
+</div>
+
+<!--顶部选项卡-->
+<div class="weui-tab">
+    <div class="weui-navbar">
+        <div class="weui-navbar__item weui-bar__item_on tab" onclick="tabNav1(event, 'page1')" id="defaultOpen">
+            &#9829 学生活动
+        </div>
+        <div class="weui-navbar__item tab" onclick="tabNav1(event, 'page2')">
+            &#9830 社团组织
+        </div>
+    </div>
+
+
+    <div class="weui-tab__panel" id="content">
+        <!--页面一-->
+        <div class="page" id="page1">
+            <div class="weui-panel weui-panel_access">
+                <div class="weui-panel__hd">学生活动</div>
+                <div class="weui-panel__bd" id="frame">
+                    <!--JS添加处-->
+                </div>
+
+                <div id="loading_1" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin" style="font-size: 30px;"></i></div>
+            </div>
+        </div>
+
+        <!--页面二-->
+        <div class="page" id="page2">
+            <div class="weui-panel weui-panel_access">
+                <div class="weui-panel__hd">社团组织</div>
+                <div class="weui-panel__bd" id="frame2">
+                    <!--JS添加处-->
+                </div>
+                <div id="loading_2" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin" style="font-size: 30px;"></i></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="CommonJS.js"></script>
+<script>
+    // 触发 id="defaultOpen" click 事件
+    document.getElementById("defaultOpen").click();
+
+
+    init();
+
+    function init() {
+        var xmlhttp = GetXMLHTTPRequest();
+        var content = {serverType: "Billboard", num: 10};
+        var loading_1=document.getElementById('loading_1');
+        loading_1.style.display='block';
+        var loading_2=document.getElementById('loading_2');
+        loading_2.style.display='block';
+        xmlhttp.open("POST", "activity.php", true);
+        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+        xmlhttp.send(toStr(content));
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var json = JSON.parse(xmlhttp.responseText);
+                if (json.success){
+                 dealContent(json);
+                loading_1.style.display='none';
+                loading_2.style.display='none';
+                }
+                else{
+                    console.log(json.error);
+                }
+            }
+        };
+    }
+
+    <!--顶部选项卡-->
+    function tabNav1(evt, tabName) {
+        var i, page, tab;
+        page = document.getElementsByClassName("page");
+        for (i = 0; i < page.length; i++) {
+            page[i].style.display = 'none';
+        }
+        tab = document.getElementsByClassName("tab");
+        for (i = 0; i < tab.length; i++) {
+            tab[i].className = tab[i].className.replace(" weui-bar__item_on", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " weui-bar__item_on";
+    }
+
+
+    function dealContent(json) {
+        var frame = document.getElementById("frame");
+        var frame2 = document.getElementById("frame2");
+        for (var i = 0; i < json.mass.length; i++)
+            frame2.appendChild(createActivity(json.mass[i].name, json.mass[i].good, json.mass[i].logo, i+1, 0));
+        for (var i = 0; i < json.activity.length; i++)
+            frame.appendChild(createActivity(json.activity[i].name, json.activity[i].mark, json.activity[i].logo, i+1, 1));
+    }
+
+    function createActivity(name, num, imgURL, order, star) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var h4 = document.createElement("h4");
+        var p_1 = document.createElement("p");
+        var img = document.createElement("img");
+        var span = document.createElement("span");
+
+        a.className = "weui-media-box weui-media-box_appmsg";
+        div_1.className = "weui-media-box__hd";
+        div_1.style = "position: relative;margin-right: 10px;";
+        span.className="weui-badge";
+        span.style = "position: absolute;top: -.4em;right: -.6em;";
+        img.src = imgURL;
+        img.style.width = "60px";
+        img.style.height = "60px";
+
+        div_2.className = "weui-media-box__bd";
+        h4.className = "weui-media-box__title";
+        p_1.className = "weui-media-box__desc";
+
+        h4.innerText = name;
+        if (star) {
+            p_1.innerHTML = "<span style='color: #f47e17'>&#9733 </span> " + "&nbsp;" + num;
+        } else {
+            p_1.innerHTML = "<span style='color: red'> &#9829</span> " + "&nbsp;" + num;
+        }
+
+
+        if (order < 10) {
+            span.innerText = "NO." + order;
+        } else {
+            span.innerText = order;
+        }
+
+        div_1.appendChild(img);
+        div_1.appendChild(span);
+
+        div_2.appendChild(h4);
+        div_2.appendChild(p_1);
+
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+
+        return a;
+
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>校园活动</title>
+    <!--全屏显示-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv='Content-Type' content='text/html;charset=utf-8'>
+    <!--引用weui框架做样式-->
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+    <link rel="stylesheet" href="css.css">
+    <style>
+        body, html {
+            height: 100%;
+            background-color: rgba(247, 247, 247, 0.5);
+            font-family: "Lato", sans-serif;
+            overflow-x: hidden;
+        }
+
+        .fa .fa-pencil-square-o {
+            float: right;
+            font-size: 20px;
+        }
+
+        .weui-media-box__desc {
+            line-height: 1.6;
+            -webkit-line-clamp: 3;
+        }
+
+        .weui-media-box_appmsg .weui-media-box__hd {
+            width: 70px;
+            height: 116px;
+            line-height: 0;
+        }
+    </style>
+</head>
+<body id="activity">
+<div id="main_2">
+    <!--<div class="scoll"><a href="#top">&#8679;</a></div>-->
+
+    <header>
+        <!--头部筛选栏-->
+        <div id="top">
+            <button class="accordion" onclick="display()"
+                    style="text-align: right; position: absolute; top: 0; z-index: 999; border-bottom:1px solid #e5e5e5">
+                筛选 &nbsp;<i class="fa fa-list-ul" style="font-size:15px;color: black;"></i>
+            </button>
+            <div class="panel" id="panel" style="position: absolute;z-index: 999;top: 37px;">
+                <p>&nbsp;校区</p>
+                <div class="button-sp-area" name="place">
+                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default">不限</a>
+                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default">南校区</a>
+                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default">东校区</a>
+                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default">北校区</a>
+                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default">珠海校区</a>
+                </div>
+                <p>&nbsp;类型</p>
+                <div class="button-sp-area" name="type">
+                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default">不限</a>
+                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default">讲座</a>
+                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default">比赛</a>
+                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default">演出</a>
+                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default">体育章</a>
+                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default">公益时</a>
+                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default">宣讲会</a>
+                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default">其它</a>
+                </div>
+                <p>&nbsp;排序</p>
+                <div class="button-sp-area" name="order">
+                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default">最新</a>
+                    <a href="#" class="weui-btn weui-btn_mini weui-btn_default">最热</a>
+                </div>
+                <br>
+                <div class="button-sp-area" style="justify-content: space-between;" name="other">
+                    <button type="reset" class="weui-btn weui-btn_mini weui-btn_default">重置</button>
+                    <button type="submit" class="weui-btn weui-btn_mini weui-btn_default"
+                            style="background-color: #86d0ff;color:#fff;margin-right: 24px;">完成
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <!--话圈_发表对活动的评论_每周更新-->
+    <section class="talk" style="background-color: #fff;">
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <div class="numbertext">1/3</div>
+                <img src=" ">
+                <!--<div class="text">文本 1</div>-->
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">2/3</div>
+                <img src=" ">
+                <!--<div class="text">文本 2</div>-->
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">3/3</div>
+                <img src=" ">
+                <!--<div class="text">文本 3</div>-->
+            </div>
+
+        </div>
+
+        <div style="text-align:center;    position: absolute;top: 80%;left: 40%;">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </section>
+
+    <!--公告栏-->
+    <div class="weui-cells" style="width: 100%;">
+        <a class="weui-cell weui-cell_access" onclick="document.getElementById('dialog_1').style.display='block'">
+            <div class="weui-cell__bd">
+                <p>活动发布流程</p>
+            </div>
+            <div class="weui-cell__ft">
+            </div>
+        </a>
+    </div>
+    <div style="display: none;" id="dialog_1">
+        <div class="weui-mask"></div>
+        <div class="weui-dialog">
+            <div class="weui-dialog__hd"><strong class="weui-dialog__title">发布流程</strong></div>
+            <div class="weui-dialog__bd">点击“我”&#8594; 社团管理者登陆 &#8594; 发布活动</div>
+            <div class="weui-dialog__ft">
+                <a href="#" class="weui-dialog__btn weui-dialog__btn_primary"
+                   onclick="document.getElementById('dialog_1').style.display='none'">确定</a>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <article>
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__bd" id="actlist">
+                <!--活动JS添加地点-->
+            </div>
+        </div>
+        <div id="loading" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin"
+                                                                      style="font-size: 30px;"></i></div>
+    </article>
+</div>
+<!--以下是默认的报名表-->
+<div id="id04" class="modal">
+    <form id="actRegister" class="modal-content animate" action=" ">
+        <div class="container" id="container">
+            <div id="custom">
+                <!--JS代码切入点-->
+            </div>
+            <div class="clearfix">
+                <button type="button"
+                        onclick="document.getElementById('id04').style.display='none';document.getElementById('main_2').style.display='block'"
+                        class="cancelbtn">
+                    取消
+                </button>
+                <button type="submit" class="signupbtn">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="CommonJS.js"></script>
+<script>
+    var panel = document.getElementById('panel');
+    var actOrder = defaultActOther();
+    var postIndex = -1;
+    var startUID = -1;
+
+    document.getElementById("actlist").innerHTML = "";
+    getActivity(actOrder);
+    setOptionColor(actOrder);
+
+    document.getElementById("panel").onclick = function (event) {
+        event = event || window.event;
+
+        if (event.target.tagName == "A") {
+            var title = event.target.parentNode.getAttribute("name");
+            var ele = event.target.innerText;
+
+            if (title == "order") {
+                actOrder[title] = ele;
+            } else {
+                var index = actOrder[title].indexOf(ele);
+                var pn = event.target.parentNode;
+                var all = !isAllIn(pn);
+                if (ele == "不限") {
+                    actOrder[title] = [];
+                    if (all) {
+                        var all = pn.getElementsByTagName("A");
+                        for (var i in all)
+                            if (all[i].innerText != "不限")
+                                actOrder[title].push(all[i].innerText);
+                    }
+                }
+                else if (index >= 0) {
+                    if (!all) {
+                        actOrder[title] = [];
+                        actOrder[title].push(ele);
+                    } else
+                        actOrder[title].splice(index, 1);
+                } else
+                    actOrder[title].push(ele);
+            }
+
+            setOptionColor(actOrder)
+        } else if (event.target.tagName == "BUTTON") {
+            var ele = event.target.innerText;
+            if (ele == "重置") {
+                actOrder = defaultActOther();
+                setOptionColor(actOrder);
+            }
+
+            if (ele == "完成") {
+                getActivity(actOrder);
+                display();
+            }
+        }
+    };
+    document.getElementById("actRegister").onsubmit = function (event) {
+        event = event || window.event;
+        event.target.disabled = true;
+        event.preventDefault();
+
+        var listjson = {};
+        var list = document.getElementById("actRegister").getElementsByTagName("input");
+        for (var i = 0; i < list.length; i++) {
+            if (list[i].name)
+                listjson[list[i].name] = list[i].value;
+        }
+        postMessage({
+            serverType: "Post",
+            json: JSON.stringify(listjson),
+            UID: postIndex
+        }, "activity.php", function () {
+            document.getElementById('main_2').style.display = 'block';
+            document.getElementById('id04').style.display = 'none';
+        });
+    };
+
+    function getActivity(type) {
+        var loading = document.getElementById('loading');
+        loading.style.display = 'block';
+        type.serverType = "GetList";
+        type.startUID = startUID;
+        type.num = 6;
+        postMessage(type, "activity.php", function (json) {
+            var card = document.getElementById("actlist");
+            for (var i = 0; i < json.length; i++) {
+                card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location,
+                    json[i].holdtime, json[i].organizer, json[i].UID, json[i].json, json[i].logo, json[i].mark, json[i].url));
+                startUID = Math.min(startUID, json[i].UID);
+            }
+            loading.style.display = 'none';
+        });
+    }
+
+    function createActivity(title, content, place, holdtime, organizer, index, labels, logo, mark, url) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var img = document.createElement("img");
+
+        var div_2 = document.createElement("div");
+        var h4 = document.createElement("h4");
+        var i_1 = document.createElement("i");
+        var i_2 = document.createElement("i");
+
+        var p_1 = document.createElement("p");
+        var p_2 = document.createElement("p");
+        var p_3 = document.createElement("p");
+        var p_4 = document.createElement("p");
+
+        var formStr = "";
+        var formLabel = JSON.parse(labels);
+        for (var i in formLabel) {
+            formStr += "<label><b>" + i + "</b></label>" + "<input name='" + i + "'>";
+        }
+
+        img.src = decodeURIComponent(logo);
+        img.style.width = "70px";
+        img.style.height = "110px";
+//        记得改尺寸
+
+        a.className = "weui-media-box weui-media-box_appmsg";
+        a.href = url;
+        a.onclick = function (event) {
+            event = event || window.event;
+            switch (event.target) {
+                case(i_2):
+                    event.preventDefault();
+                    document.getElementById("custom").innerHTML = formStr;
+                    sign(index);
+                    break;
+
+                case(i_1):
+                    event.preventDefault();
+                    postMessage({serverType: "Mark", actID: index}, "activity.php", function (json) {
+                        event.target.style.color = json.mark ? '#E7CF0C' : '';
+                    });
+                    break;
+            }
+        };
+
+        i_1.style.color = mark ? '#E7CF0C' : '';
+        i_1.className = "fa fa-star";
+        i_2.className = "fa fa-pencil-square-o";
+        i_2.style = "float:right";
+
+        div_1.className = "weui-media-box__hd";
+        div_2.className = "weui-media-box__bd";
+
+        h4.className = "weui-media-box__title";
+        h4.innerText = title + "  ";
+
+        p_1.className = p_2.className = p_3.className = p_4.className = "weui-media-box__desc";
+        p_1.innerText = "时间" + "" + ":" + holdtime;
+        p_2.innerText = "地点" + "" + ":" + place;
+        p_3.innerText = "主办方" + "" + ":" + organizer;
+        p_4.innerText = "简介" + "" + ":" + content;
+
+        div_1.appendChild(img);
+
+        h4.appendChild(i_1);
+
+        if (!formLabel.none) {
+            h4.appendChild(i_2);
+        }
+
+        div_2.appendChild(h4);
+        div_2.appendChild(p_1);
+        div_2.appendChild(p_2);
+        div_2.appendChild(p_3);
+        div_2.appendChild(p_4);
+
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+
+        return a;
+    }
+
+    function isAllIn(target) {
+        var title = target.getAttribute("name");
+        var ele = target.getElementsByTagName("A");
+        for (var i = 0; i < ele.length; i++) {
+            var signTemp = false;
+            if (ele[i].innerHTML != "不限") {
+                for (var j = 0; j < actOrder[title].length; j++)
+                    if (ele[i].innerHTML == actOrder[title][j]) {
+                        signTemp = true;
+                        break;
+                    }
+            } else
+                signTemp = true;
+
+            if (!signTemp)
+                return false;
+
+        }
+        return true;
+    }
+
+    function setOptionColor() {
+        var tempA = document.getElementById("panel").getElementsByTagName("A");
+        for (var i = 0; i < tempA.length; i++) {
+            var title = tempA[i].parentNode.getAttribute("name");
+            var ele = tempA[i].innerHTML;
+            tempA[i].style.backgroundColor = "#F8F8F8 ";
+            if (title == "order") {
+                if (ele == actOrder[title])
+                    tempA[i].style.backgroundColor = "#85CFFE";
+            } else if (ele == "不限") {
+                if (isAllIn(tempA[i].parentNode))
+                    tempA[i].style.backgroundColor = "#85CFFE";
+            } else {
+                for (var j = 0; j < actOrder[title].length; j++)
+                    if (ele == actOrder[title][j] && !isAllIn(tempA[i].parentNode))
+                        tempA[i].style.backgroundColor = "#85CFFE";
+            }
+        }
+    }
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        if (slideIndex > slides.length) {
+            slideIndex = 1
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 8000);
+        slideIndex++;
+    }
+
+    function display() {
+        panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + "px";
+    }
+
+    function sign(index) {
+        postIndex = index;
+        document.getElementById('id04').style.display = 'block';
+        document.getElementById('main_2').style.display = 'none';
+    }
+
+    function defaultActOther() {
+        var act = {place: [], type: [], order: "最新"};
+        var tempA = document.getElementById("panel").getElementsByTagName("A");
+        for (var i = 0; i < tempA.length; i++) {
+            var title = tempA[i].parentNode.getAttribute("name");
+            var ele = tempA[i].innerHTML;
+            if (title != "other" && title != "order" && ele != "不限")
+                act[title].push(ele);
+        }
+        return act;
+    }
+
+    window.onscroll = function () {
+        if (getScrollTop() + getClientHeight() == getScrollHeight()) {
+            getActivity(type);
+        }
+    };
+</script>
+</body>
+</html>

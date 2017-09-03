@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>社团主页</title>
+    <!--全屏显示-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+    <!--引用weui框架做样式-->
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+    <style>
+        ul > li > span {
+            color: #a9a9a9;
+            font-size: 15px;
+        }
+
+        .weui-media-box__info__meta.fa {
+            font-size: 15px;
+            color: #818181
+        }
+    </style>
+
+</head>
+<body>
+
+
+<!--搜索栏-->
+<div class="weui-search-bar" id="search_bar">
+    <form class="weui-search-bar__form" action="#">
+        <div class="weui-search-bar__box">
+            <i class="weui-icon-search" id="weui-icon-search" style="color: #0d8e3d;" onclick="Search()"></i>
+            <input type="input" class="weui-search-bar__input" id="search_input" placeholder="搜索">
+            <input style="display: none"/>
+        </div>
+        <label for="search_input" class="weui-search-bar__label" id="search_text" onclick="searchBarClick()">
+            <i class="weui-icon-search"></i>
+            <span>搜索</span>
+        </label>
+    </form>
+    <a href="javascript:" class="weui-search-bar__cancel-btn" id="search_cancel">返回</a>
+</div>
+
+
+<!--顶部选项卡-->
+<div class="weui-tab">
+    <div class="weui-navbar">
+        <div class="weui-navbar__item weui-bar__item_on tab" onclick="tabNav1(event, 'page1')" id="defaultOpen">
+            &#9829 兴趣社团
+        </div>
+        <div class="weui-navbar__item tab" onclick="tabNav1(event, 'page2')">
+            &#9830 学生组织
+        </div>
+    </div>
+
+
+    <div class="weui-tab__panel" id="content">
+        <!--页面一-->
+        <div class="page" id="page1">
+            <div class="weui-panel weui-panel_access">
+                <div class="weui-panel__hd">兴趣社团</div>
+                <div class="weui-panel__bd" id="frame">
+                    <!--JS添加处-->
+                </div>
+            </div>
+        </div>
+
+        <!--页面二-->
+        <div class="page" id="page2">
+            <div class="weui-panel weui-panel_access">
+                <div class="weui-panel__hd">学生组织</div>
+                <div class="weui-panel__bd" id="frame2">
+                    <!--JS添加处-->
+                    <a href=""></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="CommonJS.js"></script>
+<script>
+    //Test
+    var startUID = 0;
+    var massList = [];
+    var searchBar = document.getElementById("search_input");
+
+    //页面搜索功能
+    searchBar.onchange = function () {
+        Search();
+    };
+    // 触发 id="defaultOpen" click 事件
+    document.getElementById("defaultOpen").click();
+    //搜索返回
+    document.getElementById("search_cancel").onclick = function () {
+        searchBar.value = "";
+        document.getElementById('search_text').style.display = 'block';
+        document.getElementById('search_cancel').style.display = 'none';
+        Search();
+    };
+    init();
+
+
+    function init() {
+        postMessage({serverType: "getList", startUID: -1, num: -1}, "mass.php", function (json) {
+            for (var i = 0; i < json.length; i++) {
+                var mass = {};
+                mass.name = json[i].name;
+                mass.div = createActivity(json[i].name, json[i].intro, json[i].number, json[i].good,
+                    json[i].UID, json[i].igood, json[i].imark);
+                massList.push(mass);
+                if (json[i].type == "zuzhi")
+                    document.getElementById("frame2").appendChild(mass.div);
+                else
+                    document.getElementById("frame").appendChild(mass.div);
+                startUID = Math.min(startUID, json[i].UID);
+            }
+        });
+    }
+
+    function Search() {
+        var keyword = searchBar.value;
+        var patt = new RegExp(keyword, "g");
+        for (var i in massList) {
+            if (patt.test(massList[i].name)) {
+                massList[i].div.style.display = "flex";
+            } else {
+                massList[i].div.style.display = "none";
+            }
+        }
+    }
+
+
+    <!--点击搜索-->
+    function searchBarClick() {
+        document.getElementById('search_text').style.display = 'none';
+        document.getElementById('search_cancel').style.display = 'block';
+    }
+
+    <!--顶部选项卡-->
+    function tabNav1(evt, tabName) {
+        var i, page, tab;
+        page = document.getElementsByClassName("page");
+        for (i = 0; i < page.length; i++) {
+            page[i].style.display = 'none';
+        }
+        tab = document.getElementsByClassName("tab");
+        for (i = 0; i < tab.length; i++) {
+            tab[i].className = tab[i].className.replace(" weui-bar__item_on", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " weui-bar__item_on";
+    }
+
+    function createActivity(name, intro, number, member, uid, good, mark) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var h4 = document.createElement("h4");
+        var p = document.createElement("p");
+        var ul = document.createElement("ul");
+        var li_1 = document.createElement("li");
+        var li_2 = document.createElement("li");
+
+        a.href = "stzyz.html?uid=" + uid;
+        a.className = "weui-media-box weui-media-box_appmsg";
+        div_1.className = "weui-media-box__hd";
+
+        div_2.className = "weui-media-box__bd";
+        h4.className = "weui-media-box__title";
+        p.className = "weui-media-box__desc";
+        ul.className = "weui-media-box__info";
+        li_1.className = "weui-media-box__info__meta fa fa-user-plus";
+        li_1.style.color = mark ? 'red' : '#818181';
+        li_1.onclick = function (event) {
+            event = event || window.event;
+            event.preventDefault();
+
+            postMessage({serverType: "mark", markUID: uid}, "mass.php", function (json) {
+                var num = parseInt(li_1.innerHTML.replace("<span>", "").replace("</span>", ""));
+                if (json.mark) {
+                    num++;
+                    li_1.style.color = 'red';
+                } else {
+                    num--;
+                    li_1.style.color = '#818181'
+                }
+                li_1.innerHTML = " <span>" + num + " </span> ";
+            });
+        };
+        li_2.className = "weui-media-box__info__meta fa fa-thumbs-o-up";
+        li_2.style.color = good ? 'red' : '#818181';
+        li_2.onclick = function (event) {
+            event = event || window.event;
+            event.preventDefault();
+
+            postMessage({serverType: "good", massUID: uid}, "mass.php", function (json) {
+                var num = parseInt(li_2.innerHTML.replace("<span>", "").replace("</span>", ""));
+                if (json.good) {
+                    num++;
+                    li_2.style.color = 'red';
+                } else {
+                    num--;
+                    li_2.style.color = '#818181'
+                }
+                li_2.innerHTML = " <span>" + num + " </span> ";
+            });
+        };
+
+        h4.innerText = name;
+        p.innerText = intro;
+        li_1.innerHTML = "<span>" + number + " </span> ";
+        li_2.innerHTML = " <span>" + member + " </span> ";
+
+        ul.appendChild(li_1);
+        ul.appendChild(li_2);
+        div_2.appendChild(h4);
+        div_2.appendChild(p);
+        div_2.appendChild(ul);
+
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+
+        return a;
+
+    }
+</script>
+</body>
+</html>

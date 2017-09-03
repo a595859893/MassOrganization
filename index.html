@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>中大园圈</title>
+    <!--<meta charset="UTF-8">-->
+    <!--全屏显示-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv='Content-Type' content='text/html;charset=utf-8'>
+    <!--引用weui框架做样式-->
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="iconfont.js"></script>
+    <link rel="stylesheet" href="css.css">
+    <style>
+        .fa.fa-pencil-square-o {
+            float: right;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="page1" class="page">
+
+    <!--页面一头部幻灯片导航条-->
+    <header style="position: relative">
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <a href="http://mp.weixin.qq.com/s/SwSS9QgcUHQhNAtbtl4N2Q">
+                    <div class="numbertext">1 / 3</div>
+                    <img src="img/轮播一.jpg" style="width:100%">
+                    <!--<div class="text">文本 1</div>-->
+                </a>
+            </div>
+
+            <div class="mySlides fade">
+                <a href="http://mp.weixin.qq.com/s/PDcragJLyXbuiGmzVD9Srw">
+                    <div class="numbertext">2 / 3</div>
+                    <img src="img/轮播二.jpg" style="width:100%">
+                    <!--<div class="text">文本 2</div>-->
+                </a>
+            </div>
+
+            <div class="mySlides fade">
+                <a href="http://mp.weixin.qq.com/s/QjQ2rzUgtrCVDEs64OpNYQ">
+                    <div class="numbertext">3 / 3</div>
+                    <img src="img/轮播三.jpg" style="width:100%">
+                    <!--<div class="text">文本 3</div>-->
+                </a>
+            </div>
+
+        </div>
+
+        <div style="text-align:center;position: absolute;right: 40%;top:86%">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </header>
+    <br>
+
+    <div class="weui-tab">
+        <div class="weui-tab__panel">
+
+            <!--六个方块导航条-->
+            <div class="weui-grids">
+                <a href="huodong.html" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-huodong1-copy-copy-copy"></use>
+                        </svg>
+                    </div>
+                    <p class="weui-grid__label">
+                        校园活动
+                    </p>
+                </a>
+                <a href="stzy.html" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-tuanduijieshao-copy-copy"></use>
+                        </svg>
+                    </div>
+                    <p class="weui-grid__label">
+                        社团主页
+                    </p>
+                </a>
+                <a href="stzx.html" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-zhaoxin-"></use>
+                        </svg>
+                    </div>
+                    <p class="weui-grid__label">
+                        社团招新
+                    </p>
+                </a>
+                <a href="billboard.html" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-paihangbang-copy-copy-copy"></use>
+                        </svg>
+                    </div>
+                    <p class="weui-grid__label">
+                        排行榜
+                    </p>
+                </a>
+                <a href="conversation.html" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-gaoxiao-copy"></use>
+                        </svg>
+                    </div>
+                    <p class="weui-grid__label">
+                        话题圈
+                    </p>
+                </a>
+
+            </div>
+
+
+            <!--热门话题-->
+            <div class="weui-panel weui-panel_access">
+                <div class="weui-panel__hd">精选</div>
+                <div class="weui-panel__bd">
+                    <a href="" class="weui-media-box weui-media-box_appmsg">
+                        <div class="weui-media-box__hd">
+                            <img class="weui-media-box__thumb" src="" alt="">
+                        </div>
+                        <div class="weui-media-box__bd">
+                            <h4 class="weui-media-box__title">标题一</h4>
+                            <p class="weui-media-box__desc">内容1</p>
+                        </div>
+                    </a>
+                    <a href="" class="weui-media-box weui-media-box_appmsg">
+                        <div class="weui-media-box__hd">
+                            <img class="weui-media-box__thumb" src="" alt="">
+                        </div>
+                        <div class="weui-media-box__bd">
+                            <h4 class="weui-media-box__title">标题二</h4>
+                            <p class="weui-media-box__desc">内容2</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="weui-panel__ft">
+                    <a href="" class="weui-cell weui-cell_access weui-cell_link">
+                        <div class="weui-cell__bd">查看更多</div>
+                        <span class="weui-cell__ft"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page2" class="page">
+    <div class="weui-panel">
+        <div class="weui-panel__hd">我的消息</div>
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_small-appmsg">
+                <div class="weui-cells" id="message">
+                    <!--js添加-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--js添加dialog-->
+
+</div>
+
+<!--第三页个人主页-->
+<div id="page3" class="page">
+    <div id="main">
+        <header>
+            <div class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" style="  border-radius: 50%;" id="openID_head">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title" id="openID_name">名字</h4>
+                    <button onclick="document.getElementById('id01').style.display='block'"
+                            style="width:auto;padding: 5px;margin-top: 5px;">
+                        社团管理者登陆
+                    </button>
+                </div>
+            </div>
+        </header>
+        <br>
+        <!--通过下拉菜单查看-->
+
+        <button class="accordion" style="border-top: 0.01px solid rgba(19,104,50,0.6);"><i class="fa fa-paper-plane-o"
+                                                                                           style="font-size:18px;color: #136832;"></i>我的活动
+        </button>
+        <div class="panel" id="MyList">
+            <!--JS添加点-->
+        </div>
+
+        <button class="accordion"><i class="fa fa-star" style="font-size:18px;color: #136832;"></i> 我的收藏</button>
+        <div class="panel " id="MyMark">
+            <!--JS添加点-->
+        </div>
+
+
+        <button class="accordion"><i class="fa fa-black-tie" style="font-size:18px;color: #136832;"></i> 我的社团</button>
+        <div class="panel" id="MyMass">
+            <!--JS添加点-->
+        </div>
+
+        <button onclick="openNav()"><i class="fa fa-calendar" style="font-size:18px;color: #136832;"></i> 我的日程</button>
+
+
+    </div>
+
+
+    <!--侧拉菜单显示日程-->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="month" id="month">
+            <i class="fa fa-calendar-plus-o" style="font-size:25px;color:#fff;position: relative;left: 68%;top: 50px;"
+               onclick="document.getElementById('add').style.display = 'block';"></i>
+            <ul>
+                <li style="text-align:center">
+                    <span style="font-size:18px" id="thisYear"></span><br>
+                    <span id="thisMonth"></span>
+                </li>
+            </ul>
+        </div>
+
+        <div id="table"></div>
+        <br>
+        <div style="overflow: auto;height: 250px;">
+            <ul id="ul" style="height: 1000px">
+                <!--js添加-->
+            </ul>
+        </div>
+
+        <div style="display:none" id="add">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog">
+                <div class="weui-dialog__hd"><strong class="weui-dialog__title">添加日程</strong></div>
+                <div class="weui-dialog__bd">
+                    <label style="float: left" for="thing">事件：</label>
+                    <input type="text" id="thing">
+                    <label style="float: left" for="start">开始时间：</label>
+                    <input type="datetime-local" value="2017-09-01T15:25:33" placeholder="" id="start">
+                    <label style="float: left " for="end">结束时间：</label>
+                    <input type="datetime-local" value="2017-09-03T15:25:33" placeholder="" id="end">
+                </div>
+                <div class="weui-dialog__ft">
+                    <a class="weui-dialog__btn weui-dialog__btn_default" onclick="submit(0)">取消</a>
+                    <a class="weui-dialog__btn weui-dialog__btn_primary" onclick="submit(1)">确定</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="delete_act" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog">
+                <div class="weui-dialog__hd"><strong class="weui-dialog__title">是否删除？</strong></div>
+                <div class="weui-dialog__bd">删除之后无法恢复</div>
+                <div class="weui-dialog__ft">
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default"
+                       onclick="delete_act(0)">取消</a>
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary"
+                       onclick="delete_act(1)">确认</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <!--登录页面-->
+    <div class="modal" id="id01">
+        <form class="modal-content animate" action=" ">
+            <div class="container">
+                <label><b>账号名</b></label>
+                <input type="text" name="uname" id="uname" required>
+
+                <label><b>密码</b></label>
+                <input type="password" name="psw" id="psw" required>
+
+                <button type="button" id="login">登陆</button>
+                <input type="checkbox" checked id="remember"> 记住我
+                <span style="float: right"><a href="resign.html">去注册</a></span>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" class="cancelbtn" onclick="document.getElementById('id01').style.display='none';">
+                    取消
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+
+<div id="page4" class="page">
+    <div id="main_1">
+        <header>
+            <a href="" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title" id="user_name">社团名字</h4>
+                    <!--<p class="weui-media-box__desc" id="user_intro">内容</p>-->
+                    <button style="width:auto;background-color: #fff;" onclick="logout()">退出</button>
+                </div>
+            </a>
+        </header>
+
+        <br>
+        <article class="main">
+            <button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard"
+                                                                                               style="font-size:18px;color: #136832;"></i>
+                活动管理
+            </button>
+            <div class="panel" id="MyAct">
+                <!--js添加-->
+            </div>
+
+            <button onclick="document.getElementById('id02').style.display='block';document.getElementById('main_1').style.display='none'">
+                <i class="fa fa-edit" style="font-size:18px;color: #136832;"></i> 发布活动
+            </button>
+
+            <button onclick="document.getElementById('id03').style.display='block';document.getElementById('main_1').style.display='none'">
+                <i class="fa fa-edit" style="font-size:18px;color: #136832;"></i> 发布招新
+            </button>
+
+            <button class="accordion"><i class="fa fa-address-book-o" style="font-size:18px;color: #136832;"></i> 社团主页管理
+            </button>
+            <div class="panel">
+                <a class="weui-cell weui-cell_access"
+                   onclick="document.getElementById('dairy').style.display='block';document.getElementById('main_1').style.display='none'">
+                    <div class="weui-cell__bd">
+                        <p>编辑社团日志</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+                <a class="weui-cell weui-cell_access"
+                   onclick="document.getElementById('id04').style.display='block';document.getElementById('main_1').style.display='none'">
+                    <div class="weui-cell__bd">
+                        <p>编辑社团信息</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+            </div>
+        </article>
+    </div>
+
+    <!--活动管理表格-->
+    <div style="display: none;" id="table_main">
+        <div id="fill">
+            <div id="table_1" style="overflow: auto">
+                <table id="activityListContainer"></table>
+            </div>
+            <div class="weui-cells__title">向报名者发送消息</div>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <textarea class="weui-textarea" placeholder="您已成功报名此活动，请尽快与负责人联系" rows="3"
+                                  id="message_mass"></textarea>
+                        <div class="weui-textarea-counter"><span>0</span>/40</div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-btn-area">
+                <button class="weui-btn weui-btn_mini  weui-btn_plain-primary " style="float: left"
+                        onclick="document.getElementById('table_main').style.display='none';document.getElementById('main_1').style.display='block'">
+                    返回
+                </button>
+                <button class="weui-btn weui-btn_mini weui-btn_plain-primary " style="float: right;margin-top: 0"
+                        id="sendMessage">确认并发送
+                </button>
+            </div>
+        </div>
+        <!--没有报名表-->
+        <div class="weui-msg" id="none_tip" style="display:none">
+            <div class="weui-msg__icon-area"><i class="weui-icon-info weui-icon_msg"></i></div>
+            <div class="weui-msg__text-area">
+                <h2 class="weui-msg__title">提示</h2>
+                <p class="weui-msg__desc">暂无活动报名表信息</p>
+            </div>
+            <div class="weui-msg__opr-area">
+                <p class="weui-btn-area">
+                    <button class="weui-btn weui-btn_plain-primary"
+                            onclick="document.getElementById('none_tip').style.display='none';document.getElementById('main_1').style.display='block'">
+                        返回
+                    </button>
+                </p>
+            </div>
+            <div class="weui-msg__extra-area">
+                <div class="weui-footer">
+                    <p class="weui-footer__links">
+                        <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67a84c01324490ca&redirect_uri=http%3A%2F%2Fwww.campuscircle.top%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
+                           class="weui-footer__link">中大园圈</a>
+                    </p>
+                    <p class="weui-footer__text">Copyright &copy; 2017 SYSUcampuscircle</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--社团日志-->
+    <div id="dairy" class="container" onclick="check()" style="display: none;margin: 30px">
+        <b>日志类型</b>
+        <form style="margin: 15px 15px 35px ">
+            <label for="option-one">
+                <input id="option-one" type="radio" name="diaryOption" value="1">
+                图文说说
+            </label>
+            <br>
+            <label for="option-two" class="pure-radio">
+                <input id="option-two" type="radio" name="diaryOption" value="2">
+                推送小记
+            </label>
+        </form>
+
+        <form id="form_1" style="display: none;margin-bottom:35px ;">
+            <label>
+                <b>说说你想表达的话~</b>
+                <input type="text" id="diary_1_text">
+            </label>
+            <br>
+            <label>
+                <b>上传图片</b>
+                <button type="button" onclick="document.getElementById('diary_input_1').click();">选择图片</button>
+                <input type="file" accept="image/*" id="diary_input_1" style="display: none">
+                <img id="diary_img" width="50px" height="50px">
+            </label>
+        </form>
+
+        <form id="form_2" style="display: none;margin-bottom:35px ;">
+            <label>
+                <b>推送标题</b>
+                <input type="text" id="diary_2_text">
+            </label>
+            <br>
+            <label>
+                <b>推送图片</b>
+                <button type="button" onclick="document.getElementById('diary_input_2').click();">选择图片</button>
+                <input type="file" accept="image/*" id="diary_input_2" style="display: none">
+                <img id="diary_img2" width="50px" height="50px">
+            </label>
+            <br>
+            <label>
+                <b>请务必填写正确的推送链接~</b>
+                <input type="url" id="diary_url">
+            </label>
+        </form>
+
+        <button onclick="document.getElementById('dairy').style.display='none';document.getElementById('main_1').style.display='block'"
+                class="cancelbtn">返回
+        </button>
+        <button id="diary_submit">提交</button>
+    </div>
+
+    <!--活动发布表单-->
+    <div id="id02" class="modal">
+        <form class="modal-content animate" id="ACT_form" action=" ">
+            <div class="container">
+                <label><b>活动类型</b></label>
+                <select style="font-size: 12px;" id="ACT_type" required>
+                    <option value="讲座">讲座</option>
+                    <option value="比赛">比赛</option>
+                    <option value="演出">演出</option>
+                    <option value="宣讲会">宣讲会</option>
+                    <option value="公益时">公益时</option>
+                    <option value="体育章">体育章</option>
+                    <option value="其它">其它</option>
+                </select>
+
+                <label><b>活动名称</b></label>
+                <input type="text" placeholder="迎新晚会" id="ACT_name" required>
+
+                <label><b>活动对象</b></label>
+                <select style="font-size: 12px;" id="ACT_campus" required>
+                    <option value="南校区">南校区</option>
+                    <option value="东校区">东校区</option>
+                    <option value="北校区">北校区</option>
+                    <option value="珠海校区">珠海校区</option>
+                    <option value="不限">不限</option>
+                </select>
+
+                <label><b>活动地点</b></label>
+                <input type="text" placeholder="中珠-风雨球场" id="ACT_location" required>
+
+                <label><b>活动时间</b></label>
+
+                <input class="weui-input" type="date" value="2017-09-01" id="ACT_time" required/>
+
+                <label><b>活动简介</b></label>
+                <input type="text" id="ACT_intro" id="ACT_intro" required>
+
+                <label><b>推送链接</b></label>
+                <input type="url" id="ACT_url" placeholder="复制推送链接至此处" required>
+
+                <label><b>主办方</b></label>
+                <input type="text" placeholder="校团工委" id="ACT_organizer" required>
+
+                <label><b>上传Logo</b></label>
+
+                <button class="weui-btn weui-btn_mini weui-btn_plain-primary"
+                        onclick="document.getElementById('ACT_input').click();">点击上传图片
+                </button>
+                <input type="file" style="display:none" accept="image/*" id="ACT_input">
+                <br>
+                <img id="ACT_logo" width="70px" height="110px" style="margin-left: 3%;">
+                <br>
+                <input type="radio" name="formChoose" value="default" checked> <b>使用默认报名表</b>
+
+                <button class="weui-btn weui-btn_mini weui-btn_plain-primary"
+                        onclick="document.getElementById('id05').style.display='block';document.getElementById('main_1').style.display='none';document.getElementById('id02').style.display='none';">
+                    点此处预览
+                </button>
+                &nbsp;
+                <br>
+                <input type="radio" name="formChoose" value="make"
+                       onclick="document.getElementById('myDIV').style.display='block';document.getElementById('id02').style.display='none';document.getElementById('main_1').style.display='none';">
+                <b>自定义报名表~</b>
+
+                <button class="weui-btn weui-btn_mini weui-btn_plain-primary"
+                        onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';document.getElementById('main_1').style.display='none';">
+                    点此处预览
+                </button>
+                &nbsp;
+                <br>
+                <input type="radio" name="formChoose" value="none"> <b>不使用报名表</b>
+                <br>
+                <!--取消和提交按钮-->
+                <div class="clearfix">
+                    <button type="button"
+                            onclick="document.getElementById('id02').style.display='none';document.getElementById('main_1').style.display='block'"
+                            class="cancelbtn">取消
+                    </button>
+                    <button type="submit" class="signupbtn">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--招新表单-->
+    <div id="id03" class="modal">
+        <form class="modal-content animate" id="NEW_form">
+            <div class="container">
+                <label><b>活动类型</b></label>
+                <select style="font-size: 12px;" id="NEW_type" required>
+                    <option value="shetuan">兴趣社团</option>
+                    <option value="zuzhi">学生组织</option>
+                </select>
+
+                <label><b>招新标题</b></label>
+                <input type="text" id="NEW_title" required>
+
+                <label><b>招新对象</b></label>
+                <input type="text" id="NEW_object" required>
+
+                <label><b>报名开始时间</b></label>
+                <input class="weui-input" type="date" value="2017-09-01" id="NEW_start" required/>
+
+                <label><b>报名截止时间</b></label>
+                <input class="weui-input" type="date" value="2017-09-03" id="NEW_end" required/>
+
+                <label><b>推送链接</b></label>
+                <input type="url" placeholder="复制推送链接至此处" id="NEW_link" required>
+
+                <div class="clearfix">
+                    <button type="button"
+                            onclick="document.getElementById('id03').style.display='none';document.getElementById('main_1').style.display='block'"
+                            class="cancelbtn">取消
+                    </button>
+                    <button type="submit" class="signupbtn">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--社团信息编辑-->
+    <div id="id04" class="modal">
+        <form id="massConfig">
+            <div class="weui-cells__title">编辑基本信息</div>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label for="MASS_name" class="weui-label">社团名字</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="MASS_name"/>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cells__title">社团类型</div>
+                    <div class="weui-cells weui-cells_checkbox" style="border: 0">
+                        <label class="weui-cell weui-check__label">
+                            <input type="radio" class="weui-check" name="radio1" value="shetuan">
+                            <i class="weui-icon-checked"></i>
+                            兴趣社团
+                        </label>
+                        <label class="weui-cell weui-check__label">
+                            <input type="radio" name="radio1" class="weui-check" value="zuzhi">
+                            <i class="weui-icon-checked"></i>
+                            学生组织
+                        </label>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label for="MASS_head" class="weui-label">社团负责人</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="MASS_head"/>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">社团logo</label></div>
+                    <div class="weui-cell__bd">
+                        <button type="button" onclick="document.getElementById('MASS_logoInput').click();"
+                                style="width: 60%">点击上传图片
+                        </button>
+                        <img id="MASS_logo" style="width:150px;height:150px">
+                        <input class="weui-input" type="file" style="display:none" accept="image/*"
+                               id="MASS_logoInput"/>
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">社团公众号二维码</label></div>
+                    <div class="weui-cell__bd">
+                        <button type="button" onclick="document.getElementById('massCfg_input').click();"
+                                style="width: 60%">
+                            点击上传图片
+                        </button>
+                        <img id="massCfg_img" style="width:150px;height:150px">
+                        <input class="weui-input" type="file" style="display:none" accept="image/*" id="massCfg_input"/>
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">社团简介</label></div>
+                    <div class="weui-cell__bd">
+                        <textarea class="weui-textarea" placeholder="请输入文本" rows="3" id="MASS_desc"></textarea>
+                        <div class="weui-textarea-counter"><span>0</span>/200</div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-btn-area">
+                <button type="button"
+                        onclick="document.getElementById('id04').style.display='none';document.getElementById('main_1').style.display='block'"
+                        class="cancelbtn">取消
+                </button>
+                <button type="submit" class="signupbtn">提交</button>
+            </div>
+        </form>
+    </div>
+
+    <!--预览报名表-->
+    <div id="id05" class="modal">
+        <form class="modal-content animate" action=" ">
+            <br> <b> &nbsp; 报名表预览 </b> <br>
+            <div class="container" id="custom">
+                <!--js添加-->
+            </div>
+            <div class="clearfix">
+                <button type="button"
+                        onclick="document.getElementById('id05').style.display='none';document.getElementById('id02').style.display='block'"
+                        class="cancelbtn">
+                    返回
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!--在线制作报名表-->
+    <div id="myDIV">
+        <h2 style="margin:5px ">制作报名表</h2>
+        <input type="text" id="myInput" placeholder="输入...">
+        <button onclick="addElement()" class="addBtn">添加报名需填项</button>
+
+        <form class="modal-content animate" id="customerForm">
+            <ul id="myUL">
+                <!--JS添加地点-->
+            </ul>
+
+            <div class="clearfix">
+                <button type="button"
+                        onclick="document.getElementById('myDIV').style.display='none';document.getElementById('id02').style.display='block'"
+                        class="cancelbtn">取消
+                </button>
+                <button type="submit" class="signupbtn">提交</button>
+            </div>
+        </form>
+    </div>
+
+    <!--dialog活动删除弹窗-->
+    <div id="dialog_act" style="display: none;">
+        <div class="weui-mask"></div>
+        <div class="weui-dialog">
+            <div class="weui-dialog__hd"><strong class="weui-dialog__title">是否删除？</strong></div>
+            <div class="weui-dialog__bd">删除之后无法恢复</div>
+            <div class="weui-dialog__ft">
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" onclick="dialog_act(0)">取消</a>
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" onclick="dialog_act(1)">确认</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!--底部选项卡导航条-->
+<div class="weui-tabbar" id="footer">
+    <a href="#" class="weui-tabbar__item tab" id="defaultOpen" onclick="tabNav(event,'page1')">
+        <i class="weui-tabbar__icon fa fa-home" style="font-size:25px;"></i>
+        <p class="weui-tabbar__label">首页</p>
+    </a>
+    <a href="#" class="weui-tabbar__item tab" onclick="tabNav(event,'page2');read_message()">
+        <i class="weui-tabbar__icon fa fa-bell" style="font-size:22px;position: relative"></i><span
+            class="weui-badge weui-badge_dot" style="position: absolute;top:5px;display: none" id="mess_dot"></span>
+        <p class="weui-tabbar__label">消息</p>
+    </a>
+    <a href="#" class="weui-tabbar__item tab" id="myself" onclick="tabNav(event,'page3')">
+        <i class="weui-tabbar__icon fa fa-user-secret" style="font-size:25px;"></i>
+        <p class="weui-tabbar__label">我</p>
+    </a>
+</div>
+
+
+<script src="CommonJS.js"></script>
+<script>
+    //页面初始化
+    var listjson = {};
+    var defaultjson = {};
+    var formStr = "";
+    var del_id = -1;
+    var del_element;
+    var del_parent;
+    var ne = {
+        姓名: "",
+        学号: "",
+        学院: "",
+        手机: "",
+        QQ: "",
+        备注: ""
+    };
+
+    for (var i in ne) {
+        newElement(i, ne[i]);
+        defaultjson[i] = ne[i];
+        formStr += "<label><b>" + i + "</b></label>" + "<input name='" + i.value + "'>";
+    }
+
+    document.getElementById("custom").innerHTML = formStr;
+
+    //    下拉菜单
+    var acc = document.getElementsByClassName("accordion");
+    for (var i = 0; i < acc.length; i++) {
+        acc[i].onclick = function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        }
+    }
+    init();
+    // 触发 id="defaultOpen" click 事件
+    document.getElementById("defaultOpen").click();
+    document.getElementById("login").onclick = function () {
+        document.getElementById("login").disabled = true;
+        postMessage({
+            serverType: "login",
+            account: document.getElementById("uname").value,
+            password: document.getElementById("psw").value
+        }, "loginState.php", function (json) {
+            login(json);
+            if (document.getElementById("remember").checked) {
+                document.cookie = "account=" + document.getElementById("uname").value;
+                document.cookie = "password=" + document.getElementById("psw").value;
+            } else {
+                delCookie("account");
+                delCookie("password");
+            }
+        });
+    };
+    document.getElementById("ACT_form").onsubmit = function (event) {
+        event = event || window.event;
+        event.target.disabled = true;
+        event.preventDefault();
+        if (document.getElementsByName("formChoose")[0].checked)
+            listjson = defaultjson;
+        else if (document.getElementsByName("formChoose")[1].checked) {
+            listjson = {};
+            var list = document.getElementById("myUL").getElementsByTagName("input");
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].name)
+                    listjson[list.name] = list[i].value;
+            }
+        } else {
+            listjson = {none: true};
+        }
+
+        postMessage({
+            serverType: "acfForm",
+            name: document.getElementById("ACT_name").value,
+            location: document.getElementById("ACT_location").value,
+            time: document.getElementById("ACT_time").value,
+            introduction: document.getElementById("ACT_intro").value,
+            organizer: document.getElementById("ACT_organizer").value,
+            type: document.getElementById("ACT_type").value,
+            campus: document.getElementById("ACT_campus").value,
+            logo: encodeURIComponent(document.getElementById("ACT_logo").src),
+            url: document.getElementById("ACT_url").value,
+            json: JSON.stringify(listjson)
+        }, "IndexServer.php", function () {
+            document.getElementById('id02').style.display = 'none';
+            document.getElementById('main_1').style.display = 'block';
+            postMessage({
+                serverType: "SendGroup",
+                type: "mass",
+                title: "发布了活动:" + document.getElementById("ACT_name").value + ",点击进入社团主页",
+                content: "uid",
+                gourpType: "MassMark",
+                groupUID: "uid"
+            }, "message.php", function () {
+                alert("活动发布成功！");
+            });
+        })
+    };
+    document.getElementById("NEW_form").onsubmit = function (event) {
+        event = event || window.event;
+        event.target.disabled = true;
+        event.preventDefault();
+
+        postMessage({
+            serverType: "recruitment",
+            type: document.getElementById("NEW_type").value,
+            title: document.getElementById("NEW_title").value,
+            object: document.getElementById("NEW_object").value,
+            start: document.getElementById("NEW_start").value,
+            end: document.getElementById("NEW_end").value,
+            link: document.getElementById("NEW_link").value,
+        }, "IndexServer.php", function () {
+            document.getElementById('id03').style.display = 'none';
+            document.getElementById('main_1').style.display = 'block'
+            postMessage({
+                serverType: "SendGroup",
+                type: "mass",
+                title: "发布了招新:" + document.getElementById("NEW_title").value + ",点击进入社团主页",
+                content: "uid",
+                groupType: "MassMark",
+                groupUID: "uid"
+            }, "message.php", function () {
+                alert("招新发布成功！");
+            });
+        });
+    };
+    document.getElementById("massConfig").onsubmit = function (event) {
+        event = event || window.event;
+        event.target.disabled = true;
+        event.preventDefault();
+
+        var type;
+        var radio = document.getElementsByName("radio1");
+        for (var i = 0; i < radio.length; i++)
+            if (radio[i].checked)
+                type = radio[i].value;
+
+        var content = {
+            serverType: "massConfig",
+            type: type,
+            name: document.getElementById("MASS_name").value,
+            head: document.getElementById("MASS_head").value,
+            logo: encodeURIComponent(document.getElementById("MASS_logo").src),
+            QRcode: encodeURIComponent(document.getElementById("massCfg_img").src),
+            desc: document.getElementById("MASS_desc").value
+        };
+
+        postMessage(content, "IndexServer.php", function (json) {
+            document.getElementById('id04').style.display = 'none';
+            document.getElementById('main_1').style.display = 'block';
+//            document.getElementById('main_1').style.display = 'block';
+            document.getElementById("user_name").innerText = content.name;
+
+            postMessage({
+                serverType: "SendGroup",
+                type: "mass",
+                title: "修改了社团信息，点击进入社团主页",
+                content: "uid",
+                groupType: "MassMark",
+                groupUID: "uid"
+            }, "message.php", function () {
+                alert("信息修改成功！");
+            });
+        });
+    };
+
+    document.getElementById("diary_submit").onclick = function (event) {
+        event.target.disabled = true;
+        var type;
+        var radio = document.getElementsByName("diaryOption");
+        for (var i = 0; i < radio.length; i++)
+            if (radio[i].checked)
+                type = radio[i].value;
+
+        if (type == 1) {
+            var content = {
+                serverType: "massDiary",
+                title: "图文说说",
+                content: document.getElementById("diary_1_text").value,
+                logo: encodeURIComponent(document.getElementById("diary_img").src),
+                url: "#"
+            };
+        }
+        if (type == 2) {
+            var content = {
+                serverType: "massDiary",
+                title: document.getElementById("diary_2_text").value,
+                content: "",
+                logo: encodeURIComponent(document.getElementById("diary_img2").src),
+                url: document.getElementById("diary_url").value
+            };
+        }
+
+        postMessage(content, "IndexServer.php", function (json) {
+            event.target.disabled = false;
+            document.getElementById('dairy').style.display = 'none';
+            document.getElementById('main_1').style.display = 'block';
+
+            postMessage({
+                serverType: "SendGroup",
+                type: "mass",
+                title: "发布了日志：" + content.title + "，点击进入社团主页",
+                content: "uid",
+                groupType: "MassMark",
+                groupUID: "uid"
+            }, "message.php", function (json) {
+                console.log(json);
+                alert("日志发送成功！");
+            });
+        });
+    };
+    document.getElementById("customerForm").onsubmit = function (event) {
+        event = event || window.event;
+        event.target.disabled = true;
+        event.preventDefault();
+
+        listjson = {};
+        var list = document.getElementById("myUL").getElementsByTagName("input");
+        var formStr = "";
+        for (var i = 0; i < list.length; i++) {
+            if (list[i].name)
+                listjson[list[i].name] = list[i].value;
+            formStr += "<label><b>" + list[i].name + "</b></label>" + "<input name='" + list[i].value + "'>";
+        }
+        document.getElementById("custom").innerHTML = formStr;
+        document.getElementById('myDIV').style.display = 'none';
+        document.getElementById('id02').style.display = 'block';
+    };
+    document.getElementById("sendMessage").onclick = function (event) {
+        event.target.disabled = true;
+        postMessage({
+            serverType: "Send",
+            type: "",
+            title: "",
+            content: document.getElementById("message_mass").value
+        }, "conversation.php", function () {
+            event.target.disabled = false;
+            alert('发送成功');
+        })
+    };
+
+
+    document.getElementById("ACT_input").onchange = function (event) {
+        uploadImg(event || window.event, "ACT_logo", 110, 70);
+    };
+    document.getElementById("MASS_logoInput").onchange = function (event) {
+        uploadImg(event || window.event, "MASS_logo", 50, 50);
+    };
+    document.getElementById("massCfg_input").onchange = function (event) {
+        uploadImg(event || window.event, "massCfg_img", 80, 80);
+    };
+    document.getElementById("diary_input_1").onchange = function (event) {
+        event = event || window.event;
+        event.preventDefault();
+        uploadImg(event, "diary_img", 50, 50);
+    };
+    document.getElementById("diary_input_2").onchange = function (event) {
+        event = event || window.event;
+        event.preventDefault();
+        uploadImg(event, "diary_img2", 50, 50);
+    };
+
+    function uploadImg(event, id, width, height) {
+        var file = event.target.files[0];
+        var fr = new FileReader();
+        var reg = new RegExp(/image\/\w+/);
+        if (reg.test(file.type)) {
+            fr.onload = function (event) {
+                getBase64URL(event.target.result, width, height, function (url) {
+                    document.getElementById(id).src = url;
+                });
+            };
+            fr.readAsDataURL(file);
+        } else
+            alert("不是图片无法上传！");
+    }
+
+    function init() {
+        postMessage({serverType: "checkState"}, "loginState.php", function (json) {
+            if (json.state)
+                login(json.account);
+            else {
+                postMessage({
+                    serverType: "openID",
+                    code: getValue("code"),
+                    state: getValue("state")
+                }, "loginState.php", function (json) {
+                    document.getElementById("openID_head").src = json.info.headimgurl;
+                    document.getElementById("openID_name").innerText = json.info.nickname;
+                    postMessage({serverType: "getActivity"}, "IndexServer.php", function (json) {
+//                        console.log(json[0]);
+                        for (var i = 0; i < json.list.length; i++)
+                            document.getElementById("MyList").appendChild(createActivity(json.list[i].name, json.list[i].introduction, json.list[i].location,
+                                json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo));
+                        for (var i = 0; i < json.mark.length; i++)
+                            document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
+                                json.mark[i].holdtime, json.mark[i].time, json.mark[i].url, json.mark[i].json, json.mark[i].logo));
+                        for (var i = 0; i < json.mass.length; i++)
+                            document.getElementById("MyMass").appendChild(createMass(json.mass[i].name, json.mass[i].UID));
+                    });
+                    postMessage({serverType: "Get", startUID: -1, num: -1}, "message.php", function (json) {
+                        console.log(json);
+                    });
+                });
+
+                postMessage({serverType: "getDate"}, "schedule.php", function (json) {
+                    document.getElementById('table').appendChild(createCal(json));
+                });
+
+                postMessage({serverType: "Get"}, "message.php", function (json) {
+                    var message = document.getElementById("message");
+                    var page_2 = document.getElementById('page2');
+                    var read = 0;
+                    for (var i = 0; i < json.length; i++) {
+                        if (json[i].type == "act") {
+                            message.appendChild(createMessage(json[i].type, json[i].title, ''));
+                            page_2.appendChild(dialog(i, json[i].message, ''));
+                        }
+                        if (json[i].type == "mass")
+                            message.appendChild(createMessage(json[i].type, json[i].title, json[i].url));
+
+                        if (json[i].type == "work") {
+                            message.appendChild(createMessage("work", json[i].title, json[i].time));
+                            page_2.appendChild(dialog(i, json[i].time, json[i].title));
+                        }
+                        if (json[i].watch = 0) {
+                            read = read + 1;
+                        }
+                    }
+
+//                    if(json.length==0){document.getElementById('message').innerText='暂无消息……'}
+                    if (read > 0) {document.getElementById('mess_dot').style.display = 'inline-block';}
+
+                });
+            }
+        });
+
+        var remind_account = getCookies("account");
+        var remind_password = getCookies("password");
+        if (remind_account && remind_password) {
+            document.getElementById("uname").value = remind_account;
+            document.getElementById("psw").value = remind_password;
+        }
+    }
+
+    function read_message() {
+        postMessage({serverType: "Tag"}, "message.php", function (json) {
+            for (var i = 0; i < json.length; i++) {
+                json[i].watch = 1;
+            }
+            document.getElementById('mess_dot').style.display = 'none';
+        });
+    }
+
+    //登陆登出
+    function login(info) {
+        document.getElementById('id01').style.display = 'none';
+        document.getElementById("user_name").innerText = info.name + "(UID:" + info.UID + ")";
+//        console.log(info);
+
+        document.getElementById("MASS_name").value=info.name;
+        document.getElementById("MASS_head").value=info.member;
+        document.getElementById("MASS_logo").src=info.logo;
+        document.getElementById("massCfg_img").src=info.QRcode;
+        document.getElementById("MASS_desc").value=info.intro;
+
+        var radio = document.getElementsByName("formChoose");
+        for (var i = 0; i < radio.length; i++)
+            if (info.type = radio[i].value)
+                radio[i].checked=true;
+
+        document.getElementById("footer").style.display = 'none';
+        document.getElementById("myself").onclick = function (event) {
+            tabNav(event, 'page4')
+        };
+        postMessage({serverType: "getActList"}, "IndexServer.php", function (json) {
+            for (var i = 0; i < json.activity.length; i++)
+                document.getElementById("MyAct").appendChild(createAcc(json.activity[i].name, json.activity[i].list, json.activity[i].UID));
+        });
+        document.getElementById("myself").click();
+    }
+
+    function logout() {
+        postMessage({serverType: "logout"}, "loginState.php", function () {
+            document.getElementById("myself").onclick = function (event) {
+                tabNav(event, 'page3')
+            };
+            document.getElementById("footer").style.display = 'flex';
+            document.getElementById("myself").click();
+            document.getElementById("login").disabled = false;
+        });
+    }
+
+    //自定义表格
+    function addElement() {
+        var inputValue = document.getElementById("myInput").value;
+        if (inputValue)
+            newElement(inputValue);
+        else
+            alert("你需要写点描述");
+    }
+
+    function newElement(value) {
+        var li = document.createElement("li");
+        var label = document.createElement("label");
+        var input = document.createElement("input");
+        label.innerHTML = "<b>" + value + "&nbsp;</b>";
+        li.appendChild(label);
+        li.appendChild(input);
+        input.name = value;
+        document.getElementById("myUL").appendChild(li);
+        document.getElementById("myInput").value = "";
+
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+
+        span.onclick = function () {
+            var element = this.parentElement;
+            var parent = element.parentElement;
+            parent.removeChild(element);
+        }
+    }
+
+    //管理员活动管理和表格查看
+    function createActivity(title, content, place, holdtime, time, url, labels, logo) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var img = document.createElement("img");
+
+        var div_2 = document.createElement("div");
+        var h4 = document.createElement("h4");
+
+        var p_1 = document.createElement("p");
+        var p_2 = document.createElement("p");
+        var p_3 = document.createElement("p");
+        var p_4 = document.createElement("p");
+
+        var formStr = "";
+        var formLabel = JSON.parse(labels);
+        for (var i in formLabel) {
+            formStr += "<label><b>" + i + "</b></label>" + "<input name='" + i + "'>";
+        }
+
+        img.src = decodeURIComponent(logo);
+
+        img.style.width = "50px";
+        img.style.height = "50px";
+
+        a.className = "weui-media-box weui-media-box_appmsg";
+        a.href = url;
+
+        div_1.className = "weui-media-box__hd";
+        div_2.className = "weui-media-box__bd";
+
+        h4.className = "weui-media-box__title";
+        h4.innerText = title + "  ";
+
+        p_1.className = p_2.className = p_3.className = p_4.className = "weui-media-box__desc";
+        p_1.innerText = "时间" + "" + ":" + holdtime;
+        p_2.innerText = "地点" + "" + ":" + place;
+        p_3.innerText = "主办方" + "" + ":" + time;
+        p_4.innerText = "简介" + "" + ":" + content;
+
+        div_1.appendChild(img);
+
+        div_2.appendChild(h4);
+        div_2.appendChild(p_1);
+        div_2.appendChild(p_2);
+        div_2.appendChild(p_3);
+        div_2.appendChild(p_4);
+
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+
+        return a;
+    }
+
+    function createMass(title, uid) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var p = document.createElement("p");
+
+        a.className = 'weui-cell weui-cell_access';
+        div_1.className = 'weui-cell__bd';
+        div_2.className = 'weui-cell__ft';
+
+        a.href = "http://www.campuscircle.top/stzyz.html?uid=" + uid;
+        p.innerText = title;
+
+        div_1.appendChild(p);
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+
+        return a;
+    }
+
+    function createAcc(title, obj, uid) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var p = document.createElement("p");
+        var span = document.createElement("span");
+
+        a.className = 'weui-cell weui-cell_access';
+        div_1.className = 'weui-cell__bd';
+        span.className = 'fa fa-trash';
+        span.style.float = 'right';
+
+        p.innerText = title;
+
+        div_1.appendChild(p);
+        a.appendChild(div_1);
+        a.appendChild(span);
+
+        span.onclick = function (event) {
+            document.getElementById('dialog_act').style.display = 'block';
+            event = event || window.event;
+            event.preventDefault();
+            del_id = uid;
+            del_element = this.parentElement;
+            del_parent = del_element.parentElement;
+        };
+
+        div_1.onclick = function () {
+            document.getElementById('table_main').style.display = 'block';
+            document.getElementById('main_1').style.display = 'none';
+            document.getElementById('activityListContainer').innerHTML = '';
+            var table = document.getElementById('activityListContainer');
+            var header = document.createElement("tr");
+            for (var i = 0; i < obj.length; i++) {
+                var json = JSON.parse(obj[i].json);
+                var tr = document.createElement("tr");
+                var td = document.createElement("td");
+                var td_checkBox = document.createElement("input");
+
+                td_checkBox.type = "checkbox";
+
+                td.appendChild(td_checkBox);
+                tr.appendChild(td);
+
+                if (i == 0) {
+                    var h_th = document.createElement("th");
+                    var h_th_checkBox = document.createElement("input");
+                    h_th_checkBox.onclick = function (event) {
+                        event = event || window.event;
+                        var activityListContainer = document.getElementById("activityListContainer");
+                        var checkBox = activityListContainer.getElementsByTagName("input");
+                        for (var i = 0; i < checkBox.length; i++) {
+                            checkBox[i].checked = event.target.checked;
+                        }
+                    };
+                    h_th_checkBox.type = "checkbox";
+                    h_th.appendChild(h_th_checkBox);
+                    header.appendChild(h_th);
+                }
+                console.log(json);
+                for (var j in json) {
+                    var td = document.createElement("td");
+                    td.innerText = json[j];
+                    tr.appendChild(td);
+                    if (i == 0) {
+                        var th = document.createElement("th");
+                        th.innerText = j ? j : " ";
+                        header.appendChild(th);
+                    }
+                }
+                if (i == 0)
+                    table.appendChild(header);
+                table.appendChild(tr);
+            }
+            if (obj.length == 0) {
+                document.getElementById('fill').style.display = 'none';
+                document.getElementById('none_tip').style.display = 'block';
+            }
+        };
+        return a;
+    }
+
+
+    function createMessage(type, title, content) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var span = document.createElement("span");
+        var p = document.createElement("p");
+
+        a.className = "weui-cell weui-cell_access";
+        div_1.className = "weui-cell__hd";
+        div_2.className = "weui-cell__bd weui-cell_primary";
+        span.className = "weui-cell__ft";
+
+        if (type == "act") {
+            div_1.innerHTML = "<i class='fa fa-language' style='font-size:20px;color: #136832'></i>";
+            p.innerText = ' ' + title + '报名成功';
+            a.onclick = function () {
+                document.getElementById("date_" + index).style.display = 'block';
+            }
+        }
+        if (type == "mass") {
+            div_1.innerHTML = "<i class='fa fa-joomla' style='font-size:20px;color: #136832'></i>";
+            p.innerText = title;
+            a.href = content;
+        }
+        if (type == "work") {
+            div_1.innerHTML = "<i class='fa fa-clipboard' style='font-size:20px;color: #136832'></i>";
+            p.innerText = title;
+            a.onclick = function () {
+                document.getElementById("work_" + index).style.display = 'block';
+            }
+        }
+
+        div_2.appendChild(p);
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+        a.appendChild(span);
+
+        return a;
+    }
+
+    function createCalPiece(start, end, desc, uid) {
+        var li = document.createElement('li');
+        var span = document.createElement('span');
+        span.className = "fa fa-calendar-minus-o";
+        span.style = "font-size:15px;position:absolute;right:0;top:30%";
+        span.onclick = function (event) {
+            document.getElementById('delete_act').style.display = 'block';
+            event = event || window.event;
+            event.preventDefault();
+            span_id = uid;
+            span_element = this.parentElement;
+            span_parent = span_element.parentElement;
+        };
+        li.innerText = start + " ~ " + end + "  \n" + desc;
+        li.appendChild(span);
+        return li;
+    }
+
+    function createCal(json) {
+        function is_leap(year) {
+            return (year % 100 == 0 ? res = (year % 400 == 0 ? 1 : 0) : res = (year % 4 == 0 ? 1 : 0));
+        } //是否为闰年
+
+        var nstr = new Date(); //当前Date资讯
+        var ynow = nstr.getFullYear(); //年份
+        var mnow = nstr.getMonth(); //月份
+        var dnow = nstr.getDate(); //今日日期
+        var n1str = new Date(ynow, mnow, 1); //当月第一天Date资讯
+
+        var firstday = n1str.getDay(); //当月第一天星期几
+
+        var m_days = new Array(31, 28 + is_leap(ynow), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31); //各月份的总天数
+        var week = ["日", "一", "二", "三", "四", "五", "六"];
+        var tr_str = Math.ceil((m_days[mnow] + firstday) / 7); //表格所需要行数
+
+        document.getElementById("thisYear").innerText = ynow;
+        document.getElementById("thisMonth").innerText = mnow + 1 + '月';
+
+        var table = document.createElement("table");
+        var tr_head = document.createElement("tr");
+        var nowTD;
+
+        table.align = "center";
+        table.width = '100%';
+        table.cellSpacing = "0";
+        table.cellPadding = "10";
+
+        tr_head.bgColor = "#fff";
+        for (var i = 0; i < week.length; i++) {
+            var th = document.createElement("th");
+            th.align = "center";
+            th.innerText = week[i];
+            tr_head.appendChild(th);
+        }
+        table.appendChild(tr_head);
+
+        for (var i = 0; i < tr_str; i++) { //表格的行
+            var tr = document.createElement("tr");
+            tr.className = "day";
+
+            for (var k = 0; k < 7; k++) { //表格每行的单元格
+                var idx = i * 7 + k; //单元格自然序列号
+                var date_str = idx - firstday + 1; //计算日期
+                date_str = (date_str <= 0 || date_str > m_days[mnow]) ? " " : idx - firstday + 1; //过滤无效日期（小于等于零的、大于月总天数的）
+
+                var td = document.createElement("td");
+                td.innerText = date_str;
+                td.align = "center";
+                td.day = date_str;
+
+                if (date_str == dnow) {
+                    td.bgColor = '#CBCBCB';
+                    nowTD = td;
+                } else {
+                    td.bgColor = '#fff';
+                }
+
+                if (date_str != " ")
+                    for (var l = 0; l < json.length; l++) {
+                        var date = new Date(ynow, mnow, date_str);
+                        if (date.getTime() - Date.parse(json[l].start) >= 0 && date.getTime() - Date.parse(json[l].end) <= 0) {
+                            td.style.color = 'red';
+                            td.style.fontWeight = 'border';
+                        }
+                    }
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
+
+        table.onclick = function (event) {
+            event = event || window.event;
+            var ul = document.getElementById('ul');
+            ul.innerHTML = "";
+            for (var i = 0; i < json.length; i++) {
+                var date = new Date(ynow, mnow, event.target.day);
+                if (date.getTime() - Date.parse(json[i].start) >= 0 && date.getTime() - Date.parse(json[i].end) <= 0) {
+                    ul.appendChild(createCalPiece(json[i].start, json[i].end, json[i].name, json[i].UID));
+                }
+            }
+        };
+
+        nowTD.click();
+
+        return table;
+    }
+
+    function submit(condition) {
+        document.getElementById('add').style.display = 'none';
+        var time_1 = document.getElementById('start').value;
+        var time_2 = document.getElementById('end').value;
+        if (time_1 < time_2) {
+            if (condition) {
+                var thing = document.getElementById('thing').value;
+                if (condition) {
+                    if (time_1 < time_2) {
+                        postMessage({
+                            serverType: "addDate",
+                            actName: thing,
+                            actStart: time_1,
+                            actEnd: time_2
+                        }, "schedule.php", function () {
+                            postMessage({serverType: "getDate"}, "schedule.php", function (json) {
+                                document.getElementById('table').innerHTML = '';
+                                document.getElementById('table').appendChild(createCal(json));
+                            });
+                            alert('添加成功！');
+                        });
+                    } else
+                        alert('请正确输入时间');
+                }
+            }
+        }
+    }
+
+    function dialog(index, content, title) {
+        var div_3 = document.createElement("div");
+        var div_3_1 = document.createElement("div");
+        var div_3_2 = document.createElement("div");
+        var div_3_2_1 = document.createElement("div");
+        var div_3_2_2 = document.createElement("div");
+        var div_3_2_3 = document.createElement("div");
+        var a_1 = document.createElement("a");
+
+        div_3_1.className = "weui-mask";
+        if (title = '') {
+            div_3.id = "date_" + index;
+        } else {
+            div_3.id = "work_" + index
+        }
+
+        div_3_2.className = "weui-dialog";
+        div_3_2_1.className = "weui-dialog__hd";
+        div_3_2_2.className = "weui-dialog__bd";
+        div_3_2_3.className = "weui-dialog__ft";
+        a_1.className = "eui-dialog__btn weui-dialog__btn_primary";
+
+        div_3.style = 'display: none';
+        div_3_2_1.innerHTML = '<strong class="weui-dialog__title">' + title + '</strong>';
+        div_3_2_2.innerText = content;
+        a_1.onclick = function () {
+            this.parentElement.style.display = 'none'
+        };
+        a_1.innerText = '确定';
+
+        div_3_2_3.appendChild(a_1);
+        div_3_2.appendChild(div_3_2_1);
+        div_3_2.appendChild(div_3_2_2);
+        div_3_2.appendChild(div_3_2_3);
+
+        div_3.appendChild(div_3_1);
+        div_3.appendChild(div_3_2);
+        return div_3;
+    }
+
+    function dialog_act(value) {
+        document.getElementById('dialog_act').style.display = 'none';
+        if (value && del_id >= 0) {
+            postMessage({
+                serverType: "destroyAct",
+                actUID: del_id
+            }, "IndexServer.php", function () {
+                del_parent.removeChild(del_element);
+                alert('成功删除');
+            })
+        }
+    }
+
+    function delete_act(value) {
+        document.getElementById('delete_act').style.display = 'none';
+        if (value && span_id >= 0) {
+            postMessage({
+                serverType: "delDate",
+                UID: span_id
+            }, "schedule.php", function () {
+                span_parent.removeChild(span_element);
+                alert('成功删除');
+            })
+        }
+    }
+
+    function check() {
+        if (document.getElementById('option-one').checked) {
+            document.getElementById('form_1').style.display = 'block';
+            document.getElementById('form_2').style.display = 'none';
+        }
+        if (document.getElementById('option-two').checked) {
+            document.getElementById('form_2').style.display = 'block';
+            document.getElementById('form_1').style.display = 'none';
+        }
+    }
+
+    <!--底部选项卡-->
+    function tabNav(evt, tabName) {
+        var i, page, tab;
+        page = document.getElementsByClassName("page");
+        for (i = 0; i < page.length; i++) {
+            page[i].style.display = 'none';
+        }
+        tab = document.getElementsByClassName("tab");
+        for (i = 0; i < tab.length; i++) {
+            tab[i].className = tab[i].className.replace(" weui-bar__item_on", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        if (evt) evt.currentTarget.className += " weui-bar__item_on";
+    }
+
+    //    第一页顶部幻灯片
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        if (slideIndex > slides.length) {
+            slideIndex = 1
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 8000);
+        slideIndex++;
+    }
+
+    //    第三页侧拉菜单--显示日程
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "100%";
+        document.getElementById("main").style.marginLeft = "0%";
+        document.getElementById("footer").style.display = "none";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+        document.getElementById("footer").style.display = "flex";
+    }
+</script>
+
+
+</body>
+</html>
