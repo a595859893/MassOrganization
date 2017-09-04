@@ -24,11 +24,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
                 $UID = $row["massUID"];
 
-                $rst2 = $mysqli->query("SELECT * from mass WHERE UID=$UID LIMIT 1");
+                $rst2 = $mysqli->query("SELECT name,logo from mass WHERE UID=$UID LIMIT 1");
                 if ($rst2) {
-                    if ($row2 = $rst2->fetch_array(MYSQLI_ASSOC))
+                    if ($row2 = $rst2->fetch_array(MYSQLI_ASSOC)) {
                         $row["host"] = $row2["name"];
-                    else
+                        $row["logo"] = $row2["logo"];
+                    } else
                         $line["error"] = setError(0, "招新不存在");
                 } else  $line["error"] = setError(0, "社团获取时，数据库错误，提示：" . $mysqli->error);
 

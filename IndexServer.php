@@ -174,13 +174,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif ("destroyAct" == $serverType) {
         $actUID = $_POST["actUID"];
         $line = array();
-        $line["success"] = true;
         $rst = $mysqli->query("DELETE FROM actList WHERE actUID=$actUID");
         if (!$rst) $line["error"] = setError(0, "删除报名列表时，数据库错误，提示：" . $mysqli->error);
         $rst = $mysqli->query("DELETE FROM activityMark WHERE actID=$actUID");
         if (!$rst) $line["error"] = setError(0, "删除收藏列表时，数据库错误，提示：" . $mysqli->error);
         $rst = $mysqli->query("DELETE FROM activity WHERE UID=$actUID");
         if (!$rst) $line["error"] = setError(0, "删除活动时，数据库错误，提示：" . $mysqli->error);
+    } elseif ("destroyDiary" == $serverType) {
+        $uid = $_POST["UID"];
+        $line = array();
+        $rst = $mysqli->query("DELETE FROM massDiaryGood WHERE diaryUID=$uid");
+        if (!$rst) $line["error"] = setError(0, "删除日志点赞列表时，数据库错误，提示：" . $mysqli->error);
+        $rst = $mysqli->query("DELETE FROM massDiary WHERE UID=$uid");
+        if (!$rst) $line["error"] = setError(0, "删除日志时，数据库错误，提示：" . $mysqli->error);
+    } elseif ("destroyRecruitment" == $serverType) {
+        $uid = $_POST["UID"];
+        $line = array();
+        $rst = $mysqli->query("DELETE FROM recruitment WHERE UID=$uid");
+        if (!$rst) $line["error"] = setError(0, "删除招新时，数据库错误，提示：" . $mysqli->error);
     } else $line["error"] = setError(-1, "不匹配的类型");
     echo json_encode($line);
     $mysqli->close();
