@@ -155,7 +155,7 @@
             padding: 8px 8px 8px 32px;
             text-decoration: none;
             font-size: 20px;
-            color: #fff;
+            /*color: #fff;*/
             display: block;
             transition: 0.3s;
         }
@@ -170,6 +170,7 @@
             right: 5px;
             font-size: 50px;
             margin-left: 50px;
+            color: #fff;
         }
         /*#page3 .sidenav{background-color: #f7f7f7;}*/
         #page3 .sidenav *{box-sizing:border-box;
@@ -275,6 +276,9 @@
             overflow: hidden;
             transition: max-height 0.2s ease-out;
         }
+        /*#tip1,#tip2,#tip3{*/
+        /*color: #b2b2b2;*/
+        /*}*/
         #page4 article button:after {
             content: '\25BA';
         }
