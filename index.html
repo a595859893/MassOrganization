@@ -188,12 +188,11 @@
         <br>
         <!--通过下拉菜单查看-->
 
-        <button class="accordion" style="border-top: 0.01px solid rgba(19,104,50,0.6);"><i class="fa fa-paper-plane-o"
-                                                                                           style="font-size:18px;color: #136832;"></i>我的活动
+        <button class="accordion" style="border-top: 0.01px solid rgba(19,104,50,0.6);"><i class="fa fa-paper-plane-o" style="font-size:18px;color: #136832;"></i>我的活动
         </button>
         <div class="panel" id="MyList">
             <!--<div class="weui-media-box__hd" id="tip1" style="display: none;text-align: center;color: grey">空空如也~快去报名吧</div>-->
-            <a class="weui-cell weui-cell_access" id="tip1" href="huodong.html">
+            <a class="weui-cell weui-cell_access" id="tip1" href="huodong.html" style="display: none">
                 <div class="weui-cell__bd">
                     <p>空空如也~快去报名 <i class="fa fa-pencil-square-o"></i> 吧</p>
                 </div>
@@ -207,7 +206,7 @@
 
         <div class="panel " id="MyMark">
             <!--<div class="weui-media-box__hd" id="tip2" style="display: none;text-align: center;color: grey">空空如也~快去收藏吧</div>-->
-            <a class="weui-cell weui-cell_access" id="tip2" href="huodong.html">
+            <a class="weui-cell weui-cell_access" id="tip2" href="huodong.html" style="display: none">
                 <div class="weui-cell__bd">
                     <p>空空如也~快去收藏 <i class="fa fa-star"></i> 吧</p>
                 </div>
@@ -221,7 +220,7 @@
         <button class="accordion"><i class="fa fa-black-tie" style="font-size:18px;color: #136832;"></i> 我的社团</button>
         <div class="panel" id="MyMass">
             <!--<div class="weui-media-box__hd" id="tip3" style="display: none; text-align: center;color: grey">空空如也~快去关注吧</div>-->
-            <a class="weui-cell weui-cell_access" id="tip3" href="stzy.html">
+            <a class="weui-cell weui-cell_access" id="tip3" href="stzy.html" style="display: none">
                 <div class="weui-cell__bd">
                     <p>空空如也~快去关注 <i class="fa fa-user-plus"></i> 吧</p>
                 </div>
@@ -339,12 +338,44 @@
 
         <br>
         <article class="main">
-            <button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard"
-                                                                                               style="font-size:18px;color: #136832;"></i>
+            <button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i>
                 活动管理
             </button>
             <div class="panel" id="MyAct">
                 <!--js添加-->
+            </div>
+
+            <!--<button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i>-->
+                <!--社团日志管理-->
+            <!--</button>-->
+            <!--<div class="panel" id=" ">-->
+                <!--&lt;!&ndash;js添加&ndash;&gt;-->
+            <!--</div>-->
+
+            <button class="accordion"><i class="fa fa-address-book-o" style="font-size:18px;color: #136832;"></i> 社团主页管理
+            </button>
+            <div class="panel">
+                <a class="weui-cell weui-cell_access"
+                   onclick="document.getElementById('id04').style.display='block';document.getElementById('main_1').style.display='none'">
+                    <div class="weui-cell__bd">
+                        <p>编辑社团信息</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+                <a class="weui-cell weui-cell_access"
+                   onclick="document.getElementById('dairy').style.display='block';document.getElementById('main_1').style.display='none'">
+                    <div class="weui-cell__bd">
+                        <p>编辑社团日志</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+                <a class="weui-cell weui-cell_access"
+                   onclick="document.getElementById('dairy').style.display='block';document.getElementById('main_1').style.display='none'">
+                    <div class="weui-cell__bd">
+                        <p>管理社团日志</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
             </div>
 
             <button onclick="document.getElementById('id02').style.display='block';document.getElementById('main_1').style.display='none'">
@@ -355,24 +386,7 @@
                 <i class="fa fa-edit" style="font-size:18px;color: #136832;"></i> 发布招新
             </button>
 
-            <button class="accordion"><i class="fa fa-address-book-o" style="font-size:18px;color: #136832;"></i> 社团主页管理
-            </button>
-            <div class="panel">
-                <a class="weui-cell weui-cell_access"
-                   onclick="document.getElementById('dairy').style.display='block';document.getElementById('main_1').style.display='none'">
-                    <div class="weui-cell__bd">
-                        <p>编辑社团日志</p>
-                    </div>
-                    <div class="weui-cell__ft"></div>
-                </a>
-                <a class="weui-cell weui-cell_access"
-                   onclick="document.getElementById('id04').style.display='block';document.getElementById('main_1').style.display='none'">
-                    <div class="weui-cell__bd">
-                        <p>编辑社团信息</p>
-                    </div>
-                    <div class="weui-cell__ft"></div>
-                </a>
-            </div>
+
         </article>
     </div>
 
@@ -695,6 +709,9 @@
         </form>
     </div>
 
+    <!--社团日志管理-->
+
+
     <!--在线制作报名表-->
     <div id="myDIV">
         <h2 style="margin:5px ">制作报名表</h2>
@@ -789,7 +806,7 @@
             }
         }
     }
-    init();
+
     // 触发 id="defaultOpen" click 事件
     document.getElementById("defaultOpen").click();
     document.getElementById("login").onclick = function () {
@@ -1045,24 +1062,25 @@
                     document.getElementById("openID_head").src = json.info.headimgurl;
                     document.getElementById("openID_name").innerText = json.info.nickname;
                     postMessage({serverType: "getActivity"}, "IndexServer.php", function (json) {
-//
+                        console.log(json.list.length);
+                        if(json.list.length==0){
+                            document.getElementById("tip1").style.display='block';
+                        }
                         for (var i = 0; i < json.list.length; i++)
                             document.getElementById("MyList").appendChild(createActivity(json.list[i].name, json.list[i].introduction, json.list[i].location,
                                     json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo));
-                        if(json.list.length==0){
-                            document.getElementById("tip1").style.display='block';
+                        if(json.mark.length==0){
+                            document.getElementById("tip2").style.display='block';
                         }
                         for (var i = 0; i < json.mark.length; i++)
                             document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
                                     json.mark[i].holdtime, json.mark[i].time, json.mark[i].url, json.mark[i].json, json.mark[i].logo));
-                        if(json.mark.length==0){
-                            document.getElementById("tip2").style.display='block';
-                        }
-                        for (var i = 0; i < json.mass.length; i++)
-                            document.getElementById("MyMass").appendChild(createMass(json.mass[i].name, json.mass[i].UID));
+
                         if(json.mass.length==0){
                             document.getElementById("tip3").style.display='block';
                         }
+                        for (var i = 0; i < json.mass.length; i++)
+                            document.getElementById("MyMass").appendChild(createMass(json.mass[i].name, json.mass[i].UID));
                     });
                     postMessage({serverType: "Get", startUID: -1, num: -1}, "message.php", function (json) {
                         console.log(json);
@@ -1108,7 +1126,7 @@
             document.getElementById("psw").value = remind_password;
         }
     }
-
+    init();
     function read_message() {
         postMessage({serverType: "Tag"}, "message.php", function (json) {
             for (var i = 0; i < json.length; i++) {
@@ -1122,7 +1140,7 @@
     function login(info) {
         document.getElementById('id01').style.display = 'none';
         document.getElementById("user_name").innerText = info.name + "(UID:" + info.UID + ")";
-//        console.log(info);
+        console.log(info);
 
         document.getElementById("MASS_name").value=info.name;
         document.getElementById("MASS_head").value=info.member;
@@ -1130,13 +1148,11 @@
         document.getElementById("massCfg_img").src=info.QRcode;
         document.getElementById("MASS_desc").value=info.intro;
 
-        var radio = document.getElementsByName("formChoose");
+        var radio = document.getElementsByName("radio1");
         for (var i = 0; i < radio.length; i++) {
             if (info.type == radio[i].value) {
-                radio[i].checked = true;
+                radio[i].checked='checked';
             }
-            console.log(info.type);
-            console.log(radio[i].value);
         }
 
         document.getElementById("footer").style.display = 'none';
@@ -1144,8 +1160,9 @@
             tabNav(event, 'page4')
         };
         postMessage({serverType: "getActList"}, "IndexServer.php", function (json) {
-            for (var i = 0; i < json.activity.length; i++)
+            for (var i = 0; i < json.activity.length; i++) {
                 document.getElementById("MyAct").appendChild(createAcc(json.activity[i].name, json.activity[i].list, json.activity[i].UID));
+            }
         });
         document.getElementById("myself").click();
     }

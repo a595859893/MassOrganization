@@ -89,7 +89,7 @@
     // 触发 id="defaultOpen" click 事件
     document.getElementById("defaultOpen").click();
 
-    init();
+
 
     function init() {
         postMessage({
@@ -110,11 +110,14 @@
             startUID: startUID_shetuan
         }, "recruitment.php", function (json) {
             for (var i = 0; i < json.length; i++) {
+//                console.log(json[0]);
+//                console.log(json[0].mass.logo);
                 frame.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link));
                 startUID_shetuan = (startUID_shetuan == -1) ? json[i].UID : Math.min(startUID_shetuan, json[i].UID);
             }
         });
     }
+    init();
 
     <!--顶部选项卡-->
     function tabNav1(evt, tabName) {

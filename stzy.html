@@ -109,8 +109,7 @@
             for (var i = 0; i < json.length; i++) {
                 var mass = {};
                 mass.name = json[i].name;
-                mass.div = createActivity(json[i].name, json[i].intro, json[i].number, json[i].good,
-                    json[i].UID, json[i].igood, json[i].imark);
+                mass.div = createActivity(json[i].name, json[i].intro, json[i].number, json[i].good, json[i].UID, json[i].igood, json[i].imark);
                 massList.push(mass);
                 if (json[i].type == "zuzhi")
                     document.getElementById("frame2").appendChild(mass.div);
