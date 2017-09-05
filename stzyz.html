@@ -224,8 +224,9 @@
             document.getElementById("mass_intro").innerText = json.mass.intro;
             document.getElementById("mass_num").style.color = json.mass.imark ? 'red' : '';
             for (var i = 0; i < json.diary.length; i++) {
+                console.log(json.diary[0]);
                 document.getElementById("mass_diary").appendChild(createDiary(json.diary[i].title, json.diary[i].content, json.diary[i].time,
-                    json.diary[i].img, json.diary[i].logo, json.diary[i].UID, json.diary[i].good, json.diary[i].igood));
+                    json.diary[i].img, json.diary[i].logo, json.diary[i].UID, json.diary[i].good, json.diary[i].igood,json.diary[i].url));
             }
 
             for (var i = 0; i < json.recruitment.length; i++) {
@@ -237,7 +238,7 @@
         });
     }
 
-    function createDiary(title, content, time, image, logo, uid, good, igood) {
+    function createDiary(title, content, time, image, logo, uid, good, igood,url) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var div_2 = document.createElement("div");
@@ -249,6 +250,7 @@
         var p_3 = document.createElement("p");
 
         a.className = "weui-media-box weui-media-box_appmsg";
+        a.href=url;
         div_1.className = "weui-panel__hd";
         logo_1.className = "weui-media-box__thumb";
         div_2.className = "weui-media-box__bd";
@@ -317,7 +319,7 @@
                 actStart: end,
                 actEnd: end
             }, "IndexServer.php", function () {
-                alert("加入日程成功");
+                alert("已加入日程，活动开始前将会进行通知");
                 event.target.style.color='#136832';
             });
         };

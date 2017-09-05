@@ -302,6 +302,7 @@
                     event.preventDefault();
                     postMessage({serverType: "Mark", actID: index}, "activity.php", function (json) {
                         event.target.style.color = json.mark ? '#E7CF0C' : '';
+                        alert('已收藏');
                     });
                     break;
             }

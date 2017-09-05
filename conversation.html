@@ -400,8 +400,8 @@
         postMessage({serverType: "Get", type: "debunk", startUID: -1, num: 20}, "conversation.php", function (json) {
             conversation.innerHTML = '';
             for (var i = 0; i < json.length; i++) {
-                conversation.appendChild(appendConversation(json[i].UID, json[i].word, json[i].content,
-                    json[i].good, json[i].review, json[i].igood));
+
+                conversation.appendChild(appendConversation(json[i].UID, json[i].word, json[i].content, json[i].good, json[i].review, json[i].igood));
             }
         });
         postMessage({
@@ -422,6 +422,7 @@
                 document.getElementById("hotTopic").innerText = json[0].content;
                 document.getElementById("hotTopicLink").href = "conversationHot.html?id=" + json[0].UID;
                 for (var i = 1; i < json.length; i++) {
+                    console.log(json[i]);
                     var a = document.createElement("a");
                     var span = document.createElement("span");
                     var div = document.createElement("div");
