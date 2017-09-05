@@ -20,20 +20,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $campus = $_POST["campus"];
         $logo = $_POST["logo"];
         $url = $_POST["url"];
-
-        $order = "INSERT INTO activity (name,location,holdtime,time,organizer,introduction,type,campus,logo,url,json,organizerUID) ";
-        $order .= "VALUES('$name','$location','$holdtime',FROM_UNIXTIME($time),'$organizer','$intro','$type','$campus','$logo','$url','$json',$UID)";
-
-        $rst = $mysqli->query($order);
-        if ($rst) {
-            $mass_title = '新活动' . $name . '发布了!';
-            $mass_content = '我们发布了新的活动，快来看呀！';
-
-            $order = "INSERT INTO massDiary (title,content,time,logo,massUID) ";
-            $order .= "VALUES('$mass_title','$mass_content',FROM_UNIXTIME($time),'$logo',$UID)";
+        if (checkWechatUIRL($url)) {
+            $order = "INSERT INTO activity (name,location,holdtime,time,organizer,introduction,type,campus,logo,url,json,organizerUID) ";
+            $order .= "VALUES('$name','$location','$holdtime',FROM_UNIXTIME($time),'$organizer','$intro','$type','$campus','$logo','$url','$json',$UID)";
 
             $rst = $mysqli->query($order);
-        } else $line["error"] = setError(0, "活动发起时，数据库错误，提示：" . $mysqli->error);
+            if ($rst) {
+                $mass_title = '新活动' . $name . '发布了!';
+                $mass_content = '我们发布了新的活动，快来看呀！';
+
+                $order = "INSERT INTO massDiary (title,content,time,logo,massUID) ";
+                $order .= "VALUES('$mass_title','$mass_content',FROM_UNIXTIME($time),'$logo',$UID)";
+
+                $rst = $mysqli->query($order);
+            } else $line["error"] = setError(0, "活动发起时，数据库错误，提示：" . $mysqli->error);
+        } else $line["error"] = setError(10, "URL不合法");
+
+
     } elseif ("recruitment" == $serverType) {
         $type = $_POST["type"];
         $title = $_POST["title"];
@@ -93,12 +96,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $logo = $_POST["logo"];
         $img = $_POST["img"];
         $url = $_POST["url"];
-
-        $order = "INSERT INTO massDiary (title,content,time,logo,img,url,massUID) ";
-        $order .= "VALUES('$title','$content',FROM_UNIXTIME($time),'$logo','$img','$url',$UID)";
-        $line = array();
-        $rst = $mysqli->query($order);
-        if (!$rst) $line["error"] = setError(0, "社团日志发布时，数据库错误，提示：" . $mysqli->error);
+        if (checkWechatUIRL($url)) {
+            $order = "INSERT INTO massDiary (title,content,time,logo,img,url,massUID) ";
+            $order .= "VALUES('$title','$content',FROM_UNIXTIME($time),'$logo','$img','$url',$UID)";
+            $line = array();
+            $rst = $mysqli->query($order);
+            if (!$rst) $line["error"] = setError(0, "社团日志发布时，数据库错误，提示：" . $mysqli->error);
+        } else $line["error"] = setError(10, "URL不合法");
     } elseif ("getActivity" == $serverType) {
         $line["mark"] = array();
         $line["list"] = array();

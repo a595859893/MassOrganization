@@ -89,4 +89,9 @@ function sendMessageToWechat($openID, $url, $tmeplate_id, $data)
     return ($rst_json->errcode == 0);
 }
 
+function checkWechatUIRL($url)
+{
+    return preg_match('/^http:\/\/mp.weixin\.qq\.com\/s/', $url) > 0;
+}
+
 ?>
