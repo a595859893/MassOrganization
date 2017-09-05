@@ -417,7 +417,7 @@
                 startUID_conversation = Math.max(startUID_conversation, json[i].UID);
             }
         });
-        postMessage({serverType: "GetHotTopic"}, "conversation.php", function (json) {
+        postMessage({serverType: "GetHotTopic",goodOrder:true}, "conversation.php", function (json) {
             if (json.length > 0) {
                 document.getElementById("hotTopic").innerText = json[0].content;
                 document.getElementById("hotTopicLink").href = "conversationHot.html?id=" + json[0].UID;

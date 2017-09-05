@@ -309,7 +309,7 @@
     color: rgba(153, 153, 153, 0.4);
 }
 
-#id02 .clearfix button,#id03 button,#myDIV button,#id04 button,#dairy button,#id05 button{
+#id02 button,#id03 button,#myDIV button,#id04 button,#dairy button,#id05 button{
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;

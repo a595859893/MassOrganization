@@ -536,14 +536,14 @@
                 <input type="text" id="ACT_intro" maxlength="50" required>
 
                 <label><b>推送链接</b></label>
-                <input type="url" id="ACT_url" placeholder="复制推送链接至此处" required>
+                <input type="url" id="ACT_url" placeholder="复制推送链接至此处【注：只接受推送链接】" required>
 
                 <label><b>主办方</b></label>
                 <input type="text" placeholder="校团工委" id="ACT_organizer" required>
 
-                <label><b>上传Logo</b></label>
+                <label><b>上传图片</b></label>
 
-                <button class="weui-btn weui-btn_mini weui-btn_plain-primary"
+                <button type="button"
                         onclick="document.getElementById('ACT_input').click();">点击上传图片
                 </button>
                 <input type="file" style="display:none" accept="image/*" id="ACT_input">
@@ -552,7 +552,7 @@
                 <br>
                 <input type="radio" name="formChoose" value="default" checked> <b>使用默认报名表</b>
 
-                <button class="weui-btn weui-btn_mini weui-btn_plain-primary"
+                <button type="button"
                         onclick="document.getElementById('id05').style.display='block';document.getElementById('main_1').style.display='none';document.getElementById('id02').style.display='none';">
                     点此处预览
                 </button>
@@ -562,7 +562,7 @@
                        onclick="document.getElementById('myDIV').style.display='block';document.getElementById('id02').style.display='none';document.getElementById('main_1').style.display='none';">
                 <b>自定义报名表~</b>
 
-                <button class="weui-btn weui-btn_mini weui-btn_plain-primary"
+                <button type="button"
                         onclick="document.getElementById('id05').style.display='block';document.getElementById('id02').style.display='none';document.getElementById('main_1').style.display='none';">
                     点此处预览
                 </button>
@@ -861,6 +861,13 @@
                 delCookie("account");
                 delCookie("password");
             }
+        },function(json) {
+            if (json.error.code == 1) {
+                alert('密码错误');
+            }
+            if (json.error.code == 2) {
+                alert('账号不存在');
+            }
         });
     };
     document.getElementById("ACT_form").onsubmit = function (event) {
@@ -893,8 +900,10 @@
             url: document.getElementById("ACT_url").value,
             json: JSON.stringify(listjson)
         }, "IndexServer.php", function () {
+
             document.getElementById('id02').style.display = 'none';
             document.getElementById('main_1').style.display = 'block';
+            alert("活动发布成功！");
             postMessage({
                 serverType: "SendGroup",
                 type: "mass",
@@ -903,8 +912,9 @@
                 gourpType: "MassMark",
                 groupUID: "uid"
             }, "message.php", function () {
-                alert("活动发布成功！");
             });
+        },function(json){
+            if(json.error.code==10){alert("url不合法，只接受推送链接！");}
         })
     };
     document.getElementById("NEW_form").onsubmit = function (event) {
@@ -1120,7 +1130,7 @@
                             document.getElementById("MyMass").appendChild(createMass(json.mass[i].name, json.mass[i].UID));
                     });
                     postMessage({serverType: "Get", startUID: -1, num: -1}, "message.php", function (json) {
-                        console.log(json);
+//                        console.log(json);
                     });
                 });
 
@@ -1154,7 +1164,8 @@
 
                 });
             }
-        });
+        }
+        );
 
         var remind_account = getCookies("account");
         var remind_password = getCookies("password");
@@ -1177,7 +1188,7 @@
     function login(info) {
         document.getElementById('id01').style.display = 'none';
         document.getElementById("user_name").innerText = info.name + "(UID:" + info.UID + ")";
-        console.log(info);
+//        console.log(info);
 
         document.getElementById("MASS_name").value=info.name;
         document.getElementById("MASS_head").value=info.member;
