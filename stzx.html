@@ -99,7 +99,7 @@
             startUID: startUID_zuzhi
         }, "recruitment.php", function (json) {
             for (var i = 0; i < json.length; i++) {
-                frame2.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link));
+                frame2.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link,json[i].logo));
                 startUID_zuzhi = (startUID_zuzhi == -1) ? json[i].UID : Math.min(startUID_zuzhi, json[i].UID);
             }
         });
@@ -112,7 +112,7 @@
             for (var i = 0; i < json.length; i++) {
 //                console.log(json[0]);
 //                console.log(json[0].mass.logo);
-                frame.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link));
+                frame.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link,json[i].logo));
                 startUID_shetuan = (startUID_shetuan == -1) ? json[i].UID : Math.min(startUID_shetuan, json[i].UID);
             }
         });
@@ -134,7 +134,7 @@
         evt.currentTarget.className += " weui-bar__item_on";
     }
 
-    function createActivity(name, time, host, url) {
+    function createActivity(name, time, host, url,logo) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var div_2 = document.createElement("div");
@@ -152,6 +152,9 @@
         h4.className = "weui-media-box__title";
         p_1.className = p_2.className = "weui-media-box__desc";
 
+        img.src=logo;
+        img.width=50;
+        img.height=50;
 
         h4.innerText = name;
         p_1.innerHTML = "<i class='fa fa-clock-o'></i> " + "&nbsp;" + time;
@@ -182,7 +185,8 @@
                     startUID: startUID_shetuan
                 }, "recruitment.php", function (json) {
                     for (var i = 0; i < json.length; i++) {
-                        frame.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link));
+                        frame.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link,json[i].logo));
+//                        console.log(json[i].logo);
                         startUID_shetuan = (startUID_shetuan == -1) ? json[i].UID : Math.min(startUID_shetuan, json[i].UID);
                     }
                     loading_1.style.display = 'none';
@@ -197,7 +201,7 @@
                     startUID: startUID_zuzhi
                 }, "recruitment.php", function (json) {
                     for (var i = 0; i < json.length; i++) {
-                        frame2.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link));
+                        frame2.appendChild(createActivity(json[i].title, json[i].time, json[i].host, json[i].link,json[i].logo));
                         startUID_zuzhi = (startUID_zuzhi == -1) ? json[i].UID : Math.min(startUID_zuzhi, json[i].UID);
                     }
                     loading_2.style.display = 'none';

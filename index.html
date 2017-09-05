@@ -370,7 +370,7 @@
                     <div class="weui-cell__ft"></div>
                 </a>
                 <a class="weui-cell weui-cell_access"
-                   onclick="document.getElementById('dairy').style.display='block';document.getElementById('main_1').style.display='none'">
+                   onclick="document.getElementById('main_1').style.display='none';document.getElementById('id06').style.display='block'">
                     <div class="weui-cell__bd">
                         <p>管理社团日志</p>
                     </div>
@@ -711,6 +711,25 @@
 
     <!--社团日志管理-->
 
+    <div id="id06" style="display: none">
+        <a href="javascript:void(0)" class="closebtn" onclick="document.getElementById('main_1').style.display='block';document.getElementById('id06').style.display='none'">&times;</a>
+        <div class="weui-panel weui-panel_access" id="mass_diary">
+        <!--js添加-->
+        </div>
+
+        <!--dialog活动删除弹窗-->
+        <div id="dialog_diary" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog">
+                <div class="weui-dialog__hd"><strong class="weui-dialog__title">是否删除？</strong></div>
+                <div class="weui-dialog__bd">删除之后无法恢复</div>
+                <div class="weui-dialog__ft">
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" onclick="delete_diary(0)">取消</a>
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" onclick="delete_diary(1)">确认</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!--在线制作报名表-->
     <div id="myDIV">
@@ -1164,6 +1183,18 @@
                 document.getElementById("MyAct").appendChild(createAcc(json.activity[i].name, json.activity[i].list, json.activity[i].UID));
             }
         });
+
+        postMessage({serverType: "getMass",UID:info.UID }, "mass.php", function (json) {
+            for (var i = 0; i < json.recruitment.length; i++){
+                document.getElementById("MyAct").appendChild(createAcc(json.recruitment[i].title,"" , ""));
+            }
+
+            for (var i = 0; i < json.diary.length; i++) {
+                document.getElementById("mass_diary").appendChild(createDiary(json.diary[i].title, json.diary[i].content, json.diary[i].time,
+                        json.diary[i].img, json.diary[i].logo, json.diary[i].UID ));
+            }
+        });
+
         document.getElementById("myself").click();
     }
 
@@ -1363,6 +1394,60 @@
                 document.getElementById('none_tip').style.display = 'block';
             }
         };
+        return a;
+    }
+
+    function createDiary(title, content, time, image, logo, uid ) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var logo_1 = document.createElement("img");
+        var h4 = document.createElement("h4");
+        var span = document.createElement("i");
+        var p_1 = document.createElement("p");
+        var p_2 = document.createElement("p");
+        var p_3 = document.createElement("p");
+
+        a.className = "weui-media-box weui-media-box_appmsg";
+        div_1.className = "weui-panel__hd";
+        logo_1.className = "weui-media-box__thumb";
+        div_2.className = "weui-media-box__bd";
+        h4.className = "weui-media-box__title";
+        span.className = "fa fa-trash";
+        span.style = 'float: right';
+
+        span.onclick = function (event) {
+                document.getElementById('dialog_diary').style.display = 'block';
+                event = event || window.event;
+                event.preventDefault();
+                diary_id = uid;
+                diary_element_0_0 = this.parentElement;
+                diary_element_0 = diary_element_0_0.parentElement;
+                diary_element = diary_element_0.parentElement;
+                diary_parent = diary_element.parentElement;
+        };
+        p_1.className = p_2.className = p_3.className = "weui-media-box__desc";
+        h4.innerHTML = title;
+        p_1.innerText = time;
+        p_2.innerText = content;
+        logo_1.src = logo;
+        logo_1.style.width = 50 + "px";
+
+        for (var i = 0; i < image.length; i++) {
+            var img = document.createElement("img");
+            img.style = "background-image:url(" + image[i] + ")";
+            p_3.appendChild(img);
+        }
+
+        h4.appendChild(span);
+        div_1.appendChild(logo_1);
+        div_2.appendChild(h4);
+        div_2.appendChild(p_1);
+        div_2.appendChild(p_2);
+        div_2.appendChild(p_3);
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+
         return a;
     }
 
@@ -1591,22 +1676,31 @@
             }, "IndexServer.php", function () {
                 del_parent.removeChild(del_element);
                 alert('成功删除');
-            })
+            });
+//            if (value && del_id >= 0) {
+//                postMessage({
+//                    serverType: "destroyRecruitment",
+//                    actUID: del_id
+//                }, "IndexServer.php", function () {
+//                    del_parent.removeChild(del_element);
+//                    alert('成功删除');
+//                });
         }
     }
 
-    function delete_act(value) {
-        document.getElementById('delete_act').style.display = 'none';
-        if (value && span_id >= 0) {
+    function delete_diary(value) {
+        document.getElementById('dialog_diary').style.display = 'none';
+        if (value && diary_id >= 0) {
             postMessage({
-                serverType: "delDate",
-                UID: span_id
-            }, "schedule.php", function () {
-                span_parent.removeChild(span_element);
+                serverType: "destroyDiary",
+                UID: diary_id
+            }, "IndexServer.php", function () {
+                diary_parent.removeChild(diary_element);
                 alert('成功删除');
             })
         }
-    }
+        }
+
 
     function check() {
         if (document.getElementById('option-one').checked) {

@@ -116,13 +116,18 @@
     function dealContent(json) {
         var frame = document.getElementById("frame");
         var frame2 = document.getElementById("frame2");
-        for (var i = 0; i < json.mass.length; i++)
-            frame2.appendChild(createActivity(json.mass[i].name, json.mass[i].good, json.mass[i].logo, i+1, 0));
-        for (var i = 0; i < json.activity.length; i++)
-            frame.appendChild(createActivity(json.activity[i].name, json.activity[i].mark, json.activity[i].logo, i+1, 1));
+        for (var i = 0; i < json.mass.length; i++){
+            var url="stzyz.html?uid="+json.mass[i].UID;
+            frame2.appendChild(createActivity(json.mass[i].name, json.mass[i].good, json.mass[i].logo, i+1, 0,url));
+//        console.log(json.mass[i]);
+        }
+        for (var i = 0; i < json.activity.length; i++){
+            frame.appendChild(createActivity(json.activity[i].name, json.activity[i].mark, json.activity[i].logo, i+1, 1,json.activity[i].url));
+//            console.log(json.activity[i]);
+        }
     }
 
-    function createActivity(name, num, imgURL, order, star) {
+    function createActivity(name, num, imgURL, order, star,url) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var div_2 = document.createElement("div");
@@ -143,6 +148,7 @@
         div_2.className = "weui-media-box__bd";
         h4.className = "weui-media-box__title";
         p_1.className = "weui-media-box__desc";
+        a.href=url;
 
         h4.innerText = name;
         if (star) {
