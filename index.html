@@ -339,18 +339,18 @@
         <br>
         <article class="main">
             <button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i>
-                活动管理
-            </button>
+            活动管理
+        </button>
             <div class="panel" id="MyAct">
                 <!--js添加-->
             </div>
 
-            <!--<button class="accordion" style="border-top:0.01px solid rgba(19,104,50,0.6) ;"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i>-->
-                <!--社团日志管理-->
-            <!--</button>-->
-            <!--<div class="panel" id=" ">-->
-                <!--&lt;!&ndash;js添加&ndash;&gt;-->
-            <!--</div>-->
+            <button  onclick="document.getElementById('main_1').style.display='none';document.getElementById('id07').style.display='block'"><i class="fa fa-clipboard" style="font-size:18px;color: #136832;"></i>
+                招新管理
+            </button>
+            <div class="panel" id="MyRecruitment">
+                <!--js添加-->
+            </div>
 
             <button class="accordion"><i class="fa fa-address-book-o" style="font-size:18px;color: #136832;"></i> 社团主页管理
             </button>
@@ -710,7 +710,6 @@
     </div>
 
     <!--社团日志管理-->
-
     <div id="id06" style="display: none">
         <a href="javascript:void(0)" class="closebtn" onclick="document.getElementById('main_1').style.display='block';document.getElementById('id06').style.display='none'">&times;</a>
         <div class="weui-panel weui-panel_access" id="mass_diary">
@@ -726,6 +725,25 @@
                 <div class="weui-dialog__ft">
                     <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" onclick="delete_diary(0)">取消</a>
                     <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" onclick="delete_diary(1)">确认</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--招新管理-->
+    <div id="id07" style="display: none;">
+        <a href="javascript:void(0)" class="closebtn" onclick="document.getElementById('main_1').style.display='block';document.getElementById('id07').style.display='none'">&times;</a>
+        <div class="weui-panel weui-panel_access" id="mass_recruitment">
+            <!--js添加-->
+        </div>
+        <div id="delete_recruitment" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog">
+                <div class="weui-dialog__hd"><strong class="weui-dialog__title">是否删除？</strong></div>
+                <div class="weui-dialog__bd">删除之后无法恢复</div>
+                <div class="weui-dialog__ft">
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" onclick="delete_recruitment(0)">取消</a>
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" onclick="delete_recruitment(1)">确认</a>
                 </div>
             </div>
         </div>
@@ -1186,12 +1204,11 @@
 
         postMessage({serverType: "getMass",UID:info.UID }, "mass.php", function (json) {
             for (var i = 0; i < json.recruitment.length; i++){
-                document.getElementById("MyAct").appendChild(createAcc(json.recruitment[i].title,"" , ""));
+                document.getElementById("mass_recruitment").appendChild(createRecruitment(json.recruitment[i].title, json.recruitment[i].object, json.recruitment[i].end, json.recruitment[i].intro, json.recruitment[i].link,json.recruitment[i].UID));
             }
 
             for (var i = 0; i < json.diary.length; i++) {
-                document.getElementById("mass_diary").appendChild(createDiary(json.diary[i].title, json.diary[i].content, json.diary[i].time,
-                        json.diary[i].img, json.diary[i].logo, json.diary[i].UID ));
+                document.getElementById("mass_diary").appendChild(createDiary(json.diary[i].title, json.diary[i].content, json.diary[i].time, json.diary[i].img, json.diary[i].logo, json.diary[i].UID ));
             }
         });
 
@@ -1394,6 +1411,51 @@
                 document.getElementById('none_tip').style.display = 'block';
             }
         };
+        return a;
+    }
+
+    function createRecruitment(title, object, end, intro, url,uid) {
+        var a = document.createElement("a");
+        var div_1 = document.createElement("div");
+        var div_2 = document.createElement("div");
+        var img = document.createElement("img");
+        var h4 = document.createElement("h4");
+        var p1 = document.createElement("p1");
+        var p2 = document.createElement("p2");
+        var i = document.createElement("i");
+
+        a.className = "weui-media-box weui-media-box_appmsg";
+        div_1.className = "weui-media-box__hd";
+        div_2.className = "weui-media-box__bd";
+        h4.className = "weui-media-box__title";
+        p1.className = "weui-media-box__desc";
+        p2.className = "weui-media-box__desc";
+        i.className = "fa fa-trash";
+        i.style = "float: right;font-size: 20px;";
+        i.onclick = function (event) {
+            document.getElementById('delete_recruitment').style.display = 'block';
+            event = event || window.event;
+            event.preventDefault();
+            recruitment_id = uid;
+            recruitment_element_0_0 = this.parentElement;
+            recruitment_element_0 = recruitment_element_0_0.parentElement;
+            recruitment_element = recruitment_element_0.parentElement;
+            recruitment_parent = recruitment_element.parentElement;
+        };
+        a.href = url;
+
+        h4.innerText = title + ' ';
+        p1.innerHTML = '<i class="fa fa-clock-o"></i> &nbsp; ' + end;
+        p2.innerHTML = '<i class="fa fa-users"></i> &nbsp; ' + object;
+
+        h4.appendChild(i);
+        div_2.appendChild(h4);
+        div_2.appendChild(p1);
+        div_2.appendChild(p2);
+        div_1.appendChild(img);
+        a.appendChild(div_1);
+        a.appendChild(div_2);
+
         return a;
     }
 
@@ -1677,14 +1739,19 @@
                 del_parent.removeChild(del_element);
                 alert('成功删除');
             });
-//            if (value && del_id >= 0) {
-//                postMessage({
-//                    serverType: "destroyRecruitment",
-//                    actUID: del_id
-//                }, "IndexServer.php", function () {
-//                    del_parent.removeChild(del_element);
-//                    alert('成功删除');
-//                });
+        }
+    }
+
+    function delete_recruitment(value) {
+        document.getElementById('delete_recruitment').style.display = 'none';
+        if (value && recruitment_id >= 0) {
+            postMessage({
+                serverType: "destroyRecruitment",
+                UID: recruitment_id
+            }, "IndexServer.php", function () {
+                recruitment_parent.removeChild(recruitment_element);
+                alert('成功删除');
+            })
         }
     }
 

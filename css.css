@@ -164,13 +164,22 @@
             color: #f1f1f1;
         }
 
-        #page3 .sidenav .closebtn {
+        #page3 .sidenav .closebtn{
             position: absolute;
             top: -15px;
             right: 5px;
             font-size: 50px;
             margin-left: 50px;
             color: #fff;
+        }
+        #page4 .closebtn{
+            /*position: absolute;*/
+            /*top: -15px;*/
+            /*left: 5px;*/
+            padding: 8px ;
+            font-size: 43px;
+            margin-left: 50px;
+            color: #000;
         }
         /*#page3 .sidenav{background-color: #f7f7f7;}*/
         #page3 .sidenav *{box-sizing:border-box;

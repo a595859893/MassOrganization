@@ -229,9 +229,11 @@
             }
 
             for (var i = 0; i < json.recruitment.length; i++) {
+//                console.log(json.recruitment[0]);
                 document.getElementById("recruitment_board").appendChild(createRecruitment(json.recruitment[i].title,
                     json.recruitment[i].object, json.recruitment[i].end, json.recruitment[i].intro, json.recruitment[i].link));
             }
+
         });
     }
 
