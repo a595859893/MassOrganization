@@ -31,12 +31,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $UID = $_POST["UID"];
         $num = $_POST["num"];
         $type = $_POST["type"];
+        $goodOrder = $_POST["goodOrder"];
         $order = "SELECT * FROM conversation WHERE type='$type'";
         if ($type == "hot")
             $order .= " AND targetUID=$UID";
         if ($startUID > 0)
             $order .= " AND UID<$startUID";
-        $order .= " ORDER BY UID DESC";
+        if ($goodOrder)
+            $order .= " ORDER BY good DESC";
+        else
+            $order .= " ORDER BY UID DESC";
         if ($num > 0)
             $order .= " LIMIT $num";
         $rst = $mysqli->query($order);
