@@ -14,6 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $content = $_POST["content"];
         $targetOpenID = $_POST["openID"];
 
+        if ($content == "uid")
+            $content = $_SESSION["uid"];
+
         $order = "INSERT INTO message (title,content,sender,type,openID) ";
         $order .= "VALUES('$title','$content','$openID','$type','$targetOpenID')";
         $rst = $mysqli->query($order);
