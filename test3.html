@@ -114,16 +114,6 @@
                         话题圈
                     </p>
                 </a>
-                <a href="http://v1.rabbitpre.com/m/QQQQ2b6uh" class="weui-grid">
-                    <div class="weui-grid__icon">
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-tree"></use>
-                        </svg>
-                    </div>
-                    <p class="weui-grid__label">
-                        加入我们
-                    </p>
-                </a>
 
             </div>
 
@@ -995,7 +985,7 @@
             postMessage({
                 serverType: "SendGroup",
                 type: "mass",
-                title: mass_name + "修改了社团信息",
+                title: mass_name + "修改了社团信息，点击进入社团主页",
                 content: "uid",
                 groupType: "MassMark",
                 groupUID: "uid"
@@ -1194,7 +1184,7 @@
                     for (var i = 0; i < json.length; i++) {
                         if (json[i].type == "act") {
                             message.appendChild(createMessage(json[i].type, json[i].title,json[i].content, i));
-                            page_2.appendChild(dialog(i, json[i].message, json[i].title));
+                            page_2.appendChild(dialog(i, json[i].message, ''));
                         }
                         if (json[i].type == "mass")
                             message.appendChild(createMessage(json[i].type, json[i].title, json[i].content));
@@ -1659,12 +1649,6 @@
 
         var table = document.createElement("table");
         var tr_head = document.createElement("tr");
-        var span=document.createElement("span");
-        span.innerHTML='&#8226';
-        span.style.color='#e64340';
-        span.style.fontWeight='600';
-        span.style.fontSize='medium';
-
         var nowTD;
 
         table.align = "center";
@@ -1706,9 +1690,8 @@
                     for (var l = 0; l < json.length; l++) {
                         var date = new Date(ynow, mnow, date_str);
                         if (date.getTime() - Date.parse(json[l].start) >= 0 && date.getTime() - Date.parse(json[l].end) <= 0) {
-//                            td.style.color = 'red';
-//                            td.style.fontWeight = 'border';
-                            td.appendChild(span);
+                            td.style.color = 'red';
+                            td.style.fontWeight = 'border';
                         }
                     }
                 tr.appendChild(td);
