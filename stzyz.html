@@ -178,9 +178,9 @@
 
     <!--社团日志栏-card形式-->
     <br>
-    <div id="mass_diary" class="weui-panel weui-panel_access">
+    <div  class="weui-panel weui-panel_access">
         <div class="weui-panel__hd">社团日志</div>
-        <div class="weui-panel__bd">
+        <div class="weui-panel__bd" id="mass_diary">
             <!--js添加-->
         </div>
     </div>
@@ -260,6 +260,7 @@
         span.style.color = igood ? 'red' : '';
         span.innerText = good;
         span.onclick = function (event) {
+            event.preventDefault();
             postMessage({serverType: "goodDiary", diaryUID: uid}, "mass.php", function (json) {
                 var num = parseInt(event.target.innerText);
                 num = json.good ? num + 1 : num - 1;
@@ -272,7 +273,7 @@
         p_1.innerText = time;
         p_2.innerText = content;
         logo_1.src = logo;
-        logo_1.style.width = 50 + "px";
+        logo_1.width = 60 ;
 
         for (var i = 0; i < image.length; i++) {
             var img = document.createElement("img");

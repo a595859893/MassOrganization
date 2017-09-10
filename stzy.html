@@ -21,6 +21,11 @@
             font-size: 15px;
             color: #818181
         }
+
+        .weui-media-box__desc{
+            line-height: 1.6;
+            display: block;
+        }
     </style>
 
 </head>
@@ -109,7 +114,8 @@
             for (var i = 0; i < json.length; i++) {
                 var mass = {};
                 mass.name = json[i].name;
-                mass.div = createActivity(json[i].name, json[i].intro, json[i].number, json[i].good, json[i].UID, json[i].igood, json[i].imark);
+                console.log(json[0]);
+                mass.div = createActivity(json[i].name, json[i].intro, json[i].number, json[i].good, json[i].UID, json[i].igood, json[i].imark,json[i].logo);
                 massList.push(mass);
                 if (json[i].type == "zuzhi")
                     document.getElementById("frame2").appendChild(mass.div);
@@ -154,9 +160,10 @@
         evt.currentTarget.className += " weui-bar__item_on";
     }
 
-    function createActivity(name, intro, number, member, uid, good, mark) {
+    function createActivity(name, intro, number, member, uid, good, mark,url) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
+        var img = document.createElement("img");
         var div_2 = document.createElement("div");
         var h4 = document.createElement("h4");
         var p = document.createElement("p");
@@ -167,6 +174,10 @@
         a.href = "stzyz.html?uid=" + uid;
         a.className = "weui-media-box weui-media-box_appmsg";
         div_1.className = "weui-media-box__hd";
+        img.className = "weui-media-box__thumb";
+        img.width='60';
+        img.height='60';
+        img.src=url;
 
         div_2.className = "weui-media-box__bd";
         h4.className = "weui-media-box__title";
@@ -214,6 +225,7 @@
         li_1.innerHTML = "<span>" + number + " </span> ";
         li_2.innerHTML = " <span>" + member + " </span> ";
 
+        div_1.appendChild(img);
         ul.appendChild(li_1);
         ul.appendChild(li_2);
         div_2.appendChild(h4);
