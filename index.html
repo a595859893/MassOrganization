@@ -676,10 +676,16 @@
                     </div>
                 </div>
                 <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label" for="MASS_tel">负责人手机</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" id="MASS_tel"/>
+                    </div>
+                </div>
+
+                <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label">社团logo</label></div>
                     <div class="weui-cell__bd">
-                        <button type="button" onclick="document.getElementById('MASS_logoInput').click();"
-                                style="width: 60%">点击上传图片
+                        <button type="button" onclick="document.getElementById('MASS_logoInput').click();" style="width: 60%">点击上传图片
                         </button>
                         <img id="MASS_logo" style="width:150px;height:150px">
                         <input class="weui-input" type="file" style="display:none" accept="image/*"
@@ -990,6 +996,7 @@
         var content = {
             serverType: "massConfig",
             type: type,
+            tel: document.getElementById("MASS_tel").value,
             name: document.getElementById("MASS_name").value,
             head: document.getElementById("MASS_head").value,
             logo: encodeURIComponent(document.getElementById("MASS_logo").src),
@@ -1252,11 +1259,12 @@
         mass_name = info.name;
 
         document.getElementById('id01').style.display = 'none';
-        document.getElementById("user_name").innerText = info.name + "(UID:" + info.UID + ")";
+        document.getElementById("user_name").innerText = info.name ;
 //        console.log(info);
 
         document.getElementById("MASS_name").value = info.name;
         document.getElementById("MASS_head").value = info.member;
+        document.getElementById("MASS_tel").value = info.phone;
         document.getElementById("MASS_logo").src = info.logo;
         document.getElementById("massCfg_img").src = info.QRcode;
         document.getElementById("MASS_desc").value = info.intro;

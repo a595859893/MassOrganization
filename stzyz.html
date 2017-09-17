@@ -232,14 +232,12 @@
             document.getElementById("mass_num").style.color = json.mass.imark ? 'red' : '';
             for (var i = 0; i < json.diary.length; i++) {
                 console.log(json.diary[0]);
-                document.getElementById("mass_diary").appendChild(createDiary(json.diary[i].title, json.diary[i].content, json.diary[i].time,
-                    json.diary[i].img, json.diary[i].logo, json.diary[i].UID, json.diary[i].good, json.diary[i].igood,json.diary[i].url));
+                document.getElementById("mass_diary").appendChild(createDiary(json.diary[i].title, json.diary[i].content, json.diary[i].time,json.diary[i].img, json.diary[i].logo, json.diary[i].UID, json.diary[i].good, json.diary[i].igood,json.diary[i].url));
             }
 
             for (var i = 0; i < json.recruitment.length; i++) {
 //                console.log(json.recruitment[0]);
-                document.getElementById("recruitment_board").appendChild(createRecruitment(json.recruitment[i].title,
-                    json.recruitment[i].object, json.recruitment[i].end, json.recruitment[i].intro, json.recruitment[i].link,json.mass.logo));
+                document.getElementById("recruitment_board").appendChild(createRecruitment(json.recruitment[i].title,json.recruitment[i].object, json.recruitment[i].end, json.recruitment[i].intro, json.recruitment[i].link,json.mass.logo));
             }
         });
     }
