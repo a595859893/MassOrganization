@@ -53,12 +53,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (!$rst) $line["error"] = setError(0, "招新发起时，数据库错误，提示：" . $mysqli->error);
     } elseif ("massConfig" == $serverType) {
-        $type = $_POST["type"];
-        $name = $_POST["name"];
-        $head = $_POST["head"];
-        $logo = $_POST["logo"];
-        $desc = $_POST["desc"];
-        $QRcode = $_POST["QRcode"];
+        $type = addslashes($_POST["type"]);
+        $name = addslashes($_POST["name"]);
+        $head = addslashes($_POST["head"]);
+        $logo = addslashes($_POST["logo"]);
+        $desc = addslashes($_POST["desc"]);
+        $tel = addslashes($_POST["tel"]);
+        $QRcode = addslashes($_POST["QRcode"]);
         $start = true;
 
         $order = "UPDATE mass SET";
@@ -80,6 +81,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         if ($type) {
             $order .= ($start ? " " : ",") . "type='$type'";
+            $start = false;
+        }
+        if ($tel) {
+            $order .= ($start ? " " : ",") . "phone='$tel'";
             $start = false;
         }
         if ($QRcode) {
