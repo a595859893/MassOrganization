@@ -231,6 +231,8 @@
             }
 
             if (ele.replace(/(^\s*)|(\s*$)/g, "") == "完成") {
+                startUID = -1;
+                document.getElementById("actlist").innerHTML = ""
                 getActivity(actOrder);
                 display();
             }
@@ -264,11 +266,13 @@
         type.startUID = startUID;
         type.num = 6;
         postMessage(type, "activity.php", function (json) {
+            console.log(json);
+            console.log(startUID);
             var card = document.getElementById("actlist");
             for (var i = 0; i < json.length; i++) {
                 card.appendChild(createActivity(json[i].name, json[i].introduction, json[i].location,
-                    json[i].holdtime, json[i].organizer, json[i].UID, json[i].json, json[i].logo, json[i].mark, json[i].url));
-                startUID = startUID == -1 ? json[i].UID : Math.min(startUID, json[i].UID);
+                    json[i].holdtime, json[i].organizer, json[i].UID, json[i].json, json[i].logo, json[i].imark, json[i].url));
+                startUID = json[i].UID;
             }
             loading.style.display = 'none';
         });
@@ -447,9 +451,9 @@
     }
 
     window.onscroll = function () {
-        if (getScrollTop() + getClientHeight() == getScrollHeight()) {
-            getActivity(actOrder);
-        }
+        if (document.getElementById("loading").style.display == "none")
+            if (getScrollTop() + getClientHeight() >= getScrollHeight() - 5)
+                getActivity(actOrder);
     };
 </script>
 </body>
