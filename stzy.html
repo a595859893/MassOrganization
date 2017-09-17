@@ -177,7 +177,12 @@
         img.className = "weui-media-box__thumb";
         img.width='60';
         img.height='60';
-        img.src=url;
+        if(url){
+            img.src=url;
+        }else {
+            img.src='img/none.png';
+        }
+
 
         div_2.className = "weui-media-box__bd";
         h4.className = "weui-media-box__title";

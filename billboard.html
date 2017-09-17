@@ -141,7 +141,11 @@
         div_1.style = "position: relative;margin-right: 10px;";
         span.className="weui-badge";
         span.style = "position: absolute;top: -.4em;right: -.6em;";
+        if(imgURL){
         img.src = imgURL;
+        }else{
+            img.src='img/none.png';
+        }
         img.style.width = "60px";
         img.style.height = "60px";
 

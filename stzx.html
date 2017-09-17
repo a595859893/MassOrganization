@@ -59,8 +59,7 @@
                 <div class="weui-panel__bd" id="frame">
                     <!--JS添加处-->
                 </div>
-                <div id="loading_1" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin"
-                                                                                style="font-size: 30px;"></i></div>
+                <div id="loading_1" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin" style="font-size: 30px;"></i></div>
             </div>
         </div>
 
@@ -69,11 +68,11 @@
             <div class="weui-panel weui-panel_access">
                 <div class="weui-panel__hd">学生组织</div>
                 <div class="weui-panel__bd" id="frame2">
+
                     <!--JS添加处-->
                 </div>
 
-                <div id="loading_2" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin"
-                                                                                style="font-size: 30px;"></i></div>
+                <div id="loading_2" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin" style="font-size: 30px;"></i></div>
             </div>
         </div>
 
@@ -151,8 +150,12 @@
         div_2.className = "weui-media-box__bd";
         h4.className = "weui-media-box__title";
         p_1.className = p_2.className = "weui-media-box__desc";
-
-        img.src=logo;
+        if(logo){
+            img.src = logo;
+        }else{
+            img.src='img/none.png';
+        }
+//        img.src=logo;
         img.width=50;
         img.height=50;
 

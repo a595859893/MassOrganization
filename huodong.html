@@ -24,7 +24,7 @@
             font-size: 20px;
         }
 
-        .page .weui-media-box__desc{
+         .weui-media-box__desc{
             line-height: 1.6;
             display: block;
         }
@@ -33,6 +33,11 @@
             width: 70px;
             height: 116px;
             line-height: 0;
+        }
+        .weui-media-box__title{
+            overflow: auto;
+            text-overflow: clip;
+            white-space: normal;
         }
     </style>
 </head>
@@ -146,6 +151,7 @@
     <article>
         <div class="weui-panel weui-panel_access">
             <div class="weui-panel__bd" id="actlist">
+
                 <!--活动JS添加地点-->
             </div>
         </div>
@@ -268,6 +274,7 @@
     }
 
     function createActivity(title, content, place, holdtime, organizer, index, labels, logo, mark, url) {
+        var div = document.createElement("div");
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var img = document.createElement("img");
@@ -288,42 +295,29 @@
             formStr += "<label><b>" + i + "</b></label>" + "<input name='" + i + "'>";
         }
 
+        if(logo){
         img.src = decodeURIComponent(logo);
+        }else{
+            img.src='img/none.png';
+        }
         img.style.width = "70px";
         img.style.height = "110px";
-//        记得改尺寸
 
-        a.className = "weui-media-box weui-media-box_appmsg";
+
+//        a.className = "weui-media-box weui-media-box_appmsg";
+        div.className = "weui-media-box weui-media-box_appmsg";
         a.href = url;
-        a.onclick = function (event) {
-            event = event || window.event;
-            switch (event.target) {
-                case(i_2):
-                    event.preventDefault();
-                    document.getElementById("custom").innerHTML = formStr;
-                    sign(index);
-                    break;
-
-                case(i_1):
-                    event.preventDefault();
-                    postMessage({serverType: "Mark", actID: index}, "activity.php", function (json) {
-                        event.target.style.color = json.mark ? '#E7CF0C' : '';
-                        alert('已收藏');
-                    });
-                    break;
-            }
-        };
 
         i_1.style.color = mark ? '#E7CF0C' : '';
         i_1.className = "fa fa-star";
         i_2.className = "fa fa-pencil-square-o";
-        i_2.style = "float:right";
+        i_2.style = "padding-right:5px";
 
         div_1.className = "weui-media-box__hd";
         div_2.className = "weui-media-box__bd";
 
         h4.className = "weui-media-box__title";
-        h4.innerText = title + "  ";
+
 
         p_1.className = p_2.className = p_3.className = p_4.className = "weui-media-box__desc";
         p_1.innerText = "时间" + "" + ":" + holdtime;
@@ -333,22 +327,51 @@
 
         div_1.appendChild(img);
 
-        h4.appendChild(i_1);
+        i_2.onclick=function(){
+            document.getElementById("custom").innerHTML = formStr;
+            sign(index);
+        };
 
+        i_1.onclick=function(){
+            postMessage({serverType: "Mark", actID: index}, "activity.php", function (json) {
+                       event.target.style.color = json.mark ? '#E7CF0C' : '';
+                         alert('已收藏');
+                     });
+        };
+
+        h4.appendChild(i_1);
+        h4.innerHTML +="  "+ title  ;
         if (!formLabel.none) {
             h4.appendChild(i_2);
         }
-
         div_2.appendChild(h4);
-        div_2.appendChild(p_1);
-        div_2.appendChild(p_2);
-        div_2.appendChild(p_3);
-        div_2.appendChild(p_4);
+        a.appendChild(p_1);
+        a.appendChild(p_2);
+        a.appendChild(p_3);
+        a.appendChild(p_4);
+        div_2.appendChild(a);
 
-        a.appendChild(div_1);
-        a.appendChild(div_2);
-
-        return a;
+        div.appendChild(div_1);
+        div.appendChild(div_2);
+//        div.onclick = function (event) {
+//            event = event || window.event;
+//            switch (event.target) {
+//                case(i_2):
+////                    event.preventDefault();
+//                    document.getElementById("custom").innerHTML = formStr;
+//                    sign(index);
+//                    break;
+//
+//                case(i_1):
+////                    event.preventDefault();
+//                    postMessage({serverType: "Mark", actID: index}, "activity.php", function (json) {
+//                        event.target.style.color = json.mark ? '#E7CF0C' : '';
+//                        alert('已收藏');
+//                    });
+//                    break;
+//            }
+//        };
+        return div;
     }
 
     function isAllIn(target) {
