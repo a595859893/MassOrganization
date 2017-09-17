@@ -69,6 +69,7 @@
                 <div class="weui-panel__bd" id="frame">
                     <!--JS添加处-->
                 </div>
+                <div id="loading_1" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin" style="font-size: 30px;"></i></div>
             </div>
         </div>
 
@@ -80,6 +81,7 @@
                     <!--JS添加处-->
                     <a href=""></a>
                 </div>
+                <div id="loading_2" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin" style="font-size: 30px;"></i></div>
             </div>
         </div>
 
@@ -109,7 +111,13 @@
     init();
 
 
+
+
     function init() {
+        var loading_1 = document.getElementById('loading_1');
+        var loading_2 = document.getElementById('loading_2');
+        loading_1.style.display = 'block';
+        loading_2.style.display = 'block';
         postMessage({serverType: "getList", startUID: -1, num: -1}, "mass.php", function (json) {
             for (var i = 0; i < json.length; i++) {
                 var mass = {};
@@ -123,6 +131,8 @@
                     document.getElementById("frame").appendChild(mass.div);
                 startUID = Math.min(startUID, json[i].UID);
             }
+            loading_1.style.display = 'none';
+            loading_2.style.display = 'none';
         });
     }
 
