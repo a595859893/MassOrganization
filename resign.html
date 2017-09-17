@@ -92,6 +92,8 @@
         }, function (json) {
             if (json.error.code == 1)
                 alert('账号已被使用！');
+            else
+                console.log(json.error);
         });
 
     };
