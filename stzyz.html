@@ -124,6 +124,13 @@
         .weui-media-box__desc{
             display: block;
         }
+        .weui-media-box_appmsg .weui-media-box__thumb{
+            width: 60px;
+            height: 60px;
+        }
+        .weui-panel__hd:after{
+            border-bottom: 1px solid #fff;
+        }
     </style>
 
 
@@ -216,7 +223,7 @@
 
     function init() {
         postMessage({serverType: "getMass", UID: uid}, "mass.php", function (json) {
-            console.log(json.mass);
+//            console.log(json.mass);
             document.getElementById("mass_num").innerHTML = " <span>" + json.mass.number + " </span> ";
             document.getElementById("mass_img").src = json.mass.logo;
             document.getElementById("mass_name").innerText = json.mass.name;
@@ -232,9 +239,8 @@
             for (var i = 0; i < json.recruitment.length; i++) {
 //                console.log(json.recruitment[0]);
                 document.getElementById("recruitment_board").appendChild(createRecruitment(json.recruitment[i].title,
-                    json.recruitment[i].object, json.recruitment[i].end, json.recruitment[i].intro, json.recruitment[i].link));
+                    json.recruitment[i].object, json.recruitment[i].end, json.recruitment[i].intro, json.recruitment[i].link,json.mass.logo));
             }
-
         });
     }
 
@@ -293,7 +299,7 @@
         return a;
     }
 
-    function createRecruitment(title, object, end, intro, url) {
+    function createRecruitment(title, object, end, intro, url,logo) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var div_2 = document.createElement("div");
@@ -311,6 +317,12 @@
         p2.className = "weui-media-box__desc";
         i.className = "fa fa-calendar-plus-o";
         i.style = "float: right;font-size: 20px;";
+
+        img.className='weui-media-box__thumb';
+        img.src=logo;
+        img.width='60';
+        img.height='60';
+
         i.onclick = function (event) {
             event = event || window.event;
             event.preventDefault();
