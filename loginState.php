@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					if (!$rst) $line["error"] = setError(0, "注册时，数据库错误，提示：" . $mysqli->error);
 				}
 			} else $line["error"] = setError(0, "注册时，数据库错误，提示：" . $mysqli->error);
-		}else  $line["error"] = setError(0, "注册时，账号或密码为空");
+		}else  $line["error"] = setError(5, "注册时，账号或密码为空");
     } else  $line["error"] = setError(0, "不匹配的类型");
 
     echo json_encode($line);
