@@ -268,6 +268,7 @@
         document.getElementById("send").disabled = true;
         var my_content = document.getElementById("my_content").value;
         if (my_content) {
+            content.innerHTML = '';
             postMessage({
                 serverType: "Send",
                 type: "hot",

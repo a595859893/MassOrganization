@@ -124,6 +124,12 @@
         .weui-media-box__desc{
             display: block;
         }
+        .weui-media-box__title{
+            display: block;
+            overflow: auto;
+            text-overflow: clip;
+            white-space: normal;
+        }
         .weui-media-box_appmsg .weui-media-box__thumb{
             width: 60px;
             height: 60px;
@@ -340,7 +346,7 @@
         p1.innerHTML = '<i class="fa fa-clock-o"></i> &nbsp; ' + end;
         p2.innerHTML = '<i class="fa fa-users"></i> &nbsp; ' + object;
 
-        h4.appendChild(i);
+//        h4.appendChild(i);
         div_2.appendChild(h4);
         div_2.appendChild(p1);
         div_2.appendChild(p2);

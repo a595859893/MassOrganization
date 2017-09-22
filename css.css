@@ -23,7 +23,8 @@
         #page1 header .slideshow-container ,#activity .talk .slideshow-container {
             position: relative;
             margin: auto;
-            height: 100%;
+            /*height: 100%;*/
+            height: 250px;
         }
         #page1 header .text ,#activity .talk .text{
             color: #666666;
