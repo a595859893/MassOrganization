@@ -1,7 +1,7 @@
 
         html,#page1,#page2,#page3,#page4{
             height: 100%;
-            overflow-x: hidden;
+            /*overflow-x: hidden;*/
         }
         body {
             font-family: Verdana,sans-serif;
@@ -14,10 +14,11 @@
             overflow: hidden;
         }
         #page1 header{
-            height: 30%;
+            /*height: 30%;*/
+            height: 250px;
         }
          #activity .talk .mySlides{
-            height: 100%;
+            /*height: 100%;*/
             display:none;
         }
         #page1 header .slideshow-container ,#activity .talk .slideshow-container {
@@ -43,7 +44,8 @@
             top: 0;
         }
         #page1 header img,#activity .talk img{
-            height: 100%;
+            /*height: 100%;*/
+            height: 250px;
         }
         #page1 header .dot ,#activity .talk .dot{
             cursor:pointer;
@@ -71,6 +73,10 @@
         @keyframes fade {
             from {opacity: .4}
             to {opacity: 1}
+        }
+
+        #page2 .weui-panel{
+            overflow: auto;
         }
         #page3 header{
             height: 15%;

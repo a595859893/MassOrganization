@@ -48,12 +48,12 @@
 
     <header>
         <!--头部筛选栏-->
-        <div id="top">
+        <div id="top"   style=" position: fixed; top: 0; z-index: 999;" >
             <button class="accordion" onclick="display()"
-                    style="text-align: right; position: absolute; top: 0; z-index: 999; border-bottom:1px solid #e5e5e5">
+                    style="text-align: right; position: fixed; top: 0; z-index: 999; border-bottom:1px solid #e5e5e5">
                 筛选 &nbsp;<i class="fa fa-list-ul" style="font-size:15px;color: black;"></i>
             </button>
-            <div class="panel" id="panel" style="position: absolute;z-index: 999;top: 37px;">
+            <div class="panel" id="panel" style="position: fixed;z-index: 999;top: 37px;">
                 <p>&nbsp;校区</p>
                 <div class="button-sp-area" name="place">
                     <a href="#" class="weui-btn weui-btn_mini weui-btn_default">不限</a>
