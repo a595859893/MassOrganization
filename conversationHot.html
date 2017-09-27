@@ -98,8 +98,20 @@
 <div class="weui-panel weui-panel_access" id="content">
     <!--js添加-->
 </div>
-<div id="loading" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin"
-                                                              style="font-size: 30px;"></i></div>
+<div id="loading" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin"  style="font-size: 30px;"></i></div>
+
+<!--删除弹窗-->
+<div id="delete" style="display: none;">
+    <div class="weui-mask"></div>
+    <div class="weui-dialog">
+        <div class="weui-dialog__hd"><strong class="weui-dialog__title">是否删除？</strong></div>
+        <div class="weui-dialog__bd">删除之后无法恢复</div>
+        <div class="weui-dialog__ft">
+            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" onclick="delete_mess(0)">取消</a>
+            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" onclick="delete_mess(1)">确认</a>
+        </div>
+    </div>
+</div>
 
 <script src="CommonJS.js"></script>
 <script>
@@ -123,8 +135,8 @@
 
     function init() {
         postMessage({serverType: "getHotReview", UID: uid}, "conversation.php", function (json) {
-            document.getElementById("hotTopic").innerText = json.state.content;
-            document.getElementById("topic_time").innerHTML = json.hot.time + ' <i class="fa fa-map-signs" style="color: black;font-size: 17px;"></i>';
+//            document.getElementById("hotTopic").innerText = json.state.content;
+//            document.getElementById("topic_time").innerHTML = json.hot.time + ' <i class="fa fa-map-signs" style="color: black;font-size: 17px;"></i>';
             content.innerHTML = '';
             postMessage({
                 serverType: "Get",
@@ -150,6 +162,7 @@
         var div = document.createElement("div");
         var p = document.createElement("p");
         var p_1 = document.createElement("p");
+        var p_2 = document.createElement("p");
         var img = document.createElement("img");
         var span_1 = document.createElement("span");
         var span_2 = document.createElement("span");
@@ -184,6 +197,8 @@
         div_2.style.display = 'none';
         p_1.innerText = time;
         p_1.style = 'color: #e5e5e5;font-size: 13px;';
+        p_2.style = 'color: #e5e5e5;font-size: 13px;float:right';
+        p_2.className='fa fa-trash-o';
         p.innerText = content;
         span_2.innerText = "    " + good;
         span_1.innerText = "    " + review.length;
@@ -217,6 +232,18 @@
             }
         };
 
+        p_2.onclick=function(){
+            p_2.disabled=true;
+            document.getElementById('delete').style.display = 'block';
+            mess_id = uid;
+            mess_element_0_0 = this.parentElement;
+            mess_element_0 = mess_element_0_0.parentElement;
+            mess_element = mess_element_0.parentElement;
+            mess_parent = mess_element.parentElement;
+        };
+
+
+        div_1_2.appendChild(p_2);
         div_1_2.appendChild(p_1);
         div_1_2.appendChild(p);
         div_1_2.appendChild(span_1);
@@ -288,6 +315,18 @@
         }
     };
 
+    function delete_mess(value) {
+        document.getElementById('delete').style.display = 'none';
+        if (value && mess_id >= 0) {
+            postMessage({
+                serverType: "delConversation",
+                UID: mess_id
+            }, "conversation.php", function () {
+                mess_parent.removeChild(mess_element);
+                alert('成功删除');
+            })
+        }
+    }
 
     window.onscroll = function () {
         var loading = document.getElementById('loading');
