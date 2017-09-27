@@ -14,7 +14,8 @@
             margin: 0 auto;
             text-align: center;
         }
-        .topic_box a{
+
+        .topic_box a {
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
@@ -22,6 +23,7 @@
             -webkit-line-clamp: 1;
             color: #000;
         }
+
         #old_topic {
             position: relative;
         }
@@ -161,8 +163,8 @@
                 <!--&lt;!&ndash;</span>&ndash;&gt;-->
                 <!--</div>-->
                 <div class="topic_box">
-                <span class="topic" >
-                <a href="conversationHot.html" >说点什么 </a>
+                <span class="topic">
+                <a href="conversationHot.html">说点什么 </a>
                 </span>
                 </div>
                 <!--js添加-->
@@ -242,7 +244,8 @@
                 <!--js添加-->
             </div>
 
-            <div id="loading" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin" style="font-size: 30px;"></i></div>
+            <div id="loading" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin"
+                                                                          style="font-size: 30px;"></i></div>
         </div>
     </div>
 </div>
@@ -398,11 +401,13 @@
     function init() {
         postMessage({serverType: "Get", type: "debunk", startUID: -1, num: 20}, "conversation.php", function (json) {
             conversation.innerHTML = '';
+            startUID_debunk = -1;
             for (var i = 0; i < json.length; i++) {
-
                 conversation.appendChild(appendConversation(json[i].UID, json[i].word, json[i].content, json[i].good, json[i].review, json[i].igood));
+                startUID_debunk = (startUID_debunk == -1) ? json[i].UID : Math.min(startUID_debunk, json[i].UID);
             }
         });
+
         postMessage({
             serverType: "Get",
             type: "conversation",
@@ -416,7 +421,8 @@
                 startUID_conversation = Math.max(startUID_conversation, json[i].UID);
             }
         });
-        postMessage({serverType: "GetHotTopic",goodOrder:true}, "conversation.php", function (json) {
+
+        postMessage({serverType: "GetHotTopic", goodOrder: true}, "conversation.php", function (json) {
             if (json.length > 0) {
                 document.getElementById("hotTopic").innerText = json[0].content;
                 document.getElementById("hotTopicLink").href = "conversationHot.html?id=" + json[0].UID;
@@ -587,49 +593,25 @@
 
     init();
 
-</script>
-<script>
-    //获取滚动条当前的位置
- function getScrollTop() {
-     var scrollTop = 0;
-     if (document.documentElement && document.documentElement.scrollTop) {
-         scrollTop = document.documentElement.scrollTop;
-     } else if (document.body) {
-         scrollTop = document.body.scrollTop;
-     }
-     return scrollTop;
- }
-    //获取当前可视范围的高度
-     function getClientHeight() {
-         var clientHeight = 0;
-         if (document.body.clientHeight && document.documentElement.clientHeight) {
-             clientHeight = Math.min(document.body.clientHeight, document.documentElement.clientHeight);
-         } else {
-             clientHeight = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
-         }
-         return clientHeight;
-     }
-    //获取文档完整的高度
-     function getScrollHeight() {
-         return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-     }
-    var startUID=-1;
-    window.onscroll = function (){
+    window.onscroll = function () {
         if (getScrollTop() + getClientHeight() == getScrollHeight()) {
-            var loading=document.getElementById('loading');
-            loading.style.display='block';
-            postMessage({serverType: "Get", type: "debunk", startUID:startUID, num: 20}, "conversation.php", function (json) {
-//                conversation.innerHTML = '';
+            var loading = document.getElementById('loading');
+            loading.style.display = 'block';
+            postMessage({
+                serverType: "Get",
+                type: "debunk",
+                startUID: startUID_debunk,
+                num: 20
+            }, "conversation.php", function (json) {
                 for (var i = 0; i < json.length; i++) {
                     conversation.appendChild(appendConversation(json[i].UID, json[i].word, json[i].content,
-                            json[i].good, json[i].review, json[i].igood));
-                    startUID = (startUID == -1) ? json[i].UID : Math.min(startUID, json[i].UID);
+                        json[i].good, json[i].review, json[i].igood));
+                    startUID_debunk = (startUID_debunk == -1) ? json[i].UID : Math.min(startUID_debunk, json[i].UID);
                 }
-                loading.style.display='none';
+                loading.style.display = 'none';
             });
         }
     };
-
 
 
 </script>

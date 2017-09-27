@@ -9,11 +9,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $time = time();
 
     if ($serverType == "Send") {
-        $character = $_POST["character"];
-        $content = $_POST["content"];
-        $targetUID = $_POST["targetUID"] ? $_POST["targetUID"] : 0;
-        $type = $_POST["type"];
-        $uid = $_POST["UID"];
+        $character = addslashes($_POST["character"]);
+        $content = addslashes($_POST["content"]);
+        $targetUID = addslashes($_POST["targetUID"] ? $_POST["targetUID"] : 0);
+        $type = addslashes($_POST["type"]);
+        $uid = addslashes($_POST["UID"]);
 
         if ($uid == -1) {
             $order = "INSERT INTO conversation (openID,word,content,type,time,targetUID) ";
@@ -27,22 +27,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (!$rst) $line["error"] = setError(0, "评论发起时，数据库错误，提示：" . $mysqli->error);
         }
     } else if ("Get" == $serverType) {
-        $startUID = $_POST["startUID"];
-        $UID = $_POST["UID"];
-        $num = $_POST["num"];
-        $type = $_POST["type"];
-        $goodOrder = $_POST["goodOrder"];
+        $startUID = addslashes($_POST["startUID"]);
+        $UID = addslashes($_POST["UID"]);
+        $num = addslashes($_POST["num"]);
+        $type = addslashes($_POST["type"]);
+        $goodOrder = addslashes($_POST["goodOrder"]);
         $order = "SELECT * FROM conversation WHERE type='$type' AND del=FALSE";
         if ($type == "hot")
             $order .= " AND targetUID=$UID";
         if ($startUID > 0)
             $order .= " AND UID<$startUID";
+        $order .= " ORDER BY UID DESC";
         if ($goodOrder)
-            $order .= " ORDER BY good DESC";
-        else
-            $order .= " ORDER BY UID DESC";
+            $order .= ",good DESC";
         if ($num > 0)
             $order .= " LIMIT $num";
+
         $rst = $mysqli->query($order);
         if ($rst) {
             $looptag = 0;

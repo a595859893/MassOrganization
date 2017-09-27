@@ -114,7 +114,8 @@
                         话题圈
                     </p>
                 </a>
-                <a href="http://www.rabbitpre.com/m/F37QuqyN5?lc=1&sui=rZbSic1Y&from=groupmessage#from=share" class="weui-grid">
+                <a href="http://www.rabbitpre.com/m/F37QuqyN5?lc=1&sui=rZbSic1Y&from=groupmessage#from=share"
+                   class="weui-grid">
                     <div class="weui-grid__icon">
                         <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-tree"></use>
@@ -163,10 +164,10 @@
                     <!--</a>-->
                 </div>
                 <!--<div class="weui-panel__ft">-->
-                    <!--<a href="" class="weui-cell weui-cell_access weui-cell_link">-->
-                        <!--<div class="weui-cell__bd">查看更多</div>-->
-                        <!--<span class="weui-cell__ft"></span>-->
-                    <!--</a>-->
+                <!--<a href="" class="weui-cell weui-cell_access weui-cell_link">-->
+                <!--<div class="weui-cell__bd">查看更多</div>-->
+                <!--<span class="weui-cell__ft"></span>-->
+                <!--</a>-->
                 <!--</div>-->
             </div>
         </div>
@@ -199,7 +200,8 @@
                 </div>
                 <div class="weui-media-box__bd">
                     <h4 class="weui-media-box__title" id="openID_name">名字</h4>
-                    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;padding: 5px;margin-top: 5px;">
+                    <button onclick="document.getElementById('id01').style.display='block'"
+                            style="width:auto;padding: 5px;margin-top: 5px;">
                         社团管理者登陆
                     </button>
                 </div>
@@ -684,7 +686,8 @@
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label">社团logo</label></div>
                     <div class="weui-cell__bd">
-                        <button type="button" onclick="document.getElementById('MASS_logoInput').click();" style="width: 60%">点击上传图片
+                        <button type="button" onclick="document.getElementById('MASS_logoInput').click();"
+                                style="width: 60%">点击上传图片
                         </button>
                         <img id="MASS_logo" style="width:150px;height:150px">
                         <input class="weui-input" type="file" style="display:none" accept="image/*"
@@ -889,6 +892,7 @@
             password: document.getElementById("psw").value
         }, "loginState.php", function (json) {
             login(json);
+            document.getElementById("login").disabled = false;
             if (document.getElementById("remember").checked) {
                 document.cookie = "account=" + document.getElementById("uname").value;
                 document.cookie = "password=" + document.getElementById("psw").value;
@@ -897,11 +901,17 @@
                 delCookie("password");
             }
         }, function (json) {
-            if (json.error.code == 1) {
-                alert('密码错误');
-            }
-            if (json.error.code == 2) {
-                alert('账号不存在');
+            document.getElementById("login").disabled = false;
+            switch (json.error.code) {
+                case(1):
+                    alert('密码错误');
+                    break;
+                case(2):
+                    alert('账号不存在');
+                    break;
+                default:
+                    console.log(json.error);
+                    break;
             }
         });
     };
@@ -1057,7 +1067,7 @@
             postMessage({
                 serverType: "SendGroup",
                 type: "mass",
-                title:mass_name + "发布了新日志" ,
+                title: mass_name + "发布了新日志",
                 content: "uid",
                 groupType: "MassMark",
                 groupUID: "uid"
@@ -1094,25 +1104,25 @@
             if (checkBox[i].id && checkBox[i].checked) {
                 maxNum++;
                 postMessage({
-                            serverType: "Send",
-                            type: "act",
-                            title: "您已成功报名 " + act_name ,
-                            openID: checkBox[i].id,
-                            content: document.getElementById("message_mass").value || "您已成功报名 " + act_name + " ，请尽快与负责人联系"
-                        }, "message.php", function () {
-                            num++;
-                            if (num >= maxNum) {
-                                event.target.disabled = false;
-                                alert('发送成功');
-                            }
-                        }, function (json) {
+                        serverType: "Send",
+                        type: "act",
+                        title: "您已成功报名 " + act_name,
+                        openID: checkBox[i].id,
+                        content: document.getElementById("message_mass").value || "您已成功报名 " + act_name + " ，请尽快与负责人联系"
+                    }, "message.php", function () {
+                        num++;
+                        if (num >= maxNum) {
                             event.target.disabled = false;
-                            console.log(json.error);
-                            if (num >= 0) {
-                                num = -1;
-                                alert('发送失败！');
-                            }
+                            alert('发送成功');
                         }
+                    }, function (json) {
+                        event.target.disabled = false;
+                        console.log(json.error);
+                        if (num >= 0) {
+                            num = -1;
+                            alert('发送失败！');
+                        }
+                    }
                 );
             }
 
@@ -1181,13 +1191,13 @@
                         }
                         for (var i = 0; i < json.list.length; i++)
                             document.getElementById("MyList").appendChild(createActivity(json.list[i].name, json.list[i].introduction, json.list[i].location,
-                                    json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo));
+                                json.list[i].holdtime, json.list[i].time, json.list[i].UID, json.list[i].json, json.list[i].logo));
                         if (json.mark.length == 0) {
                             document.getElementById("tip2").style.display = 'block';
                         }
                         for (var i = 0; i < json.mark.length; i++)
                             document.getElementById("MyMark").appendChild(createActivity(json.mark[i].name, json.mark[i].introduction, json.mark[i].location,
-                                    json.mark[i].holdtime, json.mark[i].time, json.mark[i].url, json.mark[i].json, json.mark[i].logo));
+                                json.mark[i].holdtime, json.mark[i].time, json.mark[i].url, json.mark[i].json, json.mark[i].logo));
 
                         if (json.mass.length == 0) {
                             document.getElementById("tip3").style.display = 'block';
@@ -1210,7 +1220,7 @@
                     var read = 0;
                     for (var i = 0; i < json.length; i++) {
                         if (json[i].type == "act") {
-                            message.appendChild(createMessage(json[i].type, json[i].title,json[i].content, i));
+                            message.appendChild(createMessage(json[i].type, json[i].title, json[i].content, i));
                             page_2.appendChild(dialog(i, json[i].message, json[i].title));
                         }
                         if (json[i].type == "mass")
@@ -1258,7 +1268,7 @@
         mass_name = info.name;
 
         document.getElementById('id01').style.display = 'none';
-        document.getElementById("user_name").innerText = info.name ;
+        document.getElementById("user_name").innerText = info.name;
 //        console.log(info);
 
         document.getElementById("MASS_name").value = info.name;
@@ -1597,7 +1607,7 @@
         return a;
     }
 
-    function createMessage(type, title, content,index) {
+    function createMessage(type, title, content, index) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var div_2 = document.createElement("div");
@@ -1677,11 +1687,11 @@
 
         var table = document.createElement("table");
         var tr_head = document.createElement("tr");
-        var span=document.createElement("span");
-        span.innerHTML='&#8226';
-        span.style.color='#e64340';
-        span.style.fontWeight='600';
-        span.style.fontSize='medium';
+        var span = document.createElement("span");
+        span.innerHTML = '&#8226';
+        span.style.color = '#e64340';
+        span.style.fontWeight = '600';
+        span.style.fontSize = 'medium';
 
         var nowTD;
 
@@ -1803,7 +1813,7 @@
         div_3.style = 'display: none';
         div_3_2_1.innerHTML = '<strong class="weui-dialog__title">' + title + '</strong>';
         div_3_2_2.innerText = content;
-        a_1.onclick = function (){
+        a_1.onclick = function () {
             div_3.style = 'display:none'
         };
         a_1.innerText = '确定';
