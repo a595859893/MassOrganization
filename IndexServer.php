@@ -10,16 +10,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $line = array();
     $time = time();
     if ("acfForm" == $serverType) {
-        $name = $_POST["name"];
-        $location = $_POST["location"];
-        $holdtime = $_POST["time"];
-        $organizer = $_POST["organizer"];
-        $intro = $_POST["introduction"];
-        $type = $_POST["type"];
-        $json = $_POST["json"];
-        $campus = $_POST["campus"];
-        $logo = $_POST["logo"];
-        $url = $_POST["url"];
+        $name = addslashes($_POST["name"]);
+        $location = addslashes($_POST["location"]);
+        $holdtime = addslashes($_POST["time"]);
+        $organizer = addslashes($_POST["organizer"]);
+        $intro = addslashes($_POST["introduction"]);
+        $type = addslashes($_POST["type"]);
+        $json = addslashes($_POST["json"]);
+        $campus = addslashes($_POST["campus"]);
+        $logo = addslashes($_POST["logo"]);
+        $url = addslashes($_POST["url"]);
         if (checkWechatUIRL($url)) {
             $order = "INSERT INTO activity (name,location,holdtime,time,organizer,introduction,type,campus,logo,url,json,organizerUID) ";
             $order .= "VALUES('$name','$location','$holdtime',FROM_UNIXTIME($time),'$organizer','$intro','$type','$campus','$logo','$url','$json',$UID)";
@@ -38,13 +38,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     } elseif ("recruitment" == $serverType) {
-        $type = $_POST["type"];
-        $title = $_POST["title"];
-        $object = $_POST["object"];
-        $end = $_POST["end"];
-        $start = $_POST["start"];
-        $end = $_POST["end"];
-        $link = $_POST["link"];
+        $type = addslashes($_POST["type"]);
+        $title = addslashes($_POST["title"]);
+        $object = addslashes($_POST["object"]);
+        $end = addslashes($_POST["end"]);
+        $start = addslashes($_POST["start"]);
+        $end = addslashes($_POST["end"]);
+        $link = addslashes($_POST["link"]);
 
         $order = "INSERT INTO recruitment (type,title,object,start,end,link,time,massUID) ";
         $order .= "VALUES('$type','$title','$object','$start','$end','$link',FROM_UNIXTIME($time),$UID)";
@@ -96,11 +96,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $rst = $mysqli->query($order);
         if (!$rst) $line["error"] = setError(0, "社团信息修改时，数据库错误，提示：" . $mysqli->error);
     } elseif ("massDiary" == $serverType) {
-        $title = $_POST["title"];
-        $content = $_POST["content"];
-        $logo = $_POST["logo"];
-        $img = $_POST["img"];
-        $url = $_POST["url"];
+        $title = addslashes($_POST["title"]);
+        $content = addslashes($_POST["content"]);
+        $logo = addslashes($_POST["logo"]);
+        $img = addslashes($_POST["img"]);
+        $url = addslashes($_POST["url"]);
         if (checkWechatUIRL($url)) {
             $order = "INSERT INTO massDiary (title,content,time,logo,img,url,massUID) ";
             $order .= "VALUES('$title','$content',FROM_UNIXTIME($time),'$logo','$img','$url',$UID)";

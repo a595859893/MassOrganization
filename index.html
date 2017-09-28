@@ -926,7 +926,7 @@
             var list = document.getElementById("myUL").getElementsByTagName("input");
             for (var i = 0; i < list.length; i++) {
                 if (list[i].name)
-                    listjson[list.name] = list[i].value;
+                    listjson[list[i].name] = list[i].value;
             }
         } else {
             listjson = {none: true};

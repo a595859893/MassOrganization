@@ -69,8 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $line["length"] = $looptag;
         } else  $line["error"] = setError(0, "评论及匿槽获取时，数据库错误，提示：" . $mysqli->error);
     } else if ("GetHotTopic" == $serverType) {
-        $startUID = $_POST["startUID"];
-        $num = $_POST["num"];
+        $startUID = addslashes($_POST["startUID"]);
+        $num = addslashes($_POST["num"]);
 
         $rst = $mysqli->query("SELECT * FROM conversationHot ORDER BY time DESC");
         if ($rst) {
@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $line["length"] = $looptag;
         } else $line["error"] = setError(0, "热门话题获取时，数据库错误，提示：" . $mysqli->error);
     } else if ($serverType == "Good") {
-        $topicID = $_POST["topicID"];
+        $topicID = addslashes($_POST["topicID"]);
 
         $exist = false;
         $rst = $mysqli->query("SELECT * from conversationGood WHERE openID='$openID' AND topicID=$topicID LIMIT 1");
@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         } else $line["error"] = setError(0, "点赞判断时，数据库错误，提示：" . $mysqli->error);
     } else if ("getHotReview" == $serverType) {
-        $uid = $_POST["UID"];
+        $uid = addslashes($_POST["UID"]);
         $line["hotCon"] = array();
 
         $rst = $mysqli->query("SELECT * FROM conversation WHERE UID=$uid LIMIT 1");
@@ -121,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $line["hot"] = $row;
         } else  $line["error"] = setError(0, "热门话题获取阶段2时，数据库错误，提示：" . $mysqli->error);
     } else if ("delConversation" == $serverType) {
-        $uid = $_POST["UID"];
+        $uid = addslashes($_POST["UID"]);
         $rst = $mysqli->query("SELECT openID FROM conversation WHERE UID=$uid");
         if ($rst) {
             if ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
@@ -132,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else $line["error"] = setError(0, "不存在的话题！");
         } else $line["error"] = setError(0, "获取话题发送者时，数据库错误，提示：" . $mysqli->error);
     } else if ("delReview" == $serverType) {
-        $uid = $_POST["UID"];
+        $uid = addslashes($_POST["UID"]);
         $rst = $mysqli->query("SELECT openID FROM conversationRiview WHERE UID=$uid");
         if ($rst) {
             if ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
