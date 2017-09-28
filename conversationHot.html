@@ -126,7 +126,9 @@
         code: getValue("code"),
         state: getValue("state")
     }, "loginState.php", function (json) {
+//        console.log(json);
         userInfo.head = json.info.headimgurl;
+        userInfo.openID=json.info.openID;
         document.getElementById("user_head").src = userInfo.head;
     });
 
@@ -135,6 +137,7 @@
 
     function init() {
         postMessage({serverType: "getHotReview", UID: uid}, "conversation.php", function (json) {
+            console.log(json);
 //            document.getElementById("hotTopic").innerText = json.state.content;
 //            document.getElementById("topic_time").innerHTML = json.hot.time + ' <i class="fa fa-map-signs" style="color: black;font-size: 17px;"></i>';
             content.innerHTML = '';
@@ -146,6 +149,7 @@
                 startUID: -1
             }, "conversation.php", function (json) {
                 for (var i = 0; i < json.length; i++) {
+                    console.log(json[i]);
                     content.appendChild(appendConversation(json[i].UID, json[i].word, json[i].time, json[i].content, json[i].good, json[i].review, json[i].igood))
                 }
             });
@@ -168,6 +172,7 @@
         var span_2 = document.createElement("span");
         var icon = document.createElement("span");
         var input = document.createElement("input");
+
 
         div.className = 'weui-panel weui-panel_access';
         div_1.className = 'weui-media-box weui-media-box_appmsg';
@@ -233,6 +238,7 @@
         };
 
         p_2.onclick=function(){
+
             p_2.disabled=true;
             document.getElementById('delete').style.display = 'block';
             mess_id = uid;
@@ -240,6 +246,7 @@
             mess_element_0 = mess_element_0_0.parentElement;
             mess_element = mess_element_0.parentElement;
             mess_parent = mess_element.parentElement;
+
         };
 
 
@@ -260,11 +267,12 @@
                 });
                 return;
             }
-
+            if (e.target == span_1){
             if (div_2.style.display == "block") {
                 div_2.style.display = "none";
             } else {
                 div_2.style.display = "block";
+            }
             }
         };
 
@@ -324,6 +332,10 @@
             }, "conversation.php", function () {
                 mess_parent.removeChild(mess_element);
                 alert('成功删除');
+            },function(json){
+                if(json.error.code==0){
+                    alert('删除话题权限不足！');
+                }
             })
         }
     }
