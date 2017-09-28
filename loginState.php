@@ -8,8 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $line = array();
 
     if ("login" == $serverType) {
-        $account = $_POST["account"];
-        $password = $_POST["password"];
+        $account = addslashes($_POST["account"]);
+        $password = addslashes($_POST["password"]);
 
         $rst = $mysqli->query("SELECT * FROM mass WHERE account='$account' LIMIT 1");
         if ($rst) {
