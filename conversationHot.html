@@ -146,7 +146,7 @@
                 startUID: -1
             }, "conversation.php", function (json) {
                 for (var i = 0; i < json.length; i++) {
-                    content.appendChild(appendConversation(uid, json[i].word, json[i].time, json[i].content, json[i].good, json[i].review, json[i].igood))
+                    content.appendChild(appendConversation(json[i].UID, json[i].word, json[i].time, json[i].content, json[i].good, json[i].review, json[i].igood))
                 }
             });
         });
