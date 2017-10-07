@@ -22,6 +22,7 @@
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 1;
             color: #000;
+            background-image:url("img/texture03.jpg") ;
         }
 
         #old_topic {
@@ -80,6 +81,7 @@
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 1;
             color: #000;
+            background-image:url("img/texture03.jpg") ;
         }
 
         .icon {
@@ -460,7 +462,10 @@
         span_1.className = 'fa fa-lightbulb-o';
         span_1.style.color = igood ? '#E7CF0C' : '#5E6F66';
         div_1.innerHTML = '<i class="fa fa-weixin" style="width:20px;margin-right:5px;display:block;color:#5E6F66"></i>';
-        div_2.innerHTML = "<p>" + topic + "</p>";
+//        var textnode=document.createTextNode( "<p>"+  topic +" </p>");
+        var textnode=document.createTextNode(   topic );
+        div_2.appendChild(textnode);
+//        div_2.innerHTML = "<p>" + topic + "</p>";
         span_2.innerText = good;
 
 
@@ -586,7 +591,9 @@
 
         div.className = 'weui-cell weui-cell_access weui-cell_link';
         div_1.className = 'weui-cell__bd';
-        div_1.innerHTML = '<i class="fa fa-twitch"></i> ' + index + " : " + content;
+        var textnode=document.createTextNode('<i class="fa fa-twitch"></i> ' + index + " : " + content);
+//        div_1.innerHTML = '<i class="fa fa-twitch"></i> ' + index + " : " + content;
+        div_1.appendChild(textnode);
         div.appendChild(div_1);
         return div;
     }

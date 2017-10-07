@@ -136,7 +136,7 @@
                     <a href="http://www.rabbitpre.com/m/F37QuqyN5?lc=1&sui=rZbSic1Y&from=groupmessage#from=share"
                        class="weui-media-box weui-media-box_appmsg">
                         <div class="weui-media-box__hd">
-                            <img class="weui-media-box__thumb" src="img/中大园圈.jpg" alt="" width="60" height="60">
+                            <img class="weui-media-box__thumb" src="img/logo.jpg" alt="" width="60" height="60">
                         </div>
                         <div class="weui-media-box__bd">
                             <h4 class="weui-media-box__title">中大园圈--社团入驻手册</h4>
@@ -145,7 +145,7 @@
                     </a>
                     <a href="http://v.xiumi.us/board/v5/2Rzgh/56269924" class="weui-media-box weui-media-box_appmsg">
                         <div class="weui-media-box__hd">
-                            <img class="weui-media-box__thumb" src="img/中大园圈.jpg" width="60" height="60" alt="">
+                            <img class="weui-media-box__thumb" src="img/logo.jpg" width="60" height="60" alt="">
                         </div>
                         <div class="weui-media-box__bd">
                             <h4 class="weui-media-box__title">中大园圈--用户指南</h4>
@@ -1332,7 +1332,9 @@
         var li = document.createElement("li");
         var label = document.createElement("label");
         var input = document.createElement("input");
-        label.innerHTML = "<b>" + value + "&nbsp;</b>";
+        var textnode=document.createTextNode("<b>" + value + "&nbsp;</b>");
+//        label.innerHTML = "<b>" + value + "&nbsp;</b>";
+        label.appendChild(textnode);
         li.appendChild(label);
         li.appendChild(input);
         input.name = value;
@@ -1539,8 +1541,12 @@
         a.href = url;
 
         h4.innerText = title + ' ';
-        p1.innerHTML = '<i class="fa fa-clock-o"></i> &nbsp; ' + end;
-        p2.innerHTML = '<i class="fa fa-users"></i> &nbsp; ' + object;
+        var textnode_1=document.createTextNode("<i class='fa fa-clock-o'></i> &nbsp;+ end");
+        var textnode_2=document.createTextNode("<i class='fa fa-users'></i> &nbsp;+ object");
+//        p1.innerHTML = '<i class="fa fa-clock-o"></i> &nbsp; ' + end;
+//        p2.innerHTML = '<i class="fa fa-users"></i> &nbsp; ' + object;
+          p1.appendChild(textnode_1);
+          p2.appendChild(textnode_2);
 
         h4.appendChild(i);
         div_2.appendChild(h4);
@@ -1583,7 +1589,9 @@
             diary_parent = diary_element.parentElement;
         };
         p_1.className = p_2.className = p_3.className = "weui-media-box__desc";
-        h4.innerHTML = title;
+        var textnode=document.createTextNode(title);
+        h4.appendChild(textnode);
+//        h4.innerHTML = title;
         p_1.innerText = time;
         p_2.innerText = content;
         logo_1.src = logo;
@@ -1811,7 +1819,9 @@
         a_1.className = "eui-dialog__btn weui-dialog__btn_primary";
 
         div_3.style = 'display: none';
-        div_3_2_1.innerHTML = '<strong class="weui-dialog__title">' + title + '</strong>';
+        var textnode=document.createTextNode("<strong class='weui-dialog__title'>" + title + "</strong>");
+        div_3_2_1.appendChild(textnode);
+//        div_3_2_1.innerHTML = '<strong class="weui-dialog__title">' + title + '</strong>';
         div_3_2_2.innerText = content;
         a_1.onclick = function () {
             div_3.style = 'display:none'

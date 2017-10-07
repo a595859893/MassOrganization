@@ -21,6 +21,7 @@
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 1;
             color: #000;
+            background-image:url("img/texture03.jpg") ;
         }
         .topic {
             line-height: 120px;
@@ -138,8 +139,8 @@
     function init() {
         postMessage({serverType: "getHotReview", UID: uid}, "conversation.php", function (json) {
             console.log(json);
-//            document.getElementById("hotTopic").innerText = json.state.content;
-//            document.getElementById("topic_time").innerHTML = json.hot.time + ' <i class="fa fa-map-signs" style="color: black;font-size: 17px;"></i>';
+            document.getElementById("hotTopic").innerText = json.state.content;
+            document.getElementById("topic_time").innerHTML = json.hot.time + ' <i class="fa fa-map-signs" style="color: black;font-size: 17px;"></i>';
             content.innerHTML = '';
             postMessage({
                 serverType: "Get",
@@ -286,7 +287,9 @@
         var div_1 = document.createElement("div");
         div.className = 'weui-cell weui-cell_access weui-cell_link';
         div_1.className = 'weui-cell__bd';
-        div_1.innerHTML = '<i class="fa fa-twitch"></i> ' + index + " : " + content;
+        var textnode=document.createTextNode('<i class="fa fa-twitch"></i> ' + index + " : " + content);
+//        div_1.innerHTML = '<i class="fa fa-twitch"></i> ' + index + " : " + content;
+        div_1.appendChild(textnode);
         div.appendChild(div_1);
         return div;
     }
