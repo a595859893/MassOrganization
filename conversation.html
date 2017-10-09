@@ -122,9 +122,9 @@
 <body>
 <div class="weui-tab">
     <div class="weui-navbar">
-        <div class="weui-navbar__item  tab"  onclick="tabNav(event, 'page1')">
-            话圈
-        </div>
+        <!--<div class="weui-navbar__item  tab"  onclick="tabNav(event, 'page1')">-->
+            <!--话圈-->
+        <!--</div>-->
         <div class="weui-navbar__item weui-bar__item_on tab" id="defaultOpen" onclick="tabNav(event, 'page2')">
             匿槽
         </div>
@@ -535,8 +535,13 @@
         div_2_1.appendChild(div_2_1_1);
         div_2.appendChild(div_2_1);
 
-        for (var i = 0; i < review.length; i++) {
-            div_2.appendChild(appendReview(i + 1, review[i].content));
+//        for (var i = 0; i < review.length; i++) {
+////            div_2.appendChild(appendReview(i + 1, review[i].content));
+//            div_2.appendChild(appendReview(review[i].content));
+//        }
+        for (var i = review.length-1; i >-1 ; i--) {
+//            div_2.appendChild(appendReview(i + 1, review[i].content));
+            div_2.appendChild(appendReview(review[i].content));
         }
 
         icon.onclick = function () {
@@ -547,8 +552,8 @@
                     content: input.value,
                     UID: uid
                 }, "conversation.php", function () {
-                    var num = review.length + 1;
-                    div_2.appendChild(appendReview(num, input.value));
+//                    var num = review.length + 1;
+                    div_2.appendChild(appendReview(input.value));
                     icon.disabled = false;
                     input.value = '';
                     input.placeholder = '评论……';
@@ -585,15 +590,16 @@
         return div;
     }
 
-    function appendReview(index, content) {
+    function appendReview(content) {
         var div = document.createElement("div");
         var div_1 = document.createElement("div");
 
         div.className = 'weui-cell weui-cell_access weui-cell_link';
         div_1.className = 'weui-cell__bd';
-        var textnode=document.createTextNode('<i class="fa fa-twitch"></i> ' + index + " : " + content);
-//        div_1.innerHTML = '<i class="fa fa-twitch"></i> ' + index + " : " + content;
-        div_1.appendChild(textnode);
+//        var textnode=document.createTextNode('<i class="fa fa-twitch"></i> ' + index + " : " + content);
+        div_1.innerHTML = '<i class="fa fa-twitch"></i> '+ " ：" + content;
+//        div_1.innerHTML = '<i class="fa fa-twitch"></i> '  + " ：" + content;
+//        div_1.appendChild(textnode);
         div.appendChild(div_1);
         return div;
     }
