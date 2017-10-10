@@ -22,10 +22,11 @@
             color: #818181
         }
 
-        .weui-media-box__desc{
+        .weui-media-box__desc {
             line-height: 1.6;
             display: block;
         }
+
         img {
             border-radius: 50%;
         }
@@ -74,7 +75,8 @@
                     <!--JS添加处-->
                 </div>
 
-                <div id="loading_1" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin" style="font-size: 30px;"></i></div>
+                <div id="loading_1" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin"
+                                                                                style="font-size: 30px;"></i></div>
             </div>
         </div>
 
@@ -86,7 +88,8 @@
                     <!--JS添加处-->
 
                 </div>
-                <div id="loading_2" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin" style="font-size: 30px;"></i></div>
+                <div id="loading_2" style="text-align: center;display: none"><i class="fa fa-spinner fa-spin"
+                                                                                style="font-size: 30px;"></i></div>
             </div>
         </div>
 
@@ -116,8 +119,6 @@
     init();
 
 
-
-
     function init() {
         var loading_1 = document.getElementById('loading_1');
         var loading_2 = document.getElementById('loading_2');
@@ -128,7 +129,7 @@
                 var mass = {};
                 mass.name = json[i].name;
 //                console.log(json[0]);
-                mass.div = createActivity(json[i].name, json[i].intro, json[i].number, json[i].good, json[i].UID, json[i].igood, json[i].imark,json[i].logo);
+                mass.div = createActivity(json[i].name, json[i].intro, json[i].number, json[i].good, json[i].UID, json[i].igood, json[i].imark);
                 massList.push(mass);
                 if (json[i].type == "zuzhi")
                     document.getElementById("frame2").appendChild(mass.div);
@@ -175,7 +176,7 @@
         evt.currentTarget.className += " weui-bar__item_on";
     }
 
-    function createActivity(name, intro, number, member, uid, good, mark,url) {
+    function createActivity(name, intro, number, member, uid, good, mark) {
         var a = document.createElement("a");
         var div_1 = document.createElement("div");
         var img = document.createElement("img");
@@ -190,14 +191,15 @@
         a.className = "weui-media-box weui-media-box_appmsg";
         div_1.className = "weui-media-box__hd";
         img.className = "weui-media-box__thumb";
-        img.width='60';
-        img.height='60';
-        if(url){
-            img.src=url;
-        }else {
-            img.src='img/none.png';
-        }
+        img.width = '60';
+        img.height = '60';
 
+        postMessage({serverType: "getImg", UID: uid, type: "logo"}, "mass.php", function (json) {
+            img.src = json.img ? json.img : 'img/none.png';
+        }, function (json) {
+            console.log(json.error);
+            img.src = 'img/none.png';
+        });
 
         div_2.className = "weui-media-box__bd";
         h4.className = "weui-media-box__title";

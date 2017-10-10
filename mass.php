@@ -8,13 +8,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mysqli = linkToSQL();
 
     if ($serverType == "getList") {
-        $startUID = $_POST["startUID"];
-        $num = $_POST["num"];
+        $startUID = addslashes($_POST["startUID"]);
+        $num = addslashes($_POST["num"]);
         $order = "SELECT * FROM mass";
         if ($startUID > 0)
             $order .= " WHERE UID<$startUID";
+
+        $order .= " ORDER BY good DESC";
+
         if ($num > 0)
             $order .= " LIMIT $num";
+
 
         $rst = $mysqli->query($order);
         if ($rst) {
@@ -22,19 +26,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $num = 0;
             while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
                 $UID = $row["UID"];
+                $massinfo = array();
 
+                $massinfo["type"] = $row["type"];
+                $massinfo["name"] = $row["name"];
+                $massinfo["intro"] = $row["intro"];
+                $massinfo["member"] = $row["member"];
+                $massinfo["number"] = $row["number"];
+                $massinfo["good"] = $row["good"];
+                $massinfo["UID"] = $row["UID"];
                 $rst2 = $mysqli->query("SELECT * from massGood WHERE openID='$openID' AND massUID=$UID");
-                $row["igood"] = ($row2 = $rst2->fetch_array(MYSQLI_ASSOC)) ? true : false;
+                $massinfo["igood"] = ($row2 = $rst2->fetch_array(MYSQLI_ASSOC)) ? true : false;
                 $rst2 = $mysqli->query("SELECT * from massMark WHERE openID='$openID' AND markUID=$UID");
-                $row["imark"] = ($row2 = $rst2->fetch_array(MYSQLI_ASSOC)) ? true : false;
+                $massinfo["imark"] = ($row2 = $rst2->fetch_array(MYSQLI_ASSOC)) ? true : false;
 
-                $line[] = $row;
+                $line[] = $massinfo;
                 $num++;
             }
             $line["length"] = $num;
         } else  $line["error"] = setError(0, "列表获取时，数据库错误，提示：" . $mysqli->error);
     } elseif ($serverType == "good") {
-        $massUID = $_POST["massUID"];
+        $massUID = addslashes($_POST["massUID"]);
 
         $exist = false;
         $rst = $mysqli->query("SELECT * from massGood WHERE openID='$openID' AND massUID=$massUID  LIMIT 1");
@@ -51,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (!$rst2) $line["error"] = setError(0, "点赞时，数据库错误，提示：" . $mysqli->error);
         }
     } elseif ($serverType == "mark") {
-        $markUID = $_POST["markUID"];
+        $markUID = addslashes($_POST["markUID"]);
 
         $exist = false;
         $rst = $mysqli->query("SELECT * from massMark WHERE openID='$openID' AND markUID=$markUID LIMIT 1");
@@ -68,8 +80,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (!$rst2) $line["error"] = setError(0, "收藏添加时，数据库错误，提示：" . $mysqli->error);
         }
     } elseif ($serverType == "getMass") {
-        $uid = $_POST["UID"];
-        $rst = $mysqli->query("SELECT * FROM mass WHERE UID=$uid");
+        $uid = addslashes($_POST["UID"]);
+        $rst = $mysqli->query("SELECT type,name,intro,number,member,good,logo,QRcode,UID FROM mass WHERE UID=$uid");
 
         if ($rst) {
             if ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
@@ -104,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else $line["error"] = setError(0, "社团不存在");
         } else  $line["error"] = setError(0, "获取社团时，数据库错误，提示：" . $mysqli->error);
     } elseif ($serverType == "goodDiary") {
-        $diaryUID = $_POST["diaryUID"];
+        $diaryUID = addslashes($_POST["diaryUID"]);
 
         $rst = $mysqli->query("SELECT * from massDiaryGood WHERE openID='$openID' AND diaryUID=$diaryUID");
         if ($rst) {
@@ -120,7 +132,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (!$rst2) $line["error"] = setError(0, "点赞时，数据库错误，提示：" . $mysqli->error);
             }
         } else $line["error"] = setError(0, "点赞判断时，数据库错误，提示：" . $mysqli->error);
-    }
+    } else if ("getImg" == $serverType) {
+        $UID = addslashes($_POST["UID"]);
+        $type = addslashes($_POST["type"]);
+        if ($type == "logo" || $type == "QRcode") {
+            $rst = $mysqli->query("SELECT $type from mass WHERE UID='$UID'");
+            if ($row = $rst->fetch_array(MYSQLI_ASSOC))
+                $line["img"] = $row["$type"];
+            else
+                $line["error"] = setError(-1, "图像不存在");
+        } else $line["error"] = setError(-1, "类型非法");
+
+
+    } else $line["error"] = setError(-1, "不匹配的类型");
 
     echo json_encode($line);
     $mysqli->close();
