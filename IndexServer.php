@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = addslashes($_POST["name"]);
         $location = addslashes($_POST["location"]);
         $holdtime = addslashes($_POST["time"]);
+        $endtimestr = isset($_POST["endTimeStr"]) ? addslashes($_POST["endTimeStr"]) : "1";
         $organizer = addslashes($_POST["organizer"]);
         $intro = addslashes($_POST["introduction"]);
         $type = addslashes($_POST["type"]);
@@ -20,9 +21,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $campus = addslashes($_POST["campus"]);
         $logo = addslashes($_POST["logo"]);
         $url = addslashes($_POST["url"]);
+
         if (checkWechatUIRL($url)) {
-            $order = "INSERT INTO activity (name,location,holdtime,time,organizer,introduction,type,campus,logo,url,json,organizerUID) ";
-            $order .= "VALUES('$name','$location','$holdtime',FROM_UNIXTIME($time),'$organizer','$intro','$type','$campus','$logo','$url','$json',$UID)";
+            $order = "INSERT INTO activity (name,location,holdtime,endTimeStr,time,organizer,introduction,type,campus,logo,url,json,organizerUID) ";
+            $order .= "VALUES('$name','$location','$holdtime','$endtimestr',FROM_UNIXTIME($time),'$organizer','$intro','$type','$campus','$logo','$url','$json',$UID)";
 
             $rst = $mysqli->query($order);
             if ($rst) {

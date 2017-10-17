@@ -964,7 +964,8 @@
         }, function (json) {
             if (json.error.code == 10) {
                 alert("url不合法，只接受推送链接！");
-            }
+            }else
+                console.log(json);
         })
     };
     document.getElementById("NEW_form").onsubmit = function (event) {
